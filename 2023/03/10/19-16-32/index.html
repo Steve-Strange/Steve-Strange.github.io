@@ -61,6 +61,7 @@
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
+<link rel="alternate" href="/atom.xml" title="TARDIS" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
@@ -149,7 +150,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#P3%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3"><span class="nav-number">1.</span> <span class="nav-text">P3设计文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU%E6%B5%81%E7%A8%8B%EF%BC%8C%E8%8D%89%E7%A8%BF"><span class="nav-number">2.</span> <span class="nav-text">CPU流程，草稿</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E6%8C%87%E4%BB%A4"><span class="nav-number">2.1.</span> <span class="nav-text">支持指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%9D%97"><span class="nav-number">2.2.</span> <span class="nav-text">使用模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E3%80%81IFU%EF%BC%88Instruction-Fetch-Unit%EF%BC%89"><span class="nav-number">2.2.1.</span> <span class="nav-text">一、IFU（Instruction Fetch Unit）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E3%80%81GRF%EF%BC%88General-Register-File%EF%BC%89"><span class="nav-number">2.2.2.</span> <span class="nav-text">三、GRF（General Register File）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9B%E3%80%81ALU%EF%BC%88Arithmetic-amp-logical-Unit%EF%BC%89"><span class="nav-number">2.2.3.</span> <span class="nav-text">四、ALU（Arithmetic &amp; logical Unit）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%94%E3%80%81DM%EF%BC%88Data-Memory%EF%BC%89"><span class="nav-number">2.2.4.</span> <span class="nav-text">五、DM（Data Memory）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AD%E3%80%81EXT%EF%BC%88Bit-Extender%EF%BC%89"><span class="nav-number">2.2.5.</span> <span class="nav-text">六、EXT（Bit Extender）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%83%E3%80%81CU%EF%BC%88Control-Unit%EF%BC%89"><span class="nav-number">2.2.6.</span> <span class="nav-text">七、CU（Control Unit）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">3.</span> <span class="nav-text">测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81"><span class="nav-number">3.1.</span> <span class="nav-text">汇编代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E7%A0%81"><span class="nav-number">3.2.</span> <span class="nav-text">机器码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mips%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">3.2.1.</span> <span class="nav-text">mips运行结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">3.2.2.</span> <span class="nav-text">CPU运行结果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">思考题</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#P3%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3"><span class="nav-number">1.</span> <span class="nav-text">P3设计文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU%E6%B5%81%E7%A8%8B%EF%BC%8C%E8%8D%89%E7%A8%BF"><span class="nav-number">2.</span> <span class="nav-text">CPU流程，草稿</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E6%8C%87%E4%BB%A4"><span class="nav-number">2.1.</span> <span class="nav-text">支持指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%9D%97"><span class="nav-number">2.2.</span> <span class="nav-text">使用模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E3%80%81IFU%EF%BC%88Instruction-Fetch-Unit%EF%BC%89"><span class="nav-number">2.2.1.</span> <span class="nav-text">一、IFU（Instruction Fetch Unit）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E3%80%81GRF%EF%BC%88General-Register-File%EF%BC%89"><span class="nav-number">2.2.2.</span> <span class="nav-text">三、GRF（General Register File）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9B%E3%80%81ALU%EF%BC%88Arithmetic-logical-Unit%EF%BC%89"><span class="nav-number">2.2.3.</span> <span class="nav-text">四、ALU（Arithmetic &amp; logical Unit）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%94%E3%80%81DM%EF%BC%88Data-Memory%EF%BC%89"><span class="nav-number">2.2.4.</span> <span class="nav-text">五、DM（Data Memory）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AD%E3%80%81EXT%EF%BC%88Bit-Extender%EF%BC%89"><span class="nav-number">2.2.5.</span> <span class="nav-text">六、EXT（Bit Extender）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%83%E3%80%81CU%EF%BC%88Control-Unit%EF%BC%89"><span class="nav-number">2.2.6.</span> <span class="nav-text">七、CU（Control Unit）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">3.</span> <span class="nav-text">测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81"><span class="nav-number">3.1.</span> <span class="nav-text">汇编代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E7%A0%81"><span class="nav-number">3.2.</span> <span class="nav-text">机器码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mips%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">3.2.1.</span> <span class="nav-text">mips运行结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">3.2.2.</span> <span class="nav-text">CPU运行结果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">思考题</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -292,9 +293,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="P3设计文档"><a href="#P3设计文档" class="headerlink" title="P3设计文档"></a>P3设计文档</h2><span id="more"></span>
-
-<h2 id="CPU流程，草稿"><a href="#CPU流程，草稿" class="headerlink" title="CPU流程，草稿"></a>CPU流程，草稿</h2><ol>
+        <h2 id="P3设计文档">P3设计文档</h2>
+<span id="more"></span>
+<h2 id="CPU流程，草稿">CPU流程，草稿</h2>
+<ol>
 <li>取指令(PC,IM)</li>
 <li>指令译码(CU)</li>
 <li>指令执行(GRF,ALU)</li>
@@ -302,26 +304,33 @@
 <li>结果写回(GRF)</li>
 <li>循环1-5</li>
 </ol>
-<h3 id="支持指令"><a href="#支持指令" class="headerlink" title="支持指令"></a>支持指令</h3><p>add, sub, ori, lw, sw, beq, lui, j, nop</p>
+<h3 id="支持指令">支持指令</h3>
+<p>add, sub, ori, lw, sw, beq, lui, j, nop</p>
 <p>(其中add，sub为无符号加减法)</p>
-<h3 id="使用模块"><a href="#使用模块" class="headerlink" title="使用模块"></a>使用模块</h3><h4 id="一、IFU（Instruction-Fetch-Unit）"><a href="#一、IFU（Instruction-Fetch-Unit）" class="headerlink" title="一、IFU（Instruction Fetch Unit）"></a>一、IFU（Instruction Fetch Unit）</h4><ul>
-<li><p>包括PC和IM</p>
+<h3 id="使用模块">使用模块</h3>
+<h4 id="一、IFU（Instruction-Fetch-Unit）">一、IFU（Instruction Fetch Unit）</h4>
+<ul>
+<li>
+<p>包括PC和IM</p>
 </li>
-<li><p>IM用 ROM 实现，容量为 32bit × 32字。（5位地址）</p>
+<li>
+<p>IM用 ROM 实现，容量为 32bit × 32字。（5位地址）</p>
 </li>
-<li><p>PC始终为4的倍数（字节寻址，32bit&#x3D;4字节），所以取32位地址中2-6位对应ROM中指令地址</p>
+<li>
+<p>PC始终为4的倍数（字节寻址，32bit=4字节），所以取32位地址中2-6位对应ROM中指令地址</p>
 </li>
 </ul>
 <table>
 <thead>
 <tr>
 <th>端口名</th>
-<th>输入&#x2F;输出</th>
+<th>输入/输出</th>
 <th>位宽</th>
 <th>功能</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>clk</td>
 <td>in</td>
 <td>1</td>
@@ -363,8 +372,10 @@
 <td>32</td>
 <td>输出读取指令</td>
 </tr>
-</tbody></table>
-<h4 id="三、GRF（General-Register-File）"><a href="#三、GRF（General-Register-File）" class="headerlink" title="三、GRF（General Register File）"></a>三、GRF（General Register File）</h4><ul>
+</tbody>
+</table>
+<h4 id="三、GRF（General-Register-File）">三、GRF（General Register File）</h4>
+<ul>
 <li>存储$0~$31这32个寄存器数据</li>
 <li>具有异步复位，读、写功能</li>
 <li>最多一次同时取出两个寄存器的值运算，存入一个寄存器的值</li>
@@ -374,12 +385,13 @@
 <thead>
 <tr>
 <th>端口名</th>
-<th>输入&#x2F;输出</th>
+<th>输入/输出</th>
 <th>位宽</th>
 <th>功能</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>clk</td>
 <td>in</td>
 <td>1</td>
@@ -433,23 +445,28 @@
 <td>32</td>
 <td>RD2输出的数据</td>
 </tr>
-</tbody></table>
-<h4 id="四、ALU（Arithmetic-amp-logical-Unit）"><a href="#四、ALU（Arithmetic-amp-logical-Unit）" class="headerlink" title="四、ALU（Arithmetic &amp; logical Unit）"></a>四、ALU（Arithmetic &amp; logical Unit）</h4><ul>
-<li><p>提供 32 位加、减、或运算及大小比较功能，</p>
+</tbody>
+</table>
+<h4 id="四、ALU（Arithmetic-logical-Unit）">四、ALU（Arithmetic &amp; logical Unit）</h4>
+<ul>
+<li>
+<p>提供 32 位加、减、或运算及大小比较功能，</p>
 </li>
-<li><p>加减法按无符号处理</p>
+<li>
+<p>加减法按无符号处理</p>
 </li>
 </ul>
 <table>
 <thead>
 <tr>
 <th>端口名</th>
-<th>输入&#x2F;输出</th>
+<th>输入/输出</th>
 <th>位宽</th>
 <th>功能</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>op</td>
 <td>in</td>
 <td>3</td>
@@ -483,7 +500,7 @@
 <td>Equal</td>
 <td>out</td>
 <td>1</td>
-<td>A&#x3D;B</td>
+<td>A=B</td>
 </tr>
 <tr>
 <td>Less</td>
@@ -491,21 +508,24 @@
 <td>1</td>
 <td>A&lt;B</td>
 </tr>
-</tbody></table>
-<h4 id="五、DM（Data-Memory）"><a href="#五、DM（Data-Memory）" class="headerlink" title="五、DM（Data Memory）"></a>五、DM（Data Memory）</h4><ul>
+</tbody>
+</table>
+<h4 id="五、DM（Data-Memory）">五、DM（Data Memory）</h4>
+<ul>
 <li>使用 RAM 实现，有<strong>异步复位</strong>功能，复位值为 0x00000000。容量为 32bit × 32字（5位地址），使用双端口模式</li>
-<li>地址始终为4的倍数（lw&#x2F;rw每次操作一个字&#x3D;4字节），所以取32位地址中2-6位对应RAM地址，对于lb&#x2F;rb等指令还需更改</li>
+<li>地址始终为4的倍数（lw/rw每次操作一个字=4字节），所以取32位地址中2-6位对应RAM地址，对于lb/rb等指令还需更改</li>
 </ul>
 <table>
 <thead>
 <tr>
 <th>端口名</th>
-<th>输入&#x2F;输出</th>
+<th>输入/输出</th>
 <th>位宽</th>
 <th>功能</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>clk</td>
 <td>in</td>
 <td>1</td>
@@ -527,7 +547,7 @@
 <td>A</td>
 <td>in</td>
 <td>5</td>
-<td>将要读&#x2F;写的寄存器的地址</td>
+<td>将要读/写的寄存器的地址</td>
 </tr>
 <tr>
 <td>WD</td>
@@ -541,24 +561,27 @@
 <td>32</td>
 <td>读出的数据</td>
 </tr>
-</tbody></table>
-<h4 id="六、EXT（Bit-Extender）"><a href="#六、EXT（Bit-Extender）" class="headerlink" title="六、EXT（Bit Extender）"></a>六、EXT（Bit Extender）</h4><ul>
-<li>将16位偏移量&#x2F;立即数拓展至32位</li>
+</tbody>
+</table>
+<h4 id="六、EXT（Bit-Extender）">六、EXT（Bit Extender）</h4>
+<ul>
+<li>将16位偏移量/立即数拓展至32位</li>
 </ul>
 <table>
 <thead>
 <tr>
 <th>端口名</th>
-<th>输入&#x2F;输出</th>
+<th>输入/输出</th>
 <th>位宽</th>
 <th>功能</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>EXT Select</td>
 <td>in</td>
 <td>1</td>
-<td>选择符号拓展&#x2F;无符号拓展（0&#x2F;1）</td>
+<td>选择符号拓展/无符号拓展（0/1）</td>
 </tr>
 <tr>
 <td>in</td>
@@ -572,11 +595,13 @@
 <td>32</td>
 <td>拓展后32位输出</td>
 </tr>
-</tbody></table>
-<h4 id="七、CU（Control-Unit）"><a href="#七、CU（Control-Unit）" class="headerlink" title="七、CU（Control Unit）"></a>七、CU（Control Unit）</h4><ul>
+</tbody>
+</table>
+<h4 id="七、CU（Control-Unit）">七、CU（Control Unit）</h4>
+<ul>
 <li>生成所有控制信号的组合逻辑电路</li>
 <li>根据每条指令的数据通路列出如下控制信号表格</li>
-<li>R指令控制信号为 (R&#x3D;&#x3D;0)</li>
+<li>R指令控制信号为 (R==0)</li>
 <li>分别根据Opcode和Funct每一位和与门控制非R和R型指令的选择</li>
 <li>再将控制信号用或门收集所有需要触发的指令（多连接一个常数0防止没有被选择的时候输出X）</li>
 </ul>
@@ -597,7 +622,8 @@
 <th>ALUControl</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>add</td>
 <td>000000</td>
 <td>100000</td>
@@ -709,42 +735,49 @@
 <td>1</td>
 <td>00</td>
 </tr>
-</tbody></table>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><h3 id="汇编代码"><a href="#汇编代码" class="headerlink" title="汇编代码"></a>汇编代码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">ori $a0,$0,1999        #ori 测试程序要实现: $0寄存器中的内容与立即数 0x000007cf进行或运算，储存在$a0寄存器中</span><br><span class="line">ori $a1,$a0,111         #ori 测试程序要实现: $a0寄存器中的内容与立即数 0x0000006f进行或运算，储存在$a1寄存器中</span><br><span class="line">lui $a2,12345            #lui 测试程序要实现: 立即数 0x00003039 加载至 $a2 寄存器的高位</span><br><span class="line">lui $a3,0xffff          #lui 测试程序要实现: 立即数 0x0000ffff 加载至 $a3 寄存器的高位</span><br><span class="line">ori $a3,$a3,0xffff     #ori 测试程序要实现: $a3寄存器中的内容与立即数 0x0000ffff进行或运算，储存在$a3寄存器中</span><br><span class="line">add $s0,$a0,$a1        #addu 测试程序要实现：a0 寄存器中的值加上a1 后存到 s0 寄存器中</span><br><span class="line">add $s1,$a3,$a3         #addu 测试程序要实现：a3 寄存器中的值加上a3 后存到 s1 寄存器中</span><br><span class="line">add $s2,$a3,$s0         #addu 测试程序要实现：a3 寄存器中的值加上s0 后存到 s2 寄存器中</span><br><span class="line">sub $s0,$a0,$s2        #subu 测试程序要实现：a0 寄存器中的值减去 s2 寄存器中的值后存到 s0 寄存器中</span><br><span class="line">sub $s1,$a3,$a3        #subu 测试程序要实现：a3 寄存器中的值减去 a3 寄存器中的值后存到 s1 寄存器中</span><br><span class="line">eee:</span><br><span class="line">sub $s2,$a3,$a0         #subu 测试程序要实现：a3 寄存器中的值减去 a0 寄存器中的值后存到 s2 寄存器中</span><br><span class="line">sub $s3,$s2,$s1         #subu 测试程序要实现：s2 寄存器中的值减去 s1 寄存器中的值后存到 s3 寄存器中</span><br><span class="line">ori $t0,$0,0x0000       #ori 测试程序要实现: $0寄存器中的内容与立即数 0x00000000进行或运算，储存在$t0寄存器中</span><br><span class="line">sw $a0,0($t0)           #sw 测试程序要实现：把 a0 寄存器中值,存储到t0寄存器的值再加上偏移量 0， 所指向的 RAM 中</span><br><span class="line">nop</span><br><span class="line">sw $a1,4($t0)       #sw 测试程序要实现：把 a1 寄存器中值,存储到t0寄存器的值再加上偏移量 4， 所指向的 RAM 中</span><br><span class="line">sw $s0,8($t0)       #sw 测试程序要实现：把 s0 寄存器中值,存储到t0寄存器的值再加上偏移量 8， 所指向的 RAM 中</span><br><span class="line">sw $s1,12($t0)      #sw 测试程序要实现：把 s1 寄存器中值,存储到t0寄存器的值再加上偏移量 12， 所指向的 RAM 中</span><br><span class="line">sw $s2,16($t0)      #sw 测试程序要实现：把 s2 寄存器中值,存储到t0寄存器的值再加上偏移量 16， 所指向的 RAM 中</span><br><span class="line">lw $t7,0($t0)        #lw 测试程序要实现：把 t0 寄存器的值加上偏移量0 当作地址读取存储器中的值存入 t7</span><br><span class="line">lw $t6,20($t0)      #lw 测试程序要实现：把 t0 寄存器的值加上偏移量20 当作地址读取存储器中的值存入 t6</span><br><span class="line">ori $t0,$t0,1       #ori 测试程序要实现: $t0寄存器中的内容与立即数 0x00000001进行或运算，储存在$t0寄存器中</span><br><span class="line">ori $t1,$t1,1       #ori 测试程序要实现: $t1寄存器中的内容与立即数 0x00000001进行或运算，储存在$t1寄存器中</span><br><span class="line">ori $t2,$t2,2       #ori 测试程序要实现: $t2寄存器中的内容与立即数 0x00000002进行或运算，储存在$t2寄存器中</span><br><span class="line">beq $t0,$t2,eee     #beq 测试程序要实现：判断 t0 的值和 t2 的值是否相等，相等转eee</span><br><span class="line">beq $t0,$t1,end     #beq 测试程序要实现：判断 t0 的值和 t1 的值是否相等，相等转end</span><br><span class="line">lui $t3,1111     #lui 测试程序要实现: 立即数 0x00000457 加载至 $t3 寄存器的高位</span><br><span class="line">end:</span><br><span class="line">add $t0,$t0,$t7   #addu 测试程序要实现：t0 寄存器中的值加上t0 后存到 t0 寄存器中</span><br><span class="line">j end2</span><br><span class="line">#j 测试</span><br><span class="line">sw $t7,48($t0)       #sw 测试程序要实现：把 t6 寄存器中值,存储到t0寄存器的值再加上偏移量 24， 所指向的 RAM 中</span><br><span class="line">lw $t5,48($t0)     #lw 测试程序要实现：把 t0 寄存器的值加上偏移量12 当作地址读取存储器中的值存入 t5</span><br><span class="line">end2:</span><br></pre></td></tr></table></figure>
-
-<h3 id="机器码"><a href="#机器码" class="headerlink" title="机器码"></a>机器码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">v2.0 raw</span><br><span class="line">340407cf</span><br><span class="line">3485006f</span><br><span class="line">3c063039</span><br><span class="line">3c07ffff</span><br><span class="line">34e7ffff</span><br><span class="line">00858020</span><br><span class="line">00e78820</span><br><span class="line">00f09020</span><br><span class="line">00928022</span><br><span class="line">00e78822</span><br><span class="line">00e49022</span><br><span class="line">02519822</span><br><span class="line">34080000</span><br><span class="line">ad040000</span><br><span class="line">00000000</span><br><span class="line">ad050004</span><br><span class="line">ad100008</span><br><span class="line">ad11000c</span><br><span class="line">ad120010</span><br><span class="line">8d0f0000</span><br><span class="line">8d0e0014</span><br><span class="line">35080001</span><br><span class="line">35290001</span><br><span class="line">354a0002</span><br><span class="line">110afff1</span><br><span class="line">11090001</span><br><span class="line">3c0b0457</span><br><span class="line">010f4020</span><br><span class="line">08000c1f</span><br><span class="line">ad0f0030</span><br><span class="line">8d0d0030</span><br></pre></td></tr></table></figure>
-
-<h4 id="mips运行结果"><a href="#mips运行结果" class="headerlink" title="mips运行结果"></a>mips运行结果</h4><img src="image-20230310234528268.png" alt="image-20230310234528268"/>
-
+</tbody>
+</table>
+<h2 id="测试">测试</h2>
+<h3 id="汇编代码">汇编代码</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">ori $a0,$0,1999        #ori 测试程序要实现: $0寄存器中的内容与立即数 0x000007cf进行或运算，储存在$a0寄存器中</span><br><span class="line">ori $a1,$a0,111         #ori 测试程序要实现: $a0寄存器中的内容与立即数 0x0000006f进行或运算，储存在$a1寄存器中</span><br><span class="line">lui $a2,12345            #lui 测试程序要实现: 立即数 0x00003039 加载至 $a2 寄存器的高位</span><br><span class="line">lui $a3,0xffff          #lui 测试程序要实现: 立即数 0x0000ffff 加载至 $a3 寄存器的高位</span><br><span class="line">ori $a3,$a3,0xffff     #ori 测试程序要实现: $a3寄存器中的内容与立即数 0x0000ffff进行或运算，储存在$a3寄存器中</span><br><span class="line">add $s0,$a0,$a1        #addu 测试程序要实现：a0 寄存器中的值加上a1 后存到 s0 寄存器中</span><br><span class="line">add $s1,$a3,$a3         #addu 测试程序要实现：a3 寄存器中的值加上a3 后存到 s1 寄存器中</span><br><span class="line">add $s2,$a3,$s0         #addu 测试程序要实现：a3 寄存器中的值加上s0 后存到 s2 寄存器中</span><br><span class="line">sub $s0,$a0,$s2        #subu 测试程序要实现：a0 寄存器中的值减去 s2 寄存器中的值后存到 s0 寄存器中</span><br><span class="line">sub $s1,$a3,$a3        #subu 测试程序要实现：a3 寄存器中的值减去 a3 寄存器中的值后存到 s1 寄存器中</span><br><span class="line">eee:</span><br><span class="line">sub $s2,$a3,$a0         #subu 测试程序要实现：a3 寄存器中的值减去 a0 寄存器中的值后存到 s2 寄存器中</span><br><span class="line">sub $s3,$s2,$s1         #subu 测试程序要实现：s2 寄存器中的值减去 s1 寄存器中的值后存到 s3 寄存器中</span><br><span class="line">ori $t0,$0,0x0000       #ori 测试程序要实现: $0寄存器中的内容与立即数 0x00000000进行或运算，储存在$t0寄存器中</span><br><span class="line">sw $a0,0($t0)           #sw 测试程序要实现：把 a0 寄存器中值,存储到t0寄存器的值再加上偏移量 0， 所指向的 RAM 中</span><br><span class="line">nop</span><br><span class="line">sw $a1,4($t0)       #sw 测试程序要实现：把 a1 寄存器中值,存储到t0寄存器的值再加上偏移量 4， 所指向的 RAM 中</span><br><span class="line">sw $s0,8($t0)       #sw 测试程序要实现：把 s0 寄存器中值,存储到t0寄存器的值再加上偏移量 8， 所指向的 RAM 中</span><br><span class="line">sw $s1,12($t0)      #sw 测试程序要实现：把 s1 寄存器中值,存储到t0寄存器的值再加上偏移量 12， 所指向的 RAM 中</span><br><span class="line">sw $s2,16($t0)      #sw 测试程序要实现：把 s2 寄存器中值,存储到t0寄存器的值再加上偏移量 16， 所指向的 RAM 中</span><br><span class="line">lw $t7,0($t0)        #lw 测试程序要实现：把 t0 寄存器的值加上偏移量0 当作地址读取存储器中的值存入 t7</span><br><span class="line">lw $t6,20($t0)      #lw 测试程序要实现：把 t0 寄存器的值加上偏移量20 当作地址读取存储器中的值存入 t6</span><br><span class="line">ori $t0,$t0,1       #ori 测试程序要实现: $t0寄存器中的内容与立即数 0x00000001进行或运算，储存在$t0寄存器中</span><br><span class="line">ori $t1,$t1,1       #ori 测试程序要实现: $t1寄存器中的内容与立即数 0x00000001进行或运算，储存在$t1寄存器中</span><br><span class="line">ori $t2,$t2,2       #ori 测试程序要实现: $t2寄存器中的内容与立即数 0x00000002进行或运算，储存在$t2寄存器中</span><br><span class="line">beq $t0,$t2,eee     #beq 测试程序要实现：判断 t0 的值和 t2 的值是否相等，相等转eee</span><br><span class="line">beq $t0,$t1,end     #beq 测试程序要实现：判断 t0 的值和 t1 的值是否相等，相等转end</span><br><span class="line">lui $t3,1111     #lui 测试程序要实现: 立即数 0x00000457 加载至 $t3 寄存器的高位</span><br><span class="line">end:</span><br><span class="line">add $t0,$t0,$t7   #addu 测试程序要实现：t0 寄存器中的值加上t0 后存到 t0 寄存器中</span><br><span class="line">j end2</span><br><span class="line">#j 测试</span><br><span class="line">sw $t7,48($t0)       #sw 测试程序要实现：把 t6 寄存器中值,存储到t0寄存器的值再加上偏移量 24， 所指向的 RAM 中</span><br><span class="line">lw $t5,48($t0)     #lw 测试程序要实现：把 t0 寄存器的值加上偏移量12 当作地址读取存储器中的值存入 t5</span><br><span class="line">end2:</span><br></pre></td></tr></table></figure>
+<h3 id="机器码">机器码</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">v2.0 raw</span><br><span class="line">340407cf</span><br><span class="line">3485006f</span><br><span class="line">3c063039</span><br><span class="line">3c07ffff</span><br><span class="line">34e7ffff</span><br><span class="line">00858020</span><br><span class="line">00e78820</span><br><span class="line">00f09020</span><br><span class="line">00928022</span><br><span class="line">00e78822</span><br><span class="line">00e49022</span><br><span class="line">02519822</span><br><span class="line">34080000</span><br><span class="line">ad040000</span><br><span class="line">00000000</span><br><span class="line">ad050004</span><br><span class="line">ad100008</span><br><span class="line">ad11000c</span><br><span class="line">ad120010</span><br><span class="line">8d0f0000</span><br><span class="line">8d0e0014</span><br><span class="line">35080001</span><br><span class="line">35290001</span><br><span class="line">354a0002</span><br><span class="line">110afff1</span><br><span class="line">11090001</span><br><span class="line">3c0b0457</span><br><span class="line">010f4020</span><br><span class="line">08000c1f</span><br><span class="line">ad0f0030</span><br><span class="line">8d0d0030</span><br></pre></td></tr></table></figure>
+<h4 id="mips运行结果">mips运行结果</h4>
+<img src="image-20230310234528268.png" alt="image-20230310234528268"/>
 <img src="image-20221030204922910.png" alt="image-20221030204922910"/>
-
-<h4 id="CPU运行结果"><a href="#CPU运行结果" class="headerlink" title="CPU运行结果"></a>CPU运行结果</h4><img src="image-20221030204850105.png" alt="image-20221030204850105"/>
-
+<h4 id="CPU运行结果">CPU运行结果</h4>
+<img src="image-20221030204850105.png" alt="image-20221030204850105"/>
 <img src="image-20221030204822588.png" alt="image-20221030204822588"/>
-
-<h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><ol>
-<li><strong>上面我们介绍了通过 FSM 理解单周期 CPU 的基本方法。请大家指出单周期 CPU 所用到的模块中，哪些发挥状态存储功能，哪些发挥状态转移功能。</strong><ol>
+<h2 id="思考题">思考题</h2>
+<ol>
+<li><strong>上面我们介绍了通过 FSM 理解单周期 CPU 的基本方法。请大家指出单周期 CPU 所用到的模块中，哪些发挥状态存储功能，哪些发挥状态转移功能。</strong>
+<ol>
 <li>状态储存：PC, GRF, IM, DM（储存指令以及数据的状态）</li>
 <li>状态转移：ALU, EXT, CU（组合逻辑）</li>
 </ol>
 </li>
-<li><strong>现在我们的模块中 IM 使用 ROM， DM 使用 RAM， GRF 使用 Register，这种做法合理吗？ 请给出分析，若有改进意见也请一并给出。</strong><ol>
+<li><strong>现在我们的模块中 IM 使用 ROM， DM 使用 RAM， GRF 使用 Register，这种做法合理吗？ 请给出分析，若有改进意见也请一并给出。</strong>
+<ol>
 <li>合理，IM用ROM存储指令，掉电后不会丢失，并且需要人为进行修改，保证指令不会在运行中被更改；数据储存用RAM，读出和写入且访问速度快于ROM，方便每个周期读出或者写入；同时内存可能很大，不可用Register实现；GRF一共32个数据，每个周期内需要频繁同时读出和写入，用Register效率最高</li>
 </ol>
 </li>
-<li><strong>在上述提示的模块之外，你是否在实际实现时设计了其他的模块？如果是的话，请给出介绍和设计的思路。</strong><ol>
+<li><strong>在上述提示的模块之外，你是否在实际实现时设计了其他的模块？如果是的话，请给出介绍和设计的思路。</strong>
+<ol>
 <li>暂无</li>
 </ol>
 </li>
-<li><strong>事实上，实现 <code>nop</code> 空指令，我们并不需要将它加入控制信号真值表，为什么？</strong><ol>
+<li><strong>事实上，实现 <code>nop</code> 空指令，我们并不需要将它加入控制信号真值表，为什么？</strong>
+<ol>
 <li>CU中无指令被选择时，所有控制信号输出0，不对GRF写入，不对DM写入，rs与rt均全为0，在GRF选择的均为0号寄存器，输出为0，ALU运算后仍为0，即操作为将0写回$0寄存器，所以不需要加入控制信号真值表</li>
 </ol>
 </li>
-<li><strong>上文提到，MARS 不能导出 PC 与 DM 起始地址均为 0 的机器码。实际上，可以避免手工修改的麻烦。请查阅相关资料进行了解，并阐释为了解决这个问题，你最终采用的方法。</strong><ol>
+<li><strong>上文提到，MARS 不能导出 PC 与 DM 起始地址均为 0 的机器码。实际上，可以避免手工修改的麻烦。请查阅相关资料进行了解，并阐释为了解决这个问题，你最终采用的方法。</strong>
+<ol>
 <li>将地址减去0x30000000，映射到0x00000000为起始地址</li>
 </ol>
 </li>
-<li><strong>阅读 Pre 的 <a target="_blank" rel="noopener" href="http://cscore.buaa.edu.cn/tutorial/mips/mips-6/mips6-1/">“MIPS 指令集及汇编语言”</a> 一节中给出的测试样例，评价其强度（可从各个指令的覆盖情况，单一指令各种行为的覆盖情况等方面分析），并指出具体的不足之处。</strong><ol>
+<li><strong>阅读 Pre 的 <a target="_blank" rel="noopener" href="http://cscore.buaa.edu.cn/tutorial/mips/mips-6/mips6-1/">“MIPS 指令集及汇编语言”</a> 一节中给出的测试样例，评价其强度（可从各个指令的覆盖情况，单一指令各种行为的覆盖情况等方面分析），并指出具体的不足之处。</strong>
+<ol>
 <li>beq指令强度不足，只包括向后跳转，没有测试向前跳转的负立即数</li>
 <li>ori指令还可测试对$0寄存器赋值，检测是否会修改</li>
 <li>对DM和GRF，存取数据地址最好包含整个要求的地址范围和32个寄存器，保证范围设置正确，连接正确</li>

@@ -70,6 +70,7 @@
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
+<link rel="alternate" href="/atom.xml" title="TARDIS" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
@@ -301,21 +302,23 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="5级流水线CPU设计文档"><a href="#5级流水线CPU设计文档" class="headerlink" title="5级流水线CPU设计文档+"></a>5级流水线CPU设计文档+</h2><span id="more"></span>
-
-<h2 id="支持指令"><a href="#支持指令" class="headerlink" title="支持指令"></a>支持指令</h2><p>  <strong>R, add, sub, And, Or, Xor, slt, sltu</strong></p>
-<p>  <strong>addi, andi, xori, ori, lui</strong></p>
-<p>  <strong>lb, lh, lw, sb, sh, sw, lbu, lhu</strong></p>
-<p>  <strong>mult, multu, div, divu, mfhi, mflo, mthi, mtlo</strong></p>
-<p>  <strong>beq, bne, j, jal, jr, bltzal</strong></p>
-<p>  <strong>sll</strong></p>
-<h2 id="流程模块设计"><a href="#流程模块设计" class="headerlink" title="流程模块设计"></a>流程模块设计</h2><h3 id="CU模块设计"><a href="#CU模块设计" class="headerlink" title="CU模块设计"></a>CU模块设计</h3><ul>
+        <h2 id="5级流水线CPU设计文档">5级流水线CPU设计文档+</h2>
+<span id="more"></span>
+<h2 id="支持指令">支持指令</h2>
+<p><strong>R, add, sub, And, Or, Xor, slt, sltu</strong></p>
+<p><strong>addi, andi, xori, ori, lui</strong></p>
+<p><strong>lb, lh, lw, sb, sh, sw, lbu, lhu</strong></p>
+<p><strong>mult, multu, div, divu, mfhi, mflo, mthi, mtlo</strong></p>
+<p><strong>beq, bne, j, jal, jr, bltzal</strong></p>
+<p><strong>sll</strong></p>
+<h2 id="流程模块设计">流程模块设计</h2>
+<h3 id="CU模块设计">CU模块设计</h3>
+<ul>
 <li>相较P4，省去RegWrite信号，直接译出当前指令需要写入的地址，如不需写入，默认写至0，在写入GRF时直接略去</li>
-<li>直接译出当前指令rs, rt, rd, shamt, imm16, imm26以及所有控制信号供每个阶段选取使用，还需译出Tuse_rs&#x2F;rt以及E_Tnew与M_Tnew，各级输出对应信号至Conflict模块</li>
+<li>直接译出当前指令rs, rt, rd, shamt, imm16, imm26以及所有控制信号供每个阶段选取使用，还需译出Tuse_rs/rt以及E_Tnew与M_Tnew，各级输出对应信号至Conflict模块</li>
 <li>将指令分类，分为：cal_r,cal_i,md,mt,mf,load,save,branch,branch_ucl,branch_cl,shift,jreg,jadd,jlink（ori被归为cal_i）</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">   assign cal_r=(add||sub||And||Or||Xor||slt||sltu);</span><br><span class="line">assign cal_i=(addi||andi||xori||ori||lui);</span><br><span class="line"></span><br><span class="line">   assign md   =(mult||multu||div||divu);</span><br><span class="line">   assign mf   =(mfhi||mflo);</span><br><span class="line">   assign mt   =(mthi||mtlo);</span><br><span class="line"></span><br><span class="line">assign load=(lw||lh||lhu||lb||lbu);</span><br><span class="line">assign save=(sw||sh||sb);</span><br><span class="line"></span><br><span class="line">   assign branch=(beq||bne||branch_ucl||branch_cl);</span><br><span class="line">   assign branch_ucl=bltzal;</span><br><span class="line">   assign branch_cl=0;</span><br><span class="line"></span><br><span class="line">   assign jreg = jr;</span><br><span class="line">   assign jadd = (j||jal);</span><br><span class="line">   assign jlink = jal;</span><br><span class="line"></span><br><span class="line">   assign shift=sll;</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>控制信号新增：MDU, MDUStart, MDUSelect, MFSelect, ByteSelect, DESelect</li>
 <li>控制信号调整：GRF_WA, GRF_WDSrc, ALUSelect, <strong>EXTSelect（cal_i各个指令行为不同，注意对照指令集）</strong>,BranchSelect</li>
@@ -329,7 +332,8 @@
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>Ins</td>
 <td>input</td>
 <td>[31:0]</td>
@@ -533,8 +537,10 @@
 <td>[1:0]</td>
 <td></td>
 </tr>
-</tbody></table>
-<h4 id="T计算表格"><a href="#T计算表格" class="headerlink" title="T计算表格"></a>T计算表格</h4><ul>
+</tbody>
+</table>
+<h4 id="T计算表格">T计算表格</h4>
+<ul>
 <li>注意新增的乘除指令的AT</li>
 </ul>
 <table>
@@ -547,7 +553,8 @@
 <th>M_Tnew</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>cal_r</td>
 <td>1</td>
 <td>1</td>
@@ -610,52 +617,59 @@
 <td></td>
 <td></td>
 </tr>
-</tbody></table>
-<h3 id="Conflit模块设计：AT控制阻塞，直接转发"><a href="#Conflit模块设计：AT控制阻塞，直接转发" class="headerlink" title="Conflit模块设计：AT控制阻塞，直接转发"></a>Conflit模块设计：AT控制阻塞，直接转发</h3><h4 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h4><ul>
+</tbody>
+</table>
+<h3 id="Conflit模块设计：AT控制阻塞，直接转发">Conflit模块设计：AT控制阻塞，直接转发</h3>
+<h4 id="阻塞">阻塞</h4>
+<ul>
 <li>D级判断将要使用的寄存器数据是否能得到转发更新，即后续写入相同寄存器的Tnew是否有大于Tuse的，如果有则需要阻塞，以在后续能得到转发更新。特判0号寄存器不需要阻塞，能够直接获得数据0</li>
 <li>需要得到D级指令rs, rt的Tuse，以及后续E, M级指令的Tnew，在各级CU中计算，发送至冲突单元（W级Tnew全是0不需要考虑，都可以内部转发解决）</li>
 <li>阻塞时需要暂停更新PC以及F级读出的指令，并且清空D级当前指令的译码输出，以替换为nop空泡</li>
 <li>新增乘除Stall，在乘除运算即将开始或正在进行时如遇到乘除指令需要Stall</li>
 </ul>
 <img src="image-20230311001016596.png" alt="image-20230311001016596"/>
-
-<h4 id="转发"><a href="#转发" class="headerlink" title="转发"></a>转发</h4><ul>
-<li><p>阻塞后，所有指令在需要读寄存器数据的时候都能够获得后续计算完毕的数据，每级转发出已算出的数据，发送给之前各级即可。</p>
+<h4 id="转发">转发</h4>
+<ul>
+<li>
+<p>阻塞后，所有指令在需要读寄存器数据的时候都能够获得后续计算完毕的数据，每级转发出已算出的数据，发送给之前各级即可。</p>
 </li>
-<li><p>需要读寄存器：D级GRF，Branch计算需要rs, rt数据；E级ALU需要rs,rt 数据；M级DM写入数据口需要rt数据</p>
+<li>
+<p>需要读寄存器：D级GRF，Branch计算需要rs, rt数据；E级ALU需要rs,rt 数据；M级DM写入数据口需要rt数据</p>
 </li>
-<li><p>需要写寄存器：E级可转发出D级算的PC+8；M级可转发出D级算的PC+8和E级算的的ALU_Y；W级可转发出D级算的PC+8，E级算的的ALU_Y和M级读出的DM数据。<strong>根据当前指令CU译码得到的GRF_WDSrc进行选择</strong>。此外还有W级寄存器写入，可直接内部转发至D级读出</p>
+<li>
+<p>需要写寄存器：E级可转发出D级算的PC+8；M级可转发出D级算的PC+8和E级算的的ALU_Y；W级可转发出D级算的PC+8，E级算的的ALU_Y和M级读出的DM数据。<strong>根据当前指令CU译码得到的GRF_WDSrc进行选择</strong>。此外还有W级寄存器写入，可直接内部转发至D级读出</p>
 </li>
 </ul>
 <img src="image-20230311001109169.png" alt="image-20230311001109169" style="zoom:67%;" />
-
 <img src="image-20230311001116883.png" alt="image-20230311001116883" style="zoom:67%;" />
-
 <img src="image-20230311001122673.png" alt="image-20230311001122673" style="zoom:67%;" />
-
 <img src="image-20230311001129478.png" alt="image-20230311001129478" style="zoom:67%;" />
-
 <ul>
 <li>在主模块中，获取各级需要读的寄存器编号（D_rs,D_rt,E_rs,E_rt,M_rt），寄存器原读数（D_rs_data,D_rt_data,E_rs_data,E_rt_data,M_rt_data），写入的寄存器编号（E_GRF_WA,M_GRF_WA,W_GRF_WA）和数据（E_GRF_WD,M_GRF_WD,W_GRF_WD）</li>
 <li>比较读的编号和写的编号是否有相等的，如有相等的则代表有数据已经更新需要转发，转发优先级为更新次序，最后一次更新优先转发，即优先转发距离需要数据的阶段近的数据，特判如果需要读0号寄存器的数据，直接转发0</li>
 <li>转发的数据（D_rs_fw,D_rt_fw,E_rs_fw,E_rt_fw,M_rt_fw）发送至各级需要的部分运算，并传递给下一级</li>
 </ul>
 <img src="image-20230311001150971.png" alt="image-20230311001150971" style="zoom: 67%;" />
-
-<h3 id="五级模块设计"><a href="#五级模块设计" class="headerlink" title="五级模块设计"></a>五级模块设计</h3><ul>
-<li><p>每个阶段之间以寄存器隔开，寄存器设计在每个模块输出处，使用reg类型</p>
+<h3 id="五级模块设计">五级模块设计</h3>
+<ul>
+<li>
+<p>每个阶段之间以寄存器隔开，寄存器设计在每个模块输出处，使用reg类型</p>
 </li>
-<li><p>每个阶段之间需要流水传递Ins，PC，传给各级CU以译码出当前阶段的rs，rt以及需要写入的地址和写入数据的选择</p>
+<li>
+<p>每个阶段之间需要流水传递Ins，PC，传给各级CU以译码出当前阶段的rs，rt以及需要写入的地址和写入数据的选择</p>
 </li>
-<li><p>部分阶段前后间需要传递需要使用的NPC, EXTout, ALU_Y, DM_RD</p>
+<li>
+<p>部分阶段前后间需要传递需要使用的NPC, EXTout, ALU_Y, DM_RD</p>
 </li>
 </ul>
-<h4 id="P6更新乘除槽与储存器外置以及按字节访存"><a href="#P6更新乘除槽与储存器外置以及按字节访存" class="headerlink" title="P6更新乘除槽与储存器外置以及按字节访存"></a>P6更新乘除槽与储存器外置以及按字节访存</h4><ul>
+<h4 id="P6更新乘除槽与储存器外置以及按字节访存">P6更新乘除槽与储存器外置以及按字节访存</h4>
+<ul>
 <li>删去F_IFU与M_DM，添加M_DE与E_MDU</li>
 <li>乘除槽有两个寄存器，其中数据需要在EMW级流水，以便进行转发，并且需要添加转发信号控制</li>
 <li>外置储存器需要修改数据通路，前寄存器发送写入数据，后寄存器接收读出数据</li>
 </ul>
-<h4 id="1-Fetch"><a href="#1-Fetch" class="headerlink" title="1. Fetch"></a>1. Fetch</h4><ul>
+<h4 id="1-Fetch">1. Fetch</h4>
+<ul>
 <li>包含FDReg</li>
 <li>Fetch</li>
 </ul>
@@ -668,7 +682,8 @@
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>clk</td>
 <td>input</td>
 <td></td>
@@ -702,7 +717,7 @@
 <td>F_PC</td>
 <td><strong>output</strong></td>
 <td>reg [31:0]</td>
-<td>&lt;&#x3D;NPC，传出至外部指令储存器</td>
+<td>&lt;=NPC，传出至外部指令储存器</td>
 </tr>
 <tr>
 <td>F_Ins</td>
@@ -732,21 +747,22 @@
 <td>D_PC</td>
 <td>output</td>
 <td>reg [31:0]</td>
-<td>&lt;&#x3D;F_PC</td>
+<td>&lt;=F_PC</td>
 </tr>
 <tr>
 <td>D_Ins</td>
 <td>output</td>
 <td>reg [31:0]</td>
-<td>&lt;&#x3D;F_Ins</td>
+<td>&lt;=F_Ins</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <ul>
 <li>F级与指令储存的数据交换</li>
 </ul>
 <img src="image-20230311001208043.png" alt="image-20230311001208043" style="zoom:67%;" />
-
-<h4 id="2-Decode"><a href="#2-Decode" class="headerlink" title="2. Decode"></a>2. Decode</h4><ul>
+<h4 id="2-Decode">2. Decode</h4>
+<ul>
 <li>包括D_CU, EXT, NPC (Branch), DEReg</li>
 </ul>
 <table>
@@ -758,7 +774,8 @@
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>clk</td>
 <td>input</td>
 <td></td>
@@ -783,7 +800,7 @@
 <td>指令流水</td>
 </tr>
 <tr>
-<td><strong>Conflict&#x2F;Forward</strong></td>
+<td><strong>Conflict/Forward</strong></td>
 <td></td>
 <td></td>
 <td></td>
@@ -906,40 +923,42 @@
 <td>E_PC</td>
 <td>output</td>
 <td>reg [31:0]</td>
-<td>&lt;&#x3D;D_PC</td>
+<td>&lt;=D_PC</td>
 </tr>
 <tr>
 <td>E_Ins</td>
 <td>output</td>
 <td>reg [31:0]</td>
-<td>&lt;&#x3D;D_Ins</td>
+<td>&lt;=D_Ins</td>
 </tr>
 <tr>
 <td>E_rs_data</td>
 <td>output</td>
 <td>reg [31:0]</td>
-<td>&lt;&#x3D;<strong>D_rs_fw</strong></td>
+<td>&lt;=<strong>D_rs_fw</strong></td>
 </tr>
 <tr>
 <td>E_rt_data</td>
 <td>output</td>
 <td>reg [31:0]</td>
-<td>&lt;&#x3D;<strong>D_rt_fw</strong></td>
+<td>&lt;=<strong>D_rt_fw</strong></td>
 </tr>
 <tr>
 <td>E_EXT_out</td>
 <td>output</td>
 <td>reg [31:0]</td>
-<td>&lt;&#x3D;D_EXT_out</td>
+<td>&lt;=D_EXT_out</td>
 </tr>
 <tr>
 <td>E_branchTrue</td>
 <td>output</td>
 <td>reg [31:0]</td>
-<td>&lt;&#x3D;D_branchTrue</td>
+<td>&lt;=D_branchTrue</td>
 </tr>
-</tbody></table>
-<h4 id="3-Execute"><a href="#3-Execute" class="headerlink" title="3. Execute"></a>3. Execute</h4><ul>
+</tbody>
+</table>
+<h4 id="3-Execute">3. Execute</h4>
+<ul>
 <li>包括E_CU, E_ALU, E_MDU, EMReg</li>
 <li>需在此处多向Conflict传递MDU指令以及乘除运行信息，并向流水中传递HI, LO以便mf指令W级读取</li>
 </ul>
@@ -952,7 +971,8 @@
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>clk</td>
 <td>input</td>
 <td></td>
@@ -977,7 +997,7 @@
 <td>指令流水</td>
 </tr>
 <tr>
-<td><strong>Conflict&#x2F;Forward</strong></td>
+<td><strong>Conflict/Forward</strong></td>
 <td></td>
 <td></td>
 <td></td>
@@ -1076,13 +1096,13 @@
 <td>E_ALU_A</td>
 <td></td>
 <td>[31:0]</td>
-<td>&#x3D;<strong>E_rs_fw</strong>：ALU_A口数据</td>
+<td>=<strong>E_rs_fw</strong>：ALU_A口数据</td>
 </tr>
 <tr>
 <td>E_ALU_B</td>
 <td></td>
 <td>[31:0]</td>
-<td>&#x3D;<strong>E_rt_fw</strong>&#x2F;E_EXT_out：ALU_B口数据</td>
+<td>=<strong>E_rt_fw</strong>/E_EXT_out：ALU_B口数据</td>
 </tr>
 <tr>
 <td><strong>MDU</strong></td>
@@ -1136,45 +1156,46 @@
 <td>M_PC</td>
 <td>output</td>
 <td>reg [31:0]</td>
-<td>&lt;&#x3D;E_PC</td>
+<td>&lt;=E_PC</td>
 </tr>
 <tr>
 <td>M_Ins</td>
 <td>output</td>
 <td>reg [31:0]</td>
-<td>&lt;&#x3D;E_Ins</td>
+<td>&lt;=E_Ins</td>
 </tr>
 <tr>
 <td>M_ALU_Y</td>
 <td>output</td>
 <td>reg [31:0]</td>
-<td>&lt;&#x3D;E_ALU_Y</td>
+<td>&lt;=E_ALU_Y</td>
 </tr>
 <tr>
 <td>M_rt_data</td>
 <td>output</td>
 <td>reg [31:0]</td>
-<td>&lt;<strong>&#x3D;E_rt_fw</strong></td>
+<td>&lt;<strong>=E_rt_fw</strong></td>
 </tr>
 <tr>
 <td>M_branchTrue</td>
 <td>output</td>
 <td>reg</td>
-<td>&lt;&#x3D;E_branchTrue</td>
+<td>&lt;=E_branchTrue</td>
 </tr>
 <tr>
 <td>M_HI</td>
 <td>output</td>
 <td>reg [31:0]</td>
-<td>&lt;&#x3D;E_HI</td>
+<td>&lt;=E_HI</td>
 </tr>
 <tr>
 <td>M_LO</td>
 <td>output</td>
 <td>reg [31:0]</td>
-<td>&lt;&#x3D;E_LO</td>
+<td>&lt;=E_LO</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <ul>
 <li>#####E_ALU</li>
 </ul>
@@ -1187,7 +1208,8 @@
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>op</td>
 <td>input</td>
 <td>[3:0]</td>
@@ -1211,12 +1233,14 @@
 <td>[31:0]</td>
 <td></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <ul>
-<li><p>#####E_MDU</p>
+<li>
+<p>#####E_MDU</p>
 <ul>
 <li>当指令为mthi, mtlo，将寄存器数据写入HI, LO时，始终上升沿直接给HI, LO赋为A</li>
-<li>当为其余四条运算指令时，设置临时计数变量cnt，初始为0，接受到Start信号时，开始设置Busy为1；根据MDU功能选择编码，分别直接计算出HI, LO对应结果赋值，因为其他乘除操作已被阻塞，不会提前读取或写入；设置cnt为5或10，每周期-1，cnt&#x3D;&#x3D;1代表运算结束，持续保持Busy为5&#x2F;10周期后将cnt, Busy归零。</li>
+<li>当为其余四条运算指令时，设置临时计数变量cnt，初始为0，接受到Start信号时，开始设置Busy为1；根据MDU功能选择编码，分别直接计算出HI, LO对应结果赋值，因为其他乘除操作已被阻塞，不会提前读取或写入；设置cnt为5或10，每周期-1，cnt==1代表运算结束，持续保持Busy为5/10周期后将cnt, Busy归零。</li>
 </ul>
 </li>
 </ul>
@@ -1229,7 +1253,8 @@
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>clk</td>
 <td>input</td>
 <td></td>
@@ -1283,8 +1308,10 @@
 <td>reg [31:0]</td>
 <td></td>
 </tr>
-</tbody></table>
-<h4 id="4-Memory"><a href="#4-Memory" class="headerlink" title="4. Memory"></a>4. Memory</h4><ul>
+</tbody>
+</table>
+<h4 id="4-Memory">4. Memory</h4>
+<ul>
 <li>包括M_CU, M_DE</li>
 <li>因储存器外置，删除DM，加入对字节存取数据的操作，包括通过控制四位ByteEn各位</li>
 </ul>
@@ -1297,7 +1324,8 @@
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>clk</td>
 <td>input</td>
 <td></td>
@@ -1322,7 +1350,7 @@
 <td></td>
 </tr>
 <tr>
-<td><strong>Conflict&#x2F;Forward</strong></td>
+<td><strong>Conflict/Forward</strong></td>
 <td></td>
 <td></td>
 <td></td>
@@ -1403,7 +1431,7 @@
 <td>lowAddr</td>
 <td></td>
 <td>[1:0]</td>
-<td>&#x3D;M_ALU_Y[1:0]，DM写入地址地两位</td>
+<td>=M_ALU_Y[1:0]，DM写入地址地两位</td>
 </tr>
 <tr>
 <td>M_rt_fw</td>
@@ -1469,56 +1497,65 @@
 <td>W_PC</td>
 <td>output</td>
 <td>reg [31:0]</td>
-<td>&lt;&#x3D;M_PC</td>
+<td>&lt;=M_PC</td>
 </tr>
 <tr>
 <td>W_Ins</td>
 <td>output</td>
 <td>reg [31:0]</td>
-<td>&lt;&#x3D;M_Ins</td>
+<td>&lt;=M_Ins</td>
 </tr>
 <tr>
 <td>W_ALU_Y</td>
 <td>output</td>
 <td>reg [31:0]</td>
-<td>&lt;&#x3D;M_ALU_Y</td>
+<td>&lt;=M_ALU_Y</td>
 </tr>
 <tr>
 <td>W_DM_RD</td>
 <td>output</td>
 <td>reg [31:0]</td>
-<td>&lt;&#x3D;M_DM_RDout</td>
+<td>&lt;=M_DM_RDout</td>
 </tr>
 <tr>
 <td>W_branchTrue</td>
 <td>output</td>
 <td>reg</td>
-<td>&lt;&#x3D;M_branchTrue</td>
+<td>&lt;=M_branchTrue</td>
 </tr>
 <tr>
 <td>W_HI</td>
 <td>output</td>
 <td>reg [31:0]</td>
-<td>&lt;&#x3D;M_HI</td>
+<td>&lt;=M_HI</td>
 </tr>
 <tr>
 <td>W_LO</td>
 <td>output</td>
 <td>reg [31:0]</td>
-<td>&lt;&#x3D;M_LO</td>
+<td>&lt;=M_LO</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <ul>
-<li><h5 id="M-BE（计算字节访存使能，调整四字节写入数据）"><a href="#M-BE（计算字节访存使能，调整四字节写入数据）" class="headerlink" title="M_BE（计算字节访存使能，调整四字节写入数据）"></a>M_BE（计算字节访存使能，调整四字节写入数据）</h5><ul>
-<li><p>合并在Memory中，在写入的条件下，根据写入数据类型和写入地址低两位产生四个字节的每一位控制信号，即四位ByteEn</p>
+<li>
+<h5 id="M-BE（计算字节访存使能，调整四字节写入数据）">M_BE（计算字节访存使能，调整四字节写入数据）</h5>
+<ul>
+<li>
+<p>合并在Memory中，在写入的条件下，根据写入数据类型和写入地址低两位产生四个字节的每一位控制信号，即四位ByteEn</p>
 <img src="image-20230311001222299.png" alt="image-20230311001222299" style="zoom:67%;" />
 </li>
-<li><p>后续再根据ByteEn调整将写入内存的数据，需将待写入的字节移动到对应为En1的位置</p>
-<img src="image-20230311001240021.png" alt="image-20230311001240021" style="zoom:67%;" /></li>
+<li>
+<p>后续再根据ByteEn调整将写入内存的数据，需将待写入的字节移动到对应为En1的位置</p>
+<img src="image-20230311001240021.png" alt="image-20230311001240021" style="zoom:67%;" />
+</li>
 </ul>
 </li>
-<li><h5 id="M-DE（调整内存读出数据，截取需要的字节后拓展）"><a href="#M-DE（调整内存读出数据，截取需要的字节后拓展）" class="headerlink" title="M_DE（调整内存读出数据，截取需要的字节后拓展）"></a>M_DE（调整内存读出数据，截取需要的字节后拓展）</h5><ul>
-<li><p>注意DESelect种类编码，注意需要将读出字节移动至低位，高位进行拓展补齐</p>
+<li>
+<h5 id="M-DE（调整内存读出数据，截取需要的字节后拓展）">M_DE（调整内存读出数据，截取需要的字节后拓展）</h5>
+<ul>
+<li>
+<p>注意DESelect种类编码，注意需要将读出字节移动至低位，高位进行拓展补齐</p>
 <table>
 <thead>
 <tr>
@@ -1528,7 +1565,8 @@
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>lowAddr</td>
 <td>input</td>
 <td>[1:0]</td>
@@ -1552,19 +1590,19 @@
 <td>[31:0]</td>
 <td></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 </li>
 </ul>
 </li>
 </ul>
 <img src="image-20230311001304148.png" alt="image-20230311001304148" style="zoom:67%;" />
-
 <ul>
 <li>M级与内存数据交换</li>
 </ul>
 <img src="image-20230311001314893.png" alt="image-20230311001314893" style="zoom:67%;" />
-
-<h4 id="5-Writeback"><a href="#5-Writeback" class="headerlink" title="5. Writeback"></a>5. Writeback</h4><ul>
+<h4 id="5-Writeback">5. Writeback</h4>
+<ul>
 <li>包括W_CU</li>
 </ul>
 <table>
@@ -1576,7 +1614,8 @@
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>clk</td>
 <td>input</td>
 <td></td>
@@ -1601,7 +1640,7 @@
 <td></td>
 </tr>
 <tr>
-<td><strong>Conflict&#x2F;Forward</strong></td>
+<td><strong>Conflict/Forward</strong></td>
 <td></td>
 <td></td>
 <td></td>
@@ -1660,56 +1699,70 @@
 <td>[31:0]</td>
 <td>W级指令写寄存器数据</td>
 </tr>
-</tbody></table>
-<h2 id="测试-同P5，P6单独构造测试数据"><a href="#测试-同P5，P6单独构造测试数据" class="headerlink" title="测试(同P5，P6单独构造测试数据)"></a>测试(同P5，P6单独构造测试数据)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br></pre></td><td class="code"><pre><span class="line">.text</span><br><span class="line">                                        # 13</span><br><span class="line">    ori     $t0,    $0,         0xadce</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    ori     $t1,    $t0,        0xdefa</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    add     $t4,    $t2,        $t0</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         15</span><br><span class="line">    lw      $t4,    -7($t3)</span><br><span class="line">    sub     $t5,    $t4,        $t2</span><br><span class="line"></span><br><span class="line"># 14</span><br><span class="line">    ori     $t0,    $0,         0xefac</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    ori     $t1,    $t0,        0xfead</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    add     $t4,    $t0,        $t2</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         21</span><br><span class="line">    lw      $t4,    -13($t3)</span><br><span class="line">    sub     $t5,    $t2,        $t4</span><br><span class="line"></span><br><span class="line"># 15</span><br><span class="line">    ori     $t0,    $0,         0x0ace</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    ori     $t1,    $t0,        0x00a1</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    nop     </span><br><span class="line">    add     $t4,    $t2,        $t0</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         15</span><br><span class="line">    lw      $t4,    -7($t3)</span><br><span class="line">    nop     </span><br><span class="line">    sub     $t5,    $t4,        $t2</span><br><span class="line"></span><br><span class="line"># 16</span><br><span class="line">    lui     $t0,    0x1234</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    lui     $t1,    0xfead</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    nop     </span><br><span class="line">    add     $t4,    $t0,        $t2</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         25</span><br><span class="line">    lw      $t4,    -17($t3)</span><br><span class="line">    nop     </span><br><span class="line">    sub     $t5,    $t2,        $t4</span><br><span class="line"></span><br><span class="line"># 17</span><br><span class="line">    lui     $1,     0x13ac</span><br><span class="line">    ori     $2,     0x12ae</span><br><span class="line"></span><br><span class="line">    add     $3,     $1,         $2</span><br><span class="line">    ori     $4,     $3,         0xcd12</span><br><span class="line"></span><br><span class="line">    sub     $5,     $4,         $1</span><br><span class="line">    ori     $6,     $5,         0x4589</span><br><span class="line"></span><br><span class="line"># 18</span><br><span class="line">    lui     $1,     0x56ed</span><br><span class="line">    ori     $2,     0x349a</span><br><span class="line"></span><br><span class="line">    add     $3,     $1,         $2</span><br><span class="line">    nop     </span><br><span class="line">    ori     $4,     $3,         0xc102</span><br><span class="line"></span><br><span class="line">    sub     $5,     $4,         $1</span><br><span class="line">    nop     </span><br><span class="line">    ori     $6,     $5,         0x4ea9</span><br><span class="line"></span><br><span class="line"># 19</span><br><span class="line">    lui     $7,     0x1345</span><br><span class="line">    ori     $8,     $7,         0x1122</span><br><span class="line"></span><br><span class="line">    ori     $9,     $8,         0x3344</span><br><span class="line">    ori     $10,    $9,         0x00ff</span><br><span class="line"></span><br><span class="line"># 20</span><br><span class="line">    lui     $7,     0x2211</span><br><span class="line">    nop     </span><br><span class="line">    ori     $8,     $7,         0x3366</span><br><span class="line">    nop     </span><br><span class="line">    ori     $9,     $8,         0xf111</span><br><span class="line">    nop     </span><br><span class="line">    ori     $10,    $9,         0x00ff</span><br><span class="line"></span><br><span class="line"># 21</span><br><span class="line">    jal     label1</span><br><span class="line">    ori     $8,     $ra,        0x8899</span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">label1:</span><br><span class="line">                                        # 22</span><br><span class="line">    jal     label2</span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">label2:</span><br><span class="line">    ori     $9,     $ra,        0xaa12</span><br><span class="line">                                        # 23</span><br><span class="line">    ori     $t0,    $0,         35</span><br><span class="line">    sw      $ra,    24($0)</span><br><span class="line">    lw      $t1,    -11($t0)</span><br><span class="line">    ori     $t2,    $t1,        0xe2df</span><br><span class="line"></span><br><span class="line"># 24</span><br><span class="line">    sw      $t2,    36($0)</span><br><span class="line">    lw      $t3,    1($t0)</span><br><span class="line">    nop     </span><br><span class="line">    ori     $t4,    $t3,        0xaabb</span><br></pre></td></tr></table></figure>
-
+</tbody>
+</table>
+<h2 id="测试-同P5，P6单独构造测试数据">测试(同P5，P6单独构造测试数据)</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br></pre></td><td class="code"><pre><span class="line">.text</span><br><span class="line">                                        # 13</span><br><span class="line">    ori     $t0,    $0,         0xadce</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    ori     $t1,    $t0,        0xdefa</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    add     $t4,    $t2,        $t0</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         15</span><br><span class="line">    lw      $t4,    -7($t3)</span><br><span class="line">    sub     $t5,    $t4,        $t2</span><br><span class="line"></span><br><span class="line"># 14</span><br><span class="line">    ori     $t0,    $0,         0xefac</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    ori     $t1,    $t0,        0xfead</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    add     $t4,    $t0,        $t2</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         21</span><br><span class="line">    lw      $t4,    -13($t3)</span><br><span class="line">    sub     $t5,    $t2,        $t4</span><br><span class="line"></span><br><span class="line"># 15</span><br><span class="line">    ori     $t0,    $0,         0x0ace</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    ori     $t1,    $t0,        0x00a1</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    nop     </span><br><span class="line">    add     $t4,    $t2,        $t0</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         15</span><br><span class="line">    lw      $t4,    -7($t3)</span><br><span class="line">    nop     </span><br><span class="line">    sub     $t5,    $t4,        $t2</span><br><span class="line"></span><br><span class="line"># 16</span><br><span class="line">    lui     $t0,    0x1234</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    lui     $t1,    0xfead</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    nop     </span><br><span class="line">    add     $t4,    $t0,        $t2</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         25</span><br><span class="line">    lw      $t4,    -17($t3)</span><br><span class="line">    nop     </span><br><span class="line">    sub     $t5,    $t2,        $t4</span><br><span class="line"></span><br><span class="line"># 17</span><br><span class="line">    lui     $1,     0x13ac</span><br><span class="line">    ori     $2,     0x12ae</span><br><span class="line"></span><br><span class="line">    add     $3,     $1,         $2</span><br><span class="line">    ori     $4,     $3,         0xcd12</span><br><span class="line"></span><br><span class="line">    sub     $5,     $4,         $1</span><br><span class="line">    ori     $6,     $5,         0x4589</span><br><span class="line"></span><br><span class="line"># 18</span><br><span class="line">    lui     $1,     0x56ed</span><br><span class="line">    ori     $2,     0x349a</span><br><span class="line"></span><br><span class="line">    add     $3,     $1,         $2</span><br><span class="line">    nop     </span><br><span class="line">    ori     $4,     $3,         0xc102</span><br><span class="line"></span><br><span class="line">    sub     $5,     $4,         $1</span><br><span class="line">    nop     </span><br><span class="line">    ori     $6,     $5,         0x4ea9</span><br><span class="line"></span><br><span class="line"># 19</span><br><span class="line">    lui     $7,     0x1345</span><br><span class="line">    ori     $8,     $7,         0x1122</span><br><span class="line"></span><br><span class="line">    ori     $9,     $8,         0x3344</span><br><span class="line">    ori     $10,    $9,         0x00ff</span><br><span class="line"></span><br><span class="line"># 20</span><br><span class="line">    lui     $7,     0x2211</span><br><span class="line">    nop     </span><br><span class="line">    ori     $8,     $7,         0x3366</span><br><span class="line">    nop     </span><br><span class="line">    ori     $9,     $8,         0xf111</span><br><span class="line">    nop     </span><br><span class="line">    ori     $10,    $9,         0x00ff</span><br><span class="line"></span><br><span class="line"># 21</span><br><span class="line">    jal     label1</span><br><span class="line">    ori     $8,     $ra,        0x8899</span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">label1:</span><br><span class="line">                                        # 22</span><br><span class="line">    jal     label2</span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">label2:</span><br><span class="line">    ori     $9,     $ra,        0xaa12</span><br><span class="line">                                        # 23</span><br><span class="line">    ori     $t0,    $0,         35</span><br><span class="line">    sw      $ra,    24($0)</span><br><span class="line">    lw      $t1,    -11($t0)</span><br><span class="line">    ori     $t2,    $t1,        0xe2df</span><br><span class="line"></span><br><span class="line"># 24</span><br><span class="line">    sw      $t2,    36($0)</span><br><span class="line">    lw      $t3,    1($t0)</span><br><span class="line">    nop     </span><br><span class="line">    ori     $t4,    $t3,        0xaabb</span><br></pre></td></tr></table></figure>
 <img src="image-20230311001334635.png" alt="image-20230311001334635" style="zoom:67%;" />
-
 <ul>
 <li>对0号寄存器读写测试</li>
 </ul>
 <img src="image-20230311001346059.png" alt="image-20230311001346059" style="zoom:67%;" />
-
-<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ul>
-<li>乘除指令的Tuse，Tnew：包括md指令Tuse_rs&#x3D;Tuse_rt&#x3D;1; mf指令E_Tnew&#x3D;1</li>
+<h2 id="注意事项">注意事项</h2>
+<ul>
+<li>乘除指令的Tuse，Tnew：包括md指令Tuse_rs=Tuse_rt=1; mf指令E_Tnew=1</li>
 <li>按字节访存的字节位置调整</li>
 <li>指令功能选择编码</li>
 <li>cal_i指令拓展类型，有有符号，有无符号</li>
 </ul>
-<h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><ol>
+<h2 id="思考题">思考题</h2>
+<ol>
 <li>因为硬件运算中乘除法消耗时间很长，需要持续多个周期，放入ALU后会大幅降低频率。独立的HI，LO寄存器方便乘除槽与外部交换数据，并且单独预留给乘除指令，避免其他普通存取导致过多阻塞。</li>
 <li>使用移位操作，采用逐位并行的迭代阵列结构，将每个操作数的N位都并行地提交给乘法器</li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">module multi_4bits_pipelining(mul_a, mul_b, clk, rst_n, mul_out);</span><br><span class="line">    input [3:0] mul_a, mul_b;</span><br><span class="line">    input clk;</span><br><span class="line">    input rst_n;</span><br><span class="line">    output [15:0] mul_out;</span><br><span class="line"> </span><br><span class="line">    reg [15:0] mul_out;</span><br><span class="line">    reg [15:0] stored0;</span><br><span class="line">    reg [15:0] stored1;</span><br><span class="line">    reg [15:0] stored2;</span><br><span class="line">    reg [15:0] stored3;</span><br><span class="line">    reg [15:0] stored4;</span><br><span class="line">    reg [15:0] stored5;</span><br><span class="line">    reg [15:0] stored6;</span><br><span class="line">    reg [15:0] stored7;</span><br><span class="line"> </span><br><span class="line">    reg [15:0] mul_out01;</span><br><span class="line">    reg [15:0] mul_out23;</span><br><span class="line"> </span><br><span class="line">    reg [15:0] add01;</span><br><span class="line">    reg [15:0] add23;</span><br><span class="line">    reg [15:0] add45;</span><br><span class="line">    reg [15:0] add67;</span><br><span class="line"> </span><br><span class="line">    always @(posedge clk or negedge rst_n) begin</span><br><span class="line">        if(!rst_n) begin</span><br><span class="line">            mul_out &lt;= 0;</span><br><span class="line">            stored0 &lt;= 0;</span><br><span class="line">            stored1 &lt;= 0;</span><br><span class="line">            stored2 &lt;= 0;</span><br><span class="line">            stored3 &lt;= 0;</span><br><span class="line">            stored4 &lt;= 0;</span><br><span class="line">                    stored5 &lt;= 0;</span><br><span class="line">            stored6 &lt;= 0;</span><br><span class="line">            stored7 &lt;= 0;</span><br><span class="line"> </span><br><span class="line">            add01 &lt;= 0;</span><br><span class="line">            add23 &lt;= 0;</span><br><span class="line">            add45 &lt;= 0;</span><br><span class="line">            add67 &lt;= 0;</span><br><span class="line">    end</span><br><span class="line">    else begin</span><br><span class="line">        stored0 &lt;= mul_b[0]? &#123;8&#x27;b0, mul_a&#125; : 16&#x27;b0;</span><br><span class="line">        stored1 &lt;= mul_b[1]? &#123;7&#x27;b0, mul_a, 1&#x27;b0&#125; : 16&#x27;b0;</span><br><span class="line">        stored2 &lt;= mul_b[2]? &#123;6&#x27;b0, mul_a, 2&#x27;b0&#125; : 16&#x27;b0;</span><br><span class="line">        stored3 &lt;= mul_b[3]? &#123;5&#x27;b0, mul_a, 3&#x27;b0&#125; : 16&#x27;b0;</span><br><span class="line">        stored4 &lt;= mul_b[0]? &#123;4&#x27;b0, mul_a, 4&#x27;b0&#125; : 16&#x27;b0;</span><br><span class="line">        stored5 &lt;= mul_b[1]? &#123;3&#x27;b0, mul_a, 5&#x27;b0&#125; : 16&#x27;b0;</span><br><span class="line">        stored6 &lt;= mul_b[2]? &#123;2&#x27;b0, mul_a, 6&#x27;b0&#125; : 16&#x27;b0;</span><br><span class="line">        stored7 &lt;= mul_b[3]? &#123;1&#x27;b0, mul_a, 7&#x27;b0&#125; : 16&#x27;b0;</span><br><span class="line">        add01 &lt;= stored1 + stored0;</span><br><span class="line">        add23 &lt;= stored3 + stored2;</span><br><span class="line">        add45 &lt;= stored5 + stored4;</span><br><span class="line">        add67 &lt;= stored7 + stored6;</span><br><span class="line"> </span><br><span class="line">        mul_out01 &lt;= add01 + add23;</span><br><span class="line">        mul_out23 &lt;= add45 + add67;</span><br><span class="line"> </span><br><span class="line">        mul_out &lt;= mul_out01 + mul_out23;</span><br><span class="line"> </span><br><span class="line">    end</span><br><span class="line">    end</span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
-
 <ol start="3">
-<li><p>在Start到来的周期开始置1，通过cnt计数周期，计数完毕前始终保持1，完毕后归0</p>
+<li>
+<p>在Start到来的周期开始置1，通过cnt计数周期，计数完毕前始终保持1，完毕后归0</p>
 </li>
-<li><p>统一所有三种数据类型的访存操作，避免使用过多控制信号。直接用对应字节是否Enable决定是否访存，更加直接清晰。</p>
+<li>
+<p>统一所有三种数据类型的访存操作，避免使用过多控制信号。直接用对应字节是否Enable决定是否访存，更加直接清晰。</p>
 </li>
-<li><p>在lb,sb的情况下是一个字节；lh,sh两个字节；lw,sw四个字节。而按字访存的情况下则始终操作四个字节所以在执行lh,sh,lb,sb指令时按字节读和按字节写的效率会高于按字读和按字写。</p>
+<li>
+<p>在lb,sb的情况下是一个字节；lh,sh两个字节；lw,sw四个字节。而按字访存的情况下则始终操作四个字节所以在执行lh,sh,lb,sb指令时按字节读和按字节写的效率会高于按字读和按字写。</p>
 </li>
-<li><p>将指令分类，译码时不用在每个控制信号与AT计算中添加新指令，便于管理与增量开发，但需要注意某些功能是否相同，具有统一行为，如EXT。采用分布式统一译码，将各级所需控制信号直接独立传递。</p>
+<li>
+<p>将指令分类，译码时不用在每个控制信号与AT计算中添加新指令，便于管理与增量开发，但需要注意某些功能是否相同，具有统一行为，如EXT。采用分布式统一译码，将各级所需控制信号直接独立传递。</p>
 </li>
-<li><ul>
-<li><p>MDU的指令之间的冲突：在D级检测是否该指令要使用MDU，暂停的条件是要使用MDU并且MDU处于start或busy的状态。</p>
+<li>
+<ul>
+<li>
+<p>MDU的指令之间的冲突：在D级检测是否该指令要使用MDU，暂停的条件是要使用MDU并且MDU处于start或busy的状态。</p>
    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ori $t1,5</span><br><span class="line">mthi $t1</span><br><span class="line">mtlo $t1</span><br><span class="line">div $t1,$t2</span><br><span class="line">mfhi $t4</span><br><span class="line">mflo $t5</span><br><span class="line">div $t2,$t3</span><br><span class="line">mfhi $t4</span><br><span class="line">mflo $t5</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>MDU与其他指令的冲突：包括md指令Tuse_rs&#x3D;Tuse_rt&#x3D;1; mf指令E_Tnew&#x3D;1</p>
+<li>
+<p>MDU与其他指令的冲突：包括md指令Tuse_rs=Tuse_rt=1; mf指令E_Tnew=1</p>
   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">here:</span><br><span class="line">ori $t1,5</span><br><span class="line">sw $t1,0($0)</span><br><span class="line">lw $t2,0($0)</span><br><span class="line">div $t1,$t2</span><br><span class="line">mfhi $t3</span><br><span class="line">mflo $t4</span><br><span class="line">beq $t4,$5,here</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>除MDU之外其他指令之间的冲突：指令分类后用指令类型设定对应的Tuse和Tnew，与P5相同</p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ori $t0,5</span><br><span class="line">lui $t1,1</span><br><span class="line">sw $t1,0($0)</span><br><span class="line">lbu $t2,0($0)</span><br><span class="line">or $t3,$t1,$t2</span><br><span class="line">lh $t5,0($0)</span><br><span class="line">slt $t6,$t4,$t5</span><br></pre></td></tr></table></figure></li>
+<li>
+<p>除MDU之外其他指令之间的冲突：指令分类后用指令类型设定对应的Tuse和Tnew，与P5相同</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ori $t0,5</span><br><span class="line">lui $t1,1</span><br><span class="line">sw $t1,0($0)</span><br><span class="line">lbu $t2,0($0)</span><br><span class="line">or $t3,$t1,$t2</span><br><span class="line">lh $t5,0($0)</span><br><span class="line">slt $t6,$t4,$t5</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
-<li><ul>
-<li><p>测试单条指令</p>
+<li>
+<ul>
+<li>
+<p>测试单条指令</p>
 </li>
-<li><p>枚举各指令排列和之间距离</p>
+<li>
+<p>枚举各指令排列和之间距离</p>
 </li>
-<li><p>枚举各个寄存器访存，以及HI, LO</p>
+<li>
+<p>枚举各个寄存器访存，以及HI, LO</p>
 </li>
-<li><p>枚举各种数据类型和数据的读写</p>
+<li>
+<p>枚举各种数据类型和数据的读写</p>
 </li>
 </ul>
 </li>

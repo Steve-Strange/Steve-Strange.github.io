@@ -56,6 +56,7 @@
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
+<link rel="alternate" href="/atom.xml" title="TARDIS" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
@@ -281,45 +282,55 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="lab0实验报告"><a href="#lab0实验报告" class="headerlink" title="lab0实验报告"></a>lab0实验报告</h2><span id="more"></span>
-
-<h3 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h3><h4 id="Thinking-0-1"><a href="#Thinking-0-1" class="headerlink" title="Thinking 0.1"></a>Thinking 0.1</h4><ul>
+        <h2 id="lab0实验报告">lab0实验报告</h2>
+<span id="more"></span>
+<h3 id="思考题">思考题</h3>
+<h4 id="Thinking-0-1">Thinking 0.1</h4>
+<ul>
 <li>Untracked.txt:</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">位于分支 lab0</span><br><span class="line">您的分支与上游分支 &#x27;origin/lab0&#x27; 一致。</span><br><span class="line"></span><br><span class="line">未跟踪的文件:</span><br><span class="line">  （使用 &quot;git add &lt;文件&gt;...&quot; 以包含要提交的内容）</span><br><span class="line">        README.txt</span><br><span class="line">        Untracked.txt</span><br><span class="line"></span><br><span class="line">提交为空，但是存在尚未跟踪的文件（使用 &quot;git add&quot; 建立跟踪）</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>Stage.txt:</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">位于分支 lab0</span><br><span class="line">您的分支与上游分支 &#x27;origin/lab0&#x27; 一致。</span><br><span class="line"></span><br><span class="line">要提交的变更：</span><br><span class="line">  （使用 &quot;git restore --staged &lt;文件&gt;...&quot; 以取消暂存）</span><br><span class="line">        新文件：   README.txt</span><br><span class="line">        新文件：   Untracked.txt</span><br><span class="line"></span><br><span class="line">未跟踪的文件:</span><br><span class="line">  （使用 &quot;git add &lt;文件&gt;...&quot; 以包含要提交的内容）</span><br><span class="line">        Stage.txt</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>Modified.txt:</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">位于分支 lab0</span><br><span class="line">您的分支领先 &#x27;origin/lab0&#x27; 共 1 个提交。</span><br><span class="line">  （使用 &quot;git push&quot; 来发布您的本地提交）</span><br><span class="line"></span><br><span class="line">尚未暂存以备提交的变更：</span><br><span class="line">  （使用 &quot;git add &lt;文件&gt;...&quot; 更新要提交的内容）</span><br><span class="line">  （使用 &quot;git restore &lt;文件&gt;...&quot; 丢弃工作区的改动）</span><br><span class="line">        修改：     README.txt</span><br><span class="line"></span><br><span class="line">未跟踪的文件:</span><br><span class="line">  （使用 &quot;git add &lt;文件&gt;...&quot; 以包含要提交的内容）</span><br><span class="line">        Modified.txt</span><br><span class="line">        Stage.txt</span><br><span class="line"></span><br><span class="line">修改尚未加入提交（使用 &quot;git add&quot; 和/或 &quot;git commit -a&quot;）</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>从Untracked到Stage，README文件从未跟踪的文件变成要提交的文件，因为使用了git add进行跟踪，提交一次本地变更之后，再修改README时，README不再是像第一次status中有一个新的没有跟踪的文件，而是有一个持续跟踪的发生变化的文件，所以两次status不一样。</li>
 </ul>
-<h4 id="Thinking-0-2"><a href="#Thinking-0-2" class="headerlink" title="Thinking 0.2"></a>Thinking 0.2</h4><ul>
-<li><p>add the file: git add &lt;file&gt;</p>
+<h4 id="Thinking-0-2">Thinking 0.2</h4>
+<ul>
+<li>
+<p>add the file: git add &lt;file&gt;</p>
 </li>
-<li><p>stage the file: add &lt;file&gt;</p>
+<li>
+<p>stage the file: add &lt;file&gt;</p>
 </li>
-<li><p>commit: git commit -m message</p>
+<li>
+<p>commit: git commit -m message</p>
 </li>
 </ul>
-<h4 id="Thinking-0-3"><a href="#Thinking-0-3" class="headerlink" title="Thinking 0.3"></a>Thinking 0.3</h4><ol>
-<li><p>git checkout – printf.c<br>  checkout两种用法：切换分支，撤销修改（暂存区 -&gt; 工作区）</p>
+<h4 id="Thinking-0-3">Thinking 0.3</h4>
+<ol>
+<li>
+<p>git checkout – printf.c<br>
+checkout两种用法：切换分支，撤销修改（暂存区 -&gt; 工作区）</p>
 </li>
-<li><p>git reset –hard HEAD &#x2F; git reset HEAD printf.c + git restore –staged printf.c</p>
+<li>
+<p>git reset --hard HEAD / git reset HEAD printf.c + git restore --staged printf.c</p>
 </li>
 </ol>
-<p>  回退版本（仓库提交版本 -&gt; 暂存区&#x2F;工作区）</p>
-<h4 id="Thinking-0-4"><a href="#Thinking-0-4" class="headerlink" title="Thinking 0.4"></a>Thinking 0.4</h4><ul>
-<li><p>有三次提交</p>
+<p>回退版本（仓库提交版本 -&gt; 暂存区/工作区）</p>
+<h4 id="Thinking-0-4">Thinking 0.4</h4>
+<ul>
+<li>
+<p>有三次提交</p>
 </li>
-<li><pre><code class="git">  commit ca2fac3c015bd8aded736d5f8e28a52cbc4d5bb5 (HEAD -&gt; lab0)
+<li>
+<pre><code class="language-git">  commit ca2fac3c015bd8aded736d5f8e28a52cbc4d5bb5 (HEAD -&gt; lab0)
   Author: 王子腾 &lt;21373237@buaa.edu.cn&gt;
   Date:   Thu Mar 2 11:38:26 2023 +0800
   
@@ -337,52 +348,67 @@
   
    1
   <figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 执行命令 git <span class="built_in">reset</span> --hard HEAD^后，<span class="built_in">log</span>中最上一条说明为<span class="number">3</span>的提交消失</span><br><span class="line"></span><br><span class="line">- 找到提交说明为 <span class="number">1</span> 的哈希值，执行命令 git <span class="built_in">reset</span> --hard  后，<span class="built_in">log</span>中说明为<span class="number">2</span>的提交消失</span><br><span class="line"></span><br><span class="line">- 再使用说明为<span class="number">3</span>的哈希值，执行git <span class="built_in">reset</span> --hard ca2fac3c015bd8aded736d5f8e28a52cbc4d5bb5 之后，直接回到那一次提交</span><br><span class="line"></span><br><span class="line">#### Thinking <span class="number">0.5</span></span><br><span class="line"></span><br><span class="line">- echo <span class="built_in">first</span>: 终端输出</span><br><span class="line"></span><br><span class="line">    ```txt</span><br><span class="line">    <span class="built_in">first</span></span><br></pre></td></tr></table></figure>
+
 </code></pre>
 </li>
-<li><p>echo second &gt; output.txt: output中内容为</p>
+<li>
+<p>echo second &gt; output.txt: output中内容为</p>
   <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">second</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>echo third &gt; output.txt: output中内容为</p>
+<li>
+<p>echo third &gt; output.txt: output中内容为</p>
   <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">third</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>echo forth &gt;&gt; output.txt: output中内容为</p>
-  <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">third</span><br><span class="line">forth</span><br></pre></td></tr></table></figure></li>
+<li>
+<p>echo forth &gt;&gt; output.txt: output中内容为</p>
+  <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">third</span><br><span class="line">forth</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<h4 id="Thinking-0-6"><a href="#Thinking-0-6" class="headerlink" title="Thinking 0.6"></a>Thinking 0.6</h4><ul>
+<h4 id="Thinking-0-6">Thinking 0.6</h4>
+<ul>
 <li>command</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;echo Shell Start... </span></span><br><span class="line"><span class="string">echo set a = 1</span></span><br><span class="line"><span class="string">a=1</span></span><br><span class="line"><span class="string">echo set b = 2</span></span><br><span class="line"><span class="string">b=2</span></span><br><span class="line"><span class="string">echo set c = a+b</span></span><br><span class="line"><span class="string">c=\$[\$a+\$b]</span></span><br><span class="line"><span class="string">echo c = \$c</span></span><br><span class="line"><span class="string">echo save c to ./file1</span></span><br><span class="line"><span class="string">echo \$c&gt;file1</span></span><br><span class="line"><span class="string">echo save b to ./file2</span></span><br><span class="line"><span class="string">echo \$b&gt;file2</span></span><br><span class="line"><span class="string">echo save a to ./file3</span></span><br><span class="line"><span class="string">echo \$a&gt;file3</span></span><br><span class="line"><span class="string">echo save file1 file2 file3 to file4</span></span><br><span class="line"><span class="string">cat file1&gt;file4</span></span><br><span class="line"><span class="string">cat file2&gt;&gt;file4</span></span><br><span class="line"><span class="string">cat file3&gt;&gt;file4</span></span><br><span class="line"><span class="string">echo save file4 to ./result</span></span><br><span class="line"><span class="string">cat file4&gt;&gt;result&quot;</span> &gt;&gt; <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>result</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">2</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><p>a&#x3D;1, b&#x3D;2, c&#x3D;$[$a+$b]使得c&#x3D;3。c,b,a三个进入file1,2,3，最后依次存入file4，再存到result</p>
+<li>
+<p>a=1, b=2, c=$[$a+$b]使得c=3。c,b,a三个进入file1,2,3，最后依次存入file4，再存到result</p>
 </li>
-<li><p>执行<code>echo echo Shell Start</code> 与 <code>echo &#39;echo Shell Start&#39;</code>没有区别</p>
+<li>
+<p>执行<code>echo echo Shell Start</code> 与 <code>echo 'echo Shell Start'</code>没有区别</p>
 </li>
-<li><p>执行<code>echo echo $c&gt;file1</code> 与 <code>echo &#39;echo $c&#39;&gt;file1</code>有区别，不加引号时，$c被认为是一个变量，但找不到值，没有显示。加引号时引号内整体被认定为字符串，全部写入file1</p>
+<li>
+<p>执行<code>echo echo $c&gt;file1</code> 与 <code>echo 'echo $c'&gt;file1</code>有区别，不加引号时，$c被认为是一个变量，但找不到值，没有显示。加引号时引号内整体被认定为字符串，全部写入file1</p>
 </li>
 </ul>
-<h3 id="难点分析"><a href="#难点分析" class="headerlink" title="难点分析"></a>难点分析</h3><ul>
-<li><p>引号，小括号，中括号语法混乱，Exercise 0.4中替换语句中不可用‘ ’，只能用“ ”，因为单引号直接输出内部字符串，不解析特殊字符；双引号内则会解析特殊字符</p>
+<h3 id="难点分析">难点分析</h3>
+<ul>
+<li>
+<p>引号，小括号，中括号语法混乱，Exercise 0.4中替换语句中不可用‘ ’，只能用“ ”，因为单引号直接输出内部字符串，不解析特殊字符；双引号内则会解析特殊字符</p>
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&quot;s/<span class="variable">$2</span>/<span class="variable">$3</span>/g&quot;</span> <span class="variable">$1</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Exercise 0.3中while循环[]或者(())表示条件，do done为while循环区间。分支语法if elif与最后的fi结尾。</p>
+<li>
+<p>Exercise 0.3中while循环[]或者(())表示条件，do done为while循环区间。分支语法if elif与最后的fi结尾。</p>
 </li>
-<li><p>参数运算语法，写自增</p>
+<li>
+<p>参数运算语法，写自增</p>
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">a=$[<span class="variable">$b</span>+<span class="variable">$c</span>] </span><br><span class="line">c=<span class="string">&quot;expr <span class="variable">$a</span>+<span class="variable">$b</span>&quot;</span></span><br><span class="line"><span class="built_in">let</span> a++ </span><br><span class="line"><span class="built_in">let</span> a+=1 </span><br><span class="line">((a++))</span><br><span class="line">[ <span class="string">&quot;<span class="variable">$a</span>&quot;</span>  \&lt;  <span class="string">&quot;<span class="variable">$b</span>&quot;</span> ] 要带转义，条件表达式要放在方括号之间，并且要有空格，必须写成 [ <span class="variable">$a</span> == <span class="variable">$b</span> ]</span><br><span class="line">在[]中使用的比较符：</span><br><span class="line"> -eq                 =</span><br><span class="line"> -ne                 != </span><br><span class="line"> -gt                 &gt;  </span><br><span class="line"> -ge                 &gt;= </span><br><span class="line"> -lt                 &lt;  </span><br><span class="line"> -le                 &lt;= </span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Exercise 0.3中根据awk语法需要临时创建一个文件保存待更改格式的内容（？</p>
+<li>
+<p>Exercise 0.3中根据awk语法需要临时创建一个文件保存待更改格式的内容（？</p>
 </li>
-<li><p>Exercise 0.4中的.c与.h文件分别存放在两个文件夹，在链接的时候需要用-I给gcc起始搜索目录</p>
+<li>
+<p>Exercise 0.4中的.c与.h文件分别存放在两个文件夹，在链接的时候需要用-I给gcc起始搜索目录</p>
 </li>
-<li><p>Exercise 0.4中的外层make调用内层make时</p>
+<li>
+<p>Exercise 0.4中的外层make调用内层make时</p>
 </li>
 </ul>
-<h3 id="实验体会"><a href="#实验体会" class="headerlink" title="实验体会"></a>实验体会</h3><p>Linux下的各种功能更为清晰直接，提供了更多可设定参数，可以灵活编程用多种方法达到目的，并且借助一些正则表达式可以编写高效脚本。但同时大量功能和参数也使初期编写时记不清可用的功能和对应语法，导致没有头绪和大量bug…</p>
+<h3 id="实验体会">实验体会</h3>
+<p>Linux下的各种功能更为清晰直接，提供了更多可设定参数，可以灵活编程用多种方法达到目的，并且借助一些正则表达式可以编写高效脚本。但同时大量功能和参数也使初期编写时记不清可用的功能和对应语法，导致没有头绪和大量bug…</p>
 
     </div>
 
