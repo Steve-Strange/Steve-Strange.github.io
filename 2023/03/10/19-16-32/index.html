@@ -1,0 +1,1100 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Sorcerer Inferior">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="P3设计文档">
+<meta property="og:type" content="article">
+<meta property="og:title" content="P3设计文档">
+<meta property="og:url" content="https://steve-strange.github.io/2023/03/10/19-16-32/index.html">
+<meta property="og:site_name" content="TARDIS">
+<meta property="og:description" content="P3设计文档">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://steve-strange.github.io/image-20230310234528268.png">
+<meta property="og:image" content="https://steve-strange.github.io/image-20221030204922910.png">
+<meta property="og:image" content="https://steve-strange.github.io/image-20221030204850105.png">
+<meta property="og:image" content="https://steve-strange.github.io/image-20221030204822588.png">
+<meta property="article:published_time" content="2023-03-10T11:16:32.000Z">
+<meta property="article:modified_time" content="2023-03-10T15:47:08.234Z">
+<meta property="article:author" content="Sorcerer Inferior">
+<meta property="article:tag" content="Computer Orgnization">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://steve-strange.github.io/image-20230310234528268.png">
+  
+  
+  
+  <title>P3设计文档 - TARDIS</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"steve-strange.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="P3设计文档"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-10 19:16" pubdate>
+          2023年3月10日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          38 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">P3设计文档</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="P3设计文档"><a href="#P3设计文档" class="headerlink" title="P3设计文档"></a>P3设计文档</h2><span id="more"></span>
+
+<h2 id="CPU流程，草稿"><a href="#CPU流程，草稿" class="headerlink" title="CPU流程，草稿"></a>CPU流程，草稿</h2><ol>
+<li>取指令(PC,IM)</li>
+<li>指令译码(CU)</li>
+<li>指令执行(GRF,ALU)</li>
+<li>储存器访问(DM)</li>
+<li>结果写回(GRF)</li>
+<li>循环1-5</li>
+</ol>
+<h3 id="支持指令"><a href="#支持指令" class="headerlink" title="支持指令"></a>支持指令</h3><p>add, sub, ori, lw, sw, beq, lui, j, nop</p>
+<p>(其中add，sub为无符号加减法)</p>
+<h3 id="使用模块"><a href="#使用模块" class="headerlink" title="使用模块"></a>使用模块</h3><h4 id="一、IFU（Instruction-Fetch-Unit）"><a href="#一、IFU（Instruction-Fetch-Unit）" class="headerlink" title="一、IFU（Instruction Fetch Unit）"></a>一、IFU（Instruction Fetch Unit）</h4><ul>
+<li><p>包括PC和IM</p>
+</li>
+<li><p>IM用 ROM 实现，容量为 32bit × 32字。（5位地址）</p>
+</li>
+<li><p>PC始终为4的倍数（字节寻址，32bit&#x3D;4字节），所以取32位地址中2-6位对应ROM中指令地址</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>端口名</th>
+<th>输入&#x2F;输出</th>
+<th>位宽</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>clk</td>
+<td>in</td>
+<td>1</td>
+<td>时钟信号</td>
+</tr>
+<tr>
+<td>reset</td>
+<td>in</td>
+<td>1</td>
+<td>异步复位</td>
+</tr>
+<tr>
+<td>PCSrc</td>
+<td>in</td>
+<td>1</td>
+<td>下一指令地址选择信号</td>
+</tr>
+<tr>
+<td>Jump</td>
+<td>in</td>
+<td>1</td>
+<td>跳转控制信号</td>
+</tr>
+<tr>
+<td>shiftResult</td>
+<td>in</td>
+<td>32</td>
+<td>偏移后的指令地址</td>
+</tr>
+<tr>
+<td>jumpAdd</td>
+<td>in</td>
+<td>32</td>
+<td>直接跳转的指令地址</td>
+</tr>
+<tr>
+<td>D</td>
+<td>out</td>
+<td>32</td>
+<td>输出读取指令</td>
+</tr>
+</tbody></table>
+<h4 id="三、GRF（General-Register-File）"><a href="#三、GRF（General-Register-File）" class="headerlink" title="三、GRF（General Register File）"></a>三、GRF（General Register File）</h4><ul>
+<li>存储$0~$31这32个寄存器数据</li>
+<li>具有异步复位，读、写功能</li>
+<li>最多一次同时取出两个寄存器的值运算，存入一个寄存器的值</li>
+<li>$0寄存器输入为常数0</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>端口名</th>
+<th>输入&#x2F;输出</th>
+<th>位宽</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>clk</td>
+<td>in</td>
+<td>1</td>
+<td>时钟信号</td>
+</tr>
+<tr>
+<td>reset</td>
+<td>in</td>
+<td>1</td>
+<td>异步复位</td>
+</tr>
+<tr>
+<td>WE</td>
+<td>in</td>
+<td>1</td>
+<td>写入使能信号</td>
+</tr>
+<tr>
+<td>A1</td>
+<td>in</td>
+<td>5</td>
+<td>输出数据到RD1的寄存器的地址</td>
+</tr>
+<tr>
+<td>A2</td>
+<td>in</td>
+<td>5</td>
+<td>输出数据到RD2的寄存器的地址</td>
+</tr>
+<tr>
+<td>WA</td>
+<td>in</td>
+<td>5</td>
+<td>输入到寄存器的地址</td>
+</tr>
+<tr>
+<td>WD</td>
+<td>in</td>
+<td>32</td>
+<td>写入的数据</td>
+</tr>
+<tr>
+<td>RD1</td>
+<td>out</td>
+<td>32</td>
+<td>RD1输出的数据</td>
+</tr>
+<tr>
+<td>RD2</td>
+<td>out</td>
+<td>32</td>
+<td>RD2输出的数据</td>
+</tr>
+</tbody></table>
+<h4 id="四、ALU（Arithmetic-amp-logical-Unit）"><a href="#四、ALU（Arithmetic-amp-logical-Unit）" class="headerlink" title="四、ALU（Arithmetic &amp; logical Unit）"></a>四、ALU（Arithmetic &amp; logical Unit）</h4><ul>
+<li><p>提供 32 位加、减、或运算及大小比较功能，</p>
+</li>
+<li><p>加减法按无符号处理</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>端口名</th>
+<th>输入&#x2F;输出</th>
+<th>位宽</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>op</td>
+<td>in</td>
+<td>3</td>
+<td>ALU功能控制信号 000：加，001：减，010：或，比较：任意</td>
+</tr>
+<tr>
+<td>A</td>
+<td>in</td>
+<td>32</td>
+<td>输入1</td>
+</tr>
+<tr>
+<td>B</td>
+<td>in</td>
+<td>32</td>
+<td>输入2</td>
+</tr>
+<tr>
+<td>Y</td>
+<td>out</td>
+<td>32</td>
+<td>输出</td>
+</tr>
+<tr>
+<td>Greater</td>
+<td>out</td>
+<td>1</td>
+<td>A&gt;B</td>
+</tr>
+<tr>
+<td>Equal</td>
+<td>out</td>
+<td>1</td>
+<td>A&#x3D;B</td>
+</tr>
+<tr>
+<td>Less</td>
+<td>out</td>
+<td>1</td>
+<td>A&lt;B</td>
+</tr>
+</tbody></table>
+<h4 id="五、DM（Data-Memory）"><a href="#五、DM（Data-Memory）" class="headerlink" title="五、DM（Data Memory）"></a>五、DM（Data Memory）</h4><ul>
+<li>使用 RAM 实现，有<strong>异步复位</strong>功能，复位值为 0x00000000。容量为 32bit × 32字（5位地址），使用双端口模式</li>
+<li>地址始终为4的倍数（lw&#x2F;rw每次操作一个字&#x3D;4字节），所以取32位地址中2-6位对应RAM地址，对于lb&#x2F;rb等指令还需更改</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>端口名</th>
+<th>输入&#x2F;输出</th>
+<th>位宽</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>clk</td>
+<td>in</td>
+<td>1</td>
+<td>时钟信号</td>
+</tr>
+<tr>
+<td>reset</td>
+<td>in</td>
+<td>1</td>
+<td>异步复位</td>
+</tr>
+<tr>
+<td>WE</td>
+<td>in</td>
+<td>1</td>
+<td>写入使能信号</td>
+</tr>
+<tr>
+<td>A</td>
+<td>in</td>
+<td>5</td>
+<td>将要读&#x2F;写的寄存器的地址</td>
+</tr>
+<tr>
+<td>WD</td>
+<td>in</td>
+<td>32</td>
+<td>写入的数据</td>
+</tr>
+<tr>
+<td>RD</td>
+<td>out</td>
+<td>32</td>
+<td>读出的数据</td>
+</tr>
+</tbody></table>
+<h4 id="六、EXT（Bit-Extender）"><a href="#六、EXT（Bit-Extender）" class="headerlink" title="六、EXT（Bit Extender）"></a>六、EXT（Bit Extender）</h4><ul>
+<li>将16位偏移量&#x2F;立即数拓展至32位</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>端口名</th>
+<th>输入&#x2F;输出</th>
+<th>位宽</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EXT Select</td>
+<td>in</td>
+<td>1</td>
+<td>选择符号拓展&#x2F;无符号拓展（0&#x2F;1）</td>
+</tr>
+<tr>
+<td>in</td>
+<td>in</td>
+<td>16</td>
+<td>16位输入</td>
+</tr>
+<tr>
+<td>out</td>
+<td>out</td>
+<td>32</td>
+<td>拓展后32位输出</td>
+</tr>
+</tbody></table>
+<h4 id="七、CU（Control-Unit）"><a href="#七、CU（Control-Unit）" class="headerlink" title="七、CU（Control Unit）"></a>七、CU（Control Unit）</h4><ul>
+<li>生成所有控制信号的组合逻辑电路</li>
+<li>根据每条指令的数据通路列出如下控制信号表格</li>
+<li>R指令控制信号为 (R&#x3D;&#x3D;0)</li>
+<li>分别根据Opcode和Funct每一位和与门控制非R和R型指令的选择</li>
+<li>再将控制信号用或门收集所有需要触发的指令（多连接一个常数0防止没有被选择的时候输出X）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Instuction</th>
+<th>Opcode(in)</th>
+<th>Funct (in)</th>
+<th>RegWrite</th>
+<th>RegDst</th>
+<th>ALUsrc</th>
+<th>Branch</th>
+<th>MemWrite</th>
+<th>MemToReg</th>
+<th>EXTselect</th>
+<th>Jump</th>
+<th>ALUControl</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>add</td>
+<td>000000</td>
+<td>100000</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>000</td>
+</tr>
+<tr>
+<td>sub</td>
+<td>000000</td>
+<td>100010</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>001</td>
+</tr>
+<tr>
+<td>ori</td>
+<td>001101</td>
+<td></td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>010</td>
+</tr>
+<tr>
+<td>lw</td>
+<td>100011</td>
+<td></td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>000</td>
+</tr>
+<tr>
+<td>sw</td>
+<td>101011</td>
+<td></td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>000</td>
+</tr>
+<tr>
+<td>beq</td>
+<td>000100</td>
+<td></td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>000</td>
+</tr>
+<tr>
+<td>lui</td>
+<td>001111</td>
+<td></td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>011</td>
+</tr>
+<tr>
+<td>j</td>
+<td>000010</td>
+<td></td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>00</td>
+</tr>
+</tbody></table>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><h3 id="汇编代码"><a href="#汇编代码" class="headerlink" title="汇编代码"></a>汇编代码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs assembly">ori $a0,$0,1999        #ori 测试程序要实现: $0寄存器中的内容与立即数 0x000007cf进行或运算，储存在$a0寄存器中<br>ori $a1,$a0,111         #ori 测试程序要实现: $a0寄存器中的内容与立即数 0x0000006f进行或运算，储存在$a1寄存器中<br>lui $a2,12345            #lui 测试程序要实现: 立即数 0x00003039 加载至 $a2 寄存器的高位<br>lui $a3,0xffff          #lui 测试程序要实现: 立即数 0x0000ffff 加载至 $a3 寄存器的高位<br>ori $a3,$a3,0xffff     #ori 测试程序要实现: $a3寄存器中的内容与立即数 0x0000ffff进行或运算，储存在$a3寄存器中<br>add $s0,$a0,$a1        #addu 测试程序要实现：a0 寄存器中的值加上a1 后存到 s0 寄存器中<br>add $s1,$a3,$a3         #addu 测试程序要实现：a3 寄存器中的值加上a3 后存到 s1 寄存器中<br>add $s2,$a3,$s0         #addu 测试程序要实现：a3 寄存器中的值加上s0 后存到 s2 寄存器中<br>sub $s0,$a0,$s2        #subu 测试程序要实现：a0 寄存器中的值减去 s2 寄存器中的值后存到 s0 寄存器中<br>sub $s1,$a3,$a3        #subu 测试程序要实现：a3 寄存器中的值减去 a3 寄存器中的值后存到 s1 寄存器中<br>eee:<br>sub $s2,$a3,$a0         #subu 测试程序要实现：a3 寄存器中的值减去 a0 寄存器中的值后存到 s2 寄存器中<br>sub $s3,$s2,$s1         #subu 测试程序要实现：s2 寄存器中的值减去 s1 寄存器中的值后存到 s3 寄存器中<br>ori $t0,$0,0x0000       #ori 测试程序要实现: $0寄存器中的内容与立即数 0x00000000进行或运算，储存在$t0寄存器中<br>sw $a0,0($t0)           #sw 测试程序要实现：把 a0 寄存器中值,存储到t0寄存器的值再加上偏移量 0， 所指向的 RAM 中<br>nop<br>sw $a1,4($t0)       #sw 测试程序要实现：把 a1 寄存器中值,存储到t0寄存器的值再加上偏移量 4， 所指向的 RAM 中<br>sw $s0,8($t0)       #sw 测试程序要实现：把 s0 寄存器中值,存储到t0寄存器的值再加上偏移量 8， 所指向的 RAM 中<br>sw $s1,12($t0)      #sw 测试程序要实现：把 s1 寄存器中值,存储到t0寄存器的值再加上偏移量 12， 所指向的 RAM 中<br>sw $s2,16($t0)      #sw 测试程序要实现：把 s2 寄存器中值,存储到t0寄存器的值再加上偏移量 16， 所指向的 RAM 中<br>lw $t7,0($t0)        #lw 测试程序要实现：把 t0 寄存器的值加上偏移量0 当作地址读取存储器中的值存入 t7<br>lw $t6,20($t0)      #lw 测试程序要实现：把 t0 寄存器的值加上偏移量20 当作地址读取存储器中的值存入 t6<br>ori $t0,$t0,1       #ori 测试程序要实现: $t0寄存器中的内容与立即数 0x00000001进行或运算，储存在$t0寄存器中<br>ori $t1,$t1,1       #ori 测试程序要实现: $t1寄存器中的内容与立即数 0x00000001进行或运算，储存在$t1寄存器中<br>ori $t2,$t2,2       #ori 测试程序要实现: $t2寄存器中的内容与立即数 0x00000002进行或运算，储存在$t2寄存器中<br>beq $t0,$t2,eee     #beq 测试程序要实现：判断 t0 的值和 t2 的值是否相等，相等转eee<br>beq $t0,$t1,end     #beq 测试程序要实现：判断 t0 的值和 t1 的值是否相等，相等转end<br>lui $t3,1111     #lui 测试程序要实现: 立即数 0x00000457 加载至 $t3 寄存器的高位<br>end:<br>add $t0,$t0,$t7   #addu 测试程序要实现：t0 寄存器中的值加上t0 后存到 t0 寄存器中<br>j end2<br>#j 测试<br>sw $t7,48($t0)       #sw 测试程序要实现：把 t6 寄存器中值,存储到t0寄存器的值再加上偏移量 24， 所指向的 RAM 中<br>lw $t5,48($t0)     #lw 测试程序要实现：把 t0 寄存器的值加上偏移量12 当作地址读取存储器中的值存入 t5<br>end2:<br></code></pre></td></tr></table></figure>
+
+<h3 id="机器码"><a href="#机器码" class="headerlink" title="机器码"></a>机器码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs assembly">v2.0 raw<br>340407cf<br>3485006f<br>3c063039<br>3c07ffff<br>34e7ffff<br>00858020<br>00e78820<br>00f09020<br>00928022<br>00e78822<br>00e49022<br>02519822<br>34080000<br>ad040000<br>00000000<br>ad050004<br>ad100008<br>ad11000c<br>ad120010<br>8d0f0000<br>8d0e0014<br>35080001<br>35290001<br>354a0002<br>110afff1<br>11090001<br>3c0b0457<br>010f4020<br>08000c1f<br>ad0f0030<br>8d0d0030<br></code></pre></td></tr></table></figure>
+
+<h4 id="mips运行结果"><a href="#mips运行结果" class="headerlink" title="mips运行结果"></a>mips运行结果</h4><p><img src="/image-20230310234528268.png" srcset="/img/loading.gif" lazyload alt="image-20230310234528268"></p>
+<p><img src="/image-20221030204922910.png" srcset="/img/loading.gif" lazyload alt="image-20221030204922910"></p>
+<h4 id="CPU运行结果"><a href="#CPU运行结果" class="headerlink" title="CPU运行结果"></a>CPU运行结果</h4><p><img src="/image-20221030204850105.png" srcset="/img/loading.gif" lazyload alt="image-20221030204850105"></p>
+<p><img src="/image-20221030204822588.png" srcset="/img/loading.gif" lazyload alt="image-20221030204822588"></p>
+<h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><ol>
+<li><strong>上面我们介绍了通过 FSM 理解单周期 CPU 的基本方法。请大家指出单周期 CPU 所用到的模块中，哪些发挥状态存储功能，哪些发挥状态转移功能。</strong><ol>
+<li>状态储存：PC, GRF, IM, DM（储存指令以及数据的状态）</li>
+<li>状态转移：ALU, EXT, CU（组合逻辑）</li>
+</ol>
+</li>
+<li><strong>现在我们的模块中 IM 使用 ROM， DM 使用 RAM， GRF 使用 Register，这种做法合理吗？ 请给出分析，若有改进意见也请一并给出。</strong><ol>
+<li>合理，IM用ROM存储指令，掉电后不会丢失，并且需要人为进行修改，保证指令不会在运行中被更改；数据储存用RAM，读出和写入且访问速度快于ROM，方便每个周期读出或者写入；同时内存可能很大，不可用Register实现；GRF一共32个数据，每个周期内需要频繁同时读出和写入，用Register效率最高</li>
+</ol>
+</li>
+<li><strong>在上述提示的模块之外，你是否在实际实现时设计了其他的模块？如果是的话，请给出介绍和设计的思路。</strong><ol>
+<li>暂无</li>
+</ol>
+</li>
+<li><strong>事实上，实现 <code>nop</code> 空指令，我们并不需要将它加入控制信号真值表，为什么？</strong><ol>
+<li>CU中无指令被选择时，所有控制信号输出0，不对GRF写入，不对DM写入，rs与rt均全为0，在GRF选择的均为0号寄存器，输出为0，ALU运算后仍为0，即操作为将0写回$0寄存器，所以不需要加入控制信号真值表</li>
+</ol>
+</li>
+<li><strong>上文提到，MARS 不能导出 PC 与 DM 起始地址均为 0 的机器码。实际上，可以避免手工修改的麻烦。请查阅相关资料进行了解，并阐释为了解决这个问题，你最终采用的方法。</strong><ol>
+<li>将地址减去0x30000000，映射到0x00000000为起始地址</li>
+</ol>
+</li>
+<li><strong>阅读 Pre 的 <a target="_blank" rel="noopener" href="http://cscore.buaa.edu.cn/tutorial/mips/mips-6/mips6-1/">“MIPS 指令集及汇编语言”</a> 一节中给出的测试样例，评价其强度（可从各个指令的覆盖情况，单一指令各种行为的覆盖情况等方面分析），并指出具体的不足之处。</strong><ol>
+<li>beq指令强度不足，只包括向后跳转，没有测试向前跳转的负立即数</li>
+<li>ori指令还可测试对$0寄存器赋值，检测是否会修改</li>
+<li>对DM和GRF，存取数据地址最好包含整个要求的地址范围和32个寄存器，保证范围设置正确，连接正确</li>
+</ol>
+</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Computer-Orgnization/" class="category-chain-item">Computer Orgnization</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Computer-Orgnization/">#Computer Orgnization</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>P3设计文档</div>
+      <div>https://steve-strange.github.io/2023/03/10/19-16-32/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Sorcerer Inferior</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月10日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/10/19-16-42/" title="P4设计文档">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">P4设计文档</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

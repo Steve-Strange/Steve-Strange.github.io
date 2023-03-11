@@ -1,0 +1,1256 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Sorcerer Inferior">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="CPU设计文档">
+<meta property="og:type" content="article">
+<meta property="og:title" content="P4设计文档">
+<meta property="og:url" content="https://steve-strange.github.io/2023/03/10/19-16-42/index.html">
+<meta property="og:site_name" content="TARDIS">
+<meta property="og:description" content="CPU设计文档">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://steve-strange.github.io/image-20230311000307141.png">
+<meta property="og:image" content="https://steve-strange.github.io/image-20221107194455075.png">
+<meta property="og:image" content="https://steve-strange.github.io/image-20221104233120667.png">
+<meta property="article:published_time" content="2023-03-10T11:16:42.000Z">
+<meta property="article:modified_time" content="2023-03-10T16:03:27.890Z">
+<meta property="article:author" content="Sorcerer Inferior">
+<meta property="article:tag" content="Computer Orgnization">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://steve-strange.github.io/image-20230311000307141.png">
+  
+  
+  
+  <title>P4设计文档 - TARDIS</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"steve-strange.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="P4设计文档"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-10 19:16" pubdate>
+          2023年3月10日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          35 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">P4设计文档</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="CPU设计文档"><a href="#CPU设计文档" class="headerlink" title="CPU设计文档"></a>CPU设计文档</h2><span id="more"></span>
+<h3 id="支持指令"><a href="#支持指令" class="headerlink" title="支持指令"></a>支持指令</h3><p>add, sub, ori, lui, lw, sw, beq,bne, j, jr, jal, sll, nop</p>
+<p>(其中add，sub为无符号加减法)</p>
+<table>
+<thead>
+<tr>
+<th>Instuction</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><em>add</em></td>
+<td>GPR[rd] &#x3D; GPR[rs] + GPR[rt]</td>
+</tr>
+<tr>
+<td><em>sub</em></td>
+<td>GPR[rd] &#x3D; GPR[rs] - GPR[rt]</td>
+</tr>
+<tr>
+<td><em>ori</em></td>
+<td>GPR[rt] &#x3D;  GPR[rs] | ZeroExt(Imm)</td>
+</tr>
+<tr>
+<td><em>lui</em></td>
+<td>GPR[rt] &#x3D;  {imm, 16’b0}</td>
+</tr>
+<tr>
+<td><em>lw</em></td>
+<td>R[rt] &#x3D;  Mem[GPR[rs]+sign_ext(offset)]</td>
+</tr>
+<tr>
+<td><em>sw</em></td>
+<td>Mem[GPR[rs]+sign_ext(offset)] &#x3D; R[rt]</td>
+</tr>
+<tr>
+<td><em>beq</em></td>
+<td>if (GPR[rs] &#x3D;&#x3D;  GPR[rt])  PC &#x3D; PC + 4 + BranchAddr</td>
+</tr>
+<tr>
+<td><em>j</em></td>
+<td>PC &#x3D; JumpAddr</td>
+</tr>
+<tr>
+<td><em>jal</em></td>
+<td>PC &#x3D;  JumpAddr; GPR[31] &#x3D; PC + 4</td>
+</tr>
+<tr>
+<td><em>jr</em></td>
+<td>PC &#x3D; GPR[rs]</td>
+</tr>
+<tr>
+<td><em>sll</em></td>
+<td>GPR[rd] &#x3D; {GPR[rt] [31-s:0] , s{0}}</td>
+</tr>
+<tr>
+<td>bne</td>
+<td>if (GPR[rs] !&#x3D; GPR[rt]) PC &#x3D; PC + 4 + BranchAddr</td>
+</tr>
+</tbody></table>
+<h3 id="数据通路"><a href="#数据通路" class="headerlink" title="数据通路"></a>数据通路</h3><p><img src="/image-20230311000307141.png" srcset="/img/loading.gif" lazyload alt="image-20230311000307141"></p>
+<h3 id="使用模块"><a href="#使用模块" class="headerlink" title="使用模块"></a>使用模块</h3><h4 id="一、IFU（Instruction-Fetch-Unit）"><a href="#一、IFU（Instruction-Fetch-Unit）" class="headerlink" title="一、IFU（Instruction Fetch Unit）"></a>一、IFU（Instruction Fetch Unit）</h4><ul>
+<li>包括PC和IM</li>
+<li>容量为16KiB（4096 × 32bit）:  reg [31:0] IM [0:4095]</li>
+<li>注意起始地址为0x00003000，address应为PC-0x00003000，后再取[13:2]位，在IM堆中对应地址</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>端口名</th>
+<th>输入&#x2F;输出</th>
+<th>位宽</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>clk</td>
+<td>in</td>
+<td>1</td>
+<td>时钟信号</td>
+</tr>
+<tr>
+<td>reset</td>
+<td>in</td>
+<td>1</td>
+<td>同步复位</td>
+</tr>
+<tr>
+<td>PCSrc</td>
+<td>in</td>
+<td>1</td>
+<td>下一指令地址选择信号</td>
+</tr>
+<tr>
+<td>Jump</td>
+<td>in</td>
+<td>1</td>
+<td>跳转控制信号</td>
+</tr>
+<tr>
+<td>shiftResult</td>
+<td>in</td>
+<td>[31:0]</td>
+<td>偏移后的指令地址</td>
+</tr>
+<tr>
+<td>jumpAdd</td>
+<td>in</td>
+<td>[31:0]</td>
+<td>直接跳转的指令地址</td>
+</tr>
+<tr>
+<td>PC</td>
+<td>out</td>
+<td>[31:0]</td>
+<td>输出当前地址</td>
+</tr>
+<tr>
+<td>D</td>
+<td>out</td>
+<td>[31:0]</td>
+<td>输出读取指令</td>
+</tr>
+</tbody></table>
+<h4 id="二、GRF（General-Register-File）"><a href="#二、GRF（General-Register-File）" class="headerlink" title="二、GRF（General Register File）"></a>二、GRF（General Register File）</h4><ul>
+<li>存储$0~$31这32个寄存器数据：reg [31:0] GRF [31:0]</li>
+<li>具有<strong>同步复位</strong>，读、写功能</li>
+<li>$0寄存器输入为常数0（如果WA&#x3D;&#x3D;0，不写）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>端口名</th>
+<th>输入&#x2F;输出</th>
+<th>位宽</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>clk</td>
+<td>in</td>
+<td>1</td>
+<td>时钟信号</td>
+</tr>
+<tr>
+<td>reset</td>
+<td>in</td>
+<td>1</td>
+<td>同步复位</td>
+</tr>
+<tr>
+<td>WE(RegWrite)</td>
+<td>in</td>
+<td>1</td>
+<td>写入使能信号</td>
+</tr>
+<tr>
+<td>A1(GRF_A1)</td>
+<td>in</td>
+<td>[4:0]</td>
+<td>输出数据到RD1的寄存器的地址</td>
+</tr>
+<tr>
+<td>A2(GRF_A2)</td>
+<td>in</td>
+<td>[4:0]</td>
+<td>输出数据到RD2的寄存器的地址</td>
+</tr>
+<tr>
+<td>WA(GRF_WA)</td>
+<td>in</td>
+<td>[4:0]</td>
+<td>输入到寄存器的地址</td>
+</tr>
+<tr>
+<td>WD((GRF_WD)</td>
+<td>in</td>
+<td>[31:0]</td>
+<td>写入的数据</td>
+</tr>
+<tr>
+<td>RD1(GRF_RD1)</td>
+<td>out</td>
+<td>[31:0]</td>
+<td>RD1输出的数据</td>
+</tr>
+<tr>
+<td>RD2(GRF_RD2)</td>
+<td>out</td>
+<td>[31:0]</td>
+<td>RD2输出的数据</td>
+</tr>
+</tbody></table>
+<h4 id="三、ALU（Arithmetic-amp-logical-Unit）"><a href="#三、ALU（Arithmetic-amp-logical-Unit）" class="headerlink" title="三、ALU（Arithmetic &amp; logical Unit）"></a>三、ALU（Arithmetic &amp; logical Unit）</h4><ul>
+<li><p>提供 32 位加、减、或运算、高16位赋0以及大小比较功能</p>
+</li>
+<li><p>加减法按无符号处理</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>端口名</th>
+<th>输入&#x2F;输出</th>
+<th>位宽</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>op</td>
+<td>in</td>
+<td>[2:0]</td>
+<td>ALU功能控制信号 <strong>000</strong>：加；<strong>001</strong>；减；<strong>010</strong>：或；<strong>011</strong>：高16位赋0</td>
+</tr>
+<tr>
+<td>A(ALU_A)</td>
+<td>in</td>
+<td>[31:0]</td>
+<td>输入1</td>
+</tr>
+<tr>
+<td>B(ALU_B)</td>
+<td>in</td>
+<td>[31:0]</td>
+<td>输入2</td>
+</tr>
+<tr>
+<td>Y((ALU_Y)</td>
+<td>out</td>
+<td>[31:0]</td>
+<td>输出</td>
+</tr>
+<tr>
+<td>Greater</td>
+<td>out</td>
+<td>1</td>
+<td>A&gt;B</td>
+</tr>
+<tr>
+<td>Equal</td>
+<td>out</td>
+<td>1</td>
+<td>A&#x3D;B</td>
+</tr>
+<tr>
+<td>Less</td>
+<td>out</td>
+<td>1</td>
+<td>A&lt;B</td>
+</tr>
+</tbody></table>
+<h4 id="四、DM（Data-Memory）"><a href="#四、DM（Data-Memory）" class="headerlink" title="四、DM（Data Memory）"></a>四、DM（Data Memory）</h4><ul>
+<li>容量为16KiB（4096 × 32bit）:  reg [31:0] DM [0:4095]</li>
+<li>具有<strong>同步复位</strong>，读、写功能，复位地址为 0x00000000</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>端口名</th>
+<th>输入&#x2F;输出</th>
+<th>位宽</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>clk</td>
+<td>in</td>
+<td>1</td>
+<td>时钟信号</td>
+</tr>
+<tr>
+<td>reset</td>
+<td>in</td>
+<td>1</td>
+<td>同步复位</td>
+</tr>
+<tr>
+<td>WE(MemWrite)</td>
+<td>in</td>
+<td>1</td>
+<td>写控制信号</td>
+</tr>
+<tr>
+<td>A(DM_A)</td>
+<td>in</td>
+<td>[4:0]</td>
+<td>要读&#x2F;写的存储器的地址</td>
+</tr>
+<tr>
+<td>WD(DM_WD)</td>
+<td>in</td>
+<td>[31:0]</td>
+<td>写入的数据</td>
+</tr>
+<tr>
+<td>RD(DM_RD)</td>
+<td>out</td>
+<td>[31:0]</td>
+<td>读出的数据</td>
+</tr>
+</tbody></table>
+<h4 id="五、EXT（Bit-Extender）"><a href="#五、EXT（Bit-Extender）" class="headerlink" title="五、EXT（Bit Extender）"></a>五、EXT（Bit Extender）</h4><ul>
+<li>将16位偏移量&#x2F;立即数拓展至32位</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>端口名</th>
+<th>输入&#x2F;输出</th>
+<th>位宽</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EXTSelect</td>
+<td>in</td>
+<td>1</td>
+<td>选择符号拓展&#x2F;无符号拓展（0&#x2F;1）</td>
+</tr>
+<tr>
+<td>in(EXT_in)</td>
+<td>in</td>
+<td>[15:0]</td>
+<td>16位输入</td>
+</tr>
+<tr>
+<td>out(EXT_out)</td>
+<td>out</td>
+<td>[31:0]</td>
+<td>拓展后32位输出</td>
+</tr>
+</tbody></table>
+<h4 id="六、CU（Control-Unit）"><a href="#六、CU（Control-Unit）" class="headerlink" title="六、CU（Control Unit）"></a>六、CU（Control Unit）</h4><ul>
+<li>生成所有控制信号的组合逻辑</li>
+<li>根据每条指令的数据通路列出如下控制信号表格</li>
+<li>R指令控制信号为（R&#x3D;&#x3D;0)</li>
+<li>分别根据Opcode和Funct每一位和与门控制非R和R型指令的选择</li>
+<li>再将指令信号通过或连接，表示某一控制信号被哪些指令选择</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Instuction</th>
+<th>Opcode（in)</th>
+<th>Funct (in)</th>
+<th>RegWrite</th>
+<th>GRF_WASrc</th>
+<th>GRF_WDSrc</th>
+<th>ALUSrc</th>
+<th>ALUSelect</th>
+<th>MemWrite</th>
+<th>EXTSelect</th>
+<th>Branch</th>
+<th>BranchSelect</th>
+<th>Jump</th>
+<th>Jr</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>add</td>
+<td>000000</td>
+<td>100000</td>
+<td>1</td>
+<td>001</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>sub</td>
+<td>000000</td>
+<td>100010</td>
+<td>1</td>
+<td>001</td>
+<td></td>
+<td></td>
+<td>001</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ori</td>
+<td>001101</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td></td>
+<td>1</td>
+<td>010</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>lui</td>
+<td>001111</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td></td>
+<td>1</td>
+<td>011</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>sw</td>
+<td>101011</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>lw</td>
+<td>100011</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>001</td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>beq</td>
+<td>000100</td>
+<td></td>
+<td>0</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>1</td>
+<td>000</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>j</td>
+<td>000010</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>jal</td>
+<td>000011</td>
+<td></td>
+<td>1</td>
+<td>010</td>
+<td>010</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>jr</td>
+<td>000000</td>
+<td>001000</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>000</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>sll</td>
+<td>000000</td>
+<td>000000</td>
+<td>1</td>
+<td>001</td>
+<td>011</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>bne</td>
+<td>000101</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>1</td>
+<td>001</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="logisim图示"><a href="#logisim图示" class="headerlink" title="logisim图示"></a>logisim图示</h3><p><img src="/image-20221107194455075.png" srcset="/img/loading.gif" lazyload alt="image-20221107194455075"></p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>注：自造指令的同时借助zby同学的自动化测试工具大范围覆盖，以下仅放出自造指令，以及自动化测试结果截图。</p>
+<h3 id="asm指令"><a href="#asm指令" class="headerlink" title="asm指令"></a>asm指令</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs assembly">ori $1,11<br>ori $2,22<br>ori $3,33<br>lui $4,12<br>lui $5,23<br>lui $6,24<br>lui $7,25<br>lui $8,34<br>lui $9,12<br>addu $10,$9,$9<br>addu $11,$2,$3<br>addu $12,$5,$6<br>subu $13,$3,$5<br>subu $14,$5,$4<br>subu $15,$2,$6<br>nop<br>lui $16,12<br>beq $9,$16, next<br>nop<br>lui $1,1<br>lui $2,1<br>lui $3,1<br>lui $4,1<br>a:<br>lui $5,1<br>lui $6,1<br>lui $7,1<br>lui $8,1<br>lui $9,1<br>lui $10,1<br>next:<br>beq $1,$2, a<br>sw $1,0($0)<br>sw $2,4($0)<br>sw $3,8($0)<br>sw $4,12($0)<br>sw $5,16($0)<br>sw $6,20($0)<br>sw $7,24($0)<br>lw $17,0($0)<br>lw $18,4($0)<br>jal out <br>lw $19, 8($0)<br>jal end<br>out:<br>lw $0,0($0)<br>jr $31<br>end:<br>subu $3,$3,$0<br>subu $31,$0, $31<br></code></pre></td></tr></table></figure>
+
+<h4 id="机器码"><a href="#机器码" class="headerlink" title="机器码"></a>机器码</h4><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs txt">34040100<br>34850123<br>3c0601c8<br>3c07ffff<br>34e7ffff<br>00868021<br>00878821<br>00e7a021<br>00869023<br>00879823<br>ac040000<br>ac050004<br>ac060008<br>ac07000c<br>ac100010<br>ac110014<br>ac120018<br>ac13002c<br>ac140030<br>8c040000<br>8c05000c<br>ac04001c<br>ac050020<br>34040001<br>34050002<br>34060001<br>10850001<br>10860001<br>ad040024<br>ad050028<br>0c000c23<br>0c000c23<br>ad150040<br>34a50004<br>0c000c27<br>ad050038<br>ad1f003c<br>36b50005<br>03e00008<br>ad050044<br>ad1f0048<br></code></pre></td></tr></table></figure>
+
+<h4 id="输出（文本比较）"><a href="#输出（文本比较）" class="headerlink" title="输出（文本比较）"></a>输出（文本比较）</h4><p><img src="/image-20221104233120667.png" srcset="/img/loading.gif" lazyload alt="image-20221104233120667"></p>
+<p>左侧为zby测评机自mars导出的输出，右侧为verilog中的输出（0号寄存器写入输出可有可无）</p>
+<h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><ol>
+<li><ul>
+<li>DM地址来为GPR[rs]+sign_ext(offset)，来自EXT对寄存器中地址rs寄存器的值符号拓展的输出</li>
+<li>为[11:2]以对应从DM地址32位中截取的[11:2]位，截去低2位，从字节为单位的PC对应到以32bit为单位的DM</li>
+</ul>
+</li>
+<li><pre><code class="assembly"> //指令对应的控制信号如何取值
+     always @(*) begin
+         if(add) begin
+             assign RegWrite=1;
+             assign RegDst=1;
+         end
+         else if(sub) begin
+             assign RegWrite=1;
+             assign RegDst=1;
+             assign ALUControl=3&#39;b001;
+         end
+     end
+ //控制信号每种取值所对应的指令
+  assign RegWrite=(add||sub||ori||lw||lui||jal);
+     assign RegDst=(add||sub);
+     assign ALUSrc=(ori||lw||sw||lui);
+     assign Branch=(beq);
+     assign MemWrite=(sw);
+     assign MemToReg=(lw);
+     assign EXTSelect=(ori||lui);
+     assign Jump=(j||jal||jr);
+     assign ALUControl=sub?3&#39;b001:
+                       ori?3&#39;b010:
+                       lui?3&#39;b011:
+                       3&#39;b000;
+     assign Jal=(jal);
+     assign Jr=(jr);
+</code></pre>
+<p> 第一种方法优点在于添加新指令，修改更加集中，不会遗漏控制信号；缺点为当指令种类过多时，篇幅过长。</p>
+<p> 第二种方法优点为控制条件更加集中，可读性更强，如ALU信号含义更明确，不会错误对应；缺点为增加新指令时需修改多处。</p>
+</li>
+<li><p>信号优先级：</p>
+<ul>
+<li><p>同步复位：clk&gt;reset</p>
+</li>
+<li><p>异步复位：reset&gt;clk</p>
+</li>
+</ul>
+</li>
+<li><p>add,addi具有溢出检测，如果溢出，则不讲加法运算结果写入寄存器。但此结果截断低32位后与addu,addiu的运算结果相同。此时如果忽略溢出信号，照常写入，则写入值相同，即add与addu，addi与addiu等价</p>
+</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Computer-Orgnization/" class="category-chain-item">Computer Orgnization</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Computer-Orgnization/">#Computer Orgnization</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>P4设计文档</div>
+      <div>https://steve-strange.github.io/2023/03/10/19-16-42/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Sorcerer Inferior</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月10日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/10/19-16-47/" title="P5设计文档">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">P5设计文档</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/10/19-16-32/" title="P3设计文档">
+                        <span class="hidden-mobile">P3设计文档</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
