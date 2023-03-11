@@ -1,21 +1,27 @@
-
-
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=auto>
-
-
-
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Sorcerer Inferior">
-  <meta name="keywords" content="">
-  
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"steve-strange.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","Muse | Mist":280,"Pisces | Gemini":220,"width":260,"display":"always","padding":30,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":true,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
     <meta name="description" content="5级流水线CPU设计文档+">
 <meta property="og:type" content="article">
 <meta property="og:title" content="P6设计文档">
@@ -40,255 +46,268 @@
 <meta property="article:modified_time" content="2023-03-10T16:19:12.001Z">
 <meta property="article:author" content="Sorcerer Inferior">
 <meta property="article:tag" content="Computer Orgnization">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://steve-strange.github.io/image-20230311001016596.png">
-  
-  
-  
-  <title>P6设计文档 - TARDIS</title>
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+<link rel="canonical" href="https://steve-strange.github.io/2023/03/10/19-16-51/">
 
 
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://steve-strange.github.io/2023/03/10/19-16-51/","path":"2023/03/10/19-16-51/","title":"P6设计文档"}</script>
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>P6设计文档 | TARDIS</title>
   
 
 
 
 
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"steve-strange.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
 
 
-  
-<meta name="generator" content="Hexo 6.3.0"></head>
 
 
-<body>
-  
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
 
-  <header>
-    
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-<div class="header-inner" style="height: 70vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">TARDIS</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Time And Relative Dimensions In Space</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
 </nav>
 
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E7%BA%A7%E6%B5%81%E6%B0%B4%E7%BA%BFCPU%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3"><span class="nav-number">1.</span> <span class="nav-text">5级流水线CPU设计文档+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E6%8C%87%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">支持指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.</span> <span class="nav-text">流程模块设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CU%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.1.</span> <span class="nav-text">CU模块设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#T%E8%AE%A1%E7%AE%97%E8%A1%A8%E6%A0%BC"><span class="nav-number">3.1.1.</span> <span class="nav-text">T计算表格</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conflit%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%EF%BC%9AAT%E6%8E%A7%E5%88%B6%E9%98%BB%E5%A1%9E%EF%BC%8C%E7%9B%B4%E6%8E%A5%E8%BD%AC%E5%8F%91"><span class="nav-number">3.2.</span> <span class="nav-text">Conflit模块设计：AT控制阻塞，直接转发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%BB%E5%A1%9E%EF%BC%9A"><span class="nav-number">3.2.1.</span> <span class="nav-text">阻塞：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AC%E5%8F%91"><span class="nav-number">3.2.2.</span> <span class="nav-text">转发</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E7%BA%A7%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.3.</span> <span class="nav-text">五级模块设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#P6%E6%9B%B4%E6%96%B0%E4%B9%98%E9%99%A4%E6%A7%BD%E4%B8%8E%E5%82%A8%E5%AD%98%E5%99%A8%E5%A4%96%E7%BD%AE%E4%BB%A5%E5%8F%8A%E6%8C%89%E5%AD%97%E8%8A%82%E8%AE%BF%E5%AD%98"><span class="nav-number">3.3.1.</span> <span class="nav-text">P6更新乘除槽与储存器外置以及按字节访存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Fetch"><span class="nav-number">3.3.2.</span> <span class="nav-text">1. Fetch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Decode"><span class="nav-number">3.3.3.</span> <span class="nav-text">2. Decode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Execute"><span class="nav-number">3.3.4.</span> <span class="nav-text">3. Execute</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Memory"><span class="nav-number">3.3.5.</span> <span class="nav-text">4. Memory</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#M-BE%EF%BC%88%E8%AE%A1%E7%AE%97%E5%AD%97%E8%8A%82%E8%AE%BF%E5%AD%98%E4%BD%BF%E8%83%BD%EF%BC%8C%E8%B0%83%E6%95%B4%E5%9B%9B%E5%AD%97%E8%8A%82%E5%86%99%E5%85%A5%E6%95%B0%E6%8D%AE%EF%BC%89"><span class="nav-number">3.3.5.1.</span> <span class="nav-text">M_BE（计算字节访存使能，调整四字节写入数据）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#M-DE%EF%BC%88%E8%B0%83%E6%95%B4%E5%86%85%E5%AD%98%E8%AF%BB%E5%87%BA%E6%95%B0%E6%8D%AE%EF%BC%8C%E6%88%AA%E5%8F%96%E9%9C%80%E8%A6%81%E7%9A%84%E5%AD%97%E8%8A%82%E5%90%8E%E6%8B%93%E5%B1%95%EF%BC%89"><span class="nav-number">3.3.5.2.</span> <span class="nav-text">M_DE（调整内存读出数据，截取需要的字节后拓展）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Writeback"><span class="nav-number">3.3.6.</span> <span class="nav-text">5. Writeback</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95-%E5%90%8CP5%EF%BC%8CP6%E5%8D%95%E7%8B%AC%E6%9E%84%E9%80%A0%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE"><span class="nav-number">4.</span> <span class="nav-text">测试(同P5，P6单独构造测试数据)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">5.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">思考题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sorcerer Inferior"
+      src="/images/Head.jpg">
+  <p class="site-author-name" itemprop="name">Sorcerer Inferior</p>
+  <div class="site-description" itemprop="description">Come on, then. Take mine. Take my memories.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Steve-Strange" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Steve-Strange" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/SteveSt06821869" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;SteveSt06821869" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="http://volcaxiao.top/" title="http:&#x2F;&#x2F;volcaxiao.top&#x2F;" rel="noopener" target="_blank">-> 灿灿</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://augetyvolta.github.io/" title="https:&#x2F;&#x2F;augetyvolta.github.io&#x2F;" rel="noopener" target="_blank">-> 伯king</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
   
 
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="P6设计文档"></span>
-          
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://steve-strange.github.io/2023/03/10/19-16-51/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Head.jpg">
+      <meta itemprop="name" content="Sorcerer Inferior">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TARDIS">
+      <meta itemprop="description" content="Come on, then. Take mine. Take my memories.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="P6设计文档 | TARDIS">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          P6设计文档
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-03-10 19:16:51" itemprop="dateCreated datePublished" datetime="2023-03-10T19:16:51+08:00">2023-03-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-11 00:19:12" itemprop="dateModified" datetime="2023-03-11T00:19:12+08:00">2023-03-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Orgnization/" itemprop="url" rel="index"><span itemprop="name">Computer Orgnization</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="firestore-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
         </div>
-
-        
-          
-  <div class="mt-3">
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-10 19:16" pubdate>
-          2023年3月10日 晚上
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          11k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          91 分钟
-        
-      </span>
-    
+      </header>
 
     
     
-  </div>
-
-
-        
-      </div>
-
-      
-    </div>
-  </div>
-</div>
-
-</div>
-
-  </header>
-
-  <main>
     
-      
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">P6设计文档</h1>
-            
-            
-              <div class="markdown-body">
-                
-                <h2 id="5级流水线CPU设计文档"><a href="#5级流水线CPU设计文档" class="headerlink" title="5级流水线CPU设计文档+"></a>5级流水线CPU设计文档+</h2><span id="more"></span>
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="5级流水线CPU设计文档"><a href="#5级流水线CPU设计文档" class="headerlink" title="5级流水线CPU设计文档+"></a>5级流水线CPU设计文档+</h2><span id="more"></span>
 
 <h2 id="支持指令"><a href="#支持指令" class="headerlink" title="支持指令"></a>支持指令</h2><p>  <strong>R, add, sub, And, Or, Xor, slt, sltu</strong></p>
 <p>  <strong>addi, andi, xori, ori, lui</strong></p>
@@ -301,7 +320,7 @@
 <li>直接译出当前指令rs, rt, rd, shamt, imm16, imm26以及所有控制信号供每个阶段选取使用，还需译出Tuse_rs&#x2F;rt以及E_Tnew与M_Tnew，各级输出对应信号至Conflict模块</li>
 <li>将指令分类，分为：cal_r,cal_i,md,mt,mf,load,save,branch,branch_ucl,branch_cl,shift,jreg,jadd,jlink（ori被归为cal_i）</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs assembly">   assign cal_r=(add||sub||And||Or||Xor||slt||sltu);<br>assign cal_i=(addi||andi||xori||ori||lui);<br><br>   assign md   =(mult||multu||div||divu);<br>   assign mf   =(mfhi||mflo);<br>   assign mt   =(mthi||mtlo);<br><br>assign load=(lw||lh||lhu||lb||lbu);<br>assign save=(sw||sh||sb);<br><br>   assign branch=(beq||bne||branch_ucl||branch_cl);<br>   assign branch_ucl=bltzal;<br>   assign branch_cl=0;<br><br>   assign jreg = jr;<br>   assign jadd = (j||jal);<br>   assign jlink = jal;<br><br>   assign shift=sll;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">   assign cal_r=(add||sub||And||Or||Xor||slt||sltu);</span><br><span class="line">assign cal_i=(addi||andi||xori||ori||lui);</span><br><span class="line"></span><br><span class="line">   assign md   =(mult||multu||div||divu);</span><br><span class="line">   assign mf   =(mfhi||mflo);</span><br><span class="line">   assign mt   =(mthi||mtlo);</span><br><span class="line"></span><br><span class="line">assign load=(lw||lh||lhu||lb||lbu);</span><br><span class="line">assign save=(sw||sh||sb);</span><br><span class="line"></span><br><span class="line">   assign branch=(beq||bne||branch_ucl||branch_cl);</span><br><span class="line">   assign branch_ucl=bltzal;</span><br><span class="line">   assign branch_cl=0;</span><br><span class="line"></span><br><span class="line">   assign jreg = jr;</span><br><span class="line">   assign jadd = (j||jal);</span><br><span class="line">   assign jlink = jal;</span><br><span class="line"></span><br><span class="line">   assign shift=sll;</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>控制信号新增：MDU, MDUStart, MDUSelect, MFSelect, ByteSelect, DESelect</li>
@@ -604,7 +623,7 @@
 <li>阻塞时需要暂停更新PC以及F级读出的指令，并且清空D级当前指令的译码输出，以替换为nop空泡</li>
 <li>新增乘除Stall，在乘除运算即将开始或正在进行时如遇到乘除指令需要Stall</li>
 </ul>
-<p><img src="/image-20230311001016596.png" srcset="/img/loading.gif" lazyload alt="image-20230311001016596"></p>
+<p><img src="/image-20230311001016596.png" alt="image-20230311001016596"></p>
 <h4 id="转发"><a href="#转发" class="headerlink" title="转发"></a>转发</h4><ul>
 <li><p>阻塞后，所有指令在需要读寄存器数据的时候都能够获得后续计算完毕的数据，每级转发出已算出的数据，发送给之前各级即可。</p>
 </li>
@@ -613,20 +632,20 @@
 <li><p>需要写寄存器：E级可转发出D级算的PC+8；M级可转发出D级算的PC+8和E级算的的ALU_Y；W级可转发出D级算的PC+8，E级算的的ALU_Y和M级读出的DM数据。<strong>根据当前指令CU译码得到的GRF_WDSrc进行选择</strong>。此外还有W级寄存器写入，可直接内部转发至D级读出</p>
 </li>
 </ul>
-<img src="image-20230311001109169.png" srcset="/img/loading.gif" lazyload alt="image-20230311001109169" style="zoom:67%;" />
+<img src="image-20230311001109169.png" alt="image-20230311001109169" style="zoom:67%;" />
 
-<img src="image-20230311001116883.png" srcset="/img/loading.gif" lazyload alt="image-20230311001116883" style="zoom:67%;" />
+<img src="image-20230311001116883.png" alt="image-20230311001116883" style="zoom:67%;" />
 
-<img src="image-20230311001122673.png" srcset="/img/loading.gif" lazyload alt="image-20230311001122673" style="zoom:67%;" />
+<img src="image-20230311001122673.png" alt="image-20230311001122673" style="zoom:67%;" />
 
-<img src="image-20230311001129478.png" srcset="/img/loading.gif" lazyload alt="image-20230311001129478" style="zoom:67%;" />
+<img src="image-20230311001129478.png" alt="image-20230311001129478" style="zoom:67%;" />
 
 <ul>
 <li>在主模块中，获取各级需要读的寄存器编号（D_rs,D_rt,E_rs,E_rt,M_rt），寄存器原读数（D_rs_data,D_rt_data,E_rs_data,E_rt_data,M_rt_data），写入的寄存器编号（E_GRF_WA,M_GRF_WA,W_GRF_WA）和数据（E_GRF_WD,M_GRF_WD,W_GRF_WD）</li>
 <li>比较读的编号和写的编号是否有相等的，如有相等的则代表有数据已经更新需要转发，转发优先级为更新次序，最后一次更新优先转发，即优先转发距离需要数据的阶段近的数据，特判如果需要读0号寄存器的数据，直接转发0</li>
 <li>转发的数据（D_rs_fw,D_rt_fw,E_rs_fw,E_rt_fw,M_rt_fw）发送至各级需要的部分运算，并传递给下一级</li>
 </ul>
-<img src="image-20230311001150971.png" srcset="/img/loading.gif" lazyload alt="image-20230311001150971" style="zoom: 67%;" />
+<img src="image-20230311001150971.png" alt="image-20230311001150971" style="zoom: 67%;" />
 
 <h3 id="五级模块设计"><a href="#五级模块设计" class="headerlink" title="五级模块设计"></a>五级模块设计</h3><ul>
 <li><p>每个阶段之间以寄存器隔开，寄存器设计在每个模块输出处，使用reg类型</p>
@@ -730,7 +749,7 @@
 <ul>
 <li>F级与指令储存的数据交换</li>
 </ul>
-<img src="image-20230311001208043.png" srcset="/img/loading.gif" lazyload alt="image-20230311001208043" style="zoom:67%;" />
+<img src="image-20230311001208043.png" alt="image-20230311001208043" style="zoom:67%;" />
 
 <h4 id="2-Decode"><a href="#2-Decode" class="headerlink" title="2. Decode"></a>2. Decode</h4><ul>
 <li>包括D_CU, EXT, NPC (Branch), DEReg</li>
@@ -1497,10 +1516,10 @@
 <ul>
 <li><h5 id="M-BE（计算字节访存使能，调整四字节写入数据）"><a href="#M-BE（计算字节访存使能，调整四字节写入数据）" class="headerlink" title="M_BE（计算字节访存使能，调整四字节写入数据）"></a>M_BE（计算字节访存使能，调整四字节写入数据）</h5><ul>
 <li><p>合并在Memory中，在写入的条件下，根据写入数据类型和写入地址低两位产生四个字节的每一位控制信号，即四位ByteEn</p>
-<img src="image-20230311001222299.png" srcset="/img/loading.gif" lazyload alt="image-20230311001222299" style="zoom:67%;" />
+<img src="image-20230311001222299.png" alt="image-20230311001222299" style="zoom:67%;" />
 </li>
 <li><p>后续再根据ByteEn调整将写入内存的数据，需将待写入的字节移动到对应为En1的位置</p>
-<img src="image-20230311001240021.png" srcset="/img/loading.gif" lazyload alt="image-20230311001240021" style="zoom:67%;" /></li>
+<img src="image-20230311001240021.png" alt="image-20230311001240021" style="zoom:67%;" /></li>
 </ul>
 </li>
 <li><h5 id="M-DE（调整内存读出数据，截取需要的字节后拓展）"><a href="#M-DE（调整内存读出数据，截取需要的字节后拓展）" class="headerlink" title="M_DE（调整内存读出数据，截取需要的字节后拓展）"></a>M_DE（调整内存读出数据，截取需要的字节后拓展）</h5><ul>
@@ -1543,11 +1562,11 @@
 </ul>
 </li>
 </ul>
-<img src="image-20230311001304148.png" srcset="/img/loading.gif" lazyload alt="image-20230311001304148" style="zoom:67%;" />
+<img src="image-20230311001304148.png" alt="image-20230311001304148" style="zoom:67%;" />
 
 <ul>
 <li>M级与内存数据交换</li>
-<li><img src="image-20230311001314893.png" srcset="/img/loading.gif" lazyload alt="image-20230311001314893" style="zoom:67%;" /></li>
+<li><img src="image-20230311001314893.png" alt="image-20230311001314893" style="zoom:67%;" /></li>
 </ul>
 <h4 id="5-Writeback"><a href="#5-Writeback" class="headerlink" title="5. Writeback"></a>5. Writeback</h4><ul>
 <li>包括W_CU</li>
@@ -1646,14 +1665,14 @@
 <td>W级指令写寄存器数据</td>
 </tr>
 </tbody></table>
-<h2 id="测试-同P5，P6单独构造测试数据"><a href="#测试-同P5，P6单独构造测试数据" class="headerlink" title="测试(同P5，P6单独构造测试数据)"></a>测试(同P5，P6单独构造测试数据)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br></pre></td><td class="code"><pre><code class="hljs assembly">.text<br>                                        # 13<br>    ori     $t0,    $0,         0xadce<br>    sw      $t0,    12($0)<br>    ori     $t1,    $t0,        0xdefa<br>    sw      $t1,    8($0)<br><br>    ori     $t3,    $0,         4<br>    lw      $t2,    8($t3)<br>    add     $t4,    $t2,        $t0<br><br>    ori     $t3,    $0,         15<br>    lw      $t4,    -7($t3)<br>    sub     $t5,    $t4,        $t2<br><br># 14<br>    ori     $t0,    $0,         0xefac<br>    sw      $t0,    12($0)<br>    ori     $t1,    $t0,        0xfead<br>    sw      $t1,    8($0)<br><br>    ori     $t3,    $0,         4<br>    lw      $t2,    8($t3)<br>    add     $t4,    $t0,        $t2<br><br>    ori     $t3,    $0,         21<br>    lw      $t4,    -13($t3)<br>    sub     $t5,    $t2,        $t4<br><br># 15<br>    ori     $t0,    $0,         0x0ace<br>    sw      $t0,    12($0)<br>    ori     $t1,    $t0,        0x00a1<br>    sw      $t1,    8($0)<br><br>    ori     $t3,    $0,         4<br>    lw      $t2,    8($t3)<br>    nop     <br>    add     $t4,    $t2,        $t0<br><br>    ori     $t3,    $0,         15<br>    lw      $t4,    -7($t3)<br>    nop     <br>    sub     $t5,    $t4,        $t2<br><br># 16<br>    lui     $t0,    0x1234<br>    sw      $t0,    12($0)<br>    lui     $t1,    0xfead<br>    sw      $t1,    8($0)<br><br>    ori     $t3,    $0,         4<br>    lw      $t2,    8($t3)<br>    nop     <br>    add     $t4,    $t0,        $t2<br><br>    ori     $t3,    $0,         25<br>    lw      $t4,    -17($t3)<br>    nop     <br>    sub     $t5,    $t2,        $t4<br><br># 17<br>    lui     $1,     0x13ac<br>    ori     $2,     0x12ae<br><br>    add     $3,     $1,         $2<br>    ori     $4,     $3,         0xcd12<br><br>    sub     $5,     $4,         $1<br>    ori     $6,     $5,         0x4589<br><br># 18<br>    lui     $1,     0x56ed<br>    ori     $2,     0x349a<br><br>    add     $3,     $1,         $2<br>    nop     <br>    ori     $4,     $3,         0xc102<br><br>    sub     $5,     $4,         $1<br>    nop     <br>    ori     $6,     $5,         0x4ea9<br><br># 19<br>    lui     $7,     0x1345<br>    ori     $8,     $7,         0x1122<br><br>    ori     $9,     $8,         0x3344<br>    ori     $10,    $9,         0x00ff<br><br># 20<br>    lui     $7,     0x2211<br>    nop     <br>    ori     $8,     $7,         0x3366<br>    nop     <br>    ori     $9,     $8,         0xf111<br>    nop     <br>    ori     $10,    $9,         0x00ff<br><br># 21<br>    jal     label1<br>    ori     $8,     $ra,        0x8899<br>    nop     <br>    nop     <br>label1:<br>                                        # 22<br>    jal     label2<br>    nop     <br>    nop     <br>    nop     <br>    nop     <br>label2:<br>    ori     $9,     $ra,        0xaa12<br>                                        # 23<br>    ori     $t0,    $0,         35<br>    sw      $ra,    24($0)<br>    lw      $t1,    -11($t0)<br>    ori     $t2,    $t1,        0xe2df<br><br># 24<br>    sw      $t2,    36($0)<br>    lw      $t3,    1($t0)<br>    nop     <br>    ori     $t4,    $t3,        0xaabb<br></code></pre></td></tr></table></figure>
+<h2 id="测试-同P5，P6单独构造测试数据"><a href="#测试-同P5，P6单独构造测试数据" class="headerlink" title="测试(同P5，P6单独构造测试数据)"></a>测试(同P5，P6单独构造测试数据)</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.text</span><br><span class="line">                                        # 13</span><br><span class="line">    ori     $t0,    $0,         0xadce</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    ori     $t1,    $t0,        0xdefa</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    add     $t4,    $t2,        $t0</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         15</span><br><span class="line">    lw      $t4,    -7($t3)</span><br><span class="line">    sub     $t5,    $t4,        $t2</span><br><span class="line"></span><br><span class="line"># 14</span><br><span class="line">    ori     $t0,    $0,         0xefac</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    ori     $t1,    $t0,        0xfead</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    add     $t4,    $t0,        $t2</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         21</span><br><span class="line">    lw      $t4,    -13($t3)</span><br><span class="line">    sub     $t5,    $t2,        $t4</span><br><span class="line"></span><br><span class="line"># 15</span><br><span class="line">    ori     $t0,    $0,         0x0ace</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    ori     $t1,    $t0,        0x00a1</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    nop     </span><br><span class="line">    add     $t4,    $t2,        $t0</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         15</span><br><span class="line">    lw      $t4,    -7($t3)</span><br><span class="line">    nop     </span><br><span class="line">    sub     $t5,    $t4,        $t2</span><br><span class="line"></span><br><span class="line"># 16</span><br><span class="line">    lui     $t0,    0x1234</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    lui     $t1,    0xfead</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    nop     </span><br><span class="line">    add     $t4,    $t0,        $t2</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         25</span><br><span class="line">    lw      $t4,    -17($t3)</span><br><span class="line">    nop     </span><br><span class="line">    sub     $t5,    $t2,        $t4</span><br><span class="line"></span><br><span class="line"># 17</span><br><span class="line">    lui     $1,     0x13ac</span><br><span class="line">    ori     $2,     0x12ae</span><br><span class="line"></span><br><span class="line">    add     $3,     $1,         $2</span><br><span class="line">    ori     $4,     $3,         0xcd12</span><br><span class="line"></span><br><span class="line">    sub     $5,     $4,         $1</span><br><span class="line">    ori     $6,     $5,         0x4589</span><br><span class="line"></span><br><span class="line"># 18</span><br><span class="line">    lui     $1,     0x56ed</span><br><span class="line">    ori     $2,     0x349a</span><br><span class="line"></span><br><span class="line">    add     $3,     $1,         $2</span><br><span class="line">    nop     </span><br><span class="line">    ori     $4,     $3,         0xc102</span><br><span class="line"></span><br><span class="line">    sub     $5,     $4,         $1</span><br><span class="line">    nop     </span><br><span class="line">    ori     $6,     $5,         0x4ea9</span><br><span class="line"></span><br><span class="line"># 19</span><br><span class="line">    lui     $7,     0x1345</span><br><span class="line">    ori     $8,     $7,         0x1122</span><br><span class="line"></span><br><span class="line">    ori     $9,     $8,         0x3344</span><br><span class="line">    ori     $10,    $9,         0x00ff</span><br><span class="line"></span><br><span class="line"># 20</span><br><span class="line">    lui     $7,     0x2211</span><br><span class="line">    nop     </span><br><span class="line">    ori     $8,     $7,         0x3366</span><br><span class="line">    nop     </span><br><span class="line">    ori     $9,     $8,         0xf111</span><br><span class="line">    nop     </span><br><span class="line">    ori     $10,    $9,         0x00ff</span><br><span class="line"></span><br><span class="line"># 21</span><br><span class="line">    jal     label1</span><br><span class="line">    ori     $8,     $ra,        0x8899</span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">label1:</span><br><span class="line">                                        # 22</span><br><span class="line">    jal     label2</span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">label2:</span><br><span class="line">    ori     $9,     $ra,        0xaa12</span><br><span class="line">                                        # 23</span><br><span class="line">    ori     $t0,    $0,         35</span><br><span class="line">    sw      $ra,    24($0)</span><br><span class="line">    lw      $t1,    -11($t0)</span><br><span class="line">    ori     $t2,    $t1,        0xe2df</span><br><span class="line"></span><br><span class="line"># 24</span><br><span class="line">    sw      $t2,    36($0)</span><br><span class="line">    lw      $t3,    1($t0)</span><br><span class="line">    nop     </span><br><span class="line">    ori     $t4,    $t3,        0xaabb</span><br></pre></td></tr></table></figure>
 
-<img src="image-20230311001334635.png" srcset="/img/loading.gif" lazyload alt="image-20230311001334635" style="zoom:67%;" />
+<img src="image-20230311001334635.png" alt="image-20230311001334635" style="zoom:67%;" />
 
 <ul>
 <li>对0号寄存器读写测试</li>
 </ul>
-<img src="image-20230311001346059.png" srcset="/img/loading.gif" lazyload alt="image-20230311001346059" style="zoom:67%;" />
+<img src="image-20230311001346059.png" alt="image-20230311001346059" style="zoom:67%;" />
 
 <h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ul>
 <li>乘除指令的Tuse，Tnew：包括md指令Tuse_rs&#x3D;Tuse_rt&#x3D;1; mf指令E_Tnew&#x3D;1</li>
@@ -1665,7 +1684,7 @@
 <li>因为硬件运算中乘除法消耗时间很长，需要持续多个周期，放入ALU后会大幅降低频率。独立的HI，LO寄存器方便乘除槽与外部交换数据，并且单独预留给乘除指令，避免其他普通存取导致过多阻塞。</li>
 <li>使用移位操作，采用逐位并行的迭代阵列结构，将每个操作数的N位都并行地提交给乘法器</li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><code class="hljs assembly">module multi_4bits_pipelining(mul_a, mul_b, clk, rst_n, mul_out);<br>    input [3:0] mul_a, mul_b;<br>    input clk;<br>    input rst_n;<br>    output [15:0] mul_out;<br> <br>    reg [15:0] mul_out;<br>    reg [15:0] stored0;<br>    reg [15:0] stored1;<br>    reg [15:0] stored2;<br>    reg [15:0] stored3;<br>    reg [15:0] stored4;<br>    reg [15:0] stored5;<br>    reg [15:0] stored6;<br>    reg [15:0] stored7;<br> <br>    reg [15:0] mul_out01;<br>    reg [15:0] mul_out23;<br> <br>    reg [15:0] add01;<br>    reg [15:0] add23;<br>    reg [15:0] add45;<br>    reg [15:0] add67;<br> <br>    always @(posedge clk or negedge rst_n) begin<br>        if(!rst_n) begin<br>            mul_out &lt;= 0;<br>            stored0 &lt;= 0;<br>            stored1 &lt;= 0;<br>            stored2 &lt;= 0;<br>            stored3 &lt;= 0;<br>            stored4 &lt;= 0;<br>                    stored5 &lt;= 0;<br>            stored6 &lt;= 0;<br>            stored7 &lt;= 0;<br> <br>            add01 &lt;= 0;<br>            add23 &lt;= 0;<br>            add45 &lt;= 0;<br>            add67 &lt;= 0;<br>    end<br>    else begin<br>        stored0 &lt;= mul_b[0]? &#123;8&#x27;b0, mul_a&#125; : 16&#x27;b0;<br>        stored1 &lt;= mul_b[1]? &#123;7&#x27;b0, mul_a, 1&#x27;b0&#125; : 16&#x27;b0;<br>        stored2 &lt;= mul_b[2]? &#123;6&#x27;b0, mul_a, 2&#x27;b0&#125; : 16&#x27;b0;<br>        stored3 &lt;= mul_b[3]? &#123;5&#x27;b0, mul_a, 3&#x27;b0&#125; : 16&#x27;b0;<br>        stored4 &lt;= mul_b[0]? &#123;4&#x27;b0, mul_a, 4&#x27;b0&#125; : 16&#x27;b0;<br>        stored5 &lt;= mul_b[1]? &#123;3&#x27;b0, mul_a, 5&#x27;b0&#125; : 16&#x27;b0;<br>        stored6 &lt;= mul_b[2]? &#123;2&#x27;b0, mul_a, 6&#x27;b0&#125; : 16&#x27;b0;<br>        stored7 &lt;= mul_b[3]? &#123;1&#x27;b0, mul_a, 7&#x27;b0&#125; : 16&#x27;b0;<br>        add01 &lt;= stored1 + stored0;<br>        add23 &lt;= stored3 + stored2;<br>        add45 &lt;= stored5 + stored4;<br>        add67 &lt;= stored7 + stored6;<br> <br>        mul_out01 &lt;= add01 + add23;<br>        mul_out23 &lt;= add45 + add67;<br> <br>        mul_out &lt;= mul_out01 + mul_out23;<br> <br>    end<br>    end<br>endmodule<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">module multi_4bits_pipelining(mul_a, mul_b, clk, rst_n, mul_out);</span><br><span class="line">    input [3:0] mul_a, mul_b;</span><br><span class="line">    input clk;</span><br><span class="line">    input rst_n;</span><br><span class="line">    output [15:0] mul_out;</span><br><span class="line"> </span><br><span class="line">    reg [15:0] mul_out;</span><br><span class="line">    reg [15:0] stored0;</span><br><span class="line">    reg [15:0] stored1;</span><br><span class="line">    reg [15:0] stored2;</span><br><span class="line">    reg [15:0] stored3;</span><br><span class="line">    reg [15:0] stored4;</span><br><span class="line">    reg [15:0] stored5;</span><br><span class="line">    reg [15:0] stored6;</span><br><span class="line">    reg [15:0] stored7;</span><br><span class="line"> </span><br><span class="line">    reg [15:0] mul_out01;</span><br><span class="line">    reg [15:0] mul_out23;</span><br><span class="line"> </span><br><span class="line">    reg [15:0] add01;</span><br><span class="line">    reg [15:0] add23;</span><br><span class="line">    reg [15:0] add45;</span><br><span class="line">    reg [15:0] add67;</span><br><span class="line"> </span><br><span class="line">    always @(posedge clk or negedge rst_n) begin</span><br><span class="line">        if(!rst_n) begin</span><br><span class="line">            mul_out &lt;= 0;</span><br><span class="line">            stored0 &lt;= 0;</span><br><span class="line">            stored1 &lt;= 0;</span><br><span class="line">            stored2 &lt;= 0;</span><br><span class="line">            stored3 &lt;= 0;</span><br><span class="line">            stored4 &lt;= 0;</span><br><span class="line">                    stored5 &lt;= 0;</span><br><span class="line">            stored6 &lt;= 0;</span><br><span class="line">            stored7 &lt;= 0;</span><br><span class="line"> </span><br><span class="line">            add01 &lt;= 0;</span><br><span class="line">            add23 &lt;= 0;</span><br><span class="line">            add45 &lt;= 0;</span><br><span class="line">            add67 &lt;= 0;</span><br><span class="line">    end</span><br><span class="line">    else begin</span><br><span class="line">        stored0 &lt;= mul_b[0]? &#123;8&#x27;b0, mul_a&#125; : 16&#x27;b0;</span><br><span class="line">        stored1 &lt;= mul_b[1]? &#123;7&#x27;b0, mul_a, 1&#x27;b0&#125; : 16&#x27;b0;</span><br><span class="line">        stored2 &lt;= mul_b[2]? &#123;6&#x27;b0, mul_a, 2&#x27;b0&#125; : 16&#x27;b0;</span><br><span class="line">        stored3 &lt;= mul_b[3]? &#123;5&#x27;b0, mul_a, 3&#x27;b0&#125; : 16&#x27;b0;</span><br><span class="line">        stored4 &lt;= mul_b[0]? &#123;4&#x27;b0, mul_a, 4&#x27;b0&#125; : 16&#x27;b0;</span><br><span class="line">        stored5 &lt;= mul_b[1]? &#123;3&#x27;b0, mul_a, 5&#x27;b0&#125; : 16&#x27;b0;</span><br><span class="line">        stored6 &lt;= mul_b[2]? &#123;2&#x27;b0, mul_a, 6&#x27;b0&#125; : 16&#x27;b0;</span><br><span class="line">        stored7 &lt;= mul_b[3]? &#123;1&#x27;b0, mul_a, 7&#x27;b0&#125; : 16&#x27;b0;</span><br><span class="line">        add01 &lt;= stored1 + stored0;</span><br><span class="line">        add23 &lt;= stored3 + stored2;</span><br><span class="line">        add45 &lt;= stored5 + stored4;</span><br><span class="line">        add67 &lt;= stored7 + stored6;</span><br><span class="line"> </span><br><span class="line">        mul_out01 &lt;= add01 + add23;</span><br><span class="line">        mul_out23 &lt;= add45 + add67;</span><br><span class="line"> </span><br><span class="line">        mul_out &lt;= mul_out01 + mul_out23;</span><br><span class="line"> </span><br><span class="line">    end</span><br><span class="line">    end</span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
 
 <ol start="3">
 <li><p>在Start到来的周期开始置1，通过cnt计数周期，计数完毕前始终保持1，完毕后归0</p>
@@ -1678,13 +1697,13 @@
 </li>
 <li><ul>
 <li><p>MDU的指令之间的冲突：在D级检测是否该指令要使用MDU，暂停的条件是要使用MDU并且MDU处于start或busy的状态。</p>
-   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs assembly">ori $t1,5<br>mthi $t1<br>mtlo $t1<br>div $t1,$t2<br>mfhi $t4<br>mflo $t5<br>div $t2,$t3<br>mfhi $t4<br>mflo $t5<br></code></pre></td></tr></table></figure>
+   <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ori $t1,5</span><br><span class="line">mthi $t1</span><br><span class="line">mtlo $t1</span><br><span class="line">div $t1,$t2</span><br><span class="line">mfhi $t4</span><br><span class="line">mflo $t5</span><br><span class="line">div $t2,$t3</span><br><span class="line">mfhi $t4</span><br><span class="line">mflo $t5</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>MDU与其他指令的冲突：包括md指令Tuse_rs&#x3D;Tuse_rt&#x3D;1; mf指令E_Tnew&#x3D;1</p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs assembly">here:<br>ori $t1,5<br>sw $t1,0($0)<br>lw $t2,0($0)<br>div $t1,$t2<br>mfhi $t3<br>mflo $t4<br>beq $t4,$5,here<br></code></pre></td></tr></table></figure>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">here:</span><br><span class="line">ori $t1,5</span><br><span class="line">sw $t1,0($0)</span><br><span class="line">lw $t2,0($0)</span><br><span class="line">div $t1,$t2</span><br><span class="line">mfhi $t3</span><br><span class="line">mflo $t4</span><br><span class="line">beq $t4,$5,here</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>除MDU之外其他指令之间的冲突：指令分类后用指令类型设定对应的Tuse和Tnew，与P5相同</p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs assembly">ori $t0,5<br>lui $t1,1<br>sw $t1,0($0)<br>lbu $t2,0($0)<br>or $t3,$t1,$t2<br>lh $t5,0($0)<br>slt $t6,$t4,$t5<br></code></pre></td></tr></table></figure></li>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ori $t0,5</span><br><span class="line">lui $t1,1</span><br><span class="line">sw $t1,0($0)</span><br><span class="line">lbu $t2,0($0)</span><br><span class="line">or $t3,$t1,$t2</span><br><span class="line">lh $t5,0($0)</span><br><span class="line">slt $t6,$t4,$t5</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 <li><ul>
@@ -1700,372 +1719,152 @@
 </li>
 </ol>
 
-                
-              </div>
-            
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Computer-Orgnization/" class="category-chain-item">Computer Orgnization</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
     </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/Computer-Orgnization/">#Computer Orgnization</a>
-      
-    </div>
-  
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Sorcerer Inferior
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://steve-strange.github.io/2023/03/10/19-16-51/" title="P6设计文档">https://steve-strange.github.io/2023/03/10/19-16-51/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
 </div>
 
-
-              
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>P6设计文档</div>
-      <div>https://steve-strange.github.io/2023/03/10/19-16-51/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>Sorcerer Inferior</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2023年3月10日</div>
-        </div>
-      
-      
-      
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
-            
-              
-              
-                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
-                  </span>
-                </a>
-              
-            
+          <div class="post-tags">
+              <a href="/tags/Computer-Orgnization/" rel="tag"># Computer Orgnization</a>
           </div>
-        </div>
-      
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
 
+        
 
-
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2023/03/10/19-16-54/" title="P7设计文档">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">P7设计文档</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2023/03/10/19-16-47/" title="P5设计文档">
-                        <span class="hidden-mobile">P5设计文档</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/03/10/19-16-47/" rel="prev" title="P5设计文档">
+                  <i class="fa fa-chevron-left"></i> P5设计文档
+                </a>
             </div>
-
-            
-          </article>
-        </div>
-      </div>
-    </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>目录</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-
-
-  </aside>
-
-
-    </div>
-  </div>
+            <div class="post-nav-item">
+                <a href="/2023/03/10/19-16-54/" rel="next" title="P7设计文档">
+                  P7设计文档 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
 </div>
 
 
 
 
 
-  
 
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
-    
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
 </div>
-
-    
-
-    
   </main>
 
-  <footer>
+  <footer class="footer">
     <div class="footer-inner">
-  
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-    </div>
-  
-  
-  
-  
-</div>
 
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sorcerer Inferior</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
   </footer>
 
-  <!-- Scripts -->
   
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
 
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
+  <a href="https://github.com/Steve-Strange" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 
-
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
 
   
-    <script  src="/js/img-lazyload.js" ></script>
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
 
 
 
+  <script src="/js/third-party/fancybox.js"></script>
 
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
-        }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
-        }
-      }
-    });
-  });
-</script>
-
-
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
-
-  <script>Fluid.plugins.codeWidget();</script>
-
+  <script src="/js/third-party/pace.js"></script>
 
   
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
-</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.17.1/firebase-app-compat.js" integrity="sha256-4nstrISMqU/N2gvWaEztDS859x7Wv9U4pGGu55cZpc8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.17.1/firebase-firestore-compat.js" integrity="sha256-Euwjh/Y0lrAutmk/dlGLqP9M516nt50FF6B+sRI2XHQ=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="firestore" type="application/json">{"enable":true,"collection":"articles","apiKey":null,"projectId":null}</script>
+  <script src="/js/third-party/statistics/firestore.js"></script>
 
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-
-
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
 
 
   
 
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://steve-strange.github.io/2023/03/10/19-16-51/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
 </body>
 </html>

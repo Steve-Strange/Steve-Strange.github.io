@@ -1,21 +1,27 @@
-
-
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=auto>
-
-
-
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Sorcerer Inferior">
-  <meta name="keywords" content="">
-  
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"steve-strange.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","Muse | Mist":280,"Pisces | Gemini":220,"width":260,"display":"always","padding":30,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":true,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
     <meta name="description" content="lab0基础知识整理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="lab0基础知识整理">
@@ -27,675 +33,462 @@
 <meta property="article:modified_time" content="2023-03-10T15:02:09.148Z">
 <meta property="article:author" content="Sorcerer Inferior">
 <meta property="article:tag" content="Operation System">
-<meta name="twitter:card" content="summary_large_image">
-  
-  
-  
-  <title>lab0基础知识整理 - TARDIS</title>
+<meta name="twitter:card" content="summary">
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+<link rel="canonical" href="https://steve-strange.github.io/2023/03/10/20-40-24/">
 
 
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://steve-strange.github.io/2023/03/10/20-40-24/","path":"2023/03/10/20-40-24/","title":"lab0基础知识整理"}</script>
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>lab0基础知识整理 | TARDIS</title>
   
 
 
 
 
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"steve-strange.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
 
 
-  
-<meta name="generator" content="Hexo 6.3.0"></head>
 
 
-<body>
-  
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
 
-  <header>
-    
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-<div class="header-inner" style="height: 70vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">TARDIS</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Time And Relative Dimensions In Space</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
 </nav>
 
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#lab0%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">lab0基础知识整理</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sorcerer Inferior"
+      src="/images/Head.jpg">
+  <p class="site-author-name" itemprop="name">Sorcerer Inferior</p>
+  <div class="site-description" itemprop="description">Come on, then. Take mine. Take my memories.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Steve-Strange" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Steve-Strange" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/SteveSt06821869" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;SteveSt06821869" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="http://volcaxiao.top/" title="http:&#x2F;&#x2F;volcaxiao.top&#x2F;" rel="noopener" target="_blank">-> 灿灿</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://augetyvolta.github.io/" title="https:&#x2F;&#x2F;augetyvolta.github.io&#x2F;" rel="noopener" target="_blank">-> 伯king</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
   
 
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="lab0基础知识整理"></span>
-          
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://steve-strange.github.io/2023/03/10/20-40-24/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Head.jpg">
+      <meta itemprop="name" content="Sorcerer Inferior">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TARDIS">
+      <meta itemprop="description" content="Come on, then. Take mine. Take my memories.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="lab0基础知识整理 | TARDIS">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          lab0基础知识整理
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-03-10 20:40:24 / 修改时间：23:02:09" itemprop="dateCreated datePublished" datetime="2023-03-10T20:40:24+08:00">2023-03-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Operation-System/" itemprop="url" rel="index"><span itemprop="name">Operation System</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="firestore-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
         </div>
-
-        
-          
-  <div class="mt-3">
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-10 20:40" pubdate>
-          2023年3月10日 晚上
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          4.6k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          39 分钟
-        
-      </span>
-    
+      </header>
 
     
     
-  </div>
-
-
-        
-      </div>
-
-      
-    </div>
-  </div>
-</div>
-
-</div>
-
-  </header>
-
-  <main>
     
-      
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">lab0基础知识整理</h1>
-            
-            
-              <div class="markdown-body">
-                
-                <h3 id="lab0基础知识整理"><a href="#lab0基础知识整理" class="headerlink" title="lab0基础知识整理"></a>lab0基础知识整理</h3><span id="more"></span>
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="lab0基础知识整理"><a href="#lab0基础知识整理" class="headerlink" title="lab0基础知识整理"></a>lab0基础知识整理</h3><span id="more"></span>
 <ul>
 <li>一些特殊字符</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">Linux——<span class="hljs-variable">$1</span>、<span class="hljs-variable">$#</span>、<span class="hljs-variable">$@</span>、<span class="hljs-variable">$0</span>、<span class="hljs-variable">$1</span>、<span class="hljs-variable">$2</span><br><br>$? ——最后运行的命令的结束代码（返回值） <br>$- ——使用Set命令设定的Flag一览 <br>$* ——所有参数列表。如<span class="hljs-string">&quot;$*&quot;</span>用「<span class="hljs-string">&quot;」括起来的情况、以&quot;</span><span class="hljs-variable">$1</span> <span class="hljs-variable">$2</span> … <span class="hljs-variable">$n</span><span class="hljs-string">&quot;的形式输出所有参数。 </span><br><span class="hljs-string"><span class="hljs-variable">$@</span> ——所有参数列表。如&quot;</span><span class="hljs-variable">$@</span><span class="hljs-string">&quot;用「&quot;</span>」括起来的情况、以<span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$2</span>&quot;</span> … <span class="hljs-string">&quot;<span class="hljs-variable">$n</span>&quot;</span> 的形式输出所有参数。 <br><span class="hljs-variable">$#</span> ——添加到Shell的参数个数 <br><span class="hljs-variable">$0</span> ——Shell本身的文件名 <br><span class="hljs-variable">$1</span>～<span class="hljs-variable">$n</span> ——添加到Shell的各参数值。<span class="hljs-variable">$1</span>是第1参数、<span class="hljs-variable">$2</span>是第2参数…。 <br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Linux——<span class="variable">$1</span>、<span class="variable">$#</span>、<span class="variable">$@</span>、<span class="variable">$0</span>、<span class="variable">$1</span>、<span class="variable">$2</span></span><br><span class="line"></span><br><span class="line">$? ——最后运行的命令的结束代码（返回值） </span><br><span class="line">$- ——使用Set命令设定的Flag一览 </span><br><span class="line">$* ——所有参数列表。如<span class="string">&quot;$*&quot;</span>用「<span class="string">&quot;」括起来的情况、以&quot;</span><span class="variable">$1</span> <span class="variable">$2</span> … <span class="variable">$n</span><span class="string">&quot;的形式输出所有参数。 </span></span><br><span class="line"><span class="string"><span class="variable">$@</span> ——所有参数列表。如&quot;</span><span class="variable">$@</span><span class="string">&quot;用「&quot;</span>」括起来的情况、以<span class="string">&quot;<span class="variable">$1</span>&quot;</span> <span class="string">&quot;<span class="variable">$2</span>&quot;</span> … <span class="string">&quot;<span class="variable">$n</span>&quot;</span> 的形式输出所有参数。 </span><br><span class="line"><span class="variable">$#</span> ——添加到Shell的参数个数 </span><br><span class="line"><span class="variable">$0</span> ——Shell本身的文件名 </span><br><span class="line"><span class="variable">$1</span>～<span class="variable">$n</span> ——添加到Shell的各参数值。<span class="variable">$1</span>是第1参数、<span class="variable">$2</span>是第2参数…。 </span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>变量，注意要用双引号括特殊这些字符</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br>str=<span class="hljs-string">&quot;Hello, <span class="hljs-variable">$1</span> and <span class="hljs-variable">$2</span>!&quot;</span><br><span class="hljs-built_in">echo</span> <span class="hljs-variable">$str</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">str=<span class="string">&quot;Hello, <span class="variable">$1</span> and <span class="variable">$2</span>!&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$str</span></span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>if</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-keyword">if</span> (( <span class="hljs-variable">$1</span> &gt; <span class="hljs-variable">$2</span> ))<br><span class="hljs-keyword">then</span><br>        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;first &gt; second&quot;</span><br><span class="hljs-keyword">elif</span> (( <span class="hljs-variable">$1</span> &lt; <span class="hljs-variable">$2</span> ))<br><span class="hljs-keyword">then</span><br>        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;first &lt; second&quot;</span><br><span class="hljs-keyword">elif</span> (( <span class="hljs-variable">$1</span> == <span class="hljs-variable">$2</span> ))<br><span class="hljs-keyword">then</span><br>        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;first == second&quot;</span><br><span class="hljs-keyword">else</span><br>        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;I don&#x27;t know...&quot;</span><br><span class="hljs-keyword">fi</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="keyword">if</span> (( <span class="variable">$1</span> &gt; <span class="variable">$2</span> ))</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;first &gt; second&quot;</span></span><br><span class="line"><span class="keyword">elif</span> (( <span class="variable">$1</span> &lt; <span class="variable">$2</span> ))</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;first &lt; second&quot;</span></span><br><span class="line"><span class="keyword">elif</span> (( <span class="variable">$1</span> == <span class="variable">$2</span> ))</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;first == second&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;I don&#x27;t know...&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>赋值</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs bash">a=123<br>b=abc<br>c=‘123’<br>d=“hello world”<br><br>读取终端的输入给变量赋值：<span class="hljs-built_in">read</span><br><span class="hljs-built_in">echo</span> -n <span class="hljs-string">&quot;Please Input your name:&quot;</span><br><span class="hljs-built_in">read</span> name<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hi,<span class="hljs-variable">$name</span>,welcome to uncle Jelly&#x27;s cabin!&quot;</span><br>或者：<span class="hljs-built_in">read</span> -p <span class="hljs-string">&quot;Please Input your name:&quot;</span> name<br><br>反引用：``，利用其他命令的输出来给一个变量赋值<br><span class="hljs-built_in">dir</span>=`<span class="hljs-built_in">pwd</span>`<br>tim=`<span class="hljs-built_in">date</span>`<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;我在<span class="hljs-variable">$dir</span>目录下&quot;</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;现在时间是<span class="hljs-variable">$time</span>&quot;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">a=123</span><br><span class="line">b=abc</span><br><span class="line">c=‘123’</span><br><span class="line">d=“hello world”</span><br><span class="line"></span><br><span class="line">读取终端的输入给变量赋值：<span class="built_in">read</span></span><br><span class="line"><span class="built_in">echo</span> -n <span class="string">&quot;Please Input your name:&quot;</span></span><br><span class="line"><span class="built_in">read</span> name</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Hi,<span class="variable">$name</span>,welcome to uncle Jelly&#x27;s cabin!&quot;</span></span><br><span class="line">或者：<span class="built_in">read</span> -p <span class="string">&quot;Please Input your name:&quot;</span> name</span><br><span class="line"></span><br><span class="line">反引用：``，利用其他命令的输出来给一个变量赋值</span><br><span class="line"><span class="built_in">dir</span>=`<span class="built_in">pwd</span>`</span><br><span class="line">tim=`<span class="built_in">date</span>`</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;我在<span class="variable">$dir</span>目录下&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;现在时间是<span class="variable">$time</span>&quot;</span></span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>运算</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs bash">a=2<br>b=3<br>c=$[a+b]<br>d=$[a-b]<br>g=$[a%b] <br><br>c=$[<span class="hljs-variable">$a</span>+<span class="hljs-variable">$b</span>] 中括号和里面的表达式可以视作一个变量。在中括号中引用变量可以直接使用变量名，也可以使用$加变量名。<br><br><span class="hljs-built_in">expr</span>:<br><br>a=2<br>b=3<br><span class="hljs-built_in">expr</span> <span class="hljs-variable">$a</span> + <span class="hljs-variable">$b</span><br><span class="hljs-built_in">expr</span> <span class="hljs-variable">$a</span> % <span class="hljs-variable">$b</span>：该命令会将计算结果打印到标准输出<br>将<span class="hljs-built_in">expr</span>的计算结果赋值：反引用<br>c=`<span class="hljs-built_in">expr</span> <span class="hljs-variable">$a</span> + <span class="hljs-variable">$b</span>`<br><br>浮点运算：bc<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;45.36-22.33&#x27;</span>|bc<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;scale=3;2/3&#x27;</span>|bc  .666<br><br>自增自减：<span class="hljs-built_in">let</span><br><span class="hljs-built_in">let</span> a-=2<br><span class="hljs-built_in">let</span> b++<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">a=2</span><br><span class="line">b=3</span><br><span class="line">c=$[a+b]</span><br><span class="line">d=$[a-b]</span><br><span class="line">g=$[a%b] </span><br><span class="line"></span><br><span class="line">c=$[<span class="variable">$a</span>+<span class="variable">$b</span>] 中括号和里面的表达式可以视作一个变量。在中括号中引用变量可以直接使用变量名，也可以使用$加变量名。</span><br><span class="line"></span><br><span class="line"><span class="built_in">expr</span>:</span><br><span class="line"></span><br><span class="line">a=2</span><br><span class="line">b=3</span><br><span class="line"><span class="built_in">expr</span> <span class="variable">$a</span> + <span class="variable">$b</span></span><br><span class="line"><span class="built_in">expr</span> <span class="variable">$a</span> % <span class="variable">$b</span>：该命令会将计算结果打印到标准输出</span><br><span class="line">将<span class="built_in">expr</span>的计算结果赋值：反引用</span><br><span class="line">c=`<span class="built_in">expr</span> <span class="variable">$a</span> + <span class="variable">$b</span>`</span><br><span class="line"></span><br><span class="line">浮点运算：bc</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;45.36-22.33&#x27;</span>|bc</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;scale=3;2/3&#x27;</span>|bc  .666</span><br><span class="line"></span><br><span class="line">自增自减：<span class="built_in">let</span></span><br><span class="line"><span class="built_in">let</span> a-=2</span><br><span class="line"><span class="built_in">let</span> b++</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>常用语法</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs bash">&gt; 输出重定向，将命令标准输出保存为文件。$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;hello&quot;</span> &gt; ./hello.txt<br>&lt; 输入重定向，读取文件内容，作为标准输出。$ <span class="hljs-built_in">cat</span> &lt; ./hello.txt<br>&gt;&gt; 输出重定向，将命令标准输出追加到文件。$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;hello&quot;</span> &gt; ./hello.txt<br>2&gt; 将命令执行的标准错误（stderr）保存为文件。<br>2&gt;&gt; 将命令执行的标志错误（stderr）追加到文件。<br>&amp;&gt; 将标准输出（stdout）和标准错误（stderr）全部保存为文件。<br>1&gt;&amp;2 将标准输出发送为标准错误。<br>2&gt;&amp;1 将标准错误发送为标准输出。<br>| 管道，用于连续命令的执行，前面命令的输出可以传递到后面的命令作为输入。$ <span class="hljs-built_in">ls</span> -al \| grep .txt<br>$ 变量符，输出变量时使用。<br>$( ) 将命令的结果变量化。$ <span class="hljs-built_in">echo</span> $(data)<br>` ` 将命令的结果变量化。$ <span class="hljs-built_in">echo</span> `data`<br>&amp;&amp; 一行内连续执行多个命令，有错误时终止。$ make &amp;&amp; make install<br>; 一行内执行多个命令，忽略错误。$ <span class="hljs-literal">false</span>; <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;hello&quot;</span><br>’ ’ 字符串。不处理其中包含的变量。‘ ’ 中使用 “ ” 需要添加转义字符 \<br>“ ” 字符串。会处理其中包含的变量。“ ” 中可以使用 ‘ ’<br><span class="hljs-variable">$&#123; &#125;</span> 1. 变量替换；2. 默认变量。<br>\ 将单行命令写成多行。<br>&#123;1…10&#125; 表示连续数字。<br>&#123;字符串1， 字符串2&#125; 指定多个字符串。$ <span class="hljs-built_in">cp</span> ./&#123;exp1.txt,exp2.txt&#125; hello/<br><span class="hljs-keyword">if</span> 用于比较变量或字符串。<span class="hljs-keyword">if</span> [ <span class="hljs-variable">$a</span> -eq <span class="hljs-variable">$b</span> ]; <span class="hljs-keyword">then</span> <span class="hljs-built_in">echo</span> <span class="hljs-variable">$a</span> <span class="hljs-keyword">fi</span><br><span class="hljs-keyword">for</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> $(<span class="hljs-built_in">ls</span>) <span class="hljs-keyword">do</span> <span class="hljs-built_in">echo</span> <span class="hljs-variable">$i</span> <span class="hljs-keyword">done</span><br><span class="hljs-keyword">while</span> <span class="hljs-keyword">while</span> : <span class="hljs-keyword">do</span> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;hello&quot;</span>; <span class="hljs-built_in">sleep</span>; <span class="hljs-keyword">done</span><br>&lt;&lt;&lt; 将字符串发送到命令的标准输入：$ <span class="hljs-built_in">cat</span> &lt;&lt;&lt; <span class="hljs-string">&quot;User name is <span class="hljs-variable">$USER</span>&quot;</span><br>&lt;&lt;<span class="hljs-string">EOF EOF</span> 将多行字符串发送到命令的标准输入<br><span class="hljs-built_in">export</span> 设置环境变量。$ <span class="hljs-built_in">export</span> &lt; 变量 &gt;=&lt; 值 &gt;<br>sed 更改文件中的指定字符串。$ sed -i <span class="hljs-string">&quot;s/&lt; 待查找字符串 &gt;&lt; 替换字符串 &gt;/g&quot;</span> &lt; 文件名 <br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; 输出重定向，将命令标准输出保存为文件。$ <span class="built_in">echo</span> <span class="string">&quot;hello&quot;</span> &gt; ./hello.txt</span><br><span class="line">&lt; 输入重定向，读取文件内容，作为标准输出。$ <span class="built_in">cat</span> &lt; ./hello.txt</span><br><span class="line">&gt;&gt; 输出重定向，将命令标准输出追加到文件。$ <span class="built_in">echo</span> <span class="string">&quot;hello&quot;</span> &gt; ./hello.txt</span><br><span class="line">2&gt; 将命令执行的标准错误（stderr）保存为文件。</span><br><span class="line">2&gt;&gt; 将命令执行的标志错误（stderr）追加到文件。</span><br><span class="line">&amp;&gt; 将标准输出（stdout）和标准错误（stderr）全部保存为文件。</span><br><span class="line">1&gt;&amp;2 将标准输出发送为标准错误。</span><br><span class="line">2&gt;&amp;1 将标准错误发送为标准输出。</span><br><span class="line">| 管道，用于连续命令的执行，前面命令的输出可以传递到后面的命令作为输入。$ <span class="built_in">ls</span> -al \| grep .txt</span><br><span class="line">$ 变量符，输出变量时使用。</span><br><span class="line">$( ) 将命令的结果变量化。$ <span class="built_in">echo</span> $(data)</span><br><span class="line">` ` 将命令的结果变量化。$ <span class="built_in">echo</span> `data`</span><br><span class="line">&amp;&amp; 一行内连续执行多个命令，有错误时终止。$ make &amp;&amp; make install</span><br><span class="line">; 一行内执行多个命令，忽略错误。$ <span class="literal">false</span>; <span class="built_in">echo</span> <span class="string">&quot;hello&quot;</span></span><br><span class="line">’ ’ 字符串。不处理其中包含的变量。‘ ’ 中使用 “ ” 需要添加转义字符 \</span><br><span class="line">“ ” 字符串。会处理其中包含的变量。“ ” 中可以使用 ‘ ’</span><br><span class="line"><span class="variable">$&#123; &#125;</span> 1. 变量替换；2. 默认变量。</span><br><span class="line">\ 将单行命令写成多行。</span><br><span class="line">&#123;1…10&#125; 表示连续数字。</span><br><span class="line">&#123;字符串1， 字符串2&#125; 指定多个字符串。$ <span class="built_in">cp</span> ./&#123;exp1.txt,exp2.txt&#125; hello/</span><br><span class="line"><span class="keyword">if</span> 用于比较变量或字符串。<span class="keyword">if</span> [ <span class="variable">$a</span> -eq <span class="variable">$b</span> ]; <span class="keyword">then</span> <span class="built_in">echo</span> <span class="variable">$a</span> <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">for</span> <span class="keyword">for</span> i <span class="keyword">in</span> $(<span class="built_in">ls</span>) <span class="keyword">do</span> <span class="built_in">echo</span> <span class="variable">$i</span> <span class="keyword">done</span></span><br><span class="line"><span class="keyword">while</span> <span class="keyword">while</span> : <span class="keyword">do</span> <span class="built_in">echo</span> <span class="string">&quot;hello&quot;</span>; <span class="built_in">sleep</span>; <span class="keyword">done</span></span><br><span class="line">&lt;&lt;&lt; 将字符串发送到命令的标准输入：$ <span class="built_in">cat</span> &lt;&lt;&lt; <span class="string">&quot;User name is <span class="variable">$USER</span>&quot;</span></span><br><span class="line">&lt;&lt;<span class="string">EOF EOF</span> 将多行字符串发送到命令的标准输入</span><br><span class="line"><span class="built_in">export</span> 设置环境变量。$ <span class="built_in">export</span> &lt; 变量 &gt;=&lt; 值 &gt;</span><br><span class="line">sed 更改文件中的指定字符串。$ sed -i <span class="string">&quot;s/&lt; 待查找字符串 &gt;&lt; 替换字符串 &gt;/g&quot;</span> &lt; 文件名 </span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>for, while, until, break, continue</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">for</span>:<br>1.<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> &#123;1…10&#125; 或者 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> $(<span class="hljs-built_in">seq</span> 1…10…2)<br>2. <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> $(<span class="hljs-built_in">seq</span> 1 10)或者<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> $(<span class="hljs-built_in">seq</span> 1 2 10)<br>3. <span class="hljs-keyword">for</span>((i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">10</span>;i++))或者<span class="hljs-keyword">for</span>((i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">10</span>;i+=<span class="hljs-number">2</span>))<br><span class="hljs-keyword">do</span><br><span class="hljs-built_in">echo</span> <span class="hljs-variable">$i</span><br><span class="hljs-keyword">done</span><br><br><span class="hljs-comment">#!/bin/bash</span><br><span class="hljs-keyword">for</span> ((a=<span class="hljs-number">1</span>; a&lt;=<span class="hljs-number">5</span>;a++))<br><span class="hljs-keyword">do</span><br>  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;外层循环为<span class="hljs-variable">$a</span>&quot;</span><br>  <span class="hljs-keyword">if</span> [ <span class="hljs-variable">$a</span> -gt 2 -a <span class="hljs-variable">$a</span> -lt 4 ];<span class="hljs-keyword">then</span><br>     <span class="hljs-built_in">continue</span><br>  <span class="hljs-keyword">fi</span><br><br>  <span class="hljs-built_in">echo</span> $[<span class="hljs-variable">$a</span>*2]<br><br><span class="hljs-keyword">done</span><br><br><br><span class="hljs-keyword">while</span>:<br><span class="hljs-comment">#!/bin/bash</span><br>i=0<br><span class="hljs-keyword">while</span> [ <span class="hljs-variable">$i</span> -le 10 ]<br><span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-variable">$i</span><br>    <span class="hljs-built_in">let</span> i++<br><span class="hljs-keyword">done</span><br><br>until:<br><span class="hljs-comment">#!/bin/bash</span><br>a=0<br>until (( <span class="hljs-variable">$a</span> -gt <span class="hljs-number">10</span>))<br>d0<br>   <span class="hljs-built_in">echo</span> <span class="hljs-variable">$a</span><br>   <span class="hljs-built_in">let</span> a++<br><span class="hljs-keyword">done</span><br><br><br><span class="hljs-built_in">break</span>： 后面加数字表示跳出几层循环<br><br><span class="hljs-keyword">for</span> ((a=<span class="hljs-number">1</span>; a&lt;=<span class="hljs-number">5</span>;a++))<br><span class="hljs-keyword">do</span>        <br>    <span class="hljs-keyword">for</span> ((b=<span class="hljs-number">1</span>; b&lt;=<span class="hljs-number">5</span>;b++))<br>    <span class="hljs-keyword">do</span><br>        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;内循环第<span class="hljs-variable">$b</span>次&quot;</span><br>        <span class="hljs-keyword">if</span> [<span class="hljs-variable">$b</span> -eq 3 ];<span class="hljs-keyword">then</span><br>            <span class="hljs-built_in">break</span> 2<br>        <span class="hljs-keyword">fi</span><br>    <span class="hljs-keyword">done</span><br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>:</span><br><span class="line">1.<span class="keyword">for</span> i <span class="keyword">in</span> &#123;1…10&#125; 或者 <span class="keyword">for</span> i <span class="keyword">in</span> $(<span class="built_in">seq</span> 1…10…2)</span><br><span class="line">2. <span class="keyword">for</span> i <span class="keyword">in</span> $(<span class="built_in">seq</span> 1 10)或者<span class="keyword">for</span> i <span class="keyword">in</span> $(<span class="built_in">seq</span> 1 2 10)</span><br><span class="line">3. <span class="keyword">for</span>((i=<span class="number">1</span>;i&lt;=<span class="number">10</span>;i++))或者<span class="keyword">for</span>((i=<span class="number">1</span>;i&lt;=<span class="number">10</span>;i+=<span class="number">2</span>))</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line"><span class="keyword">for</span> ((a=<span class="number">1</span>; a&lt;=<span class="number">5</span>;a++))</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;外层循环为<span class="variable">$a</span>&quot;</span></span><br><span class="line">  <span class="keyword">if</span> [ <span class="variable">$a</span> -gt 2 -a <span class="variable">$a</span> -lt 4 ];<span class="keyword">then</span></span><br><span class="line">     <span class="built_in">continue</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">echo</span> $[<span class="variable">$a</span>*2]</span><br><span class="line"></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>:</span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">i=0</span><br><span class="line"><span class="keyword">while</span> [ <span class="variable">$i</span> -le 10 ]</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$i</span></span><br><span class="line">    <span class="built_in">let</span> i++</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">until:</span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">a=0</span><br><span class="line">until (( <span class="variable">$a</span> -gt <span class="number">10</span>))</span><br><span class="line">d0</span><br><span class="line">   <span class="built_in">echo</span> <span class="variable">$a</span></span><br><span class="line">   <span class="built_in">let</span> a++</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">break</span>： 后面加数字表示跳出几层循环</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ((a=<span class="number">1</span>; a&lt;=<span class="number">5</span>;a++))</span><br><span class="line"><span class="keyword">do</span>        </span><br><span class="line">    <span class="keyword">for</span> ((b=<span class="number">1</span>; b&lt;=<span class="number">5</span>;b++))</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;内循环第<span class="variable">$b</span>次&quot;</span></span><br><span class="line">        <span class="keyword">if</span> [<span class="variable">$b</span> -eq 3 ];<span class="keyword">then</span></span><br><span class="line">            <span class="built_in">break</span> 2</span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><p>awk</p>
 </li>
 <li><pre><code class="bash">  awk &#39;&#123;[pattern] action&#125;&#39; &#123;filenames&#125;   # 行匹配语句 awk &#39;&#39; 只能用单引号
-  <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><br>```bash<br># 每行按空格或TAB分割，输出文本中的<span class="hljs-number">1</span>、<span class="hljs-number">4</span>项<br> $ awk <span class="hljs-string">&#x27;&#123;print $1,$4&#125;&#x27;</span> <span class="hljs-keyword">log</span>.txt<br> <span class="hljs-comment">---------------------------------------------</span><br> <span class="hljs-number">2</span> a<br> <span class="hljs-number">3</span> <span class="hljs-keyword">like</span><br> This<span class="hljs-string">&#x27;s</span><br><span class="hljs-string"> 10 orange,apple,mongo</span><br><span class="hljs-string"> # 格式化输出</span><br><span class="hljs-string"> $ awk &#x27;</span>&#123;printf &quot;%-8s %-10s\n&quot;,<span class="hljs-meta">$1</span>,<span class="hljs-meta">$4</span>&#125;<span class="hljs-string">&#x27; log.txt</span><br><span class="hljs-string"> ---------------------------------------------</span><br><span class="hljs-string"> 2        a</span><br><span class="hljs-string"> 3        like</span><br><span class="hljs-string"> This&#x27;</span>s<br> <span class="hljs-number">10</span>       orange,apple,mongo<br></code></pre></td></tr></table></figure>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">```bash</span><br><span class="line"># 每行按空格或TAB分割，输出文本中的1、4项</span><br><span class="line"> $ awk &#x27;&#123;print $1,$4&#125;&#x27; log.txt</span><br><span class="line"> ---------------------------------------------</span><br><span class="line"> 2 a</span><br><span class="line"> 3 like</span><br><span class="line"> This&#x27;s</span><br><span class="line"> 10 orange,apple,mongo</span><br><span class="line"> # 格式化输出</span><br><span class="line"> $ awk &#x27;&#123;printf &quot;%-8s %-10s\n&quot;,$1,$4&#125;&#x27; log.txt</span><br><span class="line"> ---------------------------------------------</span><br><span class="line"> 2        a</span><br><span class="line"> 3        like</span><br><span class="line"> This&#x27;s</span><br><span class="line"> 10       orange,apple,mongo</span><br></pre></td></tr></table></figure>
 </code></pre>
 </li>
 <li><pre><code class="bash">  awk -F  #-F相当于内置变量FS, 指定分割字符
-  <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><br>```bash<br># 或者使用内建变量<br> $ awk <span class="hljs-string">&#x27;BEGIN&#123;FS=&quot;,&quot;&#125; &#123;print $1,$2&#125;&#x27;</span>     <span class="hljs-keyword">log</span>.txt<br> <span class="hljs-comment">---------------------------------------------</span><br> <span class="hljs-number">2</span> this <span class="hljs-keyword">is</span> a test<br> <span class="hljs-number">3</span> <span class="hljs-keyword">Do</span> you <span class="hljs-keyword">like</span> awk<br> This<span class="hljs-string">&#x27;s a test</span><br><span class="hljs-string"> 10 There are orange apple</span><br><span class="hljs-string"> # 使用多个分隔符.先使用空格分割，然后对分割结果再使用&quot;,&quot;分割</span><br><span class="hljs-string"> $ awk -F &#x27;</span>[ ,]<span class="hljs-string">&#x27;  &#x27;</span>&#123;print <span class="hljs-meta">$1</span>,<span class="hljs-meta">$2</span>,<span class="hljs-meta">$5</span>&#125;<span class="hljs-string">&#x27;   log.txt</span><br><span class="hljs-string"> ---------------------------------------------</span><br><span class="hljs-string"> 2 this test</span><br><span class="hljs-string"> 3 Are awk</span><br><span class="hljs-string"> This&#x27;</span>s a<br> <span class="hljs-number">10</span> There apple<br></code></pre></td></tr></table></figure>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">```bash</span><br><span class="line"># 或者使用内建变量</span><br><span class="line"> $ awk &#x27;BEGIN&#123;FS=&quot;,&quot;&#125; &#123;print $1,$2&#125;&#x27;     log.txt</span><br><span class="line"> ---------------------------------------------</span><br><span class="line"> 2 this is a test</span><br><span class="line"> 3 Do you like awk</span><br><span class="line"> This&#x27;s a test</span><br><span class="line"> 10 There are orange apple</span><br><span class="line"> # 使用多个分隔符.先使用空格分割，然后对分割结果再使用&quot;,&quot;分割</span><br><span class="line"> $ awk -F &#x27;[ ,]&#x27;  &#x27;&#123;print $1,$2,$5&#125;&#x27;   log.txt</span><br><span class="line"> ---------------------------------------------</span><br><span class="line"> 2 this test</span><br><span class="line"> 3 Are awk</span><br><span class="line"> This&#x27;s a</span><br><span class="line"> 10 There apple</span><br></pre></td></tr></table></figure>
 </code></pre>
 </li>
 <li><pre><code class="bash">  awk -v  # 设置变量
-  <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><br>```bash<br> $ awk <span class="hljs-attribute">-va</span>=1 <span class="hljs-attribute">-vb</span>=s <span class="hljs-string">&#x27;&#123;print $1,$1+a,$1b&#125;&#x27;</span> log.txt<br> ---------------------------------------------<br> 2 3 2s<br> 3 4 3s<br> This<span class="hljs-string">&#x27;s 1 This&#x27;</span>ss<br> 10 11 10s<br></code></pre></td></tr></table></figure>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">```bash</span><br><span class="line"> $ awk -va=1 -vb=s &#x27;&#123;print $1,$1+a,$1b&#125;&#x27; log.txt</span><br><span class="line"> ---------------------------------------------</span><br><span class="line"> 2 3 2s</span><br><span class="line"> 3 4 3s</span><br><span class="line"> This&#x27;s 1 This&#x27;ss</span><br><span class="line"> 10 11 10s</span><br></pre></td></tr></table></figure>
 </code></pre>
 </li>
 <li><p>条件输出</p>
 </li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ awk <span class="hljs-string">&#x27;$1&gt;2&#x27;</span> log.txt<br>$ awk -F: <span class="hljs-string">&#x27;$3 + $4 &gt; 2000&#123;print $0&#125;&#x27;</span> /etc/passwd<br>$ awk -F: <span class="hljs-string">&#x27;$3 + $4 &gt; 2000 &amp;&amp; $3 * $4 &gt; 2000&#123;print $0&#125;&#x27;</span> /etc/passwd<br><br><span class="hljs-comment"># 输出第二列包含 &quot;th&quot;，并打印第二列与第四列</span><br>$ awk <span class="hljs-string">&#x27;$2 ~ /th/ &#123;print $2,$4&#125;&#x27;</span> log.txt<br>---------------------------------------------<br>this a<br><br><span class="hljs-comment"># 输出包含 &quot;re&quot; 的行</span><br>$ awk <span class="hljs-string">&#x27;/re/ &#x27;</span> log.txt<br>---------------------------------------------<br>3 Do you like awk<br>10 There are orange,apple,mongo<br><br>格式化打印:<br>$ awk -F: <span class="hljs-string">&#x27;BEGIN&#123;OFS=&quot; | &quot;&#125;&#123;printf &quot;|%+15s|%-15s|\n&quot;, $NF, $1&#125;&#x27;</span> /etc/passwd<br>|  : 以 | 为分隔符<br>|%+15s|  : 以 | 为分隔符 %s 配合 <span class="hljs-built_in">printf</span> 使用 代替当前字符串 右对齐 占用15字符<br></code></pre></td></tr></table></figure>
-
-                
-              </div>
-            
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Operation-System/" class="category-chain-item">Operation System</a>
-  
-  
-
-      </span>
-    
-  
-</span>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ awk <span class="string">&#x27;$1&gt;2&#x27;</span> log.txt</span><br><span class="line">$ awk -F: <span class="string">&#x27;$3 + $4 &gt; 2000&#123;print $0&#125;&#x27;</span> /etc/passwd</span><br><span class="line">$ awk -F: <span class="string">&#x27;$3 + $4 &gt; 2000 &amp;&amp; $3 * $4 &gt; 2000&#123;print $0&#125;&#x27;</span> /etc/passwd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出第二列包含 &quot;th&quot;，并打印第二列与第四列</span></span><br><span class="line">$ awk <span class="string">&#x27;$2 ~ /th/ &#123;print $2,$4&#125;&#x27;</span> log.txt</span><br><span class="line">---------------------------------------------</span><br><span class="line">this a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出包含 &quot;re&quot; 的行</span></span><br><span class="line">$ awk <span class="string">&#x27;/re/ &#x27;</span> log.txt</span><br><span class="line">---------------------------------------------</span><br><span class="line">3 Do you like awk</span><br><span class="line">10 There are orange,apple,mongo</span><br><span class="line"></span><br><span class="line">格式化打印:</span><br><span class="line">$ awk -F: <span class="string">&#x27;BEGIN&#123;OFS=&quot; | &quot;&#125;&#123;printf &quot;|%+15s|%-15s|\n&quot;, $NF, $1&#125;&#x27;</span> /etc/passwd</span><br><span class="line">|  : 以 | 为分隔符</span><br><span class="line">|%+15s|  : 以 | 为分隔符 %s 配合 <span class="built_in">printf</span> 使用 代替当前字符串 右对齐 占用15字符</span><br></pre></td></tr></table></figure>
 
     </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/Operation-System/">#Operation System</a>
-      
-    </div>
-  
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Sorcerer Inferior
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://steve-strange.github.io/2023/03/10/20-40-24/" title="lab0基础知识整理">https://steve-strange.github.io/2023/03/10/20-40-24/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
 </div>
 
-
-              
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>lab0基础知识整理</div>
-      <div>https://steve-strange.github.io/2023/03/10/20-40-24/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>Sorcerer Inferior</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2023年3月10日</div>
-        </div>
-      
-      
-      
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
-            
-              
-              
-                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
-                  </span>
-                </a>
-              
-            
+          <div class="post-tags">
+              <a href="/tags/Operation-System/" rel="tag"># Operation System</a>
           </div>
-        </div>
-      
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
 
+        
 
-
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2023/03/10/20-40-25/" title="lab0实验报告">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">lab0实验报告</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2023/03/10/19-16-54/" title="P7设计文档">
-                        <span class="hidden-mobile">P7设计文档</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/03/10/19-16-54/" rel="prev" title="P7设计文档">
+                  <i class="fa fa-chevron-left"></i> P7设计文档
+                </a>
             </div>
-
-            
-          </article>
-        </div>
-      </div>
-    </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>目录</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-
-
-  </aside>
-
-
-    </div>
-  </div>
+            <div class="post-nav-item">
+                <a href="/2023/03/10/20-40-25/" rel="next" title="lab0实验报告">
+                  lab0实验报告 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
 </div>
 
 
 
 
 
-  
 
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
-    
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
 </div>
-
-    
-
-    
   </main>
 
-  <footer>
+  <footer class="footer">
     <div class="footer-inner">
-  
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-    </div>
-  
-  
-  
-  
-</div>
 
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sorcerer Inferior</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
   </footer>
 
-  <!-- Scripts -->
   
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
 
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
+  <a href="https://github.com/Steve-Strange" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 
-
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
 
   
-    <script  src="/js/img-lazyload.js" ></script>
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
 
 
 
+  <script src="/js/third-party/fancybox.js"></script>
 
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
-        }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
-        }
-      }
-    });
-  });
-</script>
-
-
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
-
-  <script>Fluid.plugins.codeWidget();</script>
-
+  <script src="/js/third-party/pace.js"></script>
 
   
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
-</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.17.1/firebase-app-compat.js" integrity="sha256-4nstrISMqU/N2gvWaEztDS859x7Wv9U4pGGu55cZpc8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.17.1/firebase-firestore-compat.js" integrity="sha256-Euwjh/Y0lrAutmk/dlGLqP9M516nt50FF6B+sRI2XHQ=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="firestore" type="application/json">{"enable":true,"collection":"articles","apiKey":null,"projectId":null}</script>
+  <script src="/js/third-party/statistics/firestore.js"></script>
 
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-
-
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
 
 
   
 
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://steve-strange.github.io/2023/03/10/20-40-24/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
 </body>
 </html>
