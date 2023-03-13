@@ -6,7 +6,7 @@
   <link href="https://steve-strange.github.io/atom.xml" rel="self"/>
   
   <link href="https://steve-strange.github.io/"/>
-  <updated>2023-03-12T11:52:51.488Z</updated>
+  <updated>2023-03-13T11:01:48.278Z</updated>
   <id>https://steve-strange.github.io/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Lab2-Report</title>
+    <link href="https://steve-strange.github.io/2023/03/13/18-54-43/"/>
+    <id>https://steve-strange.github.io/2023/03/13/18-54-43/</id>
+    <published>2023-03-13T10:54:43.000Z</published>
+    <updated>2023-03-13T11:01:48.278Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;Lab2-Report&quot;&gt;Lab2 Report&lt;/h2&gt;</summary>
+    
+    
+    
+    <category term="Lab2-Report" scheme="https://steve-strange.github.io/categories/Lab2-Report/"/>
+    
+    
+    <category term="Lab2-Report" scheme="https://steve-strange.github.io/tags/Lab2-Report/"/>
+    
+  </entry>
   
   <entry>
     <title>Some Chats with ChatGPT SDA</title>
@@ -59,14 +78,16 @@
     <link href="https://steve-strange.github.io/2023/03/12/00-04-39/"/>
     <id>https://steve-strange.github.io/2023/03/12/00-04-39/</id>
     <published>2023-03-11T16:04:39.000Z</published>
-    <updated>2023-03-13T05:15:48.948Z</updated>
+    <updated>2023-03-13T11:02:55.368Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;Welcome-to-My-Blog&quot;&gt;Welcome to My</summary>
+    <summary type="html">&lt;h2 id=&quot;Welcome-to-My-Blog&quot;&gt;Welcome to My Blog&lt;/h2&gt;
+&lt;h3 id=&quot;This-is-a-welcome-page&quot;&gt;This is a welcome page.&lt;/h3&gt;
+&lt;h4</summary>
         
       
     
@@ -80,7 +101,7 @@
     <link href="https://steve-strange.github.io/2023/03/11/11-52-15/"/>
     <id>https://steve-strange.github.io/2023/03/11/11-52-15/</id>
     <published>2023-03-11T03:52:15.000Z</published>
-    <updated>2023-03-13T04:49:02.561Z</updated>
+    <updated>2023-03-13T07:34:13.635Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;神经网络基础笔记-1&quot;&gt;神经网络基础笔记 1&lt;/h2&gt;</summary>
@@ -152,14 +173,14 @@
   </entry>
   
   <entry>
-    <title>lab1 实验报告</title>
+    <title>Lab1 Report</title>
     <link href="https://steve-strange.github.io/2023/03/10/21-48-08/"/>
     <id>https://steve-strange.github.io/2023/03/10/21-48-08/</id>
     <published>2023-03-10T13:48:08.000Z</published>
-    <updated>2023-03-12T01:37:01.027Z</updated>
+    <updated>2023-03-13T10:52:47.886Z</updated>
     
     
-    <summary type="html">&lt;h2 id=&quot;lab1实验报告&quot;&gt;lab1实验报告&lt;/h2&gt;</summary>
+    <summary type="html">&lt;h2 id=&quot;Lab1-Report&quot;&gt;Lab1 Report&lt;/h2&gt;</summary>
     
     
     
@@ -171,14 +192,14 @@
   </entry>
   
   <entry>
-    <title>lab0 实验报告</title>
+    <title>Lab0 Report</title>
     <link href="https://steve-strange.github.io/2023/03/10/20-40-25/"/>
     <id>https://steve-strange.github.io/2023/03/10/20-40-25/</id>
     <published>2023-03-10T12:40:25.000Z</published>
-    <updated>2023-03-10T15:07:20.924Z</updated>
+    <updated>2023-03-13T10:52:39.666Z</updated>
     
     
-    <summary type="html">&lt;h2 id=&quot;lab0实验报告&quot;&gt;lab0实验报告&lt;/h2&gt;</summary>
+    <summary type="html">&lt;h2 id=&quot;Lab0-Report&quot;&gt;Lab0 Report&lt;/h2&gt;</summary>
     
     
     
@@ -190,14 +211,14 @@
   </entry>
   
   <entry>
-    <title>lab0 基础知识整理</title>
+    <title>Lab0 Notes</title>
     <link href="https://steve-strange.github.io/2023/03/10/20-40-24/"/>
     <id>https://steve-strange.github.io/2023/03/10/20-40-24/</id>
     <published>2023-03-10T12:40:24.000Z</published>
-    <updated>2023-03-10T15:02:09.148Z</updated>
+    <updated>2023-03-13T10:52:19.320Z</updated>
     
     
-    <summary type="html">&lt;h3 id=&quot;lab0基础知识整理&quot;&gt;lab0基础知识整理&lt;/h3&gt;</summary>
+    <summary type="html">&lt;h3 id=&quot;Lab0-Notes&quot;&gt;Lab0 Notes&lt;/h3&gt;</summary>
     
     
     
