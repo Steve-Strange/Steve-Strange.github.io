@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/a.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/a.png">
+  <link rel="apple-touch-icon" sizes="90x90" href="/images/a.png">
+  <link rel="icon" type="image/png" sizes="20x20" href="/images/a.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/a.png">
   <link rel="mask-icon" href="/images/a.svg" color="#222">
 
@@ -24,7 +24,7 @@
 
     <meta name="description" content="5级流水线CPU设计文档+中断支持">
 <meta property="og:type" content="article">
-<meta property="og:title" content="P7设计文档">
+<meta property="og:title" content="P7 设计文档">
 <meta property="og:url" content="https://steve-strange.github.io/2023/03/10/19-16-54/index.html">
 <meta property="og:site_name" content="TARDIS">
 <meta property="og:description" content="5级流水线CPU设计文档+中断支持">
@@ -58,10 +58,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://steve-strange.github.io/2023/03/10/19-16-54/","path":"2023/03/10/19-16-54/","title":"P7设计文档"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://steve-strange.github.io/2023/03/10/19-16-54/","path":"2023/03/10/19-16-54/","title":"P7 设计文档"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>P7设计文档 | TARDIS</title>
+<title>P7 设计文档 | TARDIS</title>
   
 
 
@@ -163,7 +163,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E7%BA%A7%E6%B5%81%E6%B0%B4%E7%BA%BFCPU%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-%E4%B8%AD%E6%96%AD%E6%94%AF%E6%8C%81"><span class="nav-number">1.</span> <span class="nav-text">5级流水线CPU设计文档+中断支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E6%8C%87%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">支持指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.</span> <span class="nav-text">流程模块设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CP0"><span class="nav-number">3.1.</span> <span class="nav-text">CP0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%A1%A5"><span class="nav-number">3.2.</span> <span class="nav-text">系统桥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TC"><span class="nav-number">3.3.</span> <span class="nav-text">TC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E9%83%A8%E5%BC%82%E5%B8%B8%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.4.</span> <span class="nav-text">内部异常设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CU%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.5.</span> <span class="nav-text">CU模块设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#T%E8%AE%A1%E7%AE%97%E8%A1%A8%E6%A0%BC"><span class="nav-number">3.5.1.</span> <span class="nav-text">T计算表格</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conflit%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%EF%BC%9AAT%E6%8E%A7%E5%88%B6%E9%98%BB%E5%A1%9E%EF%BC%8C%E7%9B%B4%E6%8E%A5%E8%BD%AC%E5%8F%91"><span class="nav-number">3.6.</span> <span class="nav-text">Conflit模块设计：AT控制阻塞，直接转发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%BB%E5%A1%9E"><span class="nav-number">3.6.1.</span> <span class="nav-text">阻塞</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AC%E5%8F%91"><span class="nav-number">3.6.2.</span> <span class="nav-text">转发</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E7%BA%A7%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.7.</span> <span class="nav-text">五级模块设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#P6%E6%9B%B4%E6%96%B0%E4%B9%98%E9%99%A4%E6%A7%BD%E4%B8%8E%E5%82%A8%E5%AD%98%E5%99%A8%E5%A4%96%E7%BD%AE%E4%BB%A5%E5%8F%8A%E6%8C%89%E5%AD%97%E8%8A%82%E8%AE%BF%E5%AD%98"><span class="nav-number">3.7.1.</span> <span class="nav-text">P6更新乘除槽与储存器外置以及按字节访存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P7%E5%AE%8F%E8%A7%82PC"><span class="nav-number">3.7.2.</span> <span class="nav-text">P7宏观PC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Fetch"><span class="nav-number">3.7.3.</span> <span class="nav-text">1. Fetch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Decode"><span class="nav-number">3.7.4.</span> <span class="nav-text">2. Decode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Execute"><span class="nav-number">3.7.5.</span> <span class="nav-text">3. Execute</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Memory"><span class="nav-number">3.7.6.</span> <span class="nav-text">4. Memory</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#M-BE%EF%BC%88%E8%AE%A1%E7%AE%97%E5%AD%97%E8%8A%82%E8%AE%BF%E5%AD%98%E4%BD%BF%E8%83%BD%EF%BC%8C%E8%B0%83%E6%95%B4%E5%9B%9B%E5%AD%97%E8%8A%82%E5%86%99%E5%85%A5%E6%95%B0%E6%8D%AE%EF%BC%89"><span class="nav-number">3.7.6.1.</span> <span class="nav-text">M_BE（计算字节访存使能，调整四字节写入数据）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#M-DE%EF%BC%88%E8%B0%83%E6%95%B4%E5%86%85%E5%AD%98%E8%AF%BB%E5%87%BA%E6%95%B0%E6%8D%AE%EF%BC%8C%E6%88%AA%E5%8F%96%E9%9C%80%E8%A6%81%E7%9A%84%E5%AD%97%E8%8A%82%E5%90%8E%E6%8B%93%E5%B1%95%EF%BC%89"><span class="nav-number">3.7.6.2.</span> <span class="nav-text">M_DE（调整内存读出数据，截取需要的字节后拓展）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Writeback"><span class="nav-number">3.7.7.</span> <span class="nav-text">5. Writeback</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%89%E7%9A%84%E5%9D%91"><span class="nav-number">5.</span> <span class="nav-text">掉的坑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">思考题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E7%AE%97%E9%A1%B5%E9%9D%A2"><span class="nav-number">7.</span> <span class="nav-text">结算页面</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#5%20%E7%BA%A7%E6%B5%81%E6%B0%B4%E7%BA%BF%20CPU%20%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3%20-%20%E4%B8%AD%E6%96%AD%E6%94%AF%E6%8C%81"><span class="nav-number">1.</span> <span class="nav-text">5 级流水线 CPU 设计文档 + 中断支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E6%8C%87%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">支持指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.</span> <span class="nav-text">流程模块设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CP0"><span class="nav-number">3.1.</span> <span class="nav-text">CP0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%A1%A5"><span class="nav-number">3.2.</span> <span class="nav-text">系统桥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TC"><span class="nav-number">3.3.</span> <span class="nav-text">TC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E9%83%A8%E5%BC%82%E5%B8%B8%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.4.</span> <span class="nav-text">内部异常设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CU%20%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.5.</span> <span class="nav-text">CU 模块设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#T%20%E8%AE%A1%E7%AE%97%E8%A1%A8%E6%A0%BC"><span class="nav-number">3.5.1.</span> <span class="nav-text">T 计算表格</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conflit%20%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%EF%BC%9AAT%20%E6%8E%A7%E5%88%B6%E9%98%BB%E5%A1%9E%EF%BC%8C%E7%9B%B4%E6%8E%A5%E8%BD%AC%E5%8F%91"><span class="nav-number">3.6.</span> <span class="nav-text">Conflit 模块设计：AT 控制阻塞，直接转发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%BB%E5%A1%9E"><span class="nav-number">3.6.1.</span> <span class="nav-text">阻塞</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AC%E5%8F%91"><span class="nav-number">3.6.2.</span> <span class="nav-text">转发</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E7%BA%A7%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.7.</span> <span class="nav-text">五级模块设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#P6%20%E6%9B%B4%E6%96%B0%E4%B9%98%E9%99%A4%E6%A7%BD%E4%B8%8E%E5%82%A8%E5%AD%98%E5%99%A8%E5%A4%96%E7%BD%AE%E4%BB%A5%E5%8F%8A%E6%8C%89%E5%AD%97%E8%8A%82%E8%AE%BF%E5%AD%98"><span class="nav-number">3.7.1.</span> <span class="nav-text">P6 更新乘除槽与储存器外置以及按字节访存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P7%20%E5%AE%8F%E8%A7%82%20PC"><span class="nav-number">3.7.2.</span> <span class="nav-text">P7 宏观 PC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Fetch"><span class="nav-number">3.7.3.</span> <span class="nav-text">1. Fetch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Decode"><span class="nav-number">3.7.4.</span> <span class="nav-text">2. Decode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Execute"><span class="nav-number">3.7.5.</span> <span class="nav-text">3. Execute</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Memory"><span class="nav-number">3.7.6.</span> <span class="nav-text">4. Memory</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#M-BE%EF%BC%88%E8%AE%A1%E7%AE%97%E5%AD%97%E8%8A%82%E8%AE%BF%E5%AD%98%E4%BD%BF%E8%83%BD%EF%BC%8C%E8%B0%83%E6%95%B4%E5%9B%9B%E5%AD%97%E8%8A%82%E5%86%99%E5%85%A5%E6%95%B0%E6%8D%AE%EF%BC%89"><span class="nav-number">3.7.6.1.</span> <span class="nav-text">M_BE（计算字节访存使能，调整四字节写入数据）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#M-DE%EF%BC%88%E8%B0%83%E6%95%B4%E5%86%85%E5%AD%98%E8%AF%BB%E5%87%BA%E6%95%B0%E6%8D%AE%EF%BC%8C%E6%88%AA%E5%8F%96%E9%9C%80%E8%A6%81%E7%9A%84%E5%AD%97%E8%8A%82%E5%90%8E%E6%8B%93%E5%B1%95%EF%BC%89"><span class="nav-number">3.7.6.2.</span> <span class="nav-text">M_DE（调整内存读出数据，截取需要的字节后拓展）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Writeback"><span class="nav-number">3.7.7.</span> <span class="nav-text">5. Writeback</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%89%E7%9A%84%E5%9D%91"><span class="nav-number">5.</span> <span class="nav-text">掉的坑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">思考题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E7%AE%97%E9%A1%B5%E9%9D%A2"><span class="nav-number">7.</span> <span class="nav-text">结算页面</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -254,12 +254,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="P7设计文档 | TARDIS">
+      <meta itemprop="name" content="P7 设计文档 | TARDIS">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          P7设计文档
+          P7 设计文档
         </h1>
 
         <div class="post-meta-container">
@@ -306,7 +306,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="5级流水线CPU设计文档-中断支持">5级流水线CPU设计文档+中断支持</h2>
+        <h2 id="5 级流水线 CPU 设计文档 - 中断支持">5 级流水线 CPU 设计文档 + 中断支持</h2>
 <span id="more"></span>
 <h2 id="支持指令">支持指令</h2>
 <p><strong>R, add, sub, And, Or, Xor, slt, sltu</strong></p>
@@ -319,27 +319,27 @@
 <img src="image-20230311001413097.png" alt="image-20230311001413097" style="zoom:67%;" />
 <h3 id="CP0">CP0</h3>
 <ul>
-<li>处理来自CPU的内部异常以及来自中断发生器与timer的外部中断，产生异常控制信号给CPU</li>
-<li>放置在M级，接收CPU在M级的mtc0,mfc0,eret指令</li>
-<li>其中包含三个寄存器SR、Cause、EPC，SR为中断异常使能控制，Cause为异常中断情况，EPC为异常处理结束后需要返回的PC</li>
-<li>具体SR、Cause的特定位如下宏定义所示，后续控制逻辑由其产生</li>
+<li>处理来自 CPU 的内部异常以及来自中断发生器与 timer 的外部中断，产生异常控制信号给 CPU</li>
+<li>放置在 M 级，接收 CPU 在 M 级的 mtc0,mfc0,eret 指令</li>
+<li>其中包含三个寄存器 SR、Cause、EPC，SR 为中断异常使能控制，Cause 为异常中断情况，EPC 为异常处理结束后需要返回的 PC</li>
+<li>具体 SR、Cause 的特定位如下宏定义所示，后续控制逻辑由其产生</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">`define IM SR[15:10]        //Interrupt Mask 由mtc0修改，屏蔽中断</span><br><span class="line">`define EXL SR[1]           //Exception Level 表明进入中断异常，禁止所有中断和异常</span><br><span class="line">`define IE SR[0]            //Interrupt Enable 全局中断使能(不影响异常)</span><br><span class="line">`define BD Cause[31]        //Branch Delay EPC是否指向前一条（延迟槽）指令</span><br><span class="line">`define IP Cause[15:10]     //Interrupt Pending 表明6个外部中断有无，由计时器和外部中断修改</span><br><span class="line">`define ExcCode Cause[6:2]  //ExcCode 异常编码，记录当前发生的是什么异常。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">`define IM SR[15:10]        //Interrupt Mask 由 mtc0 修改，屏蔽中断</span><br><span class="line">`define EXL SR[1]           //Exception Level 表明进入中断异常，禁止所有中断和异常</span><br><span class="line">`define IE SR[0]            //Interrupt Enable 全局中断使能(不影响异常)</span><br><span class="line">`define BD Cause[31]        //Branch Delay EPC 是否指向前一条（延迟槽）指令</span><br><span class="line">`define IP Cause[15:10]     //Interrupt Pending 表明 6 个外部中断有无，由计时器和外部中断修改</span><br><span class="line">`define ExcCode Cause[6:2]  //ExcCode 异常编码，记录当前发生的是什么异常。</span><br></pre></td></tr></table></figure>
 <ul>
 <li>
-<p>通过EXL和ExcCodeIn判断有无异常产生，通过EXL和IE，以及每一位有没有既有中断使能，又有中断信号判断有无中断产生。</p>
+<p>通过 EXL 和 ExcCodeIn 判断有无异常产生，通过 EXL 和 IE，以及每一位有没有既有中断使能，又有中断信号判断有无中断产生。</p>
 </li>
 <li>
-<p>注意产生异常或中断时指令在延迟槽，返回PC应为到上一条跳转指令的PC，需要从D级一直流水BDIn信号，tmp_EPC = Req?(BDIn?VPC-4:VPC):EPC</p>
+<p>注意产生异常或中断时指令在延迟槽，返回 PC 应为到上一条跳转指令的 PC，需要从 D 级一直流水 BDIn 信号，tmp_EPC = Req?(BDIn?VPC-4:VPC):EPC</p>
 </li>
 <li>
-<p>其中VPC为M级PC，即在外界观察到的宏观PC</p>
+<p>其中 VPC 为 M 级 PC，即在外界观察到的宏观 PC</p>
 </li>
 <li>
-<p>写寄存器只可写SR以及EPC，判断写入地址是否是12或14并且有写使能</p>
+<p>写寄存器只可写 SR 以及 EPC，判断写入地址是否是 12 或 14 并且有写使能</p>
 </li>
 <li>
-<p>读寄存器可以直接读，根据地址12 13 14读三个寄存器</p>
+<p>读寄存器可以直接读，根据地址 12 13 14 读三个寄存器</p>
 </li>
 <li>
 <p>端口</p>
@@ -383,19 +383,19 @@
 <td>CP0In</td>
 <td>input</td>
 <td>[31:0]</td>
-<td>CP0写入数据</td>
+<td>CP0 写入数据</td>
 </tr>
 <tr>
 <td>CP0Out</td>
 <td>output</td>
 <td>[31:0]</td>
-<td>CP0读出数据</td>
+<td>CP0 读出数据</td>
 </tr>
 <tr>
 <td>VPC</td>
 <td>input</td>
 <td>[31:0]</td>
-<td>受害PC</td>
+<td>受害 PC</td>
 </tr>
 <tr>
 <td>BDIn</td>
@@ -407,13 +407,13 @@
 <td>EPCOUt</td>
 <td>output</td>
 <td>[31:0]</td>
-<td>EPC的值</td>
+<td>EPC 的值</td>
 </tr>
 <tr>
 <td>EXLClr</td>
 <td>input</td>
 <td></td>
-<td>用来复位EXL（M级指令是eret，即退出异常）</td>
+<td>用来复位 EXL（M 级指令是 eret，即退出异常）</td>
 </tr>
 <tr>
 <td>ExcCodeIn</td>
@@ -425,7 +425,7 @@
 <td>HWInt</td>
 <td>input</td>
 <td>[5:0]</td>
-<td>输入6个设备中断信号</td>
+<td>输入 6 个设备中断信号</td>
 </tr>
 <tr>
 <td>Req</td>
@@ -437,13 +437,13 @@
 </table>
 <h3 id="系统桥">系统桥</h3>
 <ul>
-<li>对CPU向外设写入的数据进行分流，对外设向CPU写入的数据进行选择。</li>
+<li>对 CPU 向外设写入的数据进行分流，对外设向 CPU 写入的数据进行选择。</li>
 </ul>
 <img src="image-20230311001425849.png" alt="image-20230311001425849" width="67%" height="67%" />
 <ul>
-<li>CPU从外设读：根据地址用MUX筛选；CPU向外设写：写地址、数据直接全部发送，写使能用byteen以及写地址决定决定</li>
-<li>修改层级结构，在最高层通过系统桥将CPU与外置DM,TC0,TC1,以及中断生成器相连</li>
-<li>注意传给DM的按位读写使能要再读写其他外设时置为0</li>
+<li>CPU 从外设读：根据地址用 MUX 筛选；CPU 向外设写：写地址、数据直接全部发送，写使能用 byteen 以及写地址决定决定</li>
+<li>修改层级结构，在最高层通过系统桥将 CPU 与外置 DM,TC0,TC1, 以及中断生成器相连</li>
+<li>注意传给 DM 的按位读写使能要再读写其他外设时置为 0</li>
 <li>端口：</li>
 </ul>
 <table>
@@ -460,13 +460,13 @@
 <td>CPUAddr</td>
 <td>input</td>
 <td>[31:0]</td>
-<td>CPU读写地址</td>
+<td>CPU 读写地址</td>
 </tr>
 <tr>
 <td>CPUWD</td>
 <td>input</td>
 <td>[31:0]</td>
-<td>CPU往外设写数据</td>
+<td>CPU 往外设写数据</td>
 </tr>
 <tr>
 <td>CPUbyteen</td>
@@ -478,13 +478,13 @@
 <td>TC0Write</td>
 <td>output</td>
 <td></td>
-<td>写TC0</td>
+<td>写 TC0</td>
 </tr>
 <tr>
 <td>TC1Write</td>
 <td>output</td>
 <td></td>
-<td>写TC1</td>
+<td>写 TC1</td>
 </tr>
 <tr>
 <td>DEV_Addr</td>
@@ -502,13 +502,13 @@
 <td>temp_m_data_byteen</td>
 <td>output</td>
 <td>[3:0]</td>
-<td>传给DM的按位读写使能</td>
+<td>传给 DM 的按位读写使能</td>
 </tr>
 <tr>
 <td>DMRD</td>
 <td>input</td>
 <td>[31:0]</td>
-<td>三个外设写入CPU的数据</td>
+<td>三个外设写入 CPU 的数据</td>
 </tr>
 <tr>
 <td>TC0RD</td>
@@ -526,25 +526,25 @@
 <td>CPURD</td>
 <td>output</td>
 <td>[31:0]</td>
-<td>最后决定写入CPU的数据</td>
+<td>最后决定写入 CPU 的数据</td>
 </tr>
 </tbody>
 </table>
 <h3 id="TC">TC</h3>
 <ul>
 <li>
-<p>包含三个32位寄存器，ctrl, preset, count</p>
+<p>包含三个 32 位寄存器，ctrl, preset, count</p>
 </li>
 <li>
-<p>ctrl[3]表示中断屏蔽（1允许中断），[2:1]为模式选择，[0]为计数器使能</p>
+<p>ctrl[3]表示中断屏蔽（1 允许中断），[2:1]为模式选择，[0]为计数器使能</p>
 </li>
 <li>
-<p>四个状态的状态机，在INT状态下，如果中断没有屏蔽，则向外发送中断信号</p>
+<p>四个状态的状态机，在 INT 状态下，如果中断没有屏蔽，则向外发送中断信号</p>
 <ul>
-<li>idle状态下，如果计数器使能为1则转至load状态</li>
-<li>load状态下，加载初始值之后转至cnt状态</li>
-<li>cnt状态下，如计数器使能为1则开始倒计数，cnt==0之后产生一周期终端信号，状态变为interrupt；如果计数器使能为0，则回到idle</li>
-<li>interrupt状态下，如果在模式0，计数到0时计数器使能变0；如果在模式1，计数为0时中断变0。之后回到idle，等待计数器使能变1往复</li>
+<li>idle 状态下，如果计数器使能为 1 则转至 load 状态</li>
+<li>load 状态下，加载初始值之后转至 cnt 状态</li>
+<li>cnt 状态下，如计数器使能为 1 则开始倒计数，cnt==0 之后产生一周期终端信号，状态变为 interrupt；如果计数器使能为 0，则回到 idle</li>
+<li>interrupt 状态下，如果在模式 0，计数到 0 时计数器使能变 0；如果在模式 1，计数为 0 时中断变 0。之后回到 idle，等待计数器使能变 1 往复</li>
 </ul>
 </li>
 <li>
@@ -608,39 +608,39 @@
 <h3 id="内部异常设计">内部异常设计</h3>
 <ul>
 <li>
-<p>所有异常级别低于中断级别，并均低于Reset</p>
+<p>所有异常级别低于中断级别，并均低于 Reset</p>
 </li>
 <li>
-<p>每一级的异常流水需要遵循距离M级远的优先级更高，即在上一级有异常时，按上一级往后传；没有异常时，再判断当前阶段有无异常。</p>
+<p>每一级的异常流水需要遵循距离 M 级远的优先级更高，即在上一级有异常时，按上一级往后传；没有异常时，再判断当前阶段有无异常。</p>
 </li>
 <li>
-<p>F级有F_Exc_AdEL，取指令异常，即取地址低位没有对齐或者超出地址存储区域。注意在有eret信号时，直接跳转到中断处理程序，不产生异常。</p>
+<p>F 级有 F_Exc_AdEL，取指令异常，即取地址低位没有对齐或者超出地址存储区域。注意在有 eret 信号时，直接跳转到中断处理程序，不产生异常。</p>
 </li>
 <li>
-<p>D级D_Exc_RI，即未知指令与D_Exc_syscall，即syscall指令，从CU增加两个控制信号即可。</p>
+<p>D 级 D_Exc_RI，即未知指令与 D_Exc_syscall，即 syscall 指令，从 CU 增加两个控制信号即可。</p>
 </li>
 <li>
-<p>E级有E_Exc_AriOv，即计算指令溢出。同时还可产生E_Exc_DMOv，即地址指令溢出，但需要注意该异常需要在M级才真正出现，E级只是提前计算，访存指令还未执行，需要跳过E级异常流水，直接传给M级再加入异常流水判断。</p>
+<p>E 级有 E_Exc_AriOv，即计算指令溢出。同时还可产生 E_Exc_DMOv，即地址指令溢出，但需要注意该异常需要在 M 级才真正出现，E 级只是提前计算，访存指令还未执行，需要跳过 E 级异常流水，直接传给 M 级再加入异常流水判断。</p>
 </li>
 <li>
-<p>M级有M_Exc_AdES与M_Exc_AdEL，即写入地址错误与读出地址错误。注意除了地址不对齐、超出范围之外，还有M级的地址运算溢出，<strong>以及不可用lb,lh读写timer中三个寄存器和不可写timer中count寄存器的要求</strong>。</p>
+<p>M 级有 M_Exc_AdES 与 M_Exc_AdEL，即写入地址错误与读出地址错误。注意除了地址不对齐、超出范围之外，还有 M 级的地址运算溢出，<strong>以及不可用 lb,lh 读写 timer 中三个寄存器和不可写 timer 中 count 寄存器的要求</strong>。</p>
 </li>
 <li>
-<p>最后传至CP0的即M级的ExcCode</p>
+<p>最后传至 CP0 的即 M 级的 ExcCode</p>
 </li>
 </ul>
-<h3 id="CU模块设计">CU模块设计</h3>
+<h3 id="CU 模块设计">CU 模块设计</h3>
 <ul>
-<li>相较P4，省去RegWrite信号，直接译出当前指令需要写入的地址，如不需写入，默认写至0，在写入GRF时直接略去</li>
-<li>直接译出当前指令rs, rt, rd, shamt, imm16, imm26以及所有控制信号供每个阶段选取使用，还需译出Tuse_rs/rt以及E_Tnew与M_Tnew，各级输出对应信号至Conflict模块</li>
-<li>将指令分类，分为：cal_r,cal_i,md,mt,mf,load,save,branch,branch_ucl,branch_cl,shift,jreg,jadd,jlink（ori被归为cal_i）</li>
-<li>增加四个指令，增加GRF写入数据来源、写入地址的选择</li>
-<li>增加ALUDM、ALUAri输出端口，表示当前使用ALU计算的指令是地址访存指令还是计算指令</li>
+<li>相较 P4，省去 RegWrite 信号，直接译出当前指令需要写入的地址，如不需写入，默认写至 0，在写入 GRF 时直接略去</li>
+<li>直接译出当前指令 rs, rt, rd, shamt, imm16, imm26 以及所有控制信号供每个阶段选取使用，还需译出 Tuse_rs/rt 以及 E_Tnew 与 M_Tnew，各级输出对应信号至 Conflict 模块</li>
+<li>将指令分类，分为：cal_r,cal_i,md,mt,mf,load,save,branch,branch_ucl,branch_cl,shift,jreg,jadd,jlink（ori 被归为 cal_i）</li>
+<li>增加四个指令，增加 GRF 写入数据来源、写入地址的选择</li>
+<li>增加 ALUDM、ALUAri 输出端口，表示当前使用 ALU 计算的指令是地址访存指令还是计算指令</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">   assign cal_r=(add||sub||And||Or||Xor||slt||sltu);</span><br><span class="line">assign cal_i=(addi||andi||xori||ori||lui);</span><br><span class="line"></span><br><span class="line">   assign md   =(mult||multu||div||divu);</span><br><span class="line">   assign mf   =(mfhi||mflo);</span><br><span class="line">   assign mt   =(mthi||mtlo);</span><br><span class="line"></span><br><span class="line">assign load=(lw||lh||lhu||lb||lbu);</span><br><span class="line">assign save=(sw||sh||sb);</span><br><span class="line"></span><br><span class="line">   assign branch=(beq||bne||branch_ucl||branch_cl);</span><br><span class="line">   assign branch_ucl=bltzal;</span><br><span class="line">   assign branch_cl=0;</span><br><span class="line"></span><br><span class="line">   assign jreg = jr;</span><br><span class="line">   assign jadd = (j||jal);</span><br><span class="line">   assign jlink = jal;</span><br><span class="line"></span><br><span class="line">   assign shift=sll;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>控制信号新增：MDU, MDUStart, MDUSelect, MFSelect, ByteSelect, DESelect</li>
-<li>控制信号调整：GRF_WA, GRF_WDSrc, ALUSelect, <strong>EXTSelect（cal_i各个指令行为不同，注意对照指令集）</strong>,BranchSelect</li>
+<li>控制信号调整：GRF_WA, GRF_WDSrc, ALUSelect, <strong>EXTSelect（cal_i 各个指令行为不同，注意对照指令集）</strong>,BranchSelect</li>
 </ul>
 <table>
 <thead>
@@ -692,7 +692,7 @@
 <td>EXTSelect</td>
 <td>output</td>
 <td></td>
-<td>EXT位拓展类型选择</td>
+<td>EXT 位拓展类型选择</td>
 </tr>
 <tr>
 <td></td>
@@ -704,19 +704,19 @@
 <td>ALUSrc</td>
 <td>output</td>
 <td></td>
-<td>ALU_B的数据源选择</td>
+<td>ALU_B 的数据源选择</td>
 </tr>
 <tr>
 <td>ALUSelect</td>
 <td>output</td>
 <td>[3:0]</td>
-<td>ALU运算类型选择</td>
+<td>ALU 运算类型选择</td>
 </tr>
 <tr>
 <td><u>MDU</u></td>
 <td>output</td>
 <td></td>
-<td>乘除运算+读写HI LO信号（需要阻塞）</td>
+<td>乘除运算 + 读写 HI LO 信号（需要阻塞）</td>
 </tr>
 <tr>
 <td><u>MDUStart</u></td>
@@ -728,13 +728,13 @@
 <td><u>MDUSelect</u></td>
 <td>output</td>
 <td>[2:0]</td>
-<td>乘除运算+写HI LO功能选择</td>
+<td>乘除运算 + 写 HI LO 功能选择</td>
 </tr>
 <tr>
 <td><u>MFSelect</u></td>
 <td>output</td>
 <td>[1:0]</td>
-<td>读HI LO功能选择</td>
+<td>读 HI LO 功能选择</td>
 </tr>
 <tr>
 <td></td>
@@ -752,13 +752,13 @@
 <td>BranchSelect</td>
 <td>output</td>
 <td>[3:0]</td>
-<td>branch判断类型选择</td>
+<td>branch 判断类型选择</td>
 </tr>
 <tr>
 <td>NPCSelect</td>
 <td>output</td>
 <td>[2:0]</td>
-<td>NPC类型选择</td>
+<td>NPC 类型选择</td>
 </tr>
 <tr>
 <td><u>ByteSelect</u></td>
@@ -827,7 +827,7 @@
 <td></td>
 </tr>
 <tr>
-<td><strong>T计算</strong></td>
+<td><strong>T 计算</strong></td>
 <td></td>
 <td></td>
 <td></td>
@@ -858,9 +858,9 @@
 </tr>
 </tbody>
 </table>
-<h4 id="T计算表格">T计算表格</h4>
+<h4 id="T 计算表格">T 计算表格</h4>
 <ul>
-<li>注意新增的乘除指令的AT</li>
+<li>注意新增的乘除指令的 AT</li>
 </ul>
 <table>
 <thead>
@@ -938,14 +938,14 @@
 </tr>
 </tbody>
 </table>
-<h3 id="Conflit模块设计：AT控制阻塞，直接转发">Conflit模块设计：AT控制阻塞，直接转发</h3>
+<h3 id="Conflit 模块设计：AT 控制阻塞，直接转发">Conflit 模块设计：AT 控制阻塞，直接转发</h3>
 <h4 id="阻塞">阻塞</h4>
 <ul>
-<li>D级判断将要使用的寄存器数据是否能得到转发更新，即后续写入相同寄存器的Tnew是否有大于Tuse的，如果有则需要阻塞，以在后续能得到转发更新。特判0号寄存器不需要阻塞，能够直接获得数据0</li>
-<li>需要得到D级指令rs, rt的Tuse，以及后续E, M级指令的Tnew，在各级CU中计算，发送至冲突单元（W级Tnew全是0不需要考虑，都可以内部转发解决）</li>
-<li>阻塞时需要暂停更新PC以及F级读出的指令，并且清空D级当前指令的译码输出，以替换为nop空泡</li>
-<li>P6新增乘除Stall，在乘除运算即将开始或正在进行时如遇到乘除指令需要Stall</li>
-<li>P7新增eret的Stall，eret与mtc0的写后读冲突，需要单独判断阻塞，判断方法为当D级为eret即将读CP0的EPC时，EM级如果有mtc0即将写入CP0的EPC，即rd为14时，阻塞。</li>
+<li>D 级判断将要使用的寄存器数据是否能得到转发更新，即后续写入相同寄存器的 Tnew 是否有大于 Tuse 的，如果有则需要阻塞，以在后续能得到转发更新。特判 0 号寄存器不需要阻塞，能够直接获得数据 0</li>
+<li>需要得到 D 级指令 rs, rt 的 Tuse，以及后续 E, M 级指令的 Tnew，在各级 CU 中计算，发送至冲突单元（W 级 Tnew 全是 0 不需要考虑，都可以内部转发解决）</li>
+<li>阻塞时需要暂停更新 PC 以及 F 级读出的指令，并且清空 D 级当前指令的译码输出，以替换为 nop 空泡</li>
+<li>P6 新增乘除 Stall，在乘除运算即将开始或正在进行时如遇到乘除指令需要 Stall</li>
+<li>P7 新增 eret 的 Stall，eret 与 mtc0 的写后读冲突，需要单独判断阻塞，判断方法为当 D 级为 eret 即将读 CP0 的 EPC 时，EM 级如果有 mtc0 即将写入 CP0 的 EPC，即 rd 为 14 时，阻塞。</li>
 </ul>
 <img src="image-20230311001016596.png" alt="image-20230311001016596"/>
 <h4 id="转发">转发</h4>
@@ -954,10 +954,10 @@
 <p>阻塞后，所有指令在需要读寄存器数据的时候都能够获得后续计算完毕的数据，每级转发出已算出的数据，发送给之前各级即可。</p>
 </li>
 <li>
-<p>需要读寄存器：D级GRF，Branch计算需要rs, rt数据；E级ALU需要rs,rt 数据；M级DM写入数据口需要rt数据</p>
+<p>需要读寄存器：D 级 GRF，Branch 计算需要 rs, rt 数据；E 级 ALU 需要 rs,rt 数据；M 级 DM 写入数据口需要 rt 数据</p>
 </li>
 <li>
-<p>需要写寄存器：E级可转发出D级算的PC+8；M级可转发出D级算的PC+8和E级算的的ALU_Y；W级可转发出D级算的PC+8，E级算的的ALU_Y和M级读出的DM数据。<strong>根据当前指令CU译码得到的GRF_WDSrc进行选择</strong>。此外还有W级寄存器写入，可直接内部转发至D级读出</p>
+<p>需要写寄存器：E 级可转发出 D 级算的 PC+8；M 级可转发出 D 级算的 PC+8 和 E 级算的的 ALU_Y；W 级可转发出 D 级算的 PC+8，E 级算的的 ALU_Y 和 M 级读出的 DM 数据。<strong>根据当前指令 CU 译码得到的 GRF_WDSrc 进行选择</strong>。此外还有 W 级寄存器写入，可直接内部转发至 D 级读出</p>
 </li>
 </ul>
 <img src="image-20230311001109169.png" alt="image-20230311001109169" style="zoom:67%;" />
@@ -966,7 +966,7 @@
 <img src="image-20230311001129478.png" alt="image-20230311001129478" style="zoom:67%;" />
 <ul>
 <li>在主模块中，获取各级需要读的寄存器编号（D_rs,D_rt,E_rs,E_rt,M_rt），寄存器原读数（D_rs_data,D_rt_data,E_rs_data,E_rt_data,M_rt_data），写入的寄存器编号（E_GRF_WA,M_GRF_WA,W_GRF_WA）和数据（E_GRF_WD,M_GRF_WD,W_GRF_WD）</li>
-<li>比较读的编号和写的编号是否有相等的，如有相等的则代表有数据已经更新需要转发，转发优先级为更新次序，最后一次更新优先转发，即优先转发距离需要数据的阶段近的数据，特判如果需要读0号寄存器的数据，直接转发0</li>
+<li>比较读的编号和写的编号是否有相等的，如有相等的则代表有数据已经更新需要转发，转发优先级为更新次序，最后一次更新优先转发，即优先转发距离需要数据的阶段近的数据，特判如果需要读 0 号寄存器的数据，直接转发 0</li>
 <li>转发的数据（D_rs_fw,D_rt_fw,E_rs_fw,E_rt_fw,M_rt_fw）发送至各级需要的部分运算，并传递给下一级</li>
 </ul>
 <img src="image-20230311001150971.png" alt="image-20230311001150971" style="zoom: 67%;" />
@@ -974,36 +974,36 @@
 <img src="image-20230311001621204.png" alt="image-20230311001621204" style="zoom:80%;" />
 <ul>
 <li>
-<p>每个阶段之间以寄存器隔开，寄存器设计在每个模块输出处，使用reg类型</p>
+<p>每个阶段之间以寄存器隔开，寄存器设计在每个模块输出处，使用 reg 类型</p>
 </li>
 <li>
-<p>每个阶段之间需要流水传递Ins，PC，传给各级CU以译码出当前阶段的rs，rt以及需要写入的地址和写入数据的选择</p>
+<p>每个阶段之间需要流水传递 Ins，PC，传给各级 CU 以译码出当前阶段的 rs，rt 以及需要写入的地址和写入数据的选择</p>
 </li>
 <li>
-<p>部分阶段前后间需要传递需要使用的NPC, EXTout, ALU_Y, DM_RD</p>
+<p>部分阶段前后间需要传递需要使用的 NPC, EXTout, ALU_Y, DM_RD</p>
 </li>
 <li>
-<p>P7新增：各级传出ExcCode并流水传递以及DS（指令是否在延迟槽中）；CU需在D和M级多译出rd，为对CP0的读写提供阻塞条件与地址</p>
+<p>P7 新增：各级传出 ExcCode 并流水传递以及 DS（指令是否在延迟槽中）；CU 需在 D 和 M 级多译出 rd，为对 CP0 的读写提供阻塞条件与地址</p>
 </li>
 </ul>
-<h4 id="P6更新乘除槽与储存器外置以及按字节访存">P6更新乘除槽与储存器外置以及按字节访存</h4>
+<h4 id="P6 更新乘除槽与储存器外置以及按字节访存">P6 更新乘除槽与储存器外置以及按字节访存</h4>
 <ul>
-<li>删去F_IFU与M_DM，添加M_DE与E_MDU</li>
-<li>乘除槽有两个寄存器，其中数据需要在EMW级流水，以便进行转发，并且需要添加转发信号控制</li>
+<li>删去 F_IFU 与 M_DM，添加 M_DE 与 E_MDU</li>
+<li>乘除槽有两个寄存器，其中数据需要在 EMW 级流水，以便进行转发，并且需要添加转发信号控制</li>
 <li>外置储存器需要修改数据通路，前寄存器发送写入数据，后寄存器接收读出数据</li>
 </ul>
-<h4 id="P7宏观PC">P7宏观PC</h4>
+<h4 id="P7 宏观 PC">P7 宏观 PC</h4>
 <ul>
 <li>
-<p>在外界的视角，仅需知道当前周期的情况，外界通过给出中断与CPU沟通，中断处理器位于M级，所以M级表现在外，宏观PC为M级PC</p>
+<p>在外界的视角，仅需知道当前周期的情况，外界通过给出中断与 CPU 沟通，中断处理器位于 M 级，所以 M 级表现在外，宏观 PC 为 M 级 PC</p>
 </li>
 <li>
-<p>为了保证做出单周期的表现，需要在出现异常中断时，所有流水寄存器统一做出跳转到4180中断处理程序的形态，并停止流水线中所有正在执行的指令的行为</p>
+<p>为了保证做出单周期的表现，需要在出现异常中断时，所有流水寄存器统一做出跳转到 4180 中断处理程序的形态，并停止流水线中所有正在执行的指令的行为</p>
 </li>
 </ul>
 <h4 id="1-Fetch">1. Fetch</h4>
 <ul>
-<li>包含FDReg</li>
+<li>包含 FDReg</li>
 <li>Fetch</li>
 </ul>
 <table>
@@ -1038,13 +1038,13 @@
 <td>F_Stall</td>
 <td>input</td>
 <td></td>
-<td>阻塞更新PC</td>
+<td>阻塞更新 PC</td>
 </tr>
 <tr>
 <td>NPC</td>
 <td>input</td>
 <td>[31:0]</td>
-<td>D级NPC计算出的NPC传入</td>
+<td>D 级 NPC 计算出的 NPC 传入</td>
 </tr>
 <tr>
 <td>F_PC</td>
@@ -1056,10 +1056,10 @@
 <td>F_Ins</td>
 <td><strong>input</strong></td>
 <td>[31:0]</td>
-<td>需要从外部指令储存器读入Ins</td>
+<td>需要从外部指令储存器读入 Ins</td>
 </tr>
 <tr>
-<td><strong>FD寄存器</strong></td>
+<td><strong>FD 寄存器</strong></td>
 <td></td>
 <td></td>
 <td></td>
@@ -1068,7 +1068,7 @@
 <td>D_Stall</td>
 <td>input</td>
 <td></td>
-<td>阻塞更新FD间寄存器</td>
+<td>阻塞更新 FD 间寄存器</td>
 </tr>
 <tr>
 <td>D_Flush</td>
@@ -1091,12 +1091,12 @@
 </tbody>
 </table>
 <ul>
-<li>F级与指令储存的数据交换</li>
+<li>F 级与指令储存的数据交换</li>
 </ul>
 <img src="image-20230311001208043.png" alt="image-20230311001208043" style="zoom:67%;" />
 <h4 id="2-Decode">2. Decode</h4>
 <ul>
-<li>包括D_CU, EXT, NPC (Branch), DEReg</li>
+<li>包括 D_CU, EXT, NPC (Branch), DEReg</li>
 </ul>
 <table>
 <thead>
@@ -1124,7 +1124,7 @@
 <td>D_PC</td>
 <td>input</td>
 <td>[31:0]</td>
-<td>PC流水</td>
+<td>PC 流水</td>
 </tr>
 <tr>
 <td>D_Ins</td>
@@ -1142,7 +1142,7 @@
 <td>Tuse_rs</td>
 <td>output</td>
 <td>[1:0]</td>
-<td>AT算阻塞</td>
+<td>AT 算阻塞</td>
 </tr>
 <tr>
 <td>Tuse_rt</td>
@@ -1154,7 +1154,7 @@
 <td>D_rs</td>
 <td>output</td>
 <td>[4:0]</td>
-<td>D级指令读寄存器的编号</td>
+<td>D 级指令读寄存器的编号</td>
 </tr>
 <tr>
 <td>D_rt</td>
@@ -1166,7 +1166,7 @@
 <td>D_rs_data</td>
 <td>output</td>
 <td>[31:0]</td>
-<td>D级指令读寄存器原数据</td>
+<td>D 级指令读寄存器原数据</td>
 </tr>
 <tr>
 <td>D_rt_data</td>
@@ -1178,7 +1178,7 @@
 <td>D_rs_fw</td>
 <td>input</td>
 <td>[31:0]</td>
-<td>D级转发后寄存器数据</td>
+<td>D 级转发后寄存器数据</td>
 </tr>
 <tr>
 <td>D_rt_fw</td>
@@ -1196,19 +1196,19 @@
 <td>imm16</td>
 <td></td>
 <td>[15:0]</td>
-<td>EXT输入</td>
+<td>EXT 输入</td>
 </tr>
 <tr>
 <td>EXTSelect</td>
 <td></td>
 <td></td>
-<td>EXT功能选择</td>
+<td>EXT 功能选择</td>
 </tr>
 <tr>
 <td>D_EXT_out</td>
 <td></td>
 <td>[31:0]</td>
-<td>EXT输出</td>
+<td>EXT 输出</td>
 </tr>
 <tr>
 <td><strong>NPC</strong></td>
@@ -1232,13 +1232,13 @@
 <td>F_PC</td>
 <td>input</td>
 <td>[31:0]</td>
-<td>算NPC用</td>
+<td>算 NPC 用</td>
 </tr>
 <tr>
 <td>NPC</td>
 <td>output</td>
 <td>[31:0]</td>
-<td>传给F级IFU</td>
+<td>传给 F 级 IFU</td>
 </tr>
 <tr>
 <td><strong>DEReg</strong></td>
@@ -1250,7 +1250,7 @@
 <td>E_Flush</td>
 <td>input</td>
 <td></td>
-<td>阻塞清空DE寄存器</td>
+<td>阻塞清空 DE 寄存器</td>
 </tr>
 <tr>
 <td>E_PC</td>
@@ -1292,8 +1292,8 @@
 </table>
 <h4 id="3-Execute">3. Execute</h4>
 <ul>
-<li>包括E_CU, E_ALU, E_MDU, EMReg</li>
-<li>需在此处多向Conflict传递MDU指令以及乘除运行信息，并向流水中传递HI, LO以便mf指令W级读取</li>
+<li>包括 E_CU, E_ALU, E_MDU, EMReg</li>
+<li>需在此处多向 Conflict 传递 MDU 指令以及乘除运行信息，并向流水中传递 HI, LO 以便 mf 指令 W 级读取</li>
 </ul>
 <table>
 <thead>
@@ -1321,7 +1321,7 @@
 <td>E_PC</td>
 <td>input</td>
 <td>[31:0]</td>
-<td>PC流水</td>
+<td>PC 流水</td>
 </tr>
 <tr>
 <td>E_Ins</td>
@@ -1345,13 +1345,13 @@
 <td>E_Tnew</td>
 <td>output</td>
 <td>[1:0]</td>
-<td>AT算阻塞</td>
+<td>AT 算阻塞</td>
 </tr>
 <tr>
 <td>E_rs</td>
 <td>output</td>
 <td>[4:0]</td>
-<td>E级指令读寄存器的编号</td>
+<td>E 级指令读寄存器的编号</td>
 </tr>
 <tr>
 <td>E_rt</td>
@@ -1363,7 +1363,7 @@
 <td>E_rs_data</td>
 <td>output</td>
 <td>[31:0]</td>
-<td>E级指令读寄存器原数据</td>
+<td>E 级指令读寄存器原数据</td>
 </tr>
 <tr>
 <td>E_rt_data</td>
@@ -1375,13 +1375,13 @@
 <td>E_GRF_WA</td>
 <td>output</td>
 <td>[4:0]</td>
-<td>E级指令写寄存器的编号</td>
+<td>E 级指令写寄存器的编号</td>
 </tr>
 <tr>
 <td>E_rs_fw</td>
 <td>input</td>
 <td>[31:0]</td>
-<td>E级接收转发后寄存器数据</td>
+<td>E 级接收转发后寄存器数据</td>
 </tr>
 <tr>
 <td>E_rt_fw</td>
@@ -1393,13 +1393,13 @@
 <td>GRF_WDSrc</td>
 <td></td>
 <td>[2:0]</td>
-<td>E级指令写寄存器的数据选择</td>
+<td>E 级指令写寄存器的数据选择</td>
 </tr>
 <tr>
 <td>E_GRF_WD</td>
 <td>output</td>
 <td>[31:0]</td>
-<td>E级指令写寄存器的数据</td>
+<td>E 级指令写寄存器的数据</td>
 </tr>
 <tr>
 <td><strong>ALU</strong></td>
@@ -1417,25 +1417,25 @@
 <td>ALUSrc</td>
 <td></td>
 <td></td>
-<td>ALU_B数据源选择</td>
+<td>ALU_B 数据源选择</td>
 </tr>
 <tr>
 <td>ALUSelect</td>
 <td></td>
 <td>[3:0]</td>
-<td>ALU功能选择</td>
+<td>ALU 功能选择</td>
 </tr>
 <tr>
 <td>E_ALU_A</td>
 <td></td>
 <td>[31:0]</td>
-<td>=<strong>E_rs_fw</strong>：ALU_A口数据</td>
+<td>=<strong>E_rs_fw</strong>：ALU_A 口数据</td>
 </tr>
 <tr>
 <td>E_ALU_B</td>
 <td></td>
 <td>[31:0]</td>
-<td>=<strong>E_rt_fw</strong>/E_EXT_out：ALU_B口数据</td>
+<td>=<strong>E_rt_fw</strong>/E_EXT_out：ALU_B 口数据</td>
 </tr>
 <tr>
 <td><strong>MDU</strong></td>
@@ -1447,37 +1447,37 @@
 <td>MDU</td>
 <td>output</td>
 <td></td>
-<td>MDU指令</td>
+<td>MDU 指令</td>
 </tr>
 <tr>
 <td>MDUSelect</td>
 <td></td>
 <td>[2:0]</td>
-<td>CU给MDU的功能选择</td>
+<td>CU 给 MDU 的功能选择</td>
 </tr>
 <tr>
 <td>MDUStart</td>
 <td>output</td>
 <td></td>
-<td>MDU运算开始</td>
+<td>MDU 运算开始</td>
 </tr>
 <tr>
 <td>MDUBusy</td>
 <td>output</td>
 <td></td>
-<td>MDU运算进行（发给Conflict判断阻塞)</td>
+<td>MDU 运算进行（发给 Conflict 判断阻塞)</td>
 </tr>
 <tr>
 <td>E_HI</td>
 <td></td>
 <td>[31:0]</td>
-<td>待转发的E级MDU的HI结果</td>
+<td>待转发的 E 级 MDU 的 HI 结果</td>
 </tr>
 <tr>
 <td>E_LO</td>
 <td></td>
 <td>[31:0]</td>
-<td>待转发的E级MDU的LO结果</td>
+<td>待转发的 E 级 MDU 的 LO 结果</td>
 </tr>
 <tr>
 <td><strong>EMReg</strong></td>
@@ -1572,8 +1572,8 @@
 <li>
 <p>#####E_MDU</p>
 <ul>
-<li>当指令为mthi, mtlo，将寄存器数据写入HI, LO时，始终上升沿直接给HI, LO赋为A</li>
-<li>当为其余四条运算指令时，设置临时计数变量cnt，初始为0，接受到Start信号时，开始设置Busy为1；根据MDU功能选择编码，分别直接计算出HI, LO对应结果赋值，因为其他乘除操作已被阻塞，不会提前读取或写入；设置cnt为5或10，每周期-1，cnt==1代表运算结束，持续保持Busy为5/10周期后将cnt, Busy归零。</li>
+<li>当指令为 mthi, mtlo，将寄存器数据写入 HI, LO 时，始终上升沿直接给 HI, LO 赋为 A</li>
+<li>当为其余四条运算指令时，设置临时计数变量 cnt，初始为 0，接受到 Start 信号时，开始设置 Busy 为 1；根据 MDU 功能选择编码，分别直接计算出 HI, LO 对应结果赋值，因为其他乘除操作已被阻塞，不会提前读取或写入；设置 cnt 为 5 或 10，每周期 -1，cnt==1 代表运算结束，持续保持 Busy 为 5/10 周期后将 cnt, Busy 归零。</li>
 </ul>
 </li>
 </ul>
@@ -1603,13 +1603,13 @@
 <td>Start</td>
 <td>input</td>
 <td></td>
-<td>CU传入开始乘除运算信号</td>
+<td>CU 传入开始乘除运算信号</td>
 </tr>
 <tr>
 <td>MDUSelect</td>
 <td>input</td>
 <td>[2:0]</td>
-<td>CU传入乘除功能选择</td>
+<td>CU 传入乘除功能选择</td>
 </tr>
 <tr>
 <td>A</td>
@@ -1645,8 +1645,8 @@
 </table>
 <h4 id="4-Memory">4. Memory</h4>
 <ul>
-<li>包括M_CU, M_DE</li>
-<li>因储存器外置，删除DM，加入对字节存取数据的操作，包括通过控制四位ByteEn各位</li>
+<li>包括 M_CU, M_DE</li>
+<li>因储存器外置，删除 DM，加入对字节存取数据的操作，包括通过控制四位 ByteEn 各位</li>
 </ul>
 <table>
 <thead>
@@ -1698,25 +1698,25 @@
 <td>M_Tnew</td>
 <td>output</td>
 <td>[1:0]</td>
-<td>AT算阻塞</td>
+<td>AT 算阻塞</td>
 </tr>
 <tr>
 <td>M_GRF_WA</td>
 <td>output</td>
 <td>[4:0]</td>
-<td>M级指令写寄存器编号</td>
+<td>M 级指令写寄存器编号</td>
 </tr>
 <tr>
 <td>M_GRF_WD</td>
 <td>output</td>
 <td>[31:0]</td>
-<td>M级指令写寄存器数据</td>
+<td>M 级指令写寄存器数据</td>
 </tr>
 <tr>
 <td>M_rt</td>
 <td>output</td>
 <td>[4:0]</td>
-<td>M级指令读寄存器编号</td>
+<td>M 级指令读寄存器编号</td>
 </tr>
 <tr>
 <td></td>
@@ -1728,31 +1728,31 @@
 <td>GRF_WDSrc</td>
 <td></td>
 <td>[2:0]</td>
-<td>M级指令写寄存器数据选择</td>
+<td>M 级指令写寄存器数据选择</td>
 </tr>
 <tr>
 <td>MFSelect</td>
 <td></td>
 <td>[1:0]</td>
-<td>读HI LO功能选择</td>
+<td>读 HI LO 功能选择</td>
 </tr>
 <tr>
 <td>M_HI</td>
 <td>input</td>
 <td>[31:0]</td>
-<td>待转发的E级MDU的HI结果</td>
+<td>待转发的 E 级 MDU 的 HI 结果</td>
 </tr>
 <tr>
 <td>M_LO</td>
 <td>input</td>
 <td>[31:0]</td>
-<td>待转发的E级MDU的LO结果</td>
+<td>待转发的 E 级 MDU 的 LO 结果</td>
 </tr>
 <tr>
 <td>M_ALU_Y</td>
 <td>input</td>
 <td>[31:0]</td>
-<td>待转发的E级ALU计算结果</td>
+<td>待转发的 E 级 ALU 计算结果</td>
 </tr>
 <tr>
 <td><strong>M_BE</strong>（ByteEnable）</td>
@@ -1764,25 +1764,25 @@
 <td>lowAddr</td>
 <td></td>
 <td>[1:0]</td>
-<td>=M_ALU_Y[1:0]，DM写入地址地两位</td>
+<td>=M_ALU_Y[1:0]，DM 写入地址地两位</td>
 </tr>
 <tr>
 <td>M_rt_fw</td>
 <td>input</td>
 <td>[31:0]</td>
-<td>M级接收转发后将写入DM的数据</td>
+<td>M 级接收转发后将写入 DM 的数据</td>
 </tr>
 <tr>
 <td>ByteSelect</td>
 <td></td>
 <td>[1:0]</td>
-<td>CU访存数据类型选择</td>
+<td>CU 访存数据类型选择</td>
 </tr>
 <tr>
 <td>MemWrite</td>
 <td></td>
 <td></td>
-<td>DM写使能</td>
+<td>DM 写使能</td>
 </tr>
 <tr>
 <td>ByteEn</td>
@@ -1875,10 +1875,10 @@
 <h5 id="M-BE（计算字节访存使能，调整四字节写入数据）">M_BE（计算字节访存使能，调整四字节写入数据）</h5>
 <ul>
 <li>
-<p>合并在Memory中，在写入的条件下，根据写入数据类型和写入地址低两位产生四个字节的每一位控制信号，即四位ByteEn</p>
+<p>合并在 Memory 中，在写入的条件下，根据写入数据类型和写入地址低两位产生四个字节的每一位控制信号，即四位 ByteEn</p>
 </li>
 <li>
-<p>后续再根据ByteEn调整将写入内存的数据，需将待写入的字节移动到对应为En1的位置</p>
+<p>后续再根据 ByteEn 调整将写入内存的数据，需将待写入的字节移动到对应为 En1 的位置</p>
 </li>
 </ul>
 </li>
@@ -1886,7 +1886,7 @@
 <h5 id="M-DE（调整内存读出数据，截取需要的字节后拓展）">M_DE（调整内存读出数据，截取需要的字节后拓展）</h5>
 <ul>
 <li>
-<p>注意DESelect种类编码，注意需要将读出字节移动至低位，高位进行拓展补齐</p>
+<p>注意 DESelect 种类编码，注意需要将读出字节移动至低位，高位进行拓展补齐</p>
 <table>
 <thead>
 <tr>
@@ -1927,7 +1927,7 @@
 </ul>
 </li>
 <li>
-<p>M级与内存数据交换</p>
+<p>M 级与内存数据交换</p>
 </li>
 <li>
 <img src="image-20230311001314893.png" alt="image-20230311001314893" style="zoom:67%;" />
@@ -1935,7 +1935,7 @@
 </ul>
 <h4 id="5-Writeback">5. Writeback</h4>
 <ul>
-<li>包括W_CU</li>
+<li>包括 W_CU</li>
 </ul>
 <table>
 <thead>
@@ -1987,55 +1987,55 @@
 <td>W_GRF_WA</td>
 <td>output</td>
 <td>[4:0]</td>
-<td>W级指令写寄存器编号</td>
+<td>W 级指令写寄存器编号</td>
 </tr>
 <tr>
 <td>GRF_WDSrc</td>
 <td></td>
 <td>[2:0]</td>
-<td>W级指令写寄存器数据选择</td>
+<td>W 级指令写寄存器数据选择</td>
 </tr>
 <tr>
 <td>MFSelect</td>
 <td></td>
 <td>[1:0]</td>
-<td>读HI LO功能选择</td>
+<td>读 HI LO 功能选择</td>
 </tr>
 <tr>
 <td>W_ALU_Y</td>
 <td>input</td>
 <td>[31:0]</td>
-<td>待转发的E级ALU计算结果</td>
+<td>待转发的 E 级 ALU 计算结果</td>
 </tr>
 <tr>
 <td>W_DM_RD</td>
 <td>input</td>
 <td>[31:0]</td>
-<td>待转发的M级DM读出数据</td>
+<td>待转发的 M 级 DM 读出数据</td>
 </tr>
 <tr>
 <td>W_HI</td>
 <td>input</td>
 <td>[31:0]</td>
-<td>待转发的E级MDU的HI结果</td>
+<td>待转发的 E 级 MDU 的 HI 结果</td>
 </tr>
 <tr>
 <td>W_LO</td>
 <td>input</td>
 <td>[31:0]</td>
-<td>待转发的E级MDU的LO结果</td>
+<td>待转发的 E 级 MDU 的 LO 结果</td>
 </tr>
 <tr>
 <td>W_GRF_WD</td>
 <td>output</td>
 <td>[31:0]</td>
-<td>W级指令写寄存器数据</td>
+<td>W 级指令写寄存器数据</td>
 </tr>
 </tbody>
 </table>
 <h2 id="测试">测试</h2>
 <ul>
-<li>非中断异常测试同P6</li>
+<li>非中断异常测试同 P6</li>
 <li>中断测试</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">.text </span><br><span class="line">lui $1,0xffff</span><br><span class="line">ori $1,$1,0xfc01</span><br><span class="line">mtc0 $1,$12</span><br><span class="line">lui $2,0xffff</span><br><span class="line">#int-grf</span><br><span class="line">ori $2,$2,0x1234</span><br><span class="line">#int-store</span><br><span class="line">sw $2,0($0)</span><br><span class="line">ori $3,$0,0xfc01</span><br><span class="line">#int-mfc0</span><br><span class="line">mtc0 $3,$12</span><br><span class="line">#int-load</span><br><span class="line">lw $4,0($0)</span><br><span class="line">lw $5,0($0)</span><br><span class="line">#int-stall</span><br><span class="line">add $6,$5,$4</span><br><span class="line">lui $7,0x7fff</span><br><span class="line">lui $8,0x7fff</span><br><span class="line">#int-beq</span><br><span class="line">beq $7,$8,label1</span><br><span class="line">#int&amp;exc-BD</span><br><span class="line">add $9,$7,$8</span><br><span class="line">#int-D beq</span><br><span class="line">addi $10,$0,0x0001</span><br><span class="line">addi $11,$0,0x0002</span><br><span class="line">beq $7,$8,label1</span><br><span class="line">nop</span><br><span class="line"></span><br><span class="line">label1:</span><br><span class="line">mult $7,$8</span><br><span class="line">syscall</span><br><span class="line">div $7,$8</span><br><span class="line">syscall</span><br><span class="line">mthi $7</span><br><span class="line">syscall</span><br><span class="line">mtlo $8</span><br><span class="line">syscall</span><br><span class="line">mfhi $10</span><br><span class="line">mflo $11</span><br><span class="line">mult $7,$8</span><br><span class="line">beq $7,$8,label2</span><br><span class="line">#int-many nop</span><br><span class="line">mflo $12</span><br><span class="line">addi $12,$0,0x0001</span><br><span class="line">addi $12,$0,0x0002</span><br><span class="line"></span><br><span class="line">label2:</span><br><span class="line">addi $13,$0,0x0001</span><br><span class="line"></span><br><span class="line">end:</span><br><span class="line">beq $0,$0,end</span><br><span class="line">nop</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.ktext 0x4180</span><br><span class="line">main_handler:</span><br><span class="line">mfc0 $26,$13</span><br><span class="line">mfc0 $27,$14</span><br><span class="line">ori $27,$0,0x007c</span><br><span class="line">and $26,$27,$26</span><br><span class="line">beq $0,$26,interrupt</span><br><span class="line">nop</span><br><span class="line">mfc0 $26,$14</span><br><span class="line">add $26,$26,4</span><br><span class="line">mtc0 $26,$14</span><br><span class="line">beq $0,$0,return</span><br><span class="line">nop</span><br><span class="line"></span><br><span class="line">interrupt:</span><br><span class="line">ori $27,$0,0x2137</span><br><span class="line">sw $27,0x7f20($0)</span><br><span class="line">beq $0,$0,return</span><br><span class="line">nop</span><br><span class="line"></span><br><span class="line">return:</span><br><span class="line">eret</span><br></pre></td></tr></table></figure>
@@ -2047,50 +2047,50 @@
 <img src="image-20230311001804942.png" alt="image-20230311001804942"/>
 <h2 id="掉的坑">掉的坑</h2>
 <ul>
-<li><strong>逻辑判断式中信号不可有高阻态否则出x</strong>，删除赋值逻辑时需给0，否则删除所有位置的这个信号</li>
-<li>地址异常中，合法地址包括DM，TC0，TC1以及<strong>中断发生器</strong>响应地址</li>
+<li><strong>逻辑判断式中信号不可有高阻态否则出 x</strong>，删除赋值逻辑时需给 0，否则删除所有位置的这个信号</li>
+<li>地址异常中，合法地址包括 DM，TC0，TC1 以及 <strong> 中断发生器 </strong> 响应地址</li>
 </ul>
 <img src="image-20230311001827809.png" alt="image-20230311001827809" style="zoom:80%;" />
 <ul>
-<li>注意出现异常或中断时，除了需要将所有级寄存器修改至即将跳转至handler的样貌之外，还需要将M级读写字节使能设为0000，防止后续指令的继续进行以及<strong>当前指令在M级对内存的写入</strong></li>
-<li>注意eret与mtc0的写后读冲突，需要单独判断阻塞，判断方法为当D级为eret即将读CP0的EPC时，EM级如果有mtc0即将写入CP0的EPC，即rd为14时，阻塞。</li>
-<li>宏观PC，与提供给CP0的VPC均为M级PC</li>
-<li>timer中不可写count寄存器，并且只能用lw，sw进行读写</li>
+<li>注意出现异常或中断时，除了需要将所有级寄存器修改至即将跳转至 handler 的样貌之外，还需要将 M 级读写字节使能设为 0000，防止后续指令的继续进行以及 <strong> 当前指令在 M 级对内存的写入</strong></li>
+<li>注意 eret 与 mtc0 的写后读冲突，需要单独判断阻塞，判断方法为当 D 级为 eret 即将读 CP0 的 EPC 时，EM 级如果有 mtc0 即将写入 CP0 的 EPC，即 rd 为 14 时，阻塞。</li>
+<li>宏观 PC，与提供给 CP0 的 VPC 均为 M 级 PC</li>
+<li>timer 中不可写 count 寄存器，并且只能用 lw，sw 进行读写</li>
 </ul>
 <h2 id="思考题">思考题</h2>
 <ol>
 <li>
-<p>当键盘鼠标按键时，会发出一个中断信号，经过中断控制器处理传到CPU，然后CPU根据不同的中断号执行不同的中断响应程序，然后进行相应的IO操作，如把按下的按键编码读到寄存器，执行相应功能。</p>
+<p>当键盘鼠标按键时，会发出一个中断信号，经过中断控制器处理传到 CPU，然后 CPU 根据不同的中断号执行不同的中断响应程序，然后进行相应的 IO 操作，如把按下的按键编码读到寄存器，执行相应功能。</p>
 </li>
 <li>
 <p>为了不与正常的指令范围冲突，需要在特定地址提前放置中断处理程序并且其他指令与数据不能包含这段地址范围。用户不可自定义入口地址，因为自定义的地址上的中断处理程序可能会被其他数据覆盖。并且如果由用户提供中断异常处理程序的话，跳转的地址也是计算出来的，但是如果在计算跳转地址的时候出现了错误，异常处理就无法正常进行。</p>
 </li>
 <li>
-<p>CPU外设数量可能会更多，并且是变化的，不可硬性直接相连。需要添加桥，根据读写地址或者根据外设特定信号，动态选择读写外设。</p>
+<p>CPU 外设数量可能会更多，并且是变化的，不可硬性直接相连。需要添加桥，根据读写地址或者根据外设特定信号，动态选择读写外设。</p>
 </li>
 <li>
-<p>idle，load，cnt状态行为相同，只有interrupt状态控制功能不同</p>
+<p>idle，load，cnt 状态行为相同，只有 interrupt 状态控制功能不同</p>
 <ol>
 <li>
-<p>idle状态下，如果计数器使能为1则转至load状态</p>
+<p>idle 状态下，如果计数器使能为 1 则转至 load 状态</p>
 </li>
 <li>
-<p>load状态下，加载初始值之后转至cnt状态</p>
+<p>load 状态下，加载初始值之后转至 cnt 状态</p>
 </li>
 <li>
-<p>cnt状态下，如计数器使能为1则开始倒计数，cnt==0之后产生一周期终端信号，状态变为interrupt；如果计数器使能为0，则回到idle</p>
+<p>cnt 状态下，如计数器使能为 1 则开始倒计数，cnt==0 之后产生一周期终端信号，状态变为 interrupt；如果计数器使能为 0，则回到 idle</p>
 </li>
 <li>
-<p>interrupt状态下</p>
+<p>interrupt 状态下</p>
 <ol>
-<li>如果在模式0，计数到0时计数器使能变0，持续产生中断，变为idle状态，直到en为1，中断才清零，重新倒计时</li>
-<li>如果在模式1，计数为0时中断直接变0，仅持续一个周期，但en仍为1，变为idle状态后可以自动循环继续倒计时，产生周期中断脉冲</li>
+<li>如果在模式 0，计数到 0 时计数器使能变 0，持续产生中断，变为 idle 状态，直到 en 为 1，中断才清零，重新倒计时</li>
+<li>如果在模式 1，计数为 0 时中断直接变 0，仅持续一个周期，但 en 仍为 1，变为 idle 状态后可以自动循环继续倒计时，产生周期中断脉冲</li>
 </ol>
 </li>
 </ol>
 </li>
 <li>
-<p>倘若中断信号流入的时候，在检测宏观 PC 的一级CPU 该级所有信息均为空，则无法获得当前的PC以及当前指令是否在延迟槽中，无法获得执行完中断程序后的正确返回地址。所以清空流水线时需要保留原指令的地址以及是否处于延迟槽的信号。</p>
+<p>倘若中断信号流入的时候，在检测宏观 PC 的一级 CPU 该级所有信息均为空，则无法获得当前的 PC 以及当前指令是否在延迟槽中，无法获得执行完中断程序后的正确返回地址。所以清空流水线时需要保留原指令的地址以及是否处于延迟槽的信号。</p>
 </li>
 <li>
 <p>Register specifiers rs and rd must not be equal, because such an instruction does not have the same effect when reexecuted. The result of executing such an instruction is UNPREDICTABLE. This restriction permits an exception handler to resume execution by re-executing the branch when an exception occurs in the branch delay slot.</p>
@@ -2103,7 +2103,7 @@
 <p>计组实验结束了，当你经历过面向对，象、操作系统、编译技术等课程的洗礼，或许你又会觉得，当年的计组是那么和蔼可亲。但请相信，没有北航人跨不过的坎”我们总要背起行囊，扬起风帆，向尽头之海进发，一往无前。</p>
 <p>感谢你一路以来的不离不弃，坚守相伴，这一切的洗礼才刚刚开始，长路漫漫祝你前程似锦。</p>
 <p>​                                                                                                                                                      计组课程团队<br>
-​                                                                                                                                                               @新北5号<br>
+​                                                                                                                                                               @新北 5 号<br>
 ​                                                                                                                                                               2022.12.21</p>
 <img src="430ce62ac2101f40f1624ec2b8a9ef6.jpg" width="30%" />
 <img src="cdf5af3d3ddb8c050cfe8e900e9345d.jpg" width="30%" />
@@ -2125,7 +2125,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://steve-strange.github.io/2023/03/10/19-16-54/" title="P7设计文档">https://steve-strange.github.io/2023/03/10/19-16-54/</a>
+      <a href="https://steve-strange.github.io/2023/03/10/19-16-54/" title="P7 设计文档">https://steve-strange.github.io/2023/03/10/19-16-54/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -2141,13 +2141,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2023/03/10/19-16-51/" rel="prev" title="P6设计文档">
-                  <i class="fa fa-chevron-left"></i> P6设计文档
+                <a href="/2023/03/10/19-16-51/" rel="prev" title="P6 设计文档">
+                  <i class="fa fa-chevron-left"></i> P6 设计文档
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/03/10/20-40-24/" rel="next" title="lab0基础知识整理">
-                  lab0基础知识整理 <i class="fa fa-chevron-right"></i>
+                <a href="/2023/03/10/20-40-24/" rel="next" title="lab0 基础知识整理">
+                  lab0 基础知识整理 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
