@@ -47,6 +47,13 @@
 <ul>
 <li> 完成 include/queue.h 中空缺的函数 LIST_INSERT_AFTER。</li>
 <li> 指针 宏定义的语法 </li>
+<li> 双向链表，在某一元素前后加元素
+<ul>
+<li>
+<img src="2023-03-14-17-11-14.png" style="width:70%;" />
+</li>
+</ul>
+</li>
 </ul>
 ]]></content>
       <categories>
