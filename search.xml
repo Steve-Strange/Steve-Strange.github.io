@@ -3,9 +3,9 @@
   <entry>
     <title>Welcome</title>
     <url>/2023/03/12/00-04-39/</url>
-    <content><![CDATA[<h2 id="Welcome-to-My-Blog">Welcome to My Blog</h2>
-<h3 id="This-is-a-welcome-page">This is a welcome page.</h3>
-<h4 id="Nothing-here-P">Nothing here :P</h4>
+    <content><![CDATA[<h2 id="Welcome-to-my-blog">Welcome to my blog</h2>
+<h3 id="This-is-a-welcome-page">This is a welcome page</h3>
+<h4 id="Nothing-here">Nothing here</h4>
 ]]></content>
   </entry>
   <entry>
@@ -24,7 +24,30 @@
 </li>
 </ul>
 <h4 id="Thinking-2-2">Thinking 2.2</h4>
+<ul>
+<li>
+<p> 宏定义可以抽象出链表操作中的公共部分，将具体的实现细节封装在宏定义内部，并且抽象出链表元素类型为 type，实现泛型的效果，在不同元素类型的链表相关代码中都可以重用这些宏定义 </p>
+</li>
+<li>
+<p> 单向链表、循环链表和双向链表在插入与删除操作上的性能差异：</p>
+<ul>
+<li> 因为单向链表只能从前往后遍历，插入或删除节点时需要找到节点的前驱节点，需要从头开始遍历，时间复杂度为 O(n)</li>
+<li> 循环链表可以从任意一个节点开始遍历，因此在插入和删除节点时只需要更新相邻节点的指针即可，时间复杂度为 O(1)</li>
+<li> 双向链表在这方面更加高效，因为它既可以从前往后遍历，也可以从后往前遍历，因此在插入和删除节点时都比单向链表更加高效，时间复杂度为 O(1)</li>
+</ul>
+</li>
+</ul>
 <h4 id="Thinking-2-3">Thinking 2.3</h4>
+<ul>
+<li>Page_list 由一个 *list_head 的链表构成，每个元素对应一个 list 的头节点地址，进入每个 list 中后，其中由一个 Page_LIST_entry_t pp_link 和 u_short pp_ref 构成，所以选择 C。</li>
+</ul>
+<h4 id="Thinking-2-4">Thinking 2.4</h4>
+<h3 id="难点分析"> 难点分析 </h3>
+<h4 id="Exercise-2-2">Exercise 2.2</h4>
+<ul>
+<li> 完成 include/queue.h 中空缺的函数 LIST_INSERT_AFTER。</li>
+<li> 指针 宏定义的语法 </li>
+</ul>
 ]]></content>
       <categories>
         <category>Lab2-Report</category>
