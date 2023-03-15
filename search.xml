@@ -11,7 +11,7 @@
   <entry>
     <title>Lab2-Report</title>
     <url>/2023/03/13/18-54-43/</url>
-    <content><![CDATA[<h2 id="Lab2-Report">Lab2 Report</h2>
+    <content><![CDATA[<p>Lab2-Report</p>
 <span id="more"></span>
 <h3 id="思考题"> 思考题 </h3>
 <h4 id="Thinking-2-1">Thinking 2.1</h4>
@@ -66,7 +66,8 @@
   <entry>
     <title>Some Chats with ChatGPT SDA</title>
     <url>/2023/03/12/18-47-04/</url>
-    <content><![CDATA[<h2 id="Some-Chats-with-ChatGPT-SDA-Superior-Do-Anything">Some Chats with ChatGPT SDA(Superior Do Anything)</h2>
+    <content><![CDATA[<p>Some Chats with ChatGPT SDA(Superior Do Anything)<br>
+看到了个解除限制的方法，聊了聊 </p>
 <span id="more"></span>
 <ul>
 <li>
@@ -178,7 +179,7 @@ Resolved: The use of social media has done more harm than good for society.</p>
   <entry>
     <title>Celebrities&#39; Name for English Essay</title>
     <url>/2023/03/12/00-04-40/</url>
-    <content><![CDATA[<h2 id="Celebrities’-Name-for-English-Essay">Celebrities’ Name for English Essay</h2>
+    <content><![CDATA[<p> 考六级前找 ChatGPT 问了问名人名字和干了啥 </p>
 <span id="more"></span>
 <p>Albert Einstein - 理论物理学家，相对论和质能方程式的创始人 <br>
 Alexander Graham Bell - 发明家，电话的发明者 <br>
@@ -410,7 +411,7 @@ $$</p>
   <entry>
     <title>Positive Psychology P3</title>
     <url>/2023/03/11/00-46-53/</url>
-    <content><![CDATA[<h2 id="Positive-Psychology-P3">Positive Psychology P3</h2>
+    <content><![CDATA[<p>Positive Psychology P3  英语作业 </p>
 <span id="more"></span>
 <h2 id="Outline">Outline</h2>
 <h3 id="Premise-5-Happiness-is-a-moral-claim-but-not-the-end">Premise 5. Happiness is a moral claim, but not the end?</h3>
@@ -544,7 +545,7 @@ $$</p>
   <entry>
     <title>Positive Psychology P2</title>
     <url>/2023/03/11/00-46-52/</url>
-    <content><![CDATA[<h2 id="Positive-Psychology-P2">Positive Psychology P2</h2>
+    <content><![CDATA[<p>Positive Psychology P2  英语作业 </p>
 <span id="more"></span>
 <h2 id="Outline">Outline</h2>
 <h3 id="Premise-of-the-course">Premise of the course</h3>
@@ -736,7 +737,7 @@ Our flaws in our nature are also part of us, they keep us to be “normal” and
   <entry>
     <title>Positive Psychology P1</title>
     <url>/2023/03/10/22-50-28/</url>
-    <content><![CDATA[<h2 id="Positive-Psychology-P1">Positive Psychology P1</h2>
+    <content><![CDATA[<p>Positive Psychology P1  英语作业 </p>
 <span id="more"></span>
 <h2 id="Outline">Outline</h2>
 <ul>
@@ -862,7 +863,7 @@ Our flaws in our nature are also part of us, they keep us to be “normal” and
   <entry>
     <title>Lab1 Report</title>
     <url>/2023/03/10/21-48-08/</url>
-    <content><![CDATA[<h2 id="Lab1-Report">Lab1 Report</h2>
+    <content><![CDATA[<p>Lab1 Report</p>
 <span id="more"></span>
 <h3 id="思考题">思考题</h3>
 <h4 id="Thinking-1-1">Thinking 1.1</h4>
@@ -925,7 +926,7 @@ Our flaws in our nature are also part of us, they keep us to be “normal” and
   <entry>
     <title>Lab0 Report</title>
     <url>/2023/03/10/20-40-25/</url>
-    <content><![CDATA[<h2 id="Lab0-Report">Lab0 Report</h2>
+    <content><![CDATA[<p>Lab0 Report</p>
 <span id="more"></span>
 <h3 id="思考题">思考题</h3>
 <h4 id="Thinking-0-1">Thinking 0.1</h4>
@@ -1063,7 +1064,7 @@ checkout 两种用法：切换分支，撤销修改（暂存区 -&gt; 工作区�
   <entry>
     <title>Lab0 Notes</title>
     <url>/2023/03/10/20-40-24/</url>
-    <content><![CDATA[<h3 id="Lab0-Notes">Lab0 Notes</h3>
+    <content><![CDATA[<p>Lab0 Notes</p>
 <span id="more"></span>
 <ul>
 <li>一些特殊字符</li>
@@ -1131,7 +1132,7 @@ checkout 两种用法：切换分支，撤销修改（暂存区 -&gt; 工作区�
   <entry>
     <title>P7 设计文档</title>
     <url>/2023/03/10/19-16-54/</url>
-    <content><![CDATA[<h2 id="5 级流水线 CPU 设计文档 - 中断支持">5 级流水线 CPU 设计文档 + 中断支持</h2>
+    <content><![CDATA[<p>5 级流水线 CPU 设计文档 + 中断支持</p>
 <span id="more"></span>
 <h2 id="支持指令">支持指令</h2>
 <p><strong>R, add, sub, And, Or, Xor, slt, sltu</strong></p>
@@ -2944,7 +2945,7 @@ checkout 两种用法：切换分支，撤销修改（暂存区 -&gt; 工作区�
   <entry>
     <title>P6 设计文档</title>
     <url>/2023/03/10/19-16-51/</url>
-    <content><![CDATA[<h2 id="5 级流水线 CPU 设计文档">5 级流水线 CPU 设计文档 +</h2>
+    <content><![CDATA[<p>5 级流水线 CPU 设计文档 +</p>
 <span id="more"></span>
 <h2 id="支持指令"> 支持指令 </h2>
 <p><strong>R, add, sub, And, Or, Xor, slt, sltu</strong></p>
@@ -4420,7 +4421,7 @@ checkout 两种用法：切换分支，撤销修改（暂存区 -&gt; 工作区�
   <entry>
     <title>P5 设计文档</title>
     <url>/2023/03/10/19-16-47/</url>
-    <content><![CDATA[<h2 id="5 级流水线 CPU">5 级流水线 CPU</h2>
+    <content><![CDATA[<p>5 级流水线 CPU</p>
 <span id="more"></span>
 <h2 id="支持指令"> 支持指令 </h2>
 <p>add, sub, ori, lw, sw, beq, lui, j, jr, jal, nop</p>
@@ -5715,7 +5716,7 @@ checkout 两种用法：切换分支，撤销修改（暂存区 -&gt; 工作区�
   <entry>
     <title>P4 设计文档</title>
     <url>/2023/03/10/19-16-42/</url>
-    <content><![CDATA[<h2 id="CPU 设计文档">CPU 设计文档</h2>
+    <content><![CDATA[<p>CPU 设计文档</p>
 <span id="more"></span>
 <h3 id="支持指令">支持指令</h3>
 <p>add, sub, ori, lui, lw, sw, beq,bne, j, jr, jal, sll, nop</p>
@@ -6368,7 +6369,7 @@ checkout 两种用法：切换分支，撤销修改（暂存区 -&gt; 工作区�
   <entry>
     <title>P3 设计文档</title>
     <url>/2023/03/10/19-16-32/</url>
-    <content><![CDATA[<h2 id="P3 设计文档">P3 设计文档</h2>
+    <content><![CDATA[<p>P3 设计文档</p>
 <span id="more"></span>
 <h2 id="CPU 流程，草稿">CPU 流程，草稿</h2>
 <ol>
