@@ -75,7 +75,11 @@
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
-<link rel="alternate" href="/atom.xml" title="TARDIS" type="application/atom+xml">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="TARDIS" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
@@ -164,7 +168,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">支持指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.</span> <span class="nav-text">流程模块设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CP0"><span class="nav-number">2.1.</span> <span class="nav-text">CP0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%A1%A5"><span class="nav-number">2.2.</span> <span class="nav-text">系统桥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TC"><span class="nav-number">2.3.</span> <span class="nav-text">TC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E9%83%A8%E5%BC%82%E5%B8%B8%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.4.</span> <span class="nav-text">内部异常设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CU%20%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.5.</span> <span class="nav-text">CU 模块设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#T%20%E8%AE%A1%E7%AE%97%E8%A1%A8%E6%A0%BC"><span class="nav-number">2.5.1.</span> <span class="nav-text">T 计算表格</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conflit%20%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%EF%BC%9AAT%20%E6%8E%A7%E5%88%B6%E9%98%BB%E5%A1%9E%EF%BC%8C%E7%9B%B4%E6%8E%A5%E8%BD%AC%E5%8F%91"><span class="nav-number">2.6.</span> <span class="nav-text">Conflit 模块设计：AT 控制阻塞，直接转发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%BB%E5%A1%9E"><span class="nav-number">2.6.1.</span> <span class="nav-text">阻塞</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AC%E5%8F%91"><span class="nav-number">2.6.2.</span> <span class="nav-text">转发</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E7%BA%A7%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.7.</span> <span class="nav-text">五级模块设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#P6%20%E6%9B%B4%E6%96%B0%E4%B9%98%E9%99%A4%E6%A7%BD%E4%B8%8E%E5%82%A8%E5%AD%98%E5%99%A8%E5%A4%96%E7%BD%AE%E4%BB%A5%E5%8F%8A%E6%8C%89%E5%AD%97%E8%8A%82%E8%AE%BF%E5%AD%98"><span class="nav-number">2.7.1.</span> <span class="nav-text">P6 更新乘除槽与储存器外置以及按字节访存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P7%20%E5%AE%8F%E8%A7%82%20PC"><span class="nav-number">2.7.2.</span> <span class="nav-text">P7 宏观 PC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Fetch"><span class="nav-number">2.7.3.</span> <span class="nav-text">1. Fetch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Decode"><span class="nav-number">2.7.4.</span> <span class="nav-text">2. Decode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Execute"><span class="nav-number">2.7.5.</span> <span class="nav-text">3. Execute</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Memory"><span class="nav-number">2.7.6.</span> <span class="nav-text">4. Memory</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#M-BE%EF%BC%88%E8%AE%A1%E7%AE%97%E5%AD%97%E8%8A%82%E8%AE%BF%E5%AD%98%E4%BD%BF%E8%83%BD%EF%BC%8C%E8%B0%83%E6%95%B4%E5%9B%9B%E5%AD%97%E8%8A%82%E5%86%99%E5%85%A5%E6%95%B0%E6%8D%AE%EF%BC%89"><span class="nav-number">2.7.6.1.</span> <span class="nav-text">M_BE（计算字节访存使能，调整四字节写入数据）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#M-DE%EF%BC%88%E8%B0%83%E6%95%B4%E5%86%85%E5%AD%98%E8%AF%BB%E5%87%BA%E6%95%B0%E6%8D%AE%EF%BC%8C%E6%88%AA%E5%8F%96%E9%9C%80%E8%A6%81%E7%9A%84%E5%AD%97%E8%8A%82%E5%90%8E%E6%8B%93%E5%B1%95%EF%BC%89"><span class="nav-number">2.7.6.2.</span> <span class="nav-text">M_DE（调整内存读出数据，截取需要的字节后拓展）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Writeback"><span class="nav-number">2.7.7.</span> <span class="nav-text">5. Writeback</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">3.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%89%E7%9A%84%E5%9D%91"><span class="nav-number">4.</span> <span class="nav-text">掉的坑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">5.</span> <span class="nav-text">思考题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E7%AE%97%E9%A1%B5%E9%9D%A2"><span class="nav-number">6.</span> <span class="nav-text">结算页面</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.</span> <span class="nav-text">流程模块设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cp0"><span class="nav-number">1.1.</span> <span class="nav-text">CP0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%A1%A5"><span class="nav-number">1.2.</span> <span class="nav-text">系统桥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tc"><span class="nav-number">1.3.</span> <span class="nav-text">TC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E9%83%A8%E5%BC%82%E5%B8%B8%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.4.</span> <span class="nav-text">内部异常设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cu%20%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.5.</span> <span class="nav-text">CU 模块设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#t%20%E8%AE%A1%E7%AE%97%E8%A1%A8%E6%A0%BC"><span class="nav-number">1.5.1.</span> <span class="nav-text">T 计算表格</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#conflit%20%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%20at%20%E6%8E%A7%E5%88%B6%E9%98%BB%E5%A1%9E%E7%9B%B4%E6%8E%A5%E8%BD%AC%E5%8F%91"><span class="nav-number">1.6.</span> <span class="nav-text">Conflit 模块设计：AT 控制阻塞，直接转发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%BB%E5%A1%9E"><span class="nav-number">1.6.1.</span> <span class="nav-text">阻塞</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AC%E5%8F%91"><span class="nav-number">1.6.2.</span> <span class="nav-text">转发</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E7%BA%A7%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.7.</span> <span class="nav-text">五级模块设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#p6%20%E6%9B%B4%E6%96%B0%E4%B9%98%E9%99%A4%E6%A7%BD%E4%B8%8E%E5%82%A8%E5%AD%98%E5%99%A8%E5%A4%96%E7%BD%AE%E4%BB%A5%E5%8F%8A%E6%8C%89%E5%AD%97%E8%8A%82%E8%AE%BF%E5%AD%98"><span class="nav-number">1.7.1.</span> <span class="nav-text">P6 更新乘除槽与储存器外置以及按字节访存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#p7%20%E5%AE%8F%E8%A7%82%20pc"><span class="nav-number">1.7.2.</span> <span class="nav-text">P7 宏观 PC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fetch"><span class="nav-number">1.7.3.</span> <span class="nav-text">1. Fetch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#decode"><span class="nav-number">1.7.4.</span> <span class="nav-text">2. Decode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#execute"><span class="nav-number">1.7.5.</span> <span class="nav-text">3. Execute</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#memory"><span class="nav-number">1.7.6.</span> <span class="nav-text">4. Memory</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#m_be%20%E8%AE%A1%E7%AE%97%E5%AD%97%E8%8A%82%E8%AE%BF%E5%AD%98%E4%BD%BF%E8%83%BD%E8%B0%83%E6%95%B4%E5%9B%9B%E5%AD%97%E8%8A%82%E5%86%99%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">1.7.6.1.</span> <span class="nav-text">M_BE（计算字节访存使能，调整四字节写入数据）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#m_de%20%E8%B0%83%E6%95%B4%E5%86%85%E5%AD%98%E8%AF%BB%E5%87%BA%E6%95%B0%E6%8D%AE%E6%88%AA%E5%8F%96%E9%9C%80%E8%A6%81%E7%9A%84%E5%AD%97%E8%8A%82%E5%90%8E%E6%8B%93%E5%B1%95"><span class="nav-number">1.7.6.2.</span> <span class="nav-text">M_DE（调整内存读出数据，截取需要的字节后拓展）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#writeback"><span class="nav-number">1.7.7.</span> <span class="nav-text">5. Writeback</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">2.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%89%E7%9A%84%E5%9D%91"><span class="nav-number">3.</span> <span class="nav-text">掉的坑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">思考题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E7%AE%97%E9%A1%B5%E9%9D%A2"><span class="nav-number">5.</span> <span class="nav-text">结算页面</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -307,9 +311,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>5 级流水线 CPU 设计文档 + 中断支持</p>
-<span id="more"></span>
-<h2 id="支持指令">支持指令</h2>
+        <p>5 级流水线 CPU 设计文档 + 中断支持 <span id="more"></span> ## 支持指令</p>
 <p><strong>R, add, sub, And, Or, Xor, slt, sltu</strong></p>
 <p><strong>addi, andi, xori, ori, lui</strong></p>
 <p><strong>lb, lh, lw, sb, sh, sw, lbu, lhu</strong></p>
@@ -317,8 +319,8 @@
 <p><strong>beq, bne, j, jal, jr, bltzal</strong></p>
 <p><strong>nop, eret, mtc0, mfc0, syscall</strong></p>
 <h2 id="流程模块设计">流程模块设计</h2>
-<img src="image-20230311001413097.png" alt="image-20230311001413097" style="zoom:67%;" />
-<h3 id="CP0">CP0</h3>
+<p><img src="image-20230311001413097.png" alt="image-20230311001413097" style="zoom:67%;" /></p>
+<h3 id="cp0">CP0</h3>
 <ul>
 <li>处理来自 CPU 的内部异常以及来自中断发生器与 timer 的外部中断，产生异常控制信号给 CPU</li>
 <li>放置在 M 级，接收 CPU 在 M 级的 mtc0,mfc0,eret 指令</li>
@@ -327,28 +329,23 @@
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">`define IM SR[15:10]        //Interrupt Mask 由 mtc0 修改，屏蔽中断</span><br><span class="line">`define EXL SR[1]           //Exception Level 表明进入中断异常，禁止所有中断和异常</span><br><span class="line">`define IE SR[0]            //Interrupt Enable 全局中断使能(不影响异常)</span><br><span class="line">`define BD Cause[31]        //Branch Delay EPC 是否指向前一条（延迟槽）指令</span><br><span class="line">`define IP Cause[15:10]     //Interrupt Pending 表明 6 个外部中断有无，由计时器和外部中断修改</span><br><span class="line">`define ExcCode Cause[6:2]  //ExcCode 异常编码，记录当前发生的是什么异常。</span><br></pre></td></tr></table></figure>
 <ul>
-<li>
-<p>通过 EXL 和 ExcCodeIn 判断有无异常产生，通过 EXL 和 IE，以及每一位有没有既有中断使能，又有中断信号判断有无中断产生。</p>
-</li>
-<li>
-<p>注意产生异常或中断时指令在延迟槽，返回 PC 应为到上一条跳转指令的 PC，需要从 D 级一直流水 BDIn 信号，tmp_EPC = Req?(BDIn?VPC-4:VPC):EPC</p>
-</li>
-<li>
-<p>其中 VPC 为 M 级 PC，即在外界观察到的宏观 PC</p>
-</li>
-<li>
-<p>写寄存器只可写 SR 以及 EPC，判断写入地址是否是 12 或 14 并且有写使能</p>
-</li>
-<li>
-<p>读寄存器可以直接读，根据地址 12 13 14 读三个寄存器</p>
-</li>
-<li>
-<p>端口</p>
-</li>
+<li><p>通过 EXL 和 ExcCodeIn 判断有无异常产生，通过 EXL 和 IE，以及每一位有没有既有中断使能，又有中断信号判断有无中断产生。</p></li>
+<li><p>注意产生异常或中断时指令在延迟槽，返回 PC 应为到上一条跳转指令的 PC，需要从 D 级一直流水 BDIn 信号，tmp_EPC
+= Req?(BDIn?VPC-4:VPC):EPC</p></li>
+<li><p>其中 VPC 为 M 级 PC，即在外界观察到的宏观 PC</p></li>
+<li><p>写寄存器只可写 SR 以及 EPC，判断写入地址是否是 12 或 14 并且有写使能</p></li>
+<li><p>读寄存器可以直接读，根据地址 12 13 14 读三个寄存器</p></li>
+<li><p>端口</p></li>
 </ul>
 <table>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 9%" />
+<col style="width: 62%" />
+</colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th>Port name</th>
 <th>Direction</th>
 <th>Type</th>
@@ -356,79 +353,79 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>clk</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>reset</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>en</td>
 <td>input</td>
 <td></td>
 <td>写使能信号 (mtc0)</td>
 </tr>
-<tr>
+<tr class="even">
 <td>CP0Add</td>
 <td>input</td>
 <td>[4:0]</td>
 <td>读写寄存器的编号</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>CP0In</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>CP0 写入数据</td>
 </tr>
-<tr>
+<tr class="even">
 <td>CP0Out</td>
 <td>output</td>
 <td>[31:0]</td>
 <td>CP0 读出数据</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>VPC</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>受害 PC</td>
 </tr>
-<tr>
+<tr class="even">
 <td>BDIn</td>
 <td>input</td>
 <td></td>
 <td>是否是延迟槽指令</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>EPCOUt</td>
 <td>output</td>
 <td>[31:0]</td>
 <td>EPC 的值</td>
 </tr>
-<tr>
+<tr class="even">
 <td>EXLClr</td>
 <td>input</td>
 <td></td>
 <td>用来复位 EXL（M 级指令是 eret，即退出异常）</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>ExcCodeIn</td>
 <td>input</td>
 <td>[4:0]</td>
 <td>记录异常类型</td>
 </tr>
-<tr>
+<tr class="even">
 <td>HWInt</td>
 <td>input</td>
 <td>[5:0]</td>
 <td>输入 6 个设备中断信号</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Req</td>
 <td>output</td>
 <td></td>
@@ -440,7 +437,7 @@
 <ul>
 <li>对 CPU 向外设写入的数据进行分流，对外设向 CPU 写入的数据进行选择。</li>
 </ul>
-<img src="image-20230311001425849.png" alt="image-20230311001425849" width="67%" height="67%" />
+<p><img src="image-20230311001425849.png" alt="image-20230311001425849" width="67%" height="67%" /></p>
 <ul>
 <li>CPU 从外设读：根据地址用 MUX 筛选；CPU 向外设写：写地址、数据直接全部发送，写使能用 byteen 以及写地址决定决定</li>
 <li>修改层级结构，在最高层通过系统桥将 CPU 与外置 DM,TC0,TC1, 以及中断生成器相连</li>
@@ -449,7 +446,7 @@
 </ul>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>Port name</th>
 <th>Direction</th>
 <th>Type</th>
@@ -457,73 +454,73 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>CPUAddr</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>CPU 读写地址</td>
 </tr>
-<tr>
+<tr class="even">
 <td>CPUWD</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>CPU 往外设写数据</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>CPUbyteen</td>
 <td>input</td>
 <td>[3:0]</td>
 <td>按位读写使能</td>
 </tr>
-<tr>
+<tr class="even">
 <td>TC0Write</td>
 <td>output</td>
 <td></td>
 <td>写 TC0</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>TC1Write</td>
 <td>output</td>
 <td></td>
 <td>写 TC1</td>
 </tr>
-<tr>
+<tr class="even">
 <td>DEV_Addr</td>
 <td>output</td>
 <td>[31:0]</td>
 <td>往外设写入的地址</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>DEV_WD</td>
 <td>output</td>
 <td>[31:0]</td>
 <td>往外设写入的数据</td>
 </tr>
-<tr>
+<tr class="even">
 <td>temp_m_data_byteen</td>
 <td>output</td>
 <td>[3:0]</td>
 <td>传给 DM 的按位读写使能</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>DMRD</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>三个外设写入 CPU 的数据</td>
 </tr>
-<tr>
+<tr class="even">
 <td>TC0RD</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>TC1RD</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>CPURD</td>
 <td>output</td>
 <td>[31:0]</td>
@@ -531,30 +528,22 @@
 </tr>
 </tbody>
 </table>
-<h3 id="TC">TC</h3>
+<h3 id="tc">TC</h3>
 <ul>
-<li>
-<p>包含三个 32 位寄存器，ctrl, preset, count</p>
-</li>
-<li>
-<p>ctrl[3]表示中断屏蔽（1 允许中断），[2:1]为模式选择，[0]为计数器使能</p>
-</li>
-<li>
-<p>四个状态的状态机，在 INT 状态下，如果中断没有屏蔽，则向外发送中断信号</p>
+<li>包含三个 32 位寄存器，ctrl, preset, count</li>
+<li>ctrl[3]表示中断屏蔽（1 允许中断），[2:1]为模式选择，[0]为计数器使能</li>
+<li>四个状态的状态机，在 INT 状态下，如果中断没有屏蔽，则向外发送中断信号
 <ul>
 <li>idle 状态下，如果计数器使能为 1 则转至 load 状态</li>
 <li>load 状态下，加载初始值之后转至 cnt 状态</li>
 <li>cnt 状态下，如计数器使能为 1 则开始倒计数，cnt==0 之后产生一周期终端信号，状态变为 interrupt；如果计数器使能为 0，则回到 idle</li>
 <li>interrupt 状态下，如果在模式 0，计数到 0 时计数器使能变 0；如果在模式 1，计数为 0 时中断变 0。之后回到 idle，等待计数器使能变 1 往复</li>
-</ul>
-</li>
-<li>
-<p>端口</p>
-</li>
+</ul></li>
+<li>端口</li>
 </ul>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>Port name</th>
 <th>Direction</th>
 <th>Type</th>
@@ -562,43 +551,43 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>clk</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>reset</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Addr</td>
 <td>input</td>
 <td>[31:2]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>WE</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Din</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>Dout</td>
 <td>output</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>IRQ</td>
 <td>output</td>
 <td></td>
@@ -608,44 +597,39 @@
 </table>
 <h3 id="内部异常设计">内部异常设计</h3>
 <ul>
-<li>
-<p>所有异常级别低于中断级别，并均低于 Reset</p>
-</li>
-<li>
-<p>每一级的异常流水需要遵循距离 M 级远的优先级更高，即在上一级有异常时，按上一级往后传；没有异常时，再判断当前阶段有无异常。</p>
-</li>
-<li>
-<p>F 级有 F_Exc_AdEL，取指令异常，即取地址低位没有对齐或者超出地址存储区域。注意在有 eret 信号时，直接跳转到中断处理程序，不产生异常。</p>
-</li>
-<li>
-<p>D 级 D_Exc_RI，即未知指令与 D_Exc_syscall，即 syscall 指令，从 CU 增加两个控制信号即可。</p>
-</li>
-<li>
-<p>E 级有 E_Exc_AriOv，即计算指令溢出。同时还可产生 E_Exc_DMOv，即地址指令溢出，但需要注意该异常需要在 M 级才真正出现，E 级只是提前计算，访存指令还未执行，需要跳过 E 级异常流水，直接传给 M 级再加入异常流水判断。</p>
-</li>
-<li>
-<p>M 级有 M_Exc_AdES 与 M_Exc_AdEL，即写入地址错误与读出地址错误。注意除了地址不对齐、超出范围之外，还有 M 级的地址运算溢出，<strong>以及不可用 lb,lh 读写 timer 中三个寄存器和不可写 timer 中 count 寄存器的要求</strong>。</p>
-</li>
-<li>
-<p>最后传至 CP0 的即 M 级的 ExcCode</p>
-</li>
+<li><p>所有异常级别低于中断级别，并均低于 Reset</p></li>
+<li><p>每一级的异常流水需要遵循距离 M 级远的优先级更高，即在上一级有异常时，按上一级往后传；没有异常时，再判断当前阶段有无异常。</p></li>
+<li><p>F 级有 F_Exc_AdEL，取指令异常，即取地址低位没有对齐或者超出地址存储区域。注意在有 eret 信号时，直接跳转到中断处理程序，不产生异常。</p></li>
+<li><p>D 级 D_Exc_RI，即未知指令与 D_Exc_syscall，即 syscall 指令，从 CU 增加两个控制信号即可。</p></li>
+<li><p>E 级有 E_Exc_AriOv，即计算指令溢出。同时还可产生 E_Exc_DMOv，即地址指令溢出，但需要注意该异常需要在 M 级才真正出现，E 级只是提前计算，访存指令还未执行，需要跳过 E 级异常流水，直接传给 M 级再加入异常流水判断。</p></li>
+<li><p>M 级有 M_Exc_AdES 与 M_Exc_AdEL，即写入地址错误与读出地址错误。注意除了地址不对齐、超出范围之外，还有 M 级的地址运算溢出，<strong>以及不可用 lb,lh 读写 timer 中三个寄存器和不可写 timer 中 count 寄存器的要求</strong>。</p></li>
+<li><p>最后传至 CP0 的即 M 级的 ExcCode</p></li>
 </ul>
-<h3 id="CU 模块设计">CU 模块设计</h3>
+<h3 id="cu 模块设计">CU 模块设计</h3>
 <ul>
 <li>相较 P4，省去 RegWrite 信号，直接译出当前指令需要写入的地址，如不需写入，默认写至 0，在写入 GRF 时直接略去</li>
-<li>直接译出当前指令 rs, rt, rd, shamt, imm16, imm26 以及所有控制信号供每个阶段选取使用，还需译出 Tuse_rs/rt 以及 E_Tnew 与 M_Tnew，各级输出对应信号至 Conflict 模块</li>
+<li>直接译出当前指令 rs, rt, rd, shamt, imm16,
+imm26 以及所有控制信号供每个阶段选取使用，还需译出 Tuse_rs/rt 以及 E_Tnew 与 M_Tnew，各级输出对应信号至 Conflict 模块</li>
 <li>将指令分类，分为：cal_r,cal_i,md,mt,mf,load,save,branch,branch_ucl,branch_cl,shift,jreg,jadd,jlink（ori 被归为 cal_i）</li>
 <li>增加四个指令，增加 GRF 写入数据来源、写入地址的选择</li>
 <li>增加 ALUDM、ALUAri 输出端口，表示当前使用 ALU 计算的指令是地址访存指令还是计算指令</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">   assign cal_r=(add||sub||And||Or||Xor||slt||sltu);</span><br><span class="line">assign cal_i=(addi||andi||xori||ori||lui);</span><br><span class="line"></span><br><span class="line">   assign md   =(mult||multu||div||divu);</span><br><span class="line">   assign mf   =(mfhi||mflo);</span><br><span class="line">   assign mt   =(mthi||mtlo);</span><br><span class="line"></span><br><span class="line">assign load=(lw||lh||lhu||lb||lbu);</span><br><span class="line">assign save=(sw||sh||sb);</span><br><span class="line"></span><br><span class="line">   assign branch=(beq||bne||branch_ucl||branch_cl);</span><br><span class="line">   assign branch_ucl=bltzal;</span><br><span class="line">   assign branch_cl=0;</span><br><span class="line"></span><br><span class="line">   assign jreg = jr;</span><br><span class="line">   assign jadd = (j||jal);</span><br><span class="line">   assign jlink = jal;</span><br><span class="line"></span><br><span class="line">   assign shift=sll;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>控制信号新增：MDU, MDUStart, MDUSelect, MFSelect, ByteSelect, DESelect</li>
-<li>控制信号调整：GRF_WA, GRF_WDSrc, ALUSelect, <strong>EXTSelect（cal_i 各个指令行为不同，注意对照指令集）</strong>,BranchSelect</li>
+<li>控制信号新增：MDU, MDUStart, MDUSelect, MFSelect, ByteSelect,
+DESelect</li>
+<li>控制信号调整：GRF_WA, GRF_WDSrc, ALUSelect,
+<strong>EXTSelect（cal_i 各个指令行为不同，注意对照指令集）</strong>,BranchSelect</li>
 </ul>
 <table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 9%" />
+<col style="width: 51%" />
+</colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th>Port name</th>
 <th>Direction</th>
 <th>Type</th>
@@ -653,205 +637,205 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>Ins</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>当级指令</td>
 </tr>
-<tr>
+<tr class="even">
 <td>branchTrue</td>
 <td>input</td>
 <td></td>
 <td>分支控制信号</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><strong>控制信号</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>GRF_WA</td>
 <td>output</td>
 <td>[4:0]</td>
 <td>写入的地址</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>GRF_WDSrc</td>
 <td>output</td>
 <td>[2:0]</td>
 <td>写入数据选择</td>
 </tr>
-<tr>
+<tr class="even">
 <td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>EXTSelect</td>
 <td>output</td>
 <td></td>
 <td>EXT 位拓展类型选择</td>
 </tr>
-<tr>
+<tr class="even">
 <td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>ALUSrc</td>
 <td>output</td>
 <td></td>
 <td>ALU_B 的数据源选择</td>
 </tr>
-<tr>
+<tr class="even">
 <td>ALUSelect</td>
 <td>output</td>
 <td>[3:0]</td>
 <td>ALU 运算类型选择</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><u>MDU</u></td>
 <td>output</td>
 <td></td>
 <td>乘除运算 + 读写 HI LO 信号（需要阻塞）</td>
 </tr>
-<tr>
+<tr class="even">
 <td><u>MDUStart</u></td>
 <td>output</td>
 <td></td>
 <td>乘除运算开始信号</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><u>MDUSelect</u></td>
 <td>output</td>
 <td>[2:0]</td>
 <td>乘除运算 + 写 HI LO 功能选择</td>
 </tr>
-<tr>
+<tr class="even">
 <td><u>MFSelect</u></td>
 <td>output</td>
 <td>[1:0]</td>
 <td>读 HI LO 功能选择</td>
 </tr>
-<tr>
+<tr class="odd">
 <td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>MemWrite</td>
 <td>output</td>
 <td></td>
 <td>内存写入控制</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>BranchSelect</td>
 <td>output</td>
 <td>[3:0]</td>
 <td>branch 判断类型选择</td>
 </tr>
-<tr>
+<tr class="even">
 <td>NPCSelect</td>
 <td>output</td>
 <td>[2:0]</td>
 <td>NPC 类型选择</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><u>ByteSelect</u></td>
 <td>output</td>
 <td>[1:0]</td>
 <td>访存数据类型选择</td>
 </tr>
-<tr>
+<tr class="even">
 <td><u>DESelect</u></td>
 <td>output</td>
 <td>[2:0]</td>
 <td>读取内存后结果拓展类型</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><strong>指令译码</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>opcode</td>
 <td>output</td>
 <td>[5:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>funct</td>
 <td>output</td>
 <td>[5:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>rs</td>
 <td>output</td>
 <td>[4:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>rt</td>
 <td>output</td>
 <td>[4:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>rd</td>
 <td>output</td>
 <td>[4:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>shamt</td>
 <td>output</td>
 <td>[4:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>imm16</td>
 <td>output</td>
 <td>[15:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>imm26</td>
 <td>output</td>
 <td>[25:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><strong>T 计算</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Tuse_rs</td>
 <td>output</td>
 <td>[1:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>Tuse_rt</td>
 <td>output</td>
 <td>[1:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>E_Tnew</td>
 <td>output</td>
 <td>[1:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>M_Tnew</td>
 <td>output</td>
 <td>[1:0]</td>
@@ -859,13 +843,13 @@
 </tr>
 </tbody>
 </table>
-<h4 id="T 计算表格">T 计算表格</h4>
+<h4 id="t 计算表格">T 计算表格</h4>
 <ul>
 <li>注意新增的乘除指令的 AT</li>
 </ul>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>Ins</th>
 <th>Tuse_rs</th>
 <th>Tuse_rt</th>
@@ -874,63 +858,63 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>cal_r</td>
 <td>1</td>
 <td>1</td>
 <td>1</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>cal_i</td>
 <td>1</td>
 <td></td>
 <td>1</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><u>md</u></td>
 <td>1</td>
 <td>1</td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><u>mt</u></td>
 <td>1</td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><u>mf</u></td>
 <td></td>
 <td></td>
 <td>1</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>load</td>
 <td>2</td>
 <td></td>
 <td>2</td>
 <td>1</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>save</td>
 <td>1</td>
 <td>2</td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>branch</td>
 <td>0</td>
 <td>0</td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>jreg</td>
 <td>0</td>
 <td></td>
@@ -939,77 +923,64 @@
 </tr>
 </tbody>
 </table>
-<h3 id="Conflit 模块设计：AT 控制阻塞，直接转发">Conflit 模块设计：AT 控制阻塞，直接转发</h3>
+<h3
+id="conflit 模块设计 at 控制阻塞直接转发">Conflit 模块设计：AT 控制阻塞，直接转发</h3>
 <h4 id="阻塞">阻塞</h4>
 <ul>
 <li>D 级判断将要使用的寄存器数据是否能得到转发更新，即后续写入相同寄存器的 Tnew 是否有大于 Tuse 的，如果有则需要阻塞，以在后续能得到转发更新。特判 0 号寄存器不需要阻塞，能够直接获得数据 0</li>
-<li>需要得到 D 级指令 rs, rt 的 Tuse，以及后续 E, M 级指令的 Tnew，在各级 CU 中计算，发送至冲突单元（W 级 Tnew 全是 0 不需要考虑，都可以内部转发解决）</li>
+<li>需要得到 D 级指令 rs, rt 的 Tuse，以及后续 E,
+M 级指令的 Tnew，在各级 CU 中计算，发送至冲突单元（W 级 Tnew 全是 0 不需要考虑，都可以内部转发解决）</li>
 <li>阻塞时需要暂停更新 PC 以及 F 级读出的指令，并且清空 D 级当前指令的译码输出，以替换为 nop 空泡</li>
 <li>P6 新增乘除 Stall，在乘除运算即将开始或正在进行时如遇到乘除指令需要 Stall</li>
 <li>P7 新增 eret 的 Stall，eret 与 mtc0 的写后读冲突，需要单独判断阻塞，判断方法为当 D 级为 eret 即将读 CP0 的 EPC 时，EM 级如果有 mtc0 即将写入 CP0 的 EPC，即 rd 为 14 时，阻塞。</li>
 </ul>
-<img src="image-20230311001016596.png" alt="image-20230311001016596"/>
+<p><img src="image-20230311001016596.png" alt="image-20230311001016596"/></p>
 <h4 id="转发">转发</h4>
 <ul>
-<li>
-<p>阻塞后，所有指令在需要读寄存器数据的时候都能够获得后续计算完毕的数据，每级转发出已算出的数据，发送给之前各级即可。</p>
-</li>
-<li>
-<p>需要读寄存器：D 级 GRF，Branch 计算需要 rs, rt 数据；E 级 ALU 需要 rs,rt 数据；M 级 DM 写入数据口需要 rt 数据</p>
-</li>
-<li>
-<p>需要写寄存器：E 级可转发出 D 级算的 PC+8；M 级可转发出 D 级算的 PC+8 和 E 级算的的 ALU_Y；W 级可转发出 D 级算的 PC+8，E 级算的的 ALU_Y 和 M 级读出的 DM 数据。<strong>根据当前指令 CU 译码得到的 GRF_WDSrc 进行选择</strong>。此外还有 W 级寄存器写入，可直接内部转发至 D 级读出</p>
-</li>
+<li><p>阻塞后，所有指令在需要读寄存器数据的时候都能够获得后续计算完毕的数据，每级转发出已算出的数据，发送给之前各级即可。</p></li>
+<li><p>需要读寄存器：D 级 GRF，Branch 计算需要 rs, rt 数据；E 级 ALU 需要 rs,rt
+数据；M 级 DM 写入数据口需要 rt 数据</p></li>
+<li><p>需要写寄存器：E 级可转发出 D 级算的 PC+8；M 级可转发出 D 级算的 PC+8 和 E 级算的的 ALU_Y；W 级可转发出 D 级算的 PC+8，E 级算的的 ALU_Y 和 M 级读出的 DM 数据。<strong>根据当前指令 CU 译码得到的 GRF_WDSrc 进行选择</strong>。此外还有 W 级寄存器写入，可直接内部转发至 D 级读出</p></li>
 </ul>
-<img src="image-20230311001109169.png" alt="image-20230311001109169" style="zoom:67%;" />
-<img src="image-20230311001116883.png" alt="image-20230311001116883" style="zoom:67%;" />
-<img src="image-20230311001122673.png" alt="image-20230311001122673" style="zoom:67%;" />
-<img src="image-20230311001129478.png" alt="image-20230311001129478" style="zoom:67%;" />
+<p><img src="image-20230311001109169.png" alt="image-20230311001109169" style="zoom:67%;" /></p>
+<p><img src="image-20230311001116883.png" alt="image-20230311001116883" style="zoom:67%;" /></p>
+<p><img src="image-20230311001122673.png" alt="image-20230311001122673" style="zoom:67%;" /></p>
+<p><img src="image-20230311001129478.png" alt="image-20230311001129478" style="zoom:67%;" /></p>
 <ul>
 <li>在主模块中，获取各级需要读的寄存器编号（D_rs,D_rt,E_rs,E_rt,M_rt），寄存器原读数（D_rs_data,D_rt_data,E_rs_data,E_rt_data,M_rt_data），写入的寄存器编号（E_GRF_WA,M_GRF_WA,W_GRF_WA）和数据（E_GRF_WD,M_GRF_WD,W_GRF_WD）</li>
 <li>比较读的编号和写的编号是否有相等的，如有相等的则代表有数据已经更新需要转发，转发优先级为更新次序，最后一次更新优先转发，即优先转发距离需要数据的阶段近的数据，特判如果需要读 0 号寄存器的数据，直接转发 0</li>
 <li>转发的数据（D_rs_fw,D_rt_fw,E_rs_fw,E_rt_fw,M_rt_fw）发送至各级需要的部分运算，并传递给下一级</li>
 </ul>
-<img src="image-20230311001150971.png" alt="image-20230311001150971" style="zoom: 67%;" />
+<p><img src="image-20230311001150971.png" alt="image-20230311001150971" style="zoom: 67%;" /></p>
 <h3 id="五级模块设计">五级模块设计</h3>
-<img src="image-20230311001621204.png" alt="image-20230311001621204" style="zoom:80%;" />
+<p><img src="image-20230311001621204.png" alt="image-20230311001621204" style="zoom:80%;" /></p>
 <ul>
-<li>
-<p>每个阶段之间以寄存器隔开，寄存器设计在每个模块输出处，使用 reg 类型</p>
-</li>
-<li>
-<p>每个阶段之间需要流水传递 Ins，PC，传给各级 CU 以译码出当前阶段的 rs，rt 以及需要写入的地址和写入数据的选择</p>
-</li>
-<li>
-<p>部分阶段前后间需要传递需要使用的 NPC, EXTout, ALU_Y, DM_RD</p>
-</li>
-<li>
-<p>P7 新增：各级传出 ExcCode 并流水传递以及 DS（指令是否在延迟槽中）；CU 需在 D 和 M 级多译出 rd，为对 CP0 的读写提供阻塞条件与地址</p>
-</li>
+<li><p>每个阶段之间以寄存器隔开，寄存器设计在每个模块输出处，使用 reg 类型</p></li>
+<li><p>每个阶段之间需要流水传递 Ins，PC，传给各级 CU 以译码出当前阶段的 rs，rt 以及需要写入的地址和写入数据的选择</p></li>
+<li><p>部分阶段前后间需要传递需要使用的 NPC, EXTout, ALU_Y,
+DM_RD</p></li>
+<li><p>P7 新增：各级传出 ExcCode 并流水传递以及 DS（指令是否在延迟槽中）；CU 需在 D 和 M 级多译出 rd，为对 CP0 的读写提供阻塞条件与地址</p></li>
 </ul>
-<h4 id="P6 更新乘除槽与储存器外置以及按字节访存">P6 更新乘除槽与储存器外置以及按字节访存</h4>
+<h4
+id="p6 更新乘除槽与储存器外置以及按字节访存">P6 更新乘除槽与储存器外置以及按字节访存</h4>
 <ul>
 <li>删去 F_IFU 与 M_DM，添加 M_DE 与 E_MDU</li>
 <li>乘除槽有两个寄存器，其中数据需要在 EMW 级流水，以便进行转发，并且需要添加转发信号控制</li>
 <li>外置储存器需要修改数据通路，前寄存器发送写入数据，后寄存器接收读出数据</li>
 </ul>
-<h4 id="P7 宏观 PC">P7 宏观 PC</h4>
+<h4 id="p7 宏观 pc">P7 宏观 PC</h4>
 <ul>
-<li>
-<p>在外界的视角，仅需知道当前周期的情况，外界通过给出中断与 CPU 沟通，中断处理器位于 M 级，所以 M 级表现在外，宏观 PC 为 M 级 PC</p>
-</li>
-<li>
-<p>为了保证做出单周期的表现，需要在出现异常中断时，所有流水寄存器统一做出跳转到 4180 中断处理程序的形态，并停止流水线中所有正在执行的指令的行为</p>
-</li>
+<li><p>在外界的视角，仅需知道当前周期的情况，外界通过给出中断与 CPU 沟通，中断处理器位于 M 级，所以 M 级表现在外，宏观 PC 为 M 级 PC</p></li>
+<li><p>为了保证做出单周期的表现，需要在出现异常中断时，所有流水寄存器统一做出跳转到 4180 中断处理程序的形态，并停止流水线中所有正在执行的指令的行为</p></li>
 </ul>
-<h4 id="1-Fetch">1. Fetch</h4>
+<h4 id="fetch">1. Fetch</h4>
 <ul>
 <li>包含 FDReg</li>
 <li>Fetch</li>
 </ul>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>Port name</th>
 <th>Direction</th>
 <th>Type</th>
@@ -1017,73 +988,73 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>clk</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>reset</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>F_Flush</td>
 <td>input</td>
 <td></td>
 <td>清空延迟槽信号</td>
 </tr>
-<tr>
+<tr class="even">
 <td>F_Stall</td>
 <td>input</td>
 <td></td>
 <td>阻塞更新 PC</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>NPC</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>D 级 NPC 计算出的 NPC 传入</td>
 </tr>
-<tr>
+<tr class="even">
 <td>F_PC</td>
 <td><strong>output</strong></td>
 <td>reg [31:0]</td>
 <td>&lt;=NPC，传出至外部指令储存器</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>F_Ins</td>
 <td><strong>input</strong></td>
 <td>[31:0]</td>
 <td>需要从外部指令储存器读入 Ins</td>
 </tr>
-<tr>
+<tr class="even">
 <td><strong>FD 寄存器</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>D_Stall</td>
 <td>input</td>
 <td></td>
 <td>阻塞更新 FD 间寄存器</td>
 </tr>
-<tr>
+<tr class="even">
 <td>D_Flush</td>
 <td>input</td>
 <td></td>
 <td>清除延迟槽信号</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>D_PC</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=F_PC</td>
 </tr>
-<tr>
+<tr class="even">
 <td>D_Ins</td>
 <td>output</td>
 <td>reg [31:0]</td>
@@ -1094,14 +1065,20 @@
 <ul>
 <li>F 级与指令储存的数据交换</li>
 </ul>
-<img src="image-20230311001208043.png" alt="image-20230311001208043" style="zoom:67%;" />
-<h4 id="2-Decode">2. Decode</h4>
+<p><img src="image-20230311001208043.png" alt="image-20230311001208043" style="zoom:67%;" /></p>
+<h4 id="decode">2. Decode</h4>
 <ul>
 <li>包括 D_CU, EXT, NPC (Branch), DEReg</li>
 </ul>
 <table>
+<colgroup>
+<col style="width: 32%" />
+<col style="width: 14%" />
+<col style="width: 16%" />
+<col style="width: 36%" />
+</colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th>Port name</th>
 <th>Direction</th>
 <th>Type</th>
@@ -1109,181 +1086,181 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>clk</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>reset</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>D_PC</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>PC 流水</td>
 </tr>
-<tr>
+<tr class="even">
 <td>D_Ins</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>指令流水</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><strong>Conflict/Forward</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>Tuse_rs</td>
 <td>output</td>
 <td>[1:0]</td>
 <td>AT 算阻塞</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Tuse_rt</td>
 <td>output</td>
 <td>[1:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>D_rs</td>
 <td>output</td>
 <td>[4:0]</td>
 <td>D 级指令读寄存器的编号</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>D_rt</td>
 <td>output</td>
 <td>[4:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>D_rs_data</td>
 <td>output</td>
 <td>[31:0]</td>
 <td>D 级指令读寄存器原数据</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>D_rt_data</td>
 <td>output</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>D_rs_fw</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>D 级转发后寄存器数据</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>D_rt_fw</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><strong>EXT</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>imm16</td>
 <td></td>
 <td>[15:0]</td>
 <td>EXT 输入</td>
 </tr>
-<tr>
+<tr class="even">
 <td>EXTSelect</td>
 <td></td>
 <td></td>
 <td>EXT 功能选择</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>D_EXT_out</td>
 <td></td>
 <td>[31:0]</td>
 <td>EXT 输出</td>
 </tr>
-<tr>
+<tr class="even">
 <td><strong>NPC</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>NPCSelect</td>
 <td></td>
 <td>[2:0]</td>
 <td>下一指令地址选择</td>
 </tr>
-<tr>
+<tr class="even">
 <td>D_branchTrue</td>
 <td></td>
 <td></td>
 <td>是否分支信号，进入流水</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>F_PC</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>算 NPC 用</td>
 </tr>
-<tr>
+<tr class="even">
 <td>NPC</td>
 <td>output</td>
 <td>[31:0]</td>
 <td>传给 F 级 IFU</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><strong>DEReg</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>E_Flush</td>
 <td>input</td>
 <td></td>
 <td>阻塞清空 DE 寄存器</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>E_PC</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=D_PC</td>
 </tr>
-<tr>
+<tr class="even">
 <td>E_Ins</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=D_Ins</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>E_rs_data</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=<strong>D_rs_fw</strong></td>
 </tr>
-<tr>
+<tr class="even">
 <td>E_rt_data</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=<strong>D_rt_fw</strong></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>E_EXT_out</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=D_EXT_out</td>
 </tr>
-<tr>
+<tr class="even">
 <td>E_branchTrue</td>
 <td>output</td>
 <td>reg [31:0]</td>
@@ -1291,14 +1268,21 @@
 </tr>
 </tbody>
 </table>
-<h4 id="3-Execute">3. Execute</h4>
+<h4 id="execute">3. Execute</h4>
 <ul>
 <li>包括 E_CU, E_ALU, E_MDU, EMReg</li>
-<li>需在此处多向 Conflict 传递 MDU 指令以及乘除运行信息，并向流水中传递 HI, LO 以便 mf 指令 W 级读取</li>
+<li>需在此处多向 Conflict 传递 MDU 指令以及乘除运行信息，并向流水中传递 HI,
+LO 以便 mf 指令 W 级读取</li>
 </ul>
 <table>
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 12%" />
+<col style="width: 13%" />
+<col style="width: 47%" />
+</colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th>Port name</th>
 <th>Direction</th>
 <th>Type</th>
@@ -1306,223 +1290,223 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>clk</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>reset</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>E_PC</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>PC 流水</td>
 </tr>
-<tr>
+<tr class="even">
 <td>E_Ins</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>指令流水</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><strong>Conflict/Forward</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>E_branchTrue</td>
 <td>input</td>
 <td></td>
 <td>是否分支信号</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>E_Tnew</td>
 <td>output</td>
 <td>[1:0]</td>
 <td>AT 算阻塞</td>
 </tr>
-<tr>
+<tr class="even">
 <td>E_rs</td>
 <td>output</td>
 <td>[4:0]</td>
 <td>E 级指令读寄存器的编号</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>E_rt</td>
 <td>output</td>
 <td>[4:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>E_rs_data</td>
 <td>output</td>
 <td>[31:0]</td>
 <td>E 级指令读寄存器原数据</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>E_rt_data</td>
 <td>output</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>E_GRF_WA</td>
 <td>output</td>
 <td>[4:0]</td>
 <td>E 级指令写寄存器的编号</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>E_rs_fw</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>E 级接收转发后寄存器数据</td>
 </tr>
-<tr>
+<tr class="even">
 <td>E_rt_fw</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>GRF_WDSrc</td>
 <td></td>
 <td>[2:0]</td>
 <td>E 级指令写寄存器的数据选择</td>
 </tr>
-<tr>
+<tr class="even">
 <td>E_GRF_WD</td>
 <td>output</td>
 <td>[31:0]</td>
 <td>E 级指令写寄存器的数据</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><strong>ALU</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>E_EXT_out</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>ALUSrc</td>
 <td></td>
 <td></td>
 <td>ALU_B 数据源选择</td>
 </tr>
-<tr>
+<tr class="even">
 <td>ALUSelect</td>
 <td></td>
 <td>[3:0]</td>
 <td>ALU 功能选择</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>E_ALU_A</td>
 <td></td>
 <td>[31:0]</td>
 <td>=<strong>E_rs_fw</strong>：ALU_A 口数据</td>
 </tr>
-<tr>
+<tr class="even">
 <td>E_ALU_B</td>
 <td></td>
 <td>[31:0]</td>
 <td>=<strong>E_rt_fw</strong>/E_EXT_out：ALU_B 口数据</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><strong>MDU</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>MDU</td>
 <td>output</td>
 <td></td>
 <td>MDU 指令</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>MDUSelect</td>
 <td></td>
 <td>[2:0]</td>
 <td>CU 给 MDU 的功能选择</td>
 </tr>
-<tr>
+<tr class="even">
 <td>MDUStart</td>
 <td>output</td>
 <td></td>
 <td>MDU 运算开始</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>MDUBusy</td>
 <td>output</td>
 <td></td>
 <td>MDU 运算进行（发给 Conflict 判断阻塞)</td>
 </tr>
-<tr>
+<tr class="even">
 <td>E_HI</td>
 <td></td>
 <td>[31:0]</td>
 <td>待转发的 E 级 MDU 的 HI 结果</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>E_LO</td>
 <td></td>
 <td>[31:0]</td>
 <td>待转发的 E 级 MDU 的 LO 结果</td>
 </tr>
-<tr>
+<tr class="even">
 <td><strong>EMReg</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>M_PC</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=E_PC</td>
 </tr>
-<tr>
+<tr class="even">
 <td>M_Ins</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=E_Ins</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>M_ALU_Y</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=E_ALU_Y</td>
 </tr>
-<tr>
+<tr class="even">
 <td>M_rt_data</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;<strong>=E_rt_fw</strong></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>M_branchTrue</td>
 <td>output</td>
 <td>reg</td>
 <td>&lt;=E_branchTrue</td>
 </tr>
-<tr>
+<tr class="even">
 <td>M_HI</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=E_HI</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>M_LO</td>
 <td>output</td>
 <td>reg [31:0]</td>
@@ -1535,7 +1519,7 @@
 </ul>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>Port name</th>
 <th>Direction</th>
 <th>Type</th>
@@ -1543,25 +1527,25 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>op</td>
 <td>input</td>
 <td>[3:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>A</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>B</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>Y</td>
 <td>output</td>
 <td>[31:0]</td>
@@ -1570,17 +1554,18 @@
 </tbody>
 </table>
 <ul>
-<li>
-<p>#####E_MDU</p>
+<li><p>#####E_MDU</p>
 <ul>
-<li>当指令为 mthi, mtlo，将寄存器数据写入 HI, LO 时，始终上升沿直接给 HI, LO 赋为 A</li>
-<li>当为其余四条运算指令时，设置临时计数变量 cnt，初始为 0，接受到 Start 信号时，开始设置 Busy 为 1；根据 MDU 功能选择编码，分别直接计算出 HI, LO 对应结果赋值，因为其他乘除操作已被阻塞，不会提前读取或写入；设置 cnt 为 5 或 10，每周期 -1，cnt==1 代表运算结束，持续保持 Busy 为 5/10 周期后将 cnt, Busy 归零。</li>
-</ul>
-</li>
+<li>当指令为 mthi, mtlo，将寄存器数据写入 HI, LO 时，始终上升沿直接给 HI,
+LO 赋为 A</li>
+<li>当为其余四条运算指令时，设置临时计数变量 cnt，初始为 0，接受到 Start 信号时，开始设置 Busy 为 1；根据 MDU 功能选择编码，分别直接计算出 HI,
+LO 对应结果赋值，因为其他乘除操作已被阻塞，不会提前读取或写入；设置 cnt 为 5 或 10，每周期 -1，cnt==1 代表运算结束，持续保持 Busy 为 5/10 周期后将 cnt,
+Busy 归零。</li>
+</ul></li>
 </ul>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>Port name</th>
 <th>Direction</th>
 <th>Type</th>
@@ -1588,55 +1573,55 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>clk</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>reset</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Start</td>
 <td>input</td>
 <td></td>
 <td>CU 传入开始乘除运算信号</td>
 </tr>
-<tr>
+<tr class="even">
 <td>MDUSelect</td>
 <td>input</td>
 <td>[2:0]</td>
 <td>CU 传入乘除功能选择</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>A</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>B</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Busy</td>
 <td>output</td>
 <td>reg</td>
 <td>正在运算信号</td>
 </tr>
-<tr>
+<tr class="even">
 <td>HI</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>LO</td>
 <td>output</td>
 <td>reg [31:0]</td>
@@ -1644,14 +1629,20 @@
 </tr>
 </tbody>
 </table>
-<h4 id="4-Memory">4. Memory</h4>
+<h4 id="memory">4. Memory</h4>
 <ul>
 <li>包括 M_CU, M_DE</li>
 <li>因储存器外置，删除 DM，加入对字节存取数据的操作，包括通过控制四位 ByteEn 各位</li>
 </ul>
 <table>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 12%" />
+<col style="width: 13%" />
+<col style="width: 43%" />
+</colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th>Port name</th>
 <th>Direction</th>
 <th>Type</th>
@@ -1659,211 +1650,211 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>clk</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>reset</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>M_PC</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>M_Ins</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><strong>Conflict/Forward</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>M_branchTrue</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>M_Tnew</td>
 <td>output</td>
 <td>[1:0]</td>
 <td>AT 算阻塞</td>
 </tr>
-<tr>
+<tr class="even">
 <td>M_GRF_WA</td>
 <td>output</td>
 <td>[4:0]</td>
 <td>M 级指令写寄存器编号</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>M_GRF_WD</td>
 <td>output</td>
 <td>[31:0]</td>
 <td>M 级指令写寄存器数据</td>
 </tr>
-<tr>
+<tr class="even">
 <td>M_rt</td>
 <td>output</td>
 <td>[4:0]</td>
 <td>M 级指令读寄存器编号</td>
 </tr>
-<tr>
+<tr class="odd">
 <td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>GRF_WDSrc</td>
 <td></td>
 <td>[2:0]</td>
 <td>M 级指令写寄存器数据选择</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>MFSelect</td>
 <td></td>
 <td>[1:0]</td>
 <td>读 HI LO 功能选择</td>
 </tr>
-<tr>
+<tr class="even">
 <td>M_HI</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>待转发的 E 级 MDU 的 HI 结果</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>M_LO</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>待转发的 E 级 MDU 的 LO 结果</td>
 </tr>
-<tr>
+<tr class="even">
 <td>M_ALU_Y</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>待转发的 E 级 ALU 计算结果</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><strong>M_BE</strong>（ByteEnable）</td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>lowAddr</td>
 <td></td>
 <td>[1:0]</td>
 <td>=M_ALU_Y[1:0]，DM 写入地址地两位</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>M_rt_fw</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>M 级接收转发后将写入 DM 的数据</td>
 </tr>
-<tr>
+<tr class="even">
 <td>ByteSelect</td>
 <td></td>
 <td>[1:0]</td>
 <td>CU 访存数据类型选择</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>MemWrite</td>
 <td></td>
 <td></td>
 <td>DM 写使能</td>
 </tr>
-<tr>
+<tr class="even">
 <td>ByteEn</td>
 <td>output</td>
 <td>reg [3:0]</td>
 <td>控制每一位是否读写的信号输出</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>M_DM_WD</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><strong>M_DE</strong>（DataExtend）</td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>DESelect</td>
 <td></td>
 <td>[2:0]</td>
 <td>字节数据拓展类型</td>
 </tr>
-<tr>
+<tr class="even">
 <td>M_DM_RDin</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>M_DM_RDout</td>
 <td></td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><strong>MWReg</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>W_PC</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=M_PC</td>
 </tr>
-<tr>
+<tr class="even">
 <td>W_Ins</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=M_Ins</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>W_ALU_Y</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=M_ALU_Y</td>
 </tr>
-<tr>
+<tr class="even">
 <td>W_DM_RD</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=M_DM_RDout</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>W_branchTrue</td>
 <td>output</td>
 <td>reg</td>
 <td>&lt;=M_branchTrue</td>
 </tr>
-<tr>
+<tr class="even">
 <td>W_HI</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=M_HI</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>W_LO</td>
 <td>output</td>
 <td>reg [31:0]</td>
@@ -1872,25 +1863,19 @@
 </tbody>
 </table>
 <ul>
-<li>
-<h5 id="M-BE（计算字节访存使能，调整四字节写入数据）">M_BE（计算字节访存使能，调整四字节写入数据）</h5>
+<li><h5
+id="m_be 计算字节访存使能调整四字节写入数据">M_BE（计算字节访存使能，调整四字节写入数据）</h5>
 <ul>
-<li>
-<p>合并在 Memory 中，在写入的条件下，根据写入数据类型和写入地址低两位产生四个字节的每一位控制信号，即四位 ByteEn</p>
-</li>
-<li>
-<p>后续再根据 ByteEn 调整将写入内存的数据，需将待写入的字节移动到对应为 En1 的位置</p>
-</li>
-</ul>
-</li>
-<li>
-<h5 id="M-DE（调整内存读出数据，截取需要的字节后拓展）">M_DE（调整内存读出数据，截取需要的字节后拓展）</h5>
+<li><p>合并在 Memory 中，在写入的条件下，根据写入数据类型和写入地址低两位产生四个字节的每一位控制信号，即四位 ByteEn</p></li>
+<li><p>后续再根据 ByteEn 调整将写入内存的数据，需将待写入的字节移动到对应为 En1 的位置</p></li>
+</ul></li>
+<li><h5
+id="m_de 调整内存读出数据截取需要的字节后拓展">M_DE（调整内存读出数据，截取需要的字节后拓展）</h5>
 <ul>
-<li>
-<p>注意 DESelect 种类编码，注意需要将读出字节移动至低位，高位进行拓展补齐</p>
+<li><p>注意 DESelect 种类编码，注意需要将读出字节移动至低位，高位进行拓展补齐</p>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>Port name</th>
 <th>Direction</th>
 <th>Type</th>
@@ -1898,49 +1883,43 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>lowAddr</td>
 <td>input</td>
 <td>[1:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>DESelect</td>
 <td>input</td>
 <td>[2:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>in</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>out</td>
 <td>output</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
 </tbody>
-</table>
-</li>
+</table></li>
+</ul></li>
+<li>M 级与内存数据交换</li>
+<li><img src="image-20230311001314893.png" alt="image-20230311001314893" style="zoom:67%;" /></li>
 </ul>
-</li>
-<li>
-<p>M 级与内存数据交换</p>
-</li>
-<li>
-<img src="image-20230311001314893.png" alt="image-20230311001314893" style="zoom:67%;" />
-</li>
-</ul>
-<h4 id="5-Writeback">5. Writeback</h4>
+<h4 id="writeback">5. Writeback</h4>
 <ul>
 <li>包括 W_CU</li>
 </ul>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>Port name</th>
 <th>Direction</th>
 <th>Type</th>
@@ -1948,85 +1927,85 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>clk</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>reset</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>W_Ins</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>W_PC</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><strong>Conflict/Forward</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>W_branchTrue</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>W_GRF_WA</td>
 <td>output</td>
 <td>[4:0]</td>
 <td>W 级指令写寄存器编号</td>
 </tr>
-<tr>
+<tr class="even">
 <td>GRF_WDSrc</td>
 <td></td>
 <td>[2:0]</td>
 <td>W 级指令写寄存器数据选择</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>MFSelect</td>
 <td></td>
 <td>[1:0]</td>
 <td>读 HI LO 功能选择</td>
 </tr>
-<tr>
+<tr class="even">
 <td>W_ALU_Y</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>待转发的 E 级 ALU 计算结果</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>W_DM_RD</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>待转发的 M 级 DM 读出数据</td>
 </tr>
-<tr>
+<tr class="even">
 <td>W_HI</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>待转发的 E 级 MDU 的 HI 结果</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>W_LO</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>待转发的 E 级 MDU 的 LO 结果</td>
 </tr>
-<tr>
+<tr class="even">
 <td>W_GRF_WD</td>
 <td>output</td>
 <td>[31:0]</td>
@@ -2040,18 +2019,18 @@
 <li>中断测试</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">.text </span><br><span class="line">lui $1,0xffff</span><br><span class="line">ori $1,$1,0xfc01</span><br><span class="line">mtc0 $1,$12</span><br><span class="line">lui $2,0xffff</span><br><span class="line">#int-grf</span><br><span class="line">ori $2,$2,0x1234</span><br><span class="line">#int-store</span><br><span class="line">sw $2,0($0)</span><br><span class="line">ori $3,$0,0xfc01</span><br><span class="line">#int-mfc0</span><br><span class="line">mtc0 $3,$12</span><br><span class="line">#int-load</span><br><span class="line">lw $4,0($0)</span><br><span class="line">lw $5,0($0)</span><br><span class="line">#int-stall</span><br><span class="line">add $6,$5,$4</span><br><span class="line">lui $7,0x7fff</span><br><span class="line">lui $8,0x7fff</span><br><span class="line">#int-beq</span><br><span class="line">beq $7,$8,label1</span><br><span class="line">#int&amp;exc-BD</span><br><span class="line">add $9,$7,$8</span><br><span class="line">#int-D beq</span><br><span class="line">addi $10,$0,0x0001</span><br><span class="line">addi $11,$0,0x0002</span><br><span class="line">beq $7,$8,label1</span><br><span class="line">nop</span><br><span class="line"></span><br><span class="line">label1:</span><br><span class="line">mult $7,$8</span><br><span class="line">syscall</span><br><span class="line">div $7,$8</span><br><span class="line">syscall</span><br><span class="line">mthi $7</span><br><span class="line">syscall</span><br><span class="line">mtlo $8</span><br><span class="line">syscall</span><br><span class="line">mfhi $10</span><br><span class="line">mflo $11</span><br><span class="line">mult $7,$8</span><br><span class="line">beq $7,$8,label2</span><br><span class="line">#int-many nop</span><br><span class="line">mflo $12</span><br><span class="line">addi $12,$0,0x0001</span><br><span class="line">addi $12,$0,0x0002</span><br><span class="line"></span><br><span class="line">label2:</span><br><span class="line">addi $13,$0,0x0001</span><br><span class="line"></span><br><span class="line">end:</span><br><span class="line">beq $0,$0,end</span><br><span class="line">nop</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.ktext 0x4180</span><br><span class="line">main_handler:</span><br><span class="line">mfc0 $26,$13</span><br><span class="line">mfc0 $27,$14</span><br><span class="line">ori $27,$0,0x007c</span><br><span class="line">and $26,$27,$26</span><br><span class="line">beq $0,$26,interrupt</span><br><span class="line">nop</span><br><span class="line">mfc0 $26,$14</span><br><span class="line">add $26,$26,4</span><br><span class="line">mtc0 $26,$14</span><br><span class="line">beq $0,$0,return</span><br><span class="line">nop</span><br><span class="line"></span><br><span class="line">interrupt:</span><br><span class="line">ori $27,$0,0x2137</span><br><span class="line">sw $27,0x7f20($0)</span><br><span class="line">beq $0,$0,return</span><br><span class="line">nop</span><br><span class="line"></span><br><span class="line">return:</span><br><span class="line">eret</span><br></pre></td></tr></table></figure>
-<img src="image-20230311001726074.png" alt="image-20230311001726074"/>
+<p><img src="image-20230311001726074.png" alt="image-20230311001726074"/></p>
 <ul>
 <li>异常测试：</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line">.text</span><br><span class="line">    mtc0 $0, $12</span><br><span class="line">    ori $at, $0, 0xfffc</span><br><span class="line"></span><br><span class="line"> #====OV=====</span><br><span class="line">    lui $t0, 0x7fff</span><br><span class="line">    lui $t1, 0xffff</span><br><span class="line">    add $t2, $t0, $t1</span><br><span class="line">    sub $t2, $t0, $t1</span><br><span class="line">    sub $t2, $t1, $t0</span><br><span class="line">    lui $t1, 0x7fff</span><br><span class="line">    add $t2, $t0, $t1</span><br><span class="line">    ori $t1, $t1, 0xffff</span><br><span class="line">    addi $t2, $t1, 0xfffffff0</span><br><span class="line">    addi $t1, $t1, 0x0010</span><br><span class="line"></span><br><span class="line"> #=====SYSCALL=====</span><br><span class="line">    syscall</span><br><span class="line">    </span><br><span class="line">    #=====ADEL=====</span><br><span class="line">    lui $t1, 0x7fff</span><br><span class="line">    jal label1</span><br><span class="line">    add $ra, $ra, $t1</span><br><span class="line">label1:</span><br><span class="line">    jr $ra</span><br><span class="line">    nop</span><br><span class="line">    jal label2</span><br><span class="line">    addi $ra, $ra, 1</span><br><span class="line">label2:</span><br><span class="line">    jr $ra</span><br><span class="line">    nop</span><br><span class="line">    ori $t0, $0, 0x7f00</span><br><span class="line">    ori $t2, $0, 0x7f20</span><br><span class="line">    sw $t0, 0($0)</span><br><span class="line">    lw $t0, 0($0)</span><br><span class="line">    lw $t0, 1($0)</span><br><span class="line">    lw $t0, 2($0)</span><br><span class="line">    lh $t0, 3($0)</span><br><span class="line">    lh $t0, 0($t0)</span><br><span class="line">    lh $t0, 2($t0)</span><br><span class="line">    lb $t0, 0($t0)</span><br><span class="line">    lb $t0, 3($t0)</span><br><span class="line">loop_timer1:</span><br><span class="line">    lw $t1, 0($t0)</span><br><span class="line">    addi $t0, $t0, 4</span><br><span class="line">    bne $t0, $t2, loop_timer1</span><br><span class="line">    nop</span><br><span class="line">    ori $t0, $0, 0x3000</span><br><span class="line">    lw $t0, 0($t0)</span><br><span class="line">    lui $t0, 0x7fff</span><br><span class="line">    ori $t0, $t0, 0xffff</span><br><span class="line"> lw $t0, 1($t0)</span><br><span class="line"> lw $t0, -4($0)</span><br><span class="line"> </span><br><span class="line"> #=====ADES=====</span><br><span class="line"> sw $0, 1($0)</span><br><span class="line">    sw $0, 2($0)</span><br><span class="line">    sh $0, 3($0)</span><br><span class="line">    sw $0, 4($0)</span><br><span class="line">    sh $0, 6($0)</span><br><span class="line">    sb $0, 7($0)</span><br><span class="line">    ori $t0, $0, 0x7f00</span><br><span class="line">    sh $0, 0($t0)</span><br><span class="line">    sh $0, 2($t0)</span><br><span class="line">    sb $0, 0($t0)</span><br><span class="line">    sb $0, 3($t0)</span><br><span class="line">    ori $t1, $0, 0x7f30</span><br><span class="line">loop_timer2:</span><br><span class="line"> sw $0, 0($t0)</span><br><span class="line"> addi $t0, $t0, 4</span><br><span class="line">    bne $t0, $t1, loop_timer2</span><br><span class="line">    nop</span><br><span class="line">    ori $t0, $0, 0x3000</span><br><span class="line">    sw $0, 0($t0)</span><br><span class="line">    lui $t0, 0x7fff</span><br><span class="line">    ori $t0, $t0, 0xffff</span><br><span class="line"> sw $0, 1($t0)</span><br><span class="line"> sw $0, -1($0)</span><br><span class="line"></span><br><span class="line"> #=====ALTOGETHER=====</span><br><span class="line"> lui $t0, 0x7fff</span><br><span class="line"> ori $t1, $t0, 0xffff</span><br><span class="line"> sw $0, 0($t0)</span><br><span class="line"> addi $t1, $t1, 1</span><br><span class="line"> syscall</span><br><span class="line"> </span><br><span class="line"> sw $0, 0($t0)</span><br><span class="line"> addi $t1, $t1, 1</span><br><span class="line"> nop</span><br><span class="line"> </span><br><span class="line"> sw $0, 0($t0)</span><br><span class="line"> addi $t1, $t1, 0</span><br><span class="line"> syscall</span><br><span class="line"> </span><br><span class="line"> sw $0, 0($0)</span><br><span class="line"> addi $t1, $t1, 1</span><br><span class="line"> syscall</span><br><span class="line"> </span><br><span class="line"> lui $t0, 0x8000</span><br><span class="line"> addi $t1, $t1, 1</span><br><span class="line"> beq $t0, $t1, end</span><br><span class="line"> nop</span><br><span class="line"></span><br><span class="line">end:</span><br><span class="line">    beq $0, $0, end</span><br><span class="line">    nop</span><br><span class="line"></span><br><span class="line">.ktext 0x4180</span><br><span class="line">_main_handler:</span><br><span class="line">    mfc0 $k0, $13</span><br><span class="line">    mfc0 $k0, $14</span><br><span class="line">    and $k0, $k0, $at</span><br><span class="line">    addi $k0, $k0, 4</span><br><span class="line">    mtc0 $k0, $14</span><br><span class="line">    eret</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<img src="image-20230311001804942.png" alt="image-20230311001804942"/>
+<p><img src="image-20230311001804942.png" alt="image-20230311001804942"/></p>
 <h2 id="掉的坑">掉的坑</h2>
 <ul>
 <li><strong>逻辑判断式中信号不可有高阻态否则出 x</strong>，删除赋值逻辑时需给 0，否则删除所有位置的这个信号</li>
 <li>地址异常中，合法地址包括 DM，TC0，TC1 以及 <strong> 中断发生器 </strong> 响应地址</li>
 </ul>
-<img src="image-20230311001827809.png" alt="image-20230311001827809" style="zoom:80%;" />
+<p><img src="image-20230311001827809.png" alt="image-20230311001827809" style="zoom:80%;" /></p>
 <ul>
 <li>注意出现异常或中断时，除了需要将所有级寄存器修改至即将跳转至 handler 的样貌之外，还需要将 M 级读写字节使能设为 0000，防止后续指令的继续进行以及 <strong> 当前指令在 M 级对内存的写入</strong></li>
 <li>注意 eret 与 mtc0 的写后读冲突，需要单独判断阻塞，判断方法为当 D 级为 eret 即将读 CP0 的 EPC 时，EM 级如果有 mtc0 即将写入 CP0 的 EPC，即 rd 为 14 时，阻塞。</li>
@@ -2059,56 +2038,39 @@
 <li>timer 中不可写 count 寄存器，并且只能用 lw，sw 进行读写</li>
 </ul>
 <h2 id="思考题">思考题</h2>
-<ol>
-<li>
-<p>当键盘鼠标按键时，会发出一个中断信号，经过中断控制器处理传到 CPU，然后 CPU 根据不同的中断号执行不同的中断响应程序，然后进行相应的 IO 操作，如把按下的按键编码读到寄存器，执行相应功能。</p>
-</li>
-<li>
-<p>为了不与正常的指令范围冲突，需要在特定地址提前放置中断处理程序并且其他指令与数据不能包含这段地址范围。用户不可自定义入口地址，因为自定义的地址上的中断处理程序可能会被其他数据覆盖。并且如果由用户提供中断异常处理程序的话，跳转的地址也是计算出来的，但是如果在计算跳转地址的时候出现了错误，异常处理就无法正常进行。</p>
-</li>
-<li>
-<p>CPU 外设数量可能会更多，并且是变化的，不可硬性直接相连。需要添加桥，根据读写地址或者根据外设特定信号，动态选择读写外设。</p>
-</li>
-<li>
-<p>idle，load，cnt 状态行为相同，只有 interrupt 状态控制功能不同</p>
-<ol>
-<li>
-<p>idle 状态下，如果计数器使能为 1 则转至 load 状态</p>
-</li>
-<li>
-<p>load 状态下，加载初始值之后转至 cnt 状态</p>
-</li>
-<li>
-<p>cnt 状态下，如计数器使能为 1 则开始倒计数，cnt==0 之后产生一周期终端信号，状态变为 interrupt；如果计数器使能为 0，则回到 idle</p>
-</li>
-<li>
-<p>interrupt 状态下</p>
-<ol>
+<ol type="1">
+<li><p>当键盘鼠标按键时，会发出一个中断信号，经过中断控制器处理传到 CPU，然后 CPU 根据不同的中断号执行不同的中断响应程序，然后进行相应的 IO 操作，如把按下的按键编码读到寄存器，执行相应功能。</p></li>
+<li><p>为了不与正常的指令范围冲突，需要在特定地址提前放置中断处理程序并且其他指令与数据不能包含这段地址范围。用户不可自定义入口地址，因为自定义的地址上的中断处理程序可能会被其他数据覆盖。并且如果由用户提供中断异常处理程序的话，跳转的地址也是计算出来的，但是如果在计算跳转地址的时候出现了错误，异常处理就无法正常进行。</p></li>
+<li><p>CPU 外设数量可能会更多，并且是变化的，不可硬性直接相连。需要添加桥，根据读写地址或者根据外设特定信号，动态选择读写外设。</p></li>
+<li><p>idle，load，cnt 状态行为相同，只有 interrupt 状态控制功能不同</p>
+<ol type="1">
+<li><p>idle 状态下，如果计数器使能为 1 则转至 load 状态</p></li>
+<li><p>load 状态下，加载初始值之后转至 cnt 状态</p></li>
+<li><p>cnt 状态下，如计数器使能为 1 则开始倒计数，cnt==0 之后产生一周期终端信号，状态变为 interrupt；如果计数器使能为 0，则回到 idle</p></li>
+<li><p>interrupt 状态下</p>
+<ol type="1">
 <li>如果在模式 0，计数到 0 时计数器使能变 0，持续产生中断，变为 idle 状态，直到 en 为 1，中断才清零，重新倒计时</li>
 <li>如果在模式 1，计数为 0 时中断直接变 0，仅持续一个周期，但 en 仍为 1，变为 idle 状态后可以自动循环继续倒计时，产生周期中断脉冲</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>
-<p>倘若中断信号流入的时候，在检测宏观 PC 的一级 CPU 该级所有信息均为空，则无法获得当前的 PC 以及当前指令是否在延迟槽中，无法获得执行完中断程序后的正确返回地址。所以清空流水线时需要保留原指令的地址以及是否处于延迟槽的信号。</p>
-</li>
-<li>
-<p>Register specifiers rs and rd must not be equal, because such an instruction does not have the same effect when reexecuted. The result of executing such an instruction is UNPREDICTABLE. This restriction permits an exception handler to resume execution by re-executing the branch when an exception occurs in the branch delay slot.</p>
-</li>
-<li>
-<p>指令集要求。寄存器说明符 rs 和 rd 不得相等，因为此类指令在重新执行时不具有相同的效果。执行此类指令的结果是不可预测的。此限制允许异常处理程序在分支延迟槽中发生异常时通过重新执行分支来恢复执行。</p>
-</li>
+</ol></li>
+</ol></li>
+<li><p>倘若中断信号流入的时候，在检测宏观 PC 的一级 CPU
+该级所有信息均为空，则无法获得当前的 PC 以及当前指令是否在延迟槽中，无法获得执行完中断程序后的正确返回地址。所以清空流水线时需要保留原指令的地址以及是否处于延迟槽的信号。</p></li>
+<li><p>Register specifiers rs and rd must not be equal, because such an
+instruction does not have the same effect when reexecuted. The result of
+executing such an instruction is UNPREDICTABLE. This restriction permits
+an exception handler to resume execution by re-executing the branch when
+an exception occurs in the branch delay slot.</p></li>
+<li><p>指令集要求。寄存器说明符 rs 和 rd
+不得相等，因为此类指令在重新执行时不具有相同的效果。执行此类指令的结果是不可预测的。此限制允许异常处理程序在分支延迟槽中发生异常时通过重新执行分支来恢复执行。</p></li>
 </ol>
 <h2 id="结算页面">结算页面</h2>
 <p>计组实验结束了，当你经历过面向对，象、操作系统、编译技术等课程的洗礼，或许你又会觉得，当年的计组是那么和蔼可亲。但请相信，没有北航人跨不过的坎”我们总要背起行囊，扬起风帆，向尽头之海进发，一往无前。</p>
 <p>感谢你一路以来的不离不弃，坚守相伴，这一切的洗礼才刚刚开始，长路漫漫祝你前程似锦。</p>
-<p>​                                                                                                                                                      计组课程团队<br>
-​                                                                                                                                                               @新北 5 号<br>
-​                                                                                                                                                               2022.12.21</p>
-<img src="430ce62ac2101f40f1624ec2b8a9ef6.jpg" width="30%" />
-<img src="cdf5af3d3ddb8c050cfe8e900e9345d.jpg" width="30%" />
-<img src="87d0c733f6c32a8e759b783e29a9c42.jpg" width="100%" />
+<p>​ 计组课程团队 ​ <span class="citation"
+data-cites="新北 5 号">@新北 5 号</span> ​ 2022.12.21</p>
+<p><img src="430ce62ac2101f40f1624ec2b8a9ef6.jpg" width="30%" /></p>
+<p><img src="cdf5af3d3ddb8c050cfe8e900e9345d.jpg" width="30%" /></p>
+<p><img src="87d0c733f6c32a8e759b783e29a9c42.jpg" width="100%" /></p>
 
     </div>
 
