@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"steve-strange.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","Muse | Mist":280,"Pisces | Gemini":220,"width":260,"display":"always","padding":30,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":false,"storage":true,"lazyload":false,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"steve-strange.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","Muse | Mist":280,"Pisces | Gemini":220,"width":260,"display":"always","padding":30,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":false,"storage":true,"lazyload":false,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="5级流水线CPU设计文档+">
 <meta property="og:type" content="article">
@@ -179,7 +179,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -642,7 +642,7 @@ M 级指令的 Tnew，在各级 CU 中计算，发送至冲突单元（W 级 Tne
 <li> 阻塞时需要暂停更新 PC 以及 F 级读出的指令，并且清空 D 级当前指令的译码输出，以替换为 nop 空泡 </li>
 <li> 新增乘除 Stall，在乘除运算即将开始或正在进行时如遇到乘除指令需要 Stall</li>
 </ul>
-<p><img src="image-20230311001016596.png" alt="image-20230311001016596"/></p>
+<p><img data-src="image-20230311001016596.png" alt="image-20230311001016596"/></p>
 <h4 id="转发"> 转发 </h4>
 <ul>
 <li><p> 阻塞后，所有指令在需要读寄存器数据的时候都能够获得后续计算完毕的数据，每级转发出已算出的数据，发送给之前各级即可。</p></li>
@@ -650,16 +650,16 @@ M 级指令的 Tnew，在各级 CU 中计算，发送至冲突单元（W 级 Tne
 数据；M 级 DM 写入数据口需要 rt 数据 </p></li>
 <li><p> 需要写寄存器：E 级可转发出 D 级算的 PC+8；M 级可转发出 D 级算的 PC+8 和 E 级算的的 ALU_Y；W 级可转发出 D 级算的 PC+8，E 级算的的 ALU_Y 和 M 级读出的 DM 数据。<strong> 根据当前指令 CU 译码得到的 GRF_WDSrc 进行选择 </strong>。此外还有 W 级寄存器写入，可直接内部转发至 D 级读出 </p></li>
 </ul>
-<p><img src="image-20230311001109169.png" alt="image-20230311001109169" style="zoom:67%;" /></p>
-<p><img src="image-20230311001116883.png" alt="image-20230311001116883" style="zoom:67%;" /></p>
-<p><img src="image-20230311001122673.png" alt="image-20230311001122673" style="zoom:67%;" /></p>
-<p><img src="image-20230311001129478.png" alt="image-20230311001129478" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311001109169.png" alt="image-20230311001109169" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311001116883.png" alt="image-20230311001116883" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311001122673.png" alt="image-20230311001122673" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311001129478.png" alt="image-20230311001129478" style="zoom:67%;" /></p>
 <ul>
 <li> 在主模块中，获取各级需要读的寄存器编号（D_rs,D_rt,E_rs,E_rt,M_rt），寄存器原读数（D_rs_data,D_rt_data,E_rs_data,E_rt_data,M_rt_data），写入的寄存器编号（E_GRF_WA,M_GRF_WA,W_GRF_WA）和数据（E_GRF_WD,M_GRF_WD,W_GRF_WD）</li>
 <li> 比较读的编号和写的编号是否有相等的，如有相等的则代表有数据已经更新需要转发，转发优先级为更新次序，最后一次更新优先转发，即优先转发距离需要数据的阶段近的数据，特判如果需要读 0 号寄存器的数据，直接转发 0</li>
 <li> 转发的数据（D_rs_fw,D_rt_fw,E_rs_fw,E_rt_fw,M_rt_fw）发送至各级需要的部分运算，并传递给下一级 </li>
 </ul>
-<p><img src="image-20230311001150971.png" alt="image-20230311001150971" style="zoom: 67%;" /></p>
+<p><img data-src="image-20230311001150971.png" alt="image-20230311001150971" style="zoom: 67%;" /></p>
 <h3 id="五级模块设计"> 五级模块设计 </h3>
 <ul>
 <li><p> 每个阶段之间以寄存器隔开，寄存器设计在每个模块输出处，使用 reg 类型 </p></li>
@@ -766,7 +766,7 @@ id="p6 更新乘除槽与储存器外置以及按字节访存">P6 更新乘除�
 <ul>
 <li>F 级与指令储存的数据交换 </li>
 </ul>
-<p><img src="image-20230311001208043.png" alt="image-20230311001208043" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311001208043.png" alt="image-20230311001208043" style="zoom:67%;" /></p>
 <h4 id="decode">2. Decode</h4>
 <ul>
 <li> 包括 D_CU, EXT, NPC (Branch), DEReg</li>
@@ -1568,9 +1568,9 @@ Busy 归零。</li>
 id="m_be 计算字节访存使能调整四字节写入数据">M_BE（计算字节访存使能，调整四字节写入数据）</h5>
 <ul>
 <li><p> 合并在 Memory 中，在写入的条件下，根据写入数据类型和写入地址低两位产生四个字节的每一位控制信号，即四位 ByteEn</p>
-<p><img src="image-20230311001222299.png" alt="image-20230311001222299" style="zoom:67%;" /></p></li>
+<p><img data-src="image-20230311001222299.png" alt="image-20230311001222299" style="zoom:67%;" /></p></li>
 <li><p> 后续再根据 ByteEn 调整将写入内存的数据，需将待写入的字节移动到对应为 En1 的位置 </p>
-<p><img src="image-20230311001240021.png" alt="image-20230311001240021" style="zoom:67%;" /></p></li>
+<p><img data-src="image-20230311001240021.png" alt="image-20230311001240021" style="zoom:67%;" /></p></li>
 </ul></li>
 <li><h5
 id="m_de 调整内存读出数据截取需要的字节后拓展">M_DE（调整内存读出数据，截取需要的字节后拓展）</h5>
@@ -1614,11 +1614,11 @@ id="m_de 调整内存读出数据截取需要的字节后拓展">M_DE（调整�
 </table></li>
 </ul></li>
 </ul>
-<p><img src="image-20230311001304148.png" alt="image-20230311001304148" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311001304148.png" alt="image-20230311001304148" style="zoom:67%;" /></p>
 <ul>
 <li>M 级与内存数据交换 </li>
 </ul>
-<p><img src="image-20230311001314893.png" alt="image-20230311001314893" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311001314893.png" alt="image-20230311001314893" style="zoom:67%;" /></p>
 <h4 id="writeback">5. Writeback</h4>
 <ul>
 <li> 包括 W_CU</li>
@@ -1721,11 +1721,11 @@ id="m_de 调整内存读出数据截取需要的字节后拓展">M_DE（调整�
 </table>
 <h2 id="测试同 p5p6 单独构造测试数据"> 测试 (同 P5，P6 单独构造测试数据)</h2>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br></pre></td><td class="code"><pre><span class="line">.text</span><br><span class="line">                                        # 13</span><br><span class="line">    ori     $t0,    $0,         0xadce</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    ori     $t1,    $t0,        0xdefa</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    add     $t4,    $t2,        $t0</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         15</span><br><span class="line">    lw      $t4,    -7($t3)</span><br><span class="line">    sub     $t5,    $t4,        $t2</span><br><span class="line"></span><br><span class="line"># 14</span><br><span class="line">    ori     $t0,    $0,         0xefac</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    ori     $t1,    $t0,        0xfead</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    add     $t4,    $t0,        $t2</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         21</span><br><span class="line">    lw      $t4,    -13($t3)</span><br><span class="line">    sub     $t5,    $t2,        $t4</span><br><span class="line"></span><br><span class="line"># 15</span><br><span class="line">    ori     $t0,    $0,         0x0ace</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    ori     $t1,    $t0,        0x00a1</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    nop     </span><br><span class="line">    add     $t4,    $t2,        $t0</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         15</span><br><span class="line">    lw      $t4,    -7($t3)</span><br><span class="line">    nop     </span><br><span class="line">    sub     $t5,    $t4,        $t2</span><br><span class="line"></span><br><span class="line"># 16</span><br><span class="line">    lui     $t0,    0x1234</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    lui     $t1,    0xfead</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    nop     </span><br><span class="line">    add     $t4,    $t0,        $t2</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         25</span><br><span class="line">    lw      $t4,    -17($t3)</span><br><span class="line">    nop     </span><br><span class="line">    sub     $t5,    $t2,        $t4</span><br><span class="line"></span><br><span class="line"># 17</span><br><span class="line">    lui     $1,     0x13ac</span><br><span class="line">    ori     $2,     0x12ae</span><br><span class="line"></span><br><span class="line">    add     $3,     $1,         $2</span><br><span class="line">    ori     $4,     $3,         0xcd12</span><br><span class="line"></span><br><span class="line">    sub     $5,     $4,         $1</span><br><span class="line">    ori     $6,     $5,         0x4589</span><br><span class="line"></span><br><span class="line"># 18</span><br><span class="line">    lui     $1,     0x56ed</span><br><span class="line">    ori     $2,     0x349a</span><br><span class="line"></span><br><span class="line">    add     $3,     $1,         $2</span><br><span class="line">    nop     </span><br><span class="line">    ori     $4,     $3,         0xc102</span><br><span class="line"></span><br><span class="line">    sub     $5,     $4,         $1</span><br><span class="line">    nop     </span><br><span class="line">    ori     $6,     $5,         0x4ea9</span><br><span class="line"></span><br><span class="line"># 19</span><br><span class="line">    lui     $7,     0x1345</span><br><span class="line">    ori     $8,     $7,         0x1122</span><br><span class="line"></span><br><span class="line">    ori     $9,     $8,         0x3344</span><br><span class="line">    ori     $10,    $9,         0x00ff</span><br><span class="line"></span><br><span class="line"># 20</span><br><span class="line">    lui     $7,     0x2211</span><br><span class="line">    nop     </span><br><span class="line">    ori     $8,     $7,         0x3366</span><br><span class="line">    nop     </span><br><span class="line">    ori     $9,     $8,         0xf111</span><br><span class="line">    nop     </span><br><span class="line">    ori     $10,    $9,         0x00ff</span><br><span class="line"></span><br><span class="line"># 21</span><br><span class="line">    jal     label1</span><br><span class="line">    ori     $8,     $ra,        0x8899</span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">label1:</span><br><span class="line">                                        # 22</span><br><span class="line">    jal     label2</span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">label2:</span><br><span class="line">    ori     $9,     $ra,        0xaa12</span><br><span class="line">                                        # 23</span><br><span class="line">    ori     $t0,    $0,         35</span><br><span class="line">    sw      $ra,    24($0)</span><br><span class="line">    lw      $t1,    -11($t0)</span><br><span class="line">    ori     $t2,    $t1,        0xe2df</span><br><span class="line"></span><br><span class="line"># 24</span><br><span class="line">    sw      $t2,    36($0)</span><br><span class="line">    lw      $t3,    1($t0)</span><br><span class="line">    nop     </span><br><span class="line">    ori     $t4,    $t3,        0xaabb</span><br></pre></td></tr></table></figure>
-<p><img src="image-20230311001334635.png" alt="image-20230311001334635" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311001334635.png" alt="image-20230311001334635" style="zoom:67%;" /></p>
 <ul>
 <li> 对 0 号寄存器读写测试 </li>
 </ul>
-<p><img src="image-20230311001346059.png" alt="image-20230311001346059" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311001346059.png" alt="image-20230311001346059" style="zoom:67%;" /></p>
 <h2 id="注意事项"> 注意事项 </h2>
 <ul>
 <li> 乘除指令的 Tuse，Tnew：包括 md 指令 Tuse_rs=Tuse_rt=1;
@@ -1877,6 +1877,7 @@ mf 指令 E_Tnew=1</p>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
 
@@ -1904,7 +1905,7 @@ mf 指令 E_Tnew=1</p>
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
 <script src="/js/third-party/math/mathjax.js"></script>
 
 

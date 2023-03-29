@@ -9,12 +9,336 @@
 ]]></content>
   </entry>
   <entry>
+    <title>Lab3 Report</title>
+    <url>/2023/03/28/14-52-04/</url>
+    <content><![CDATA[<p>Lab3 Report <span id="more"></span></p>
+<h2 id="思考题"> 思考题 </h2>
+<h3 id="thinking-3.1">Thinking 3.1</h3>
+<ul>
+<li>e-&gt;env_pgdir[PDX(UVPT)] = PADDR(e-&gt;env_pgdir) | PTE_V
+<ul>
+<li>Map its own page table at 'UVPT' with readonly permission.</li>
+<li> 在 env_pgdir 基地址之上，加上 PDX(UVPT) 的 UVPT 的页目录项偏移 </li>
+<li> 找到指向自己页表的页目录项后，赋上用 PADDR(e-&gt;env_pgdir) 取得页目录的物理地址，和 PTE_V 标志位表示只读 </li>
+</ul></li>
+</ul>
+<h4 id="thinking-3.2">Thinking 3.2</h4>
+<ul>
+<li>static void load_icode(struct Env <em>e, const void </em>binary,
+size_t size) 中，调用了 elf_load_seg(ph, binary + ph-&gt;p_offset,
+load_icode_mapper, e)</li>
+<li> 其中 'e' 为待 program segments 从 'binary'
+加载到的用户空间进程的环境，如果没有这个参数，则无法加载到用户空间进程的环境中 </li>
+</ul>
+<h4 id="thinking-3.3">Thinking 3.3</h4>
+<ul>
+<li>elf_load_seg 函数会从 ph 中获取
+va（该段需要被加载到的虚地址）、sgsize（该段在内
+存中的大小）、bin_size（该段在文件中的大小）和
+perm（该段被加载时的页面权限）
+<ul>
+<li> 内存中的大小和文件中的大小不一定相同，因为文件中的大小可能不足以填满整个页面，余下的部分用
+0 来填充。</li>
+<li> 剩余空闲页面不够分配 </li>
+<li> 内存不够加载该段的所有数据 </li>
+</ul></li>
+</ul>
+<h4 id="thinking-3.4">Thinking 3.4</h4>
+<ul>
+<li> 是虚拟地址，因为程序入口为 e_entry (Entry point virtual
+address)，当我们运行进程时 CPU 将自动从 PC
+所指的位置开始执行二进制码，所以 PC 这个位置为虚拟地址 </li>
+</ul>
+]]></content>
+      <categories>
+        <category>Operation System</category>
+      </categories>
+      <tags>
+        <tag>Operation System</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OS Homework2</title>
+    <url>/2023/03/26/20-50-14/</url>
+    <content><![CDATA[<p>OS homework2</p>
+<span id="more"></span>
+<p>1．
+动态内存分配需要对内存分区进行管理，一般使用位图和空闲链表两种方法。128MB
+的内存以 n 字节为单元分配，对于链表，假设内存中数据段和空闲区交替排列，长度均
+为 64KB。并假设链表中的每个节点需要记录 32 位的内存地址信息、16 位长度信息和 16
+位下一节点域信息。这两种方法分别需要多少字节的存储空间？那种方法更好？</p>
+<ul>
+<li>128MB=2 ^ 27B，n 字节位单元，所以 2 ^ 27/n 个单元，使用位图需 2 ^
+27/n 位，即 2 ^ 24/n 字节 </li>
+<li> 使用链表需 128MB/64KB=2K 个节点，每个节点 8 字节（64）位，所以 16KB=2^14 字节。</li>
+<li> 当 n 小于 1024 时，链表较好；反之，位图更好。</li>
+</ul>
+<p>2． 在一个交换系统中，按内存地址排列的空闲区大小是:
+10KB、4KB、20KB、18KB、7KB、
+9KB、12KB 和 15KB。对于连续的段请求：12KB、10KB、9KB。使用 FirstFit、BestFit、
+WorstFit 和 NextFit 将找出哪些空闲区？</p>
+<ul>
+<li>FirstFit: 20KB,10KB,18KB</li>
+<li>BestFit: 12KB,10KB,9KB</li>
+<li>WorstFit: 20KB,18KB,15KB</li>
+<li>NextFit: 20KB,18KB,9KB</li>
+</ul>
+<p>3． 解释逻辑地址、物理地址、地址映射，并举例说明。</p>
+<ul>
+<li> 逻辑地址：应用程序角度看到的内存单元、储存单元、网络主机的地址。比如 CPU 访问储存单元时用的就是逻辑地址 </li>
+<li> 物理地址：就是实地址，它在地址总线上真实存在，使数据总线可以访问主存某个特定的储存单元的内存地址。由逻辑地址经过地址映射之后得到的就是物理地址 </li>
+<li> 地址映射：指将逻辑地址与物理地址相转换的过程。比如 MMU 就可以实现地址映射 </li>
+</ul>
+<p>4．
+解释页式（段式）存储管理中为什么要设置页（段）表和快表，简述页式（段式）地
+址转换过程。</p>
+<ul>
+<li> 设置页表：为了便于在内存中找到每个页面所对应的页框，分页系统为每个进程分配一张页表，进程逻辑的每一页，在页表中都有一个对应的页表项。</li>
+<li> 设置快表 (TLB)：应用程序的空间局部性，来提高程序的内存访问效率。</li>
+<li> 页式地址转换过程：逻辑地址分为页号和偏移两个部分，根据页号找到页表中对应的页表项，由该页表项获得页框号，页框号与原逻辑地址的偏移拼接得到物理地址 </li>
+</ul>
+<p>5． 叙述缺页中断的处理流程。</p>
+<ul>
+<li> 当进程执行中需访问的页面不在物理内存中时，会引发发生缺页中断（也称缺页异常），进行所需页面换入，步骤如下：
+<ul>
+<li> 陷入内核态，保存必要的信息（OS 及用户进程状态相关的信息）。（现场保护）</li>
+<li> 查找出发生缺页中断的虚拟页面（进程地址空间中的页面）。这个虚拟页面的信息通常会保存在一个硬件寄存器中，如果没有的话，操作系统必须检索程序计数器，取出这条指令，用软件分析该指令，通过分析找出发生页面中断的虚拟页面。（页面定位）</li>
+<li> 检查虚拟地址的有效性及安全保护位。如果发生保护错误，则杀死该进程。（权限检查）</li>
+<li> 查找一个空闲的页框（物理内存中的页面），如果没有空闲页框则需要通过页面置换算法找到一个需要换出
+的页框。（新页面调入（1））</li>
+<li> 如果找的页框中的内容被修改了，则需要将修改的内容保存到磁盘上¹。（注：此时需要将页框置为忙状态，以防页框被其它进程抢占掉）（旧页面写回）</li>
+<li> 页框“干净”后，操作系统将保持在磁盘上的页面内容复制到该页框中²。（新页面调入（2））</li>
+<li> 步骤 5，6 会引起写磁盘调用，发生上下文切换（在等待磁盘写的过程中让其它进程运行）。</li>
+<li> 当磁盘中的页面内容全部装入页框后，向 CPU 发送一个中断。操作系统更新内存中的页表项，将虚拟页面映射的页框号更新为写入的页框，并将页框标记为正常状态。（更新页表）</li>
+<li> 恢复缺页中断发生前的状态，将程序指针重新指向引起缺页中断的指令。（恢复现场）</li>
+<li> 程序重新执行引发缺页中断的指令，进行存储访问。（继续执行）</li>
+</ul></li>
+</ul>
+<p>6． 假设一个机器有 38 位的虚拟地址和 32 位的物理地址。 (1)
+与一级页表相比，多级页表的主要优点是什么？ (2)
+如果使用二级页表，页面大小为 16KB，每个页表项有 4 个字节。应该为虚拟地址中的第一级和第二级页表域各分配多少位？</p>
+<ul>
+<li> 多级页表解决了一级页表需要占用较大的连续存储空间来存储页表的问题。</li>
+<li> 页面 16KB，页内偏移需要 14 位。由于二级页表的大小和页面大小相同为 16KB，且每个页表项有 4 个字节，所以需要有一个二级页表中有 2^12 个页表项，因此二级页表域需要 12 位。则一级页表域需要 38-14-12=12 位。</li>
+</ul>
+<p>7．
+假设页面的访问存在一定的周期性循环，但周期之间会随机出现一些页面的访问。例
+如：0,1,2…,511,431,0,1,2…511,332,0,1,2,…,511 等。请思考： (1)
+LRU、FIFO 和 Clock 算法的效果如何？ (2)
+如果有 500 个页框，能否设计一个优于 LRU、FIFO 和 Clock 的算法？</p>
+<ul>
+<li> 于要访问的页面符合局部性原理的访问，三种算法产生的缺页中断是一样的 </li>
+<li> 尽量把工作集装入内存。将 0-498 页面映射到固定的页框，每次只置换第 499 个页面 </li>
+</ul>
+<p>8．
+一个交换系统通过紧缩技术来清理碎片。如果内存碎片和数据区域是随机分配的。而且假设读写 32 位内存字需要 10nsec.
+那么如果紧缩 128MB 的内存需要多久？简单起见，假设第 0 个字是碎片的一部分而最高位的字包含了有效的数据 </p>
+<ul>
+<li> 每字节 10/4=2.5ns 128MB=1282<sup>20=2</sup>27Byte
+对每个字节既要读又要写，22.5*2^27=671ms</li>
+</ul>
+]]></content>
+      <categories>
+        <category>OS</category>
+      </categories>
+      <tags>
+        <tag>OS Homework</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Positive Psychology P5</title>
+    <url>/2023/03/18/15-52-53/</url>
+    <content><![CDATA[<p>Positive Psychology P5 英语作业 <span id="more"></span></p>
+<h2 id="outline">Outline</h2>
+<h3 id="self-fulfilling-prophecy">Self-fulfilling prophecy</h3>
+<h4
+id="improve-self-esteem-and-base-level-of-happiness-to-cope-to-risk-as-opposed-to-avoid">Improve
+self-esteem and base level of happiness: to cope, to risk as opposed to
+avoid</h4>
+<ul>
+<li>Self-perception theory: we derive conclusion about ourselves in the
+same way we derive conclusion about other people(by observing behavour)
+<ul>
+<li>We see ourself coping -&gt; I must be courageous and with high
+self-esteem</li>
+</ul></li>
+<li>Failure is not that bad (be familiar)
+<ul>
+<li>learn to fail / fail to learn</li>
+</ul></li>
+</ul>
+<h4 id="how-to-be-more-optimistic">How to be more optimistic</h4>
+<ul>
+<li>(Optimitic is an interpreation style)</li>
+<li><strong>Take action</strong>
+<ul>
+<li>Constantly being told you are wonderful no matter what × (should be
+discerning with praise)</li>
+<li><strong>Action</strong>, put hard work on the things you want to be
+confident about, putting yourselves on the line and cope. (physical
+immune system) (Self-perception theory)</li>
+<li>To dare is to lose one's foot momentarily. Not to dare is to lose
+oneself. -- Soren Kierkegaard (how to perceive failure)
+<ul>
+<li>Interpret the failure not as permanent and pervasive one but
+temporary and specific one</li>
+</ul></li>
+<li>Give ourselves the permission to fail</li>
+</ul></li>
+<li><strong>Power of imagination</strong>
+<ul>
+<li>Imagining success</li>
+<li>Fire the same neurons as the real thing(our mind is a
+<strong>powerful simulator</strong>)</li>
+<li>To avoid inconsistency, we will bring up the external reality to
+match the internal schema that we imagined and
+<strong>practiced</strong> over and over again</li>
+<li>To visisualize the destination as well as the
+<strong>journey</strong> of getting there.</li>
+<li>To make it as real as possible by involving as many
+<strong>senses</strong> as possible</li>
+<li><strong>Evoking emotions</strong>: emotion -- motion</li>
+<li>&lt;&lt;I Have a Dream&gt;&gt;
+<ul>
+<li>"In the <strong>process</strong> of gaining our rightful
+place..."</li>
+<li>"By drinking from the cup of <strong>bitterness</strong> and
+hatred..."</li>
+<li>"Free at last, free at last, thank God Almighty, we are free at
+last!"</li>
+</ul></li>
+</ul></li>
+<li><strong>Cognitive therapy</strong>(effective)
+<ul>
+<li>Basic premise: thoughts drive emotions
+<ul>
+<li>Event -&gt; <strong>Evaluation</strong>(thought) -&gt; Emotion -&gt;
+Action</li>
+<li>The evaluation is natural and healthy, but sometimes our thoughts
+are irrational, distort reality and the evalutaion (restore
+rationality)</li>
+</ul></li>
+<li>Summary (3M, three traps)
+<ul>
+<li>Magnifying
+<ul>
+<li>Over generalize</li>
+<li><strong>All or nothing</strong></li>
+</ul></li>
+<li>Minimizing (tunnel vision)
+<ul>
+<li>Fall into one small question and ignore the big picture</li>
+<li>Dissmiss the positive or the negative</li>
+</ul></li>
+<li>Making up (fabricating)
+<ul>
+<li>Avoid facing the reality but over-personlize or over-blame</li>
+<li>Emotional reasoning: take the emotion into account when evaluating
+the situation</li>
+</ul></li>
+<li><strong>Dispute it, challenge it, reframe it</strong></li>
+</ul></li>
+<li>Key method: <strong>be real</strong>
+<ul>
+<li>Tie conclusion to reality</li>
+<li>Rational</li>
+<li>Open the vision up (not zoom in, not ignore any side)</li>
+</ul></li>
+</ul></li>
+<li>Evaluation -&gt; self-fulfilling prophecy</li>
+<li>No short cuts
+<ul>
+<li>Work visualizing</li>
+<li>Hard work and coping</li>
+<li>Work learning to dispute irrational thoughts</li>
+</ul></li>
+</ul>
+<h3 id="focus">Focus</h3>
+<ul>
+<li>Internal mind is a lot more important than external world</li>
+<li>Nothing is good or bad, but thinking make it so. "Shakespeare"</li>
+</ul>
+<h4 id="focus-create-reality">Focus create reality</h4>
+<ul>
+<li>Change our focus, change our questions
+<ul>
+<li>Fault-finder: focus on problems, constatant complainer, find faults
+even in paradise. Resignation, helplessness</li>
+<li>Benefit-finder: focus on what works, find the miricle in the common
+(<strong>detached</strong> benefit-finder: focus only on the positive
+<strong>×</strong>)</li>
+</ul></li>
+<li><strong>To respect reality</strong>, we don't creat it simply by
+focus, but we are <strong>co-creator</strong>
+<ul>
+<li>Fixed elements in reality, but we still have a certain freedom in
+our dealing with them, like our sensation, depends our own
+interests</li>
+<li>Waterloo: English -&gt; Victory; French -&gt; Defeat</li>
+<li>What do we do with our reality is what we are responsed for</li>
+</ul></li>
+</ul>
+<h4 id="cognitive-reconstruction">Cognitive reconstruction</h4>
+<ul>
+<li>Learning to interpret things optimistically
+<ul>
+<li>Things happen for the best ×</li>
+<li>To make the best of things that happened √</li>
+</ul></li>
+<li>"Never let a good crisis go to waste"</li>
+</ul>
+<h2 id="response-paper">Response Paper</h2>
+<ul>
+<li><p>One way to improve self-esteem and happiness is through the
+self-perception theory. By seeing ourselves cope with difficult
+situations, we can conclude that we are courageous and have high
+self-esteem. Additionally, we should learn to embrace failure and view
+it as an opportunity to learn and grow, to gain experience in dealing
+with negative situations and thoughts just like physical immune system
+dealing with viruses. Besides, we need to take action and put in the
+hard work to become confident in the things we value.</p></li>
+<li><p>Constantly being told that we are wonderful no matter what is not
+helpful, as we should be discerning with praise and only take it
+seriously when it is deserved. We should also perceive failure as
+temporary and specific, rather than permanent and pervasive, as this
+will help us overcome setbacks and move forward with greater
+confidence.</p></li>
+<li><p>The power of imagination is another powerful tool for optimism.
+By visualizing success, we can activate the same neurons in our brain as
+if we were actually experiencing that success. When visualizing success,
+we should make it as real as possible by involving all of our senses and
+evoking emotions that will drive us forward.</p></li>
+<li><p>Cognitive therapy is an effective method for challenging
+irrational thoughts that can lead to negative self-fulfilling
+prophecies. By recognizing and disputing negative thoughts, we can
+restore rationality and view situations in a more balanced and realistic
+way. The three traps of cognitive therapy include magnifying,
+minimizing, and making up. By disputing these irrational thoughts and
+reframing them in a more rational way, we can improve our overall mental
+health and happiness.</p></li>
+<li><p>In conclusion, there are no shortcuts to improving self-esteem
+and happiness levels, but by using the tools of self-perception theory,
+visualization, and cognitive therapy, we can overcome negative
+self-fulfilling prophecies and cultivate a more optimistic outlook on
+life. We should be willing to take risks and cope with failure,
+challenging irrational thoughts and viewing situations in a more
+balanced and realistic way.</p></li>
+</ul>
+]]></content>
+      <categories>
+        <category>English</category>
+      </categories>
+      <tags>
+        <tag>Positive Psychology</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Positive Psychology P4</title>
     <url>/2023/03/18/15-52-53/</url>
     <content><![CDATA[<p>Positive Psychology P4 英语作业 <span id="more"></span></p>
 <h2 id="outline">Outline</h2>
+<h3 id="environment-is-powerful">Environment is powerful</h3>
 <ul>
-<li>Environment is powerful</li>
 <li>How to Create a positive environment?</li>
 <li><strong><em>Priming</em></strong>: subconsciously / consciously
 (Prime: make ready for use or action; prepare; activate, 打底)</li>
@@ -27,10 +351,10 @@ some quotes...</li>
 <li>Do more research on positive psychology is priming ourselves with
 positive thoughts and feelings.</li>
 </ul>
-<p><br></p>
+<h3
+id="think-and-believe-then-affluenceabundance-will-come-to-you">Think
+and believe, then affluence(abundance) will come to you (?</h3>
 <ul>
-<li>Think and believe, then affluence(abundance) will come to you
-(?</li>
 <li>&lt;&lt;Thinking Grow Rich&gt;&gt;</li>
 <li>&lt;&lt;The Power of Positive Thinking&gt;&gt;
 <ul>
@@ -42,7 +366,9 @@ Have great faith in yourself and in the power of your mind... "</li>
 <ul>
 <li>The law of attraction</li>
 </ul></li>
-<li>Mind create reality × Mind <strong>co-create</strong> reality √
+</ul>
+<h4 id="mind-create-reality-mind-co-create-reality">Mind create reality
+× Mind <strong>co-create</strong> reality √</h4>
 <ul>
 <li>Only a part of it</li>
 <li>Has to come with a lot of hard work and persistence and a lot of
@@ -55,12 +381,14 @@ failure. (Half / half)
 the hard work, the persistence and the failure that is <strong>necessary
 part and parcel of a successful, happy, fulfilling Human
 life</strong>.</li>
-</ul></li>
-<li>Self-efficacy (believing in oneself)
+</ul>
+<h3 id="self-efficacy">Self-efficacy</h3>
+<h4 id="believing-in-oneself">Believing in oneself</h4>
 <ul>
 <li>Beliefs in personal efficacy affect life choices, level of
 motivation, quality of functioning, resilience to adversity and
-vulnerability to stress and depression.</li>
+vulnerability to stress and depression.
+<ul>
 <li>Believe in themselves: do well in different areas.</li>
 <li>Produce their own future rather than simply foretell it.</li>
 <li>It can be learnt.</li>
@@ -70,6 +398,57 @@ correlation between self-efficacy and material affluence and where we
 live.</li>
 <li>"Self-concept is destiny"</li>
 <li>The placebo effect</li>
+</ul>
+<h4
+id="what-mediate-between-beliefs-expectations-and-actual-performance-in-the-real-world">What
+mediate between beliefs expectations and actual performance in the real
+world</h4>
+<ul>
+<li>Motivation
+<ul>
+<li>hopeless -&gt; resign</li>
+</ul></li>
+<li>Consistency / Congruence
+<ul>
+<li>A mental schema of the world (perceive the world that ought to be)
+-&gt; inside</li>
+<li>Mind like to feel that inside and outside are congruent</li>
+<li>When feel the inconsistency
+<ul>
+<li>update the schema</li>
+<li>ignore it</li>
+<li>actively seek confirmation: ignore the other side, only trying to
+confirm our mind</li>
+</ul></li>
+</ul></li>
+</ul>
+<h4 id="interpret-our-performance">Interpret our performance</h4>
+<ul>
+<li>Sbjective, reality</li>
+<li>Objective, our perspective
+<ul>
+<li>Edison: 5000 failures -&gt; 5000 times succeed in showing what
+doesn't work.</li>
+</ul></li>
+<li>Optimisim / Pessimisim
+<ul>
+<li>Pessimists: realistic in terms of long term goals and short term
+goals</li>
+<li>Optimists: realistic in terms of long term goals but not in terms of
+long term goals(high level of belief and motivation) -&gt; It's ok, and
+what can I learn from it, and next time I will do better</li>
+</ul></li>
+<li>Interpret the failure not as permanent and pervasive one but
+temporary and specific one</li>
+</ul>
+<h4 id="how-to-identify-what-is-realistic-or-not">How to identify what
+is realistic or not</h4>
+<ul>
+<li>The Stockdale Paradox (<strong>Balance</strong>)
+<ul>
+<li>Faith + Facts</li>
+<li>Realistic Optimisim</li>
+</ul></li>
 </ul>
 <h2 id="response-paper">Response Paper</h2>
 <ul>
@@ -108,11 +487,11 @@ persistence, and a willingness to face failure.</p></li>
       </tags>
   </entry>
   <entry>
-    <title>Lab2-Report</title>
+    <title>Lab2 Report</title>
     <url>/2023/03/13/18-54-43/</url>
-    <content><![CDATA[<p>Lab2-Report <span id="more"></span></p>
-<h3 id="思考题"> 思考题 </h3>
-<h4 id="thinking-2.1">Thinking 2.1</h4>
+    <content><![CDATA[<p>Lab2 Report <span id="more"></span></p>
+<h2 id="思考题"> 思考题 </h2>
+<h3 id="thinking-2.1">Thinking 2.1</h3>
 <ul>
 <li> 在编写的 C 程序中，指针变量中存储的地址是虚拟地址，MIPS 汇编程序中
 lw 和 sw 使用的也是虚拟地址
@@ -121,7 +500,7 @@ lw 和 sw 使用的也是虚拟地址
 <li>MIPS 架构中，访问内存时使用的是虚拟地址，由硬件转换为物理地址。这种方式称为虚拟内存管理。操作系统负责将虚拟地址映射到物理地址，这样每个程序都可以访问自己的地址空间，而不会干扰其他程序的内存。</li>
 </ul></li>
 </ul>
-<h4 id="thinking-2.2">Thinking 2.2</h4>
+<h3 id="thinking-2.2">Thinking 2.2</h3>
 <ul>
 <li><p> 宏定义可以抽象出链表操作中的公共部分，将具体的实现细节封装在宏定义内部，并且抽象出链表元素类型为 type，实现泛型的效果，在不同元素类型的链表相关代码中都可以重用这些宏定义 </p></li>
 <li><p> 单向链表、循环链表和双向链表在插入与删除操作上的性能差异：</p>
@@ -131,29 +510,119 @@ lw 和 sw 使用的也是虚拟地址
 <li> 双向链表在这方面更加高效，因为它既可以从前往后遍历，也可以从后往前遍历，因此在插入和删除节点时都比单向链表更加高效，时间复杂度为 O(1)</li>
 </ul></li>
 </ul>
-<h4 id="thinking-2.3">Thinking 2.3</h4>
+<h3 id="thinking-2.3">Thinking 2.3</h3>
 <ul>
 <li>Page_list 由一个 *list_head 的链表构成，每个元素对应一个 list
 的头节点地址，进入每个 list 中后，其中由一个 Page_LIST_entry_t pp_link
 和 u_short pp_ref 构成，所以选择 C。</li>
 </ul>
-<h4 id="thinking-2.4">Thinking 2.4</h4>
-<h3 id="难点分析"> 难点分析 </h3>
-<h4 id="exercise-2.2">Exercise 2.2</h4>
+<h3 id="thinking-2.4">Thinking 2.4</h3>
+<ul>
+<li> 多个进程可能通过不同的虚拟内存映射到相同的物理内存，所以在 TLB 映射时，需要添加 ASID 用以标识每个进程，当 TLB 尝试解析虚拟页码时，它对正在访问该条目的进程检查，确保当前正在运行的进程的 ASID 与与虚拟页面关联的 ASID 匹配。如果不匹配，则 TLB 将忽略该条目，而不是将其映射到物理内存中的页面，保护各个进程中的数据。</li>
+<li> 可容纳不同地址空间的最大数量为 64 个
+<ul>
+<li>“Instead, the OS assigns a <strong>6-bit</strong> unique code to
+each task’s distinct address space. Since the ASID is only 6 bits long,
+OS software does have to lend a hand if there are ever more than
+<strong>64 address spaces</strong> in concurrent use; but it probably
+won’t happen too often.”</li>
+</ul></li>
+</ul>
+<h3 id="thinking-2.5">Thinking 2.5</h3>
+<ul>
+<li><p>void tlb_invalidate(u_int asid, u_long va) {tlb_out(PTE_ADDR(va)
+| (asid &lt;&lt; 6)); } , tlb_invalidate 调用 tlb_out</p></li>
+<li><p>tlb_invalidate 函数就是用 tlb_out() 把 asid 进程中的虚拟地址 va 对应的 tlb 页表项清空 </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">LEAF(tlb_out)</span><br><span class="line">.set noreorder</span><br><span class="line">mfc0    t0, CP0_ENTRYHI  #CP0_ENTRYHI 写入 t0</span><br><span class="line">mtc0    a0, CP0_ENTRYHI  #a0(传入的参数, 待清空表项的 entryhi) 写入 CP0_ENTRYHI</span><br><span class="line">nop</span><br><span class="line">/* Step 1: Use &#x27;tlbp&#x27; to probe TLB entry */</span><br><span class="line">/* Exercise 2.8: Your code here. (1/2) */</span><br><span class="line">tlbp #根据 EntryHi 中的 Key（包含 VPN 与 ASID），查找 TLB 中与之对应的表项，并将表项的索引存入 Index 寄存器（若未找到匹配项，则 Index 最高位被置 1）</span><br><span class="line"></span><br><span class="line">nop</span><br><span class="line">/* Step 2: Fetch the probe result from CP0.Index */</span><br><span class="line">mfc0    t1, CP0_INDEX #表项的索引取出到 t1</span><br><span class="line">.set reorder</span><br><span class="line">bltz    t1, NO_SUCH_ENTRY #如果最高项是 1，则表明未找到匹配项，跳到 NO_SUCH_ENTRY</span><br><span class="line">.set noreorder</span><br><span class="line">mtc0    zero, CP0_ENTRYHI    #如果找到匹配项，则清空 CP0_ENTRYHI，CP0_ENTRYLO，为写入做准备 </span><br><span class="line">mtc0    zero, CP0_ENTRYLO</span><br><span class="line">nop</span><br><span class="line">/* Step 3: Use &#x27;tlbwi&#x27; to write CP0.EntryHi/Lo into TLB at CP0.Index  */</span><br><span class="line">/* Exercise 2.8: Your code here. (2/2) */</span><br><span class="line">tlbwi #以 Index 寄存器中的值为索引，将此时 EntryHi 与 EntryLo 的值写到索引指定的 TLB 表项中 </span><br><span class="line"></span><br><span class="line">.set reorder</span><br><span class="line"></span><br><span class="line">NO_SUCH_ENTRY:</span><br><span class="line">mtc0    t0, CP0_ENTRYHI    #t0 写回给 CP0_ENTRYHI</span><br><span class="line">j       ra     #跳回被调用的地方 </span><br><span class="line">END(tlb_out)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="thinking-a.1">Thinking A.1</h3>
+<ul>
+<li> 三级页表页目录的基地址: PTBase + PTBase &gt;&gt; 9 + PTBase &gt;&gt;
+18</li>
+<li> 三级页表页目录的基地址: PTBase + PTBase &gt;&gt; 9 + PTBase &gt;&gt;
+18 + PTBase &gt;&gt; 27</li>
+</ul>
+<h3 id="thinking-2.6">Thinking 2.6</h3>
+<ul>
+<li>X86 体系结构中的内存管理机制，比较 X86 和 MIPS 在内存管理上的区别
+<ul>
+<li>X86 用到三个地址空间的概念：物理地址、线性地址和逻辑地址。而 MIPS 只有物理地址和虚拟地址两个概念。相对而言，段机制对大量应用程序分散地使用大内存的支持能力较弱。所以 Intel 公司又加入了页机制，每个页的大小是固定的（一般为 4KB），也可完成对内存单元的安全保护，隔离，且可有效支持大量应用程序分散地使用大内存的情况。x86 体系中，TLB 表项更新能够由硬件自己主动发起，也能够有软件主动更新 </li>
+</ul></li>
+</ul>
+<h2 id="难点分析"> 难点分析 </h2>
+<ul>
+<li> 对各处宏的寻找和理解 </li>
+</ul>
+<h3 id="exercise-2.2">Exercise 2.2</h3>
 <ul>
 <li> 完成 include/queue.h 中空缺的函数 LIST_INSERT_AFTER。</li>
 <li> 指针 宏定义的语法 </li>
 <li> 双向链表，在某一元素前后加元素
 <ul>
-<li><img src="2023-03-14-17-11-14.png" style="width:70%;" /></li>
+<li><img data-src="2023-03-14-17-11-14.png" style="width:70%;" /></li>
 </ul></li>
+</ul>
+<h3 id="exercise-2.3">Exercise 2.3</h3>
+<ul>
+<li> 通过宏将虚拟地址转换为物理地址以取得 freemem 以下页面对应的页控制块号（物理块号）：
+<ul>
+<li>int npage_unavailable = PPN(PADDR(freemem));</li>
+<li>// PADDR(freemen): freemen-80000000 (ULIM)
+去掉最高位，从虚拟地址找到物理地址 </li>
+<li>// PPN(va): va &gt;&gt; 12 address / size of a page (2^12)</li>
+</ul></li>
+</ul>
+<h3 id="exercise-2.4">Exercise 2.4</h3>
+<ul>
+<li>LIST_EMPTY 返回值注意，#define E_NO_MEM 4</li>
+<li>Initialize this page with zero:
+<ul>
+<li>memset((void *)page2kva(pp), 0, BY2PG);</li>
+<li>// 由页控制块地址得到虚拟地址，不是 page2pa，因为 alloc 出来的是要用的虚拟地址 </li>
+</ul></li>
+</ul>
+<h3 id="exercise-2.6">Exercise 2.6</h3>
+<ul>
+<li>pgdir_walk:
+给定一个虚拟地址，在给定的页目录中查找这个虚拟地址对应的页表项，将其地址写入
+*ppte
+<ul>
+<li>if (!(*pgdir_entryp &amp; PTE_V)) if(create)
+// 注意目标页表地址不存在或者无效和需要新建的两层逻辑 </li>
+<li>*pgdir_entryp = page2pa(pp) | PTE_D | PTE_V; // 新建之后配置页表内容
+(高 20 位物理地址，低 12 位为其他标志位)</li>
+<li>EntryLo 的位结构： PFN N D V G 0</li>
+<li>Assign the kernel virtual address of the page table entry to '*ppte'
+<ul>
+<li>*ppte = (Pte<em>)KADDR(PTE_ADDR(</em>pgdir_entryp)) + PTX(va);</li>
+<li>PTE_ADDR(pte): ((pte)&amp; ~0xFFF)
+将低 12 位置 0，（第一层页表项）将低 12 位变 0，得到物理⻚表基地址 </li>
+<li> 将物理地址转为虚拟地址，最后加上第二级偏移，找到目标页在页表中地址 </li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="exercise-2.7">Exercise 2.7</h3>
+<ul>
+<li> 插入页面时需要先检查 va 地址是否已经存在了映射，映射是否有效，映射的页和插入的页是否相同 </li>
+<li> 如果不存在了映射，或映射无效则需要调用 pgdir_walk，设置 create 为 1 来新建
+<ul>
+<li>if(pgdir_walk(pgdir, va, 1, &amp;pte)){return -E_NO_MEM;}</li>
+</ul></li>
+<li> 每当页表被修改，就需要调用该函数以保证下次访问该虚拟地址时诱发 TLB
+重填以保证访存的正确性 </li>
+</ul>
+<h2 id="实验体会"> 实验体会 </h2>
+<ul>
+<li> 理论知识需要再熟悉，比如对两级页表的地址与页表项的关系和内容，虚拟地址和物理地址的映射，两次页表查找的过程，TLB 的重填 </li>
+<li> 对所有宏含义需要再理解 </li>
+<li> 对 C 语言指针的理解和运用还需要再加强 </li>
 </ul>
 ]]></content>
       <categories>
-        <category>Lab2-Report</category>
+        <category>Operation System</category>
       </categories>
       <tags>
-        <tag>Lab2-Report</tag>
+        <tag>Operation System</tag>
       </tags>
   </entry>
   <entry>
@@ -433,7 +902,7 @@ O(dq/n),n 为超参数</li>
 <li>训练样本的数量：尽量大</li>
 </ol></li>
 </ul>
-<p><img src="2023-03-13-15-30-00.png" alt="模型复杂度对欠拟合和过拟合的影响" style="zoom:67%;"></p>
+<p><img data-src="2023-03-13-15-30-00.png" alt="模型复杂度对欠拟合和过拟合的影响" style="zoom:67%;"></p>
 <h3 id="模型选择">模型选择</h3>
 <ul>
 <li>测试希望比较具有不同数量的隐藏层、不同数量的隐藏单元以及不同的激活函数组合的模型</li>
@@ -452,7 +921,32 @@ O(dq/n),n 为超参数</li>
 <ul>
 <li>通过函数与零的距离来衡量函数的复杂度，控制复杂度，保证权重向量比较小</li>
 <li>将其范数，如 <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.564ex;" xmlns="http://www.w3.org/2000/svg" width="5.384ex" height="2.451ex" role="img" focusable="false" viewBox="0 -833.9 2379.6 1083.4"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="7C" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"></path></g><g data-mml-node="mo" transform="translate(278,0) translate(0 -0.5)"><path data-c="7C" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(556,0)"><g data-mml-node="mi"><path data-c="1D430" d="M624 444Q636 441 722 441Q797 441 800 444H805V382H741L593 11Q592 10 590 8T586 4T584 2T581 0T579 -2T575 -3T571 -3T567 -4T561 -4T553 -4H542Q525 -4 518 6T490 70Q474 110 463 137L415 257L367 137Q357 111 341 72Q320 17 313 7T289 -4H277Q259 -4 253 -2T238 11L90 382H25V444H32Q47 441 140 441Q243 441 261 444H270V382H222L310 164L382 342L366 382H303V444H310Q322 441 407 441Q508 441 523 444H531V382H506Q481 382 481 380Q482 376 529 259T577 142L674 382H617V444H624Z"></path></g></g><g data-mml-node="mo" transform="translate(1387,0) translate(0 -0.5)"><path data-c="7C" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"></path></g><g data-mml-node="msup" transform="translate(1665,0)"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="7C" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"></path></g><g data-mml-node="mn" transform="translate(311,363) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g></g></svg></mjx-container></span>
-作为惩罚项加到最小化损失的问题中, 最小化预测损失和惩罚项之和 <span class="math display"><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -1.552ex;" xmlns="http://www.w3.org/2000/svg" width="17.997ex" height="4.652ex" role="img" focusable="false" viewBox="0 -1370 7954.7 2056"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D43F" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 217 683Q271 680 344 680Q485 680 506 683H518Q524 677 524 674T522 656Q517 641 513 637H475Q406 636 394 628Q387 624 380 600T313 336Q297 271 279 198T252 88L243 52Q243 48 252 48T311 46H328Q360 46 379 47T428 54T478 72T522 106T564 161Q580 191 594 228T611 270Q616 273 628 273H641Q647 264 647 262T627 203T583 83T557 9Q555 4 553 3T537 0T494 -1Q483 -1 418 -1T294 0H116Q32 0 32 10Q32 17 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path></g><g data-mml-node="mo" transform="translate(681,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(1070,0)"><g data-mml-node="mi"><path data-c="1D430" d="M624 444Q636 441 722 441Q797 441 800 444H805V382H741L593 11Q592 10 590 8T586 4T584 2T581 0T579 -2T575 -3T571 -3T567 -4T561 -4T553 -4H542Q525 -4 518 6T490 70Q474 110 463 137L415 257L367 137Q357 111 341 72Q320 17 313 7T289 -4H277Q259 -4 253 -2T238 11L90 382H25V444H32Q47 441 140 441Q243 441 261 444H270V382H222L310 164L382 342L366 382H303V444H310Q322 441 407 441Q508 441 523 444H531V382H506Q481 382 481 380Q482 376 529 259T577 142L674 382H617V444H624Z"></path></g></g><g data-mml-node="mo" transform="translate(1901,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mi" transform="translate(2345.7,0)"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g><g data-mml-node="mo" transform="translate(2774.7,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mo" transform="translate(3385.9,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mfrac" transform="translate(4386.1,0)"><g data-mml-node="mi" transform="translate(220,676)"><path data-c="1D706" d="M166 673Q166 685 183 694H202Q292 691 316 644Q322 629 373 486T474 207T524 67Q531 47 537 34T546 15T551 6T555 2T556 -2T550 -11H482Q457 3 450 18T399 152L354 277L340 262Q327 246 293 207T236 141Q211 112 174 69Q123 9 111 -1T83 -12Q47 -12 47 20Q47 37 61 52T199 187Q229 216 266 252T321 306L338 322Q338 323 288 462T234 612Q214 657 183 657Q166 657 166 673Z"></path></g><g data-mml-node="mn" transform="translate(261.5,-686)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><rect width="783" height="60" x="120" y="220"></rect></g><g data-mml-node="mo" transform="translate(5409.1,0)"><path data-c="2225" d="M133 736Q138 750 153 750Q164 750 170 739Q172 735 172 250T170 -239Q164 -250 152 -250Q144 -250 138 -244L137 -243Q133 -241 133 -179T132 250Q132 731 133 736ZM329 739Q334 750 346 750Q353 750 361 744L362 743Q366 741 366 679T367 250T367 -178T362 -243L361 -244Q355 -250 347 -250Q335 -250 329 -239Q327 -235 327 250T329 739Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(5909.1,0)"><g data-mml-node="mi"><path data-c="1D430" d="M624 444Q636 441 722 441Q797 441 800 444H805V382H741L593 11Q592 10 590 8T586 4T584 2T581 0T579 -2T575 -3T571 -3T567 -4T561 -4T553 -4H542Q525 -4 518 6T490 70Q474 110 463 137L415 257L367 137Q357 111 341 72Q320 17 313 7T289 -4H277Q259 -4 253 -2T238 11L90 382H25V444H32Q47 441 140 441Q243 441 261 444H270V382H222L310 164L382 342L366 382H303V444H310Q322 441 407 441Q508 441 523 444H531V382H506Q481 382 481 380Q482 376 529 259T577 142L674 382H617V444H624Z"></path></g></g><g data-mml-node="msup" transform="translate(6740.1,0)"><g data-mml-node="mo"><path data-c="2225" d="M133 736Q138 750 153 750Q164 750 170 739Q172 735 172 250T170 -239Q164 -250 152 -250Q144 -250 138 -244L137 -243Q133 -241 133 -179T132 250Q132 731 133 736ZM329 739Q334 750 346 750Q353 750 361 744L362 743Q366 741 366 679T367 250T367 -178T362 -243L361 -244Q355 -250 347 -250Q335 -250 329 -239Q327 -235 327 250T329 739Z"></path></g><g data-mml-node="mn" transform="translate(533,413) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g><g data-mml-node="mo" transform="translate(7676.7,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g></g></g></svg></mjx-container></span> 其中 <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.027ex;" xmlns="http://www.w3.org/2000/svg" width="1.319ex" height="1.597ex" role="img" focusable="false" viewBox="0 -694 583 706"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D706" d="M166 673Q166 685 183 694H202Q292 691 316 644Q322 629 373 486T474 207T524 67Q531 47 537 34T546 15T551 6T555 2T556 -2T550 -11H482Q457 3 450 18T399 152L354 277L340 262Q327 246 293 207T236 141Q211 112 174 69Q123 9 111 -1T83 -12Q47 -12 47 20Q47 37 61 52T199 187Q229 216 266 252T321 306L338 322Q338 323 288 462T234 612Q214 657 183 657Q166 657 166 673Z"></path></g></g></g></svg></mjx-container></span> 是正则化超参数，控制惩罚项在损失函数中的相对重要性</li>
+作为惩罚项加到最小化损失的问题中, 最小化预测损失和惩罚项之和 <span class="math display"><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -1.552ex;" xmlns="http://www.w3.org/2000/svg" width="17.997ex" height="4.652ex" role="img" focusable="false" viewBox="0 -1370 7954.7 2056"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D43F" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 217 683Q271 680 344 680Q485 680 506 683H518Q524 677 524 674T522 656Q517 641 513 637H475Q406 636 394 628Q387 624 380 600T313 336Q297 271 279 198T252 88L243 52Q243 48 252 48T311 46H328Q360 46 379 47T428 54T478 72T522 106T564 161Q580 191 594 228T611 270Q616 273 628 273H641Q647 264 647 262T627 203T583 83T557 9Q555 4 553 3T537 0T494 -1Q483 -1 418 -1T294 0H116Q32 0 32 10Q32 17 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path></g><g data-mml-node="mo" transform="translate(681,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(1070,0)"><g data-mml-node="mi"><path data-c="1D430" d="M624 444Q636 441 722 441Q797 441 800 444H805V382H741L593 11Q592 10 590 8T586 4T584 2T581 0T579 -2T575 -3T571 -3T567 -4T561 -4T553 -4H542Q525 -4 518 6T490 70Q474 110 463 137L415 257L367 137Q357 111 341 72Q320 17 313 7T289 -4H277Q259 -4 253 -2T238 11L90 382H25V444H32Q47 441 140 441Q243 441 261 444H270V382H222L310 164L382 342L366 382H303V444H310Q322 441 407 441Q508 441 523 444H531V382H506Q481 382 481 380Q482 376 529 259T577 142L674 382H617V444H624Z"></path></g></g><g data-mml-node="mo" transform="translate(1901,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mi" transform="translate(2345.7,0)"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g><g data-mml-node="mo" transform="translate(2774.7,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mo" transform="translate(3385.9,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mfrac" transform="translate(4386.1,0)"><g data-mml-node="mi" transform="translate(220,676)"><path data-c="1D706" d="M166 673Q166 685 183 694H202Q292 691 316 644Q322 629 373 486T474 207T524 67Q531 47 537 34T546 15T551 6T555 2T556 -2T550 -11H482Q457 3 450 18T399 152L354 277L340 262Q327 246 293 207T236 141Q211 112 174 69Q123 9 111 -1T83 -12Q47 -12 47 20Q47 37 61 52T199 187Q229 216 266 252T321 306L338 322Q338 323 288 462T234 612Q214 657 183 657Q166 657 166 673Z"></path></g><g data-mml-node="mn" transform="translate(261.5,-686)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><rect width="783" height="60" x="120" y="220"></rect></g><g data-mml-node="mo" transform="translate(5409.1,0)"><path data-c="2225" d="M133 736Q138 750 153 750Q164 750 170 739Q172 735 172 250T170 -239Q164 -250 152 -250Q144 -250 138 -244L137 -243Q133 -241 133 -179T132 250Q132 731 133 736ZM329 739Q334 750 346 750Q353 750 361 744L362 743Q366 741 366 679T367 250T367 -178T362 -243L361 -244Q355 -250 347 -250Q335 -250 329 -239Q327 -235 327 250T329 739Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(5909.1,0)"><g data-mml-node="mi"><path data-c="1D430" d="M624 444Q636 441 722 441Q797 441 800 444H805V382H741L593 11Q592 10 590 8T586 4T584 2T581 0T579 -2T575 -3T571 -3T567 -4T561 -4T553 -4H542Q525 -4 518 6T490 70Q474 110 463 137L415 257L367 137Q357 111 341 72Q320 17 313 7T289 -4H277Q259 -4 253 -2T238 11L90 382H25V444H32Q47 441 140 441Q243 441 261 444H270V382H222L310 164L382 342L366 382H303V444H310Q322 441 407 441Q508 441 523 444H531V382H506Q481 382 481 380Q482 376 529 259T577 142L674 382H617V444H624Z"></path></g></g><g data-mml-node="msup" transform="translate(6740.1,0)"><g data-mml-node="mo"><path data-c="2225" d="M133 736Q138 750 153 750Q164 750 170 739Q172 735 172 250T170 -239Q164 -250 152 -250Q144 -250 138 -244L137 -243Q133 -241 133 -179T132 250Q132 731 133 736ZM329 739Q334 750 346 750Q353 750 361 744L362 743Q366 741 366 679T367 250T367 -178T362 -243L361 -244Q355 -250 347 -250Q335 -250 329 -239Q327 -235 327 250T329 739Z"></path></g><g data-mml-node="mn" transform="translate(533,413) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g><g data-mml-node="mo" transform="translate(7676.7,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g></g></g></svg></mjx-container></span></li>
+<li>其中 <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.027ex;" xmlns="http://www.w3.org/2000/svg" width="1.319ex" height="1.597ex" role="img" focusable="false" viewBox="0 -694 583 706"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D706" d="M166 673Q166 685 183 694H202Q292 691 316 644Q322 629 373 486T474 207T524 67Q531 47 537 34T546 15T551 6T555 2T556 -2T550 -11H482Q457 3 450 18T399 152L354 277L340 262Q327 246 293 207T236 141Q211 112 174 69Q123 9 111 -1T83 -12Q47 -12 47 20Q47 37 61 52T199 187Q229 216 266 252T321 306L338 322Q338 323 288 462T234 612Q214 657 183 657Q166 657 166 673Z"></path></g></g></g></svg></mjx-container></span> 是正则化超参数，控制惩罚项在损失函数中的相对重要性</li>
+<li>L2 正则化线性模型构成经典的岭回归算法，对权重向量的大分量施加了巨大的惩罚。偏向于在大量特征上均匀分布权重的模型，使实践中对单个变量中的观测误差更为稳定</li>
+<li>L1 正则化线性回归是统计学中类似的基本模型，称为套索回归，模型将权重集中在一小部分特征上而将其他权重清除为零，为特征选择</li>
+<li>L2 正则化回归的小批量随机梯度下降更新如下式： <span class="math display"><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -2.142ex;" xmlns="http://www.w3.org/2000/svg" width="49.237ex" height="5.415ex" role="img" focusable="false" viewBox="0 -1446.6 21762.7 2393.3"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mtable"><g data-mml-node="mtr" transform="translate(0,297.1)"><g data-mml-node="mtd"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D430" d="M624 444Q636 441 722 441Q797 441 800 444H805V382H741L593 11Q592 10 590 8T586 4T584 2T581 0T579 -2T575 -3T571 -3T567 -4T561 -4T553 -4H542Q525 -4 518 6T490 70Q474 110 463 137L415 257L367 137Q357 111 341 72Q320 17 313 7T289 -4H277Q259 -4 253 -2T238 11L90 382H25V444H32Q47 441 140 441Q243 441 261 444H270V382H222L310 164L382 342L366 382H303V444H310Q322 441 407 441Q508 441 523 444H531V382H506Q481 382 481 380Q482 376 529 259T577 142L674 382H617V444H624Z"></path></g></g></g><g data-mml-node="mtd" transform="translate(831,0)"><g data-mml-node="mi"></g><g data-mml-node="mo" transform="translate(277.8,0)"><path data-c="2190" d="M944 261T944 250T929 230H165Q167 228 182 216T211 189T244 152T277 96T303 25Q308 7 308 0Q308 -11 288 -11Q281 -11 278 -11T272 -7T267 2T263 21Q245 94 195 151T73 236Q58 242 55 247Q55 254 59 257T73 264Q121 283 158 314T215 375T247 434T264 480L267 497Q269 503 270 505T275 509T288 511Q308 511 308 500Q308 493 303 475Q293 438 278 406T246 352T215 315T185 287T165 270H929Q944 261 944 250Z"></path></g><g data-mml-node="mrow" transform="translate(1555.6,0)"><g data-mml-node="mo"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mn" transform="translate(389,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mo" transform="translate(1111.2,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mi" transform="translate(2111.4,0)"><path data-c="1D702" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q156 442 175 435T205 417T221 395T229 376L231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336V326Q503 302 439 53Q381 -182 377 -189Q364 -216 332 -216Q319 -216 310 -208T299 -186Q299 -177 358 57L420 307Q423 322 423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(2608.4,0)"><path data-c="1D706" d="M166 673Q166 685 183 694H202Q292 691 316 644Q322 629 373 486T474 207T524 67Q531 47 537 34T546 15T551 6T555 2T556 -2T550 -11H482Q457 3 450 18T399 152L354 277L340 262Q327 246 293 207T236 141Q211 112 174 69Q123 9 111 -1T83 -12Q47 -12 47 20Q47 37 61 52T199 187Q229 216 266 252T321 306L338 322Q338 323 288 462T234 612Q214 657 183 657Q166 657 166 673Z"></path></g><g data-mml-node="mo" transform="translate(3191.4,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(5136,0)"><g data-mml-node="mi"><path data-c="1D430" d="M624 444Q636 441 722 441Q797 441 800 444H805V382H741L593 11Q592 10 590 8T586 4T584 2T581 0T579 -2T575 -3T571 -3T567 -4T561 -4T553 -4H542Q525 -4 518 6T490 70Q474 110 463 137L415 257L367 137Q357 111 341 72Q320 17 313 7T289 -4H277Q259 -4 253 -2T238 11L90 382H25V444H32Q47 441 140 441Q243 441 261 444H270V382H222L310 164L382 342L366 382H303V444H310Q322 441 407 441Q508 441 523 444H531V382H506Q481 382 481 380Q482 376 529 259T577 142L674 382H617V444H624Z"></path></g></g><g data-mml-node="mo" transform="translate(6189.2,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mfrac" transform="translate(7189.4,0)"><g data-mml-node="mi" transform="translate(578,676)"><path data-c="1D702" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q156 442 175 435T205 417T221 395T229 376L231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336V326Q503 302 439 53Q381 -182 377 -189Q364 -216 332 -216Q319 -216 310 -208T299 -186Q299 -177 358 57L420 307Q423 322 423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mrow" transform="translate(220,-709.5)"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="7C" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(278,0)"><g data-mml-node="mi"><path data-c="42" d="M304 342Q292 342 292 353Q292 372 323 391Q331 396 417 428T533 487Q563 512 563 555V562Q563 575 557 589T530 618T475 636Q429 636 396 613T330 539Q263 446 210 238Q196 183 173 120Q135 31 121 16Q108 1 85 -10T47 -22T32 -10Q32 -5 44 18T77 93T112 206Q135 296 154 395T182 550T191 615Q191 616 190 616Q188 616 179 611T157 601T131 594Q113 594 113 605Q113 623 144 644Q154 650 205 676T267 703Q277 705 279 705Q295 705 295 693Q295 686 288 635T278 575Q278 572 287 582Q336 635 402 669T540 704Q603 704 633 673T664 599Q664 559 638 523T580 462Q553 440 504 413L491 407L504 402Q566 381 596 338T627 244Q627 172 575 110T444 13T284 -22Q208 -22 158 28Q144 42 146 50Q150 67 178 85T230 103Q236 103 246 95T267 75T302 56T357 47Q436 47 486 93Q526 136 526 198V210Q526 228 518 249T491 292T436 330T350 345Q335 345 321 344T304 342Z"></path></g></g><g data-mml-node="mo" transform="translate(935,0) translate(0 -0.5)"><path data-c="7C" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"></path></g></g><rect width="1413" height="60" x="120" y="220"></rect></g><g data-mml-node="munder" transform="translate(9009.1,0)"><g data-mml-node="mo"><path data-c="2211" d="M60 948Q63 950 665 950H1267L1325 815Q1384 677 1388 669H1348L1341 683Q1320 724 1285 761Q1235 809 1174 838T1033 881T882 898T699 902H574H543H251L259 891Q722 258 724 252Q725 250 724 246Q721 243 460 -56L196 -356Q196 -357 407 -357Q459 -357 548 -357T676 -358Q812 -358 896 -353T1063 -332T1204 -283T1307 -196Q1328 -170 1348 -124H1388Q1388 -125 1381 -145T1356 -210T1325 -294L1267 -449L666 -450Q64 -450 61 -448Q55 -446 55 -439Q55 -437 57 -433L590 177Q590 178 557 222T452 366T322 544L56 909L55 924Q55 945 60 948Z"></path></g><g data-mml-node="TeXAtom" transform="translate(131.9,-1115.5) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(345,0)"><path data-c="2208" d="M84 250Q84 372 166 450T360 539Q361 539 377 539T419 540T469 540H568Q583 532 583 520Q583 511 570 501L466 500Q355 499 329 494Q280 482 242 458T183 409T147 354T129 306T124 272V270H568Q583 262 583 250T568 230H124V228Q124 207 134 177T167 112T231 48T328 7Q355 1 466 0H570Q583 -10 583 -20Q583 -32 568 -40H471Q464 -40 446 -40T417 -41Q262 -41 172 45Q84 127 84 250Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(1012,0)"><g data-mml-node="mi"><path data-c="42" d="M304 342Q292 342 292 353Q292 372 323 391Q331 396 417 428T533 487Q563 512 563 555V562Q563 575 557 589T530 618T475 636Q429 636 396 613T330 539Q263 446 210 238Q196 183 173 120Q135 31 121 16Q108 1 85 -10T47 -22T32 -10Q32 -5 44 18T77 93T112 206Q135 296 154 395T182 550T191 615Q191 616 190 616Q188 616 179 611T157 601T131 594Q113 594 113 605Q113 623 144 644Q154 650 205 676T267 703Q277 705 279 705Q295 705 295 693Q295 686 288 635T278 575Q278 572 287 582Q336 635 402 669T540 704Q603 704 633 673T664 599Q664 559 638 523T580 462Q553 440 504 413L491 407L504 402Q566 381 596 338T627 244Q627 172 575 110T444 13T284 -22Q208 -22 158 28Q144 42 146 50Q150 67 178 85T230 103Q236 103 246 95T267 75T302 56T357 47Q436 47 486 93Q526 136 526 198V210Q526 228 518 249T491 292T436 330T350 345Q335 345 321 344T304 342Z"></path></g></g></g></g><g data-mml-node="msup" transform="translate(10619.8,0)"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D431" d="M227 0Q212 3 121 3Q40 3 28 0H21V62H117L245 213L109 382H26V444H34Q49 441 143 441Q247 441 265 444H274V382H246L281 339Q315 297 316 297Q320 297 354 341L389 382H352V444H360Q375 441 466 441Q547 441 559 444H566V382H471L355 246L504 63L545 62H586V0H578Q563 3 469 3Q365 3 347 0H338V62H366Q366 63 326 112T285 163L198 63L217 62H235V0H227Z"></path></g></g><g data-mml-node="TeXAtom" transform="translate(640,413) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mo"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(389,0)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(734,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g><g data-mml-node="mrow" transform="translate(12270.5,0)"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="28" d="M180 96T180 250T205 541T266 770T353 944T444 1069T527 1150H555Q561 1144 561 1141Q561 1137 545 1120T504 1072T447 995T386 878T330 721T288 513T272 251Q272 133 280 56Q293 -87 326 -209T399 -405T475 -531T536 -609T561 -640Q561 -643 555 -649H527Q483 -612 443 -568T353 -443T266 -270T205 -41Z"></path></g><g data-mml-node="msup" transform="translate(597,0)"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D430" d="M624 444Q636 441 722 441Q797 441 800 444H805V382H741L593 11Q592 10 590 8T586 4T584 2T581 0T579 -2T575 -3T571 -3T567 -4T561 -4T553 -4H542Q525 -4 518 6T490 70Q474 110 463 137L415 257L367 137Q357 111 341 72Q320 17 313 7T289 -4H277Q259 -4 253 -2T238 11L90 382H25V444H32Q47 441 140 441Q243 441 261 444H270V382H222L310 164L382 342L366 382H303V444H310Q322 441 407 441Q508 441 523 444H531V382H506Q481 382 481 380Q482 376 529 259T577 142L674 382H617V444H624Z"></path></g></g><g data-mml-node="mi" transform="translate(864,413) scale(0.707)"><path data-c="22A4" d="M55 642T55 648T59 659T66 666T71 668H708Q723 660 723 648T708 628H409V15Q402 2 391 0Q387 0 384 1T379 3T375 6T373 9T371 13T369 16V628H71Q70 628 67 630T59 637Z"></path></g></g><g data-mml-node="msup" transform="translate(2061.1,0)"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D431" d="M227 0Q212 3 121 3Q40 3 28 0H21V62H117L245 213L109 382H26V444H34Q49 441 143 441Q247 441 265 444H274V382H246L281 339Q315 297 316 297Q320 297 354 341L389 382H352V444H360Q375 441 466 441Q547 441 559 444H566V382H471L355 246L504 63L545 62H586V0H578Q563 3 469 3Q365 3 347 0H338V62H366Q366 63 326 112T285 163L198 63L217 62H235V0H227Z"></path></g></g><g data-mml-node="TeXAtom" transform="translate(640,413) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mo"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(389,0)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(734,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g><g data-mml-node="mo" transform="translate(3767.4,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mi" transform="translate(4767.7,0)"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g><g data-mml-node="mo" transform="translate(5418.9,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="msup" transform="translate(6419.1,0)"><g data-mml-node="mi"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="TeXAtom" transform="translate(523,413) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mo"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(389,0)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(734,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g><g data-mml-node="mo" transform="translate(7786.2,0) translate(0 -0.5)"><path data-c="29" d="M35 1138Q35 1150 51 1150H56H69Q113 1113 153 1069T243 944T330 771T391 541T416 250T391 -40T330 -270T243 -443T152 -568T69 -649H56Q43 -649 39 -647T35 -637Q65 -607 110 -548Q283 -316 316 56Q324 133 324 251Q324 368 316 445Q278 877 48 1123Q36 1137 35 1138Z"></path></g></g><g data-mml-node="mo" transform="translate(20653.7,0)"><path data-c="2E" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60Z"></path></g></g></g></g></g></g></svg></mjx-container></span></li>
+</ul>
+<h3 id="暂退法">暂退法</h3>
+<ul>
+<li>先验：权重的值取自均值为 0 的高斯分布</li>
+<li>目标：模型深度挖掘特征，将其权重分散到许多特征中，而不是过于依赖少数潜在的虚假关联</li>
+<li>“好”的预测模型：在未知的数据上有很好的表现</li>
+<li>缩小训练和测试性能之间的差距，应该以 <strong> 简单的模型 </strong> 为目标</li>
+<li>平滑性：即函数不应该对其输入的微小变化敏感，在计算后续层之前向网络的每一层 <strong> 注入噪声 </strong> 训练 -&gt; 暂退法</li>
+</ul>
+<h4 id="如何注入噪声">如何注入噪声</h4>
+<ul>
+<li><p>无偏向：标准暂退法正则化中，通过按保留（未丢弃）的节点的分数进行规范化来消除每一层的偏差。
+换言之，每个中间活性值 h 以暂退概率 p 由随机变量 h' 替换，期望值保持不变。如下所示：
+<span class="math display"><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -2.338ex;" xmlns="http://www.w3.org/2000/svg" width="22.367ex" height="5.807ex" role="img" focusable="false" viewBox="0 -1533.5 9886.4 2566.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mtable"><g data-mml-node="mtr"><g data-mml-node="mtd"><g data-mml-node="mtable"><g data-mml-node="mtr"><g data-mml-node="mtd"><g data-mml-node="msup"><g data-mml-node="mi"><path data-c="210E" d="M137 683Q138 683 209 688T282 694Q294 694 294 685Q294 674 258 534Q220 386 220 383Q220 381 227 388Q288 442 357 442Q411 442 444 415T478 336Q478 285 440 178T402 50Q403 36 407 31T422 26Q450 26 474 56T513 138Q516 149 519 151T535 153Q555 153 555 145Q555 144 551 130Q535 71 500 33Q466 -10 419 -10H414Q367 -10 346 17T325 74Q325 90 361 192T398 345Q398 404 354 404H349Q266 404 205 306L198 293L164 158Q132 28 127 16Q114 -11 83 -11Q69 -11 59 -2T48 16Q48 30 121 320L195 616Q195 629 188 632T149 637H128Q122 643 122 645T124 664Q129 683 137 683Z"></path></g><g data-mml-node="mo" transform="translate(609,413) scale(0.707)"><path data-c="2032" d="M79 43Q73 43 52 49T30 61Q30 68 85 293T146 528Q161 560 198 560Q218 560 240 545T262 501Q262 496 260 486Q259 479 173 263T84 45T79 43Z"></path></g></g><g data-mml-node="mo" transform="translate(1131.2,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mrow" transform="translate(2187,0)"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="7B" d="M618 -943L612 -949H582L568 -943Q472 -903 411 -841T332 -703Q327 -682 327 -653T325 -350Q324 -28 323 -18Q317 24 301 61T264 124T221 171T179 205T147 225T132 234Q130 238 130 250Q130 255 130 258T131 264T132 267T134 269T139 272T144 275Q207 308 256 367Q310 436 323 519Q324 529 325 851Q326 1124 326 1154T332 1205Q369 1358 566 1443L582 1450H612L618 1444V1429Q618 1413 616 1411L608 1406Q599 1402 585 1393T552 1372T515 1343T479 1305T449 1257T429 1200Q425 1180 425 1152T423 851Q422 579 422 549T416 498Q407 459 388 424T346 364T297 318T250 284T214 264T197 254L188 251L205 242Q290 200 345 138T416 3Q421 -18 421 -48T423 -349Q423 -397 423 -472Q424 -677 428 -694Q429 -697 429 -699Q434 -722 443 -743T465 -782T491 -816T519 -845T548 -868T574 -886T595 -899T610 -908L616 -910Q618 -912 618 -928V-943Z"></path></g><g data-mml-node="mtable" transform="translate(750,0)"><g data-mml-node="mtr" transform="translate(0,783.5)"><g data-mml-node="mtd"><g data-mml-node="mn"><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"></path></g></g><g data-mml-node="mtd" transform="translate(2699.4,0)"><g data-mml-node="mtext"><path data-c="A0" d=""></path><text data-variant="normal"transform="translate(250,0) scale(1,-1)"font-size="884px"font-family="serif">概 </text><text data-variant="normal"transform="translate(1250,0) scale(1,-1)"font-size="884px"font-family="serif"> 率</text><text data-variant="normal"transform="translate(2250,0) scale(1,-1)"font-size="884px"font-family="serif">为 </text><path data-c="A0"d="" transform="translate(3250,0)"></path></g><g data-mml-node="mi" transform="translate(3500,0)"><path data-c="1D45D" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"></path></g></g></g><g data-mml-node="mtr" transform="translate(0,-551.3)"><g data-mml-node="mtd"><g data-mml-node="mfrac"><g data-mml-node="mi" transform="translate(646,394) scale(0.707)"><path data-c="210E" d="M137 683Q138 683 209 688T282 694Q294 694 294 685Q294 674 258 534Q220 386 220 383Q220 381 227 388Q288 442 357 442Q411 442 444 415T478 336Q478 285 440 178T402 50Q403 36 407 31T422 26Q450 26 474 56T513 138Q516 149 519 151T535 153Q555 153 555 145Q555 144 551 130Q535 71 500 33Q466 -10 419 -10H414Q367 -10 346 17T325 74Q325 90 361 192T398 345Q398 404 354 404H349Q266 404 205 306L198 293L164 158Q132 28 127 16Q114 -11 83 -11Q69 -11 59 -2T48 16Q48 30 121 320L195 616Q195 629 188 632T149 637H128Q122 643 122 645T124 664Q129 683 137 683Z"></path></g><g data-mml-node="mrow" transform="translate(220,-345) scale(0.707)"><g data-mml-node="mn"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mo" transform="translate(500,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mi" transform="translate(1278,0)"><path data-c="1D45D" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"></path></g></g><rect width="1459.4" height="60" x="120" y="220"></rect></g></g><g data-mml-node="mtd" transform="translate(2699.4,0)"><g data-mml-node="mtext"><path data-c="A0" d=""></path><text data-variant="normal"transform="translate(250,0) scale(1,-1)"font-size="884px"font-family="serif"> 其</text><text data-variant="normal"transform="translate(1250,0) scale(1,-1)"font-size="884px"font-family="serif">他 </text><text data-variant="normal"transform="translate(2250,0) scale(1,-1)"font-size="884px"font-family="serif"> 情</text><text data-variant="normal"transform="translate(3250,0) scale(1,-1)"font-size="884px"font-family="serif">况</text></g></g></g></g><g data-mml-node="mo"transform="translate(7699.4,0) translate(0 250)"></g></g></g></g></g></g></g></g></g></g></svg></mjx-container></span></p></li>
+<li><p>测试时使用暂退法，以 p 的概率将隐藏单元置为零，用于估计神经网络预测的“不确定性”</p></li>
+</ul>
+<h3 id="前向传播反向传播">前向传播、反向传播</h3>
+<h4 id="前向传播">前向传播</h4>
+<ul>
+<li>前向传播：按顺序（从输入层到输出层）计算和存储神经网络中每层的结果</li>
+<li></li>
 </ul>
 ]]></content>
       <categories>
@@ -906,8 +1400,8 @@ situation may not be random ever.</p>
     <title>Lab1 Report</title>
     <url>/2023/03/10/21-48-08/</url>
     <content><![CDATA[<p>Lab1 Report <span id="more"></span></p>
-<h3 id="思考题">思考题</h3>
-<h4 id="thinking-1.1">Thinking 1.1</h4>
+<h2 id="思考题">思考题</h2>
+<h3 id="thinking-1.1">Thinking 1.1</h3>
 <ul>
 <li>编译程序 hello.c，再用 objdump 反编译.o 与可执行文件</li>
 </ul>
@@ -917,7 +1411,7 @@ situation may not be random ever.</p>
 <li>通过观察不同工具链编译出的可执行文件和使用 objdump
 解析的结果，可以发现它们在汇编指令和符号表等方面存在差异。不同的工具链可能使用不同的指令集，因此编译出的可执行文件也会有所不同。</li>
 </ul>
-<h4 id="thinking-1.2">Thinking 1.2</h4>
+<h3 id="thinking-1.2">Thinking 1.2</h3>
 <ul>
 <li>readelf 解析之前在 target 目录下生成的内核 ELF 文件结果</li>
 </ul>
@@ -925,16 +1419,16 @@ situation may not be random ever.</p>
 <ul>
 <li>使用 readelf -h 得到两个文件文件头差异</li>
 </ul>
-<p><img src="image-20230307161525500.png" alt="image-20230307161525500"/></p>
+<p><img data-src="image-20230307161525500.png" alt="image-20230307161525500"/></p>
 <ul>
 <li>编写的 readelf 中 Elf32_Ehdr 等针对的是 32 位的 ELF 的解析，hello 程序 ELF 类别是 32 位，可被编写的 readelf 解析，但 readelf 文件本身位 64 位 ELF，不可被解析。系统工具则都可解析</li>
 </ul>
-<h4 id="thinking-1.3">Thinking 1.3</h4>
+<h3 id="thinking-1.3">Thinking 1.3</h3>
 <ul>
 <li><p>在实验操作系统的启动过程中，有一个引导加载程序的阶段。引导加载程序位于启动入口地址处，它的作用是将内核从磁盘中加载到内存中，并将控制权转移到内核入口地址。实验操作系统的内核入口地址放置在内存布局图的正确位置时，引导加载程序可以正确地将控制权转移到内核入口地址处，进入内核。</p></li>
 <li><p>因此，尽管内核入口地址不是启动入口地址，但通过引导加载程序的正确执行，内核入口仍然可以被正确地跳转到。</p></li>
 </ul>
-<h3 id="难点分析">难点分析</h3>
+<h2 id="难点分析">难点分析</h2>
 <ul>
 <li>理解整体架构，查找、理解所需内存配置信息与关联函数参数使用，如：
 <ul>
@@ -947,7 +1441,7 @@ long，十进制有符号数需要提前判断是否为负数，取绝对值，�
 </ul></li>
 <li>1.4 中 c 的语法和与逻辑，一些指针的使用，以及一点点 mips 的语法</li>
 </ul>
-<h3 id="实验体会">实验体会</h3>
+<h2 id="实验体会">实验体会</h2>
 <ul>
 <li>体会到内核设计运行的复杂与严谨，内存信息需有序规划分配。以及多种类型文件的不同方式的编译，分别负责整体的不同功能方面。</li>
 <li>体会到一些 c 语言的强大的灵活基础能力</li>
@@ -967,8 +1461,8 @@ long，十进制有符号数需要提前判断是否为负数，取绝对值，�
     <title>Lab0 Report</title>
     <url>/2023/03/10/20-40-25/</url>
     <content><![CDATA[<p>Lab0 Report <span id="more"></span></p>
-<h3 id="思考题">思考题</h3>
-<h4 id="thinking-0.1">Thinking 0.1</h4>
+<h2 id="思考题">思考题</h2>
+<h3 id="thinking-0.1">Thinking 0.1</h3>
 <ul>
 <li>Untracked.txt:</li>
 </ul>
@@ -985,13 +1479,13 @@ long，十进制有符号数需要提前判断是否为负数，取绝对值，�
 <li>从 Untracked 到 Stage，README 文件从未跟踪的文件变成要提交的文件，因为使用了 git
 add 进行跟踪，提交一次本地变更之后，再修改 README 时，README 不再是像第一次 status 中有一个新的没有跟踪的文件，而是有一个持续跟踪的发生变化的文件，所以两次 status 不一样。</li>
 </ul>
-<h4 id="thinking-0.2">Thinking 0.2</h4>
+<h3 id="thinking-0.2">Thinking 0.2</h3>
 <ul>
 <li><p>add the file: git add &lt;file&gt;</p></li>
 <li><p>stage the file: add &lt;file&gt;</p></li>
 <li><p>commit: git commit -m message</p></li>
 </ul>
-<h4 id="thinking-0.3">Thinking 0.3</h4>
+<h3 id="thinking-0.3">Thinking 0.3</h3>
 <ol type="1">
 <li><p>git checkout -- printf.c
 checkout 两种用法：切换分支，撤销修改（暂存区 -&gt; 工作区）</p></li>
@@ -999,7 +1493,7 @@ checkout 两种用法：切换分支，撤销修改（暂存区 -&gt; 工作区�
 --staged printf.c</p></li>
 </ol>
 <p>回退版本（仓库提交版本 -&gt; 暂存区 / 工作区）</p>
-<h4 id="thinking-0.4">Thinking 0.4</h4>
+<h3 id="thinking-0.4">Thinking 0.4</h3>
 <ul>
 <li><p>有三次提交</p></li>
 <li><p>```git commit ca2fac3c015bd8aded736d5f8e28a52cbc4d5bb5 (HEAD
@@ -1016,7 +1510,7 @@ class="email">21373237@buaa.edu.cn</a> Date: Thu Mar 2 11:37:42 2023
 href="mailto:21373237@buaa.edu.cn"
 class="email">21373237@buaa.edu.cn</a> Date: Thu Mar 2 11:36:29 2023
 +0800</p>
-<p>1 <figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- 执行命令 git <span class="built_in">reset</span> --hard HEAD^ 后，<span class="built_in">log</span>中最上一条说明为 <span class="number">3</span> 的提交消失 </span><br><span class="line"></span><br><span class="line">- 找到提交说明为 <span class="number">1</span> 的哈希值，执行命令 git <span class="built_in">reset</span> --hard  后，<span class="built_in">log</span> 中说明为 <span class="number">2</span> 的提交消失 </span><br><span class="line"></span><br><span class="line">- 再使用说明为<span class="number">3</span> 的哈希值，执行 git <span class="built_in">reset</span> --hard ca2fac3c015bd8aded736d5f8e28a52cbc4d5bb5 之后，直接回到那一次提交</span><br><span class="line"></span><br><span class="line">#### Thinking <span class="number">0.5</span></span><br><span class="line"></span><br><span class="line">- echo <span class="built_in">first</span>: 终端输出</span><br><span class="line"></span><br><span class="line">    ```txt</span><br><span class="line">    <span class="built_in">first</span></span><br></pre></td></tr></table></figure></p></li>
+<p>1 <figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- 执行命令 git <span class="built_in">reset</span> --hard HEAD^ 后，<span class="built_in">log</span>中最上一条说明为 <span class="number">3</span> 的提交消失 </span><br><span class="line"></span><br><span class="line">- 找到提交说明为 <span class="number">1</span> 的哈希值，执行命令 git <span class="built_in">reset</span> --hard  后，<span class="built_in">log</span> 中说明为 <span class="number">2</span> 的提交消失 </span><br><span class="line"></span><br><span class="line">- 再使用说明为<span class="number">3</span> 的哈希值，执行 git <span class="built_in">reset</span> --hard ca2fac3c015bd8aded736d5f8e28a52cbc4d5bb5 之后，直接回到那一次提交</span><br><span class="line"></span><br><span class="line">### Thinking <span class="number">0.5</span></span><br><span class="line"></span><br><span class="line">- echo <span class="built_in">first</span>: 终端输出</span><br><span class="line"></span><br><span class="line">    ```txt</span><br><span class="line">    <span class="built_in">first</span></span><br></pre></td></tr></table></figure></p></li>
 <li><p>echo second &gt; output.txt: output 中内容为</p>
 <p><figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">second</span><br></pre></td></tr></table></figure></p></li>
 <li><p>echo third &gt; output.txt: output 中内容为</p>
@@ -1024,7 +1518,7 @@ class="email">21373237@buaa.edu.cn</a> Date: Thu Mar 2 11:36:29 2023
 <li><p>echo forth &gt;&gt; output.txt: output 中内容为</p>
 <p><figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">third</span><br><span class="line">forth</span><br></pre></td></tr></table></figure></p></li>
 </ul>
-<h4 id="thinking-0.6">Thinking 0.6</h4>
+<h3 id="thinking-0.6">Thinking 0.6</h3>
 <ul>
 <li>command</li>
 </ul>
@@ -1041,7 +1535,7 @@ c=$[$a+$b]使得 c=3。c,b,a 三个进入 file1,2,3，最后依次存入 file4�
 <li><p>执行<code>echo echo $c&gt;file1</code> 与
 <code>echo 'echo $c'&gt;file1</code>有区别，不加引号时，$c 被认为是一个变量，但找不到值，没有显示。加引号时引号内整体被认定为字符串，全部写入 file1</p></li>
 </ul>
-<h3 id="难点分析">难点分析</h3>
+<h2 id="难点分析">难点分析</h2>
 <ul>
 <li><p>引号，小括号，中括号语法混乱，Exercise 0.4 中替换语句中不可用‘
 ’，只能用“
@@ -1057,7 +1551,7 @@ done 为 while 循环区间。分支语法 if elif 与最后的 fi 结尾。</p>
 0.4 中的.c 与.h 文件分别存放在两个文件夹，在链接的时候需要用 -I 给 gcc 起始搜索目录</p></li>
 <li><p>Exercise 0.4 中的外层 make 调用内层 make 时</p></li>
 </ul>
-<h3 id="实验体会">实验体会</h3>
+<h2 id="实验体会">实验体会</h2>
 <p>Linux 下的各种功能更为清晰直接，提供了更多可设定参数，可以灵活编程用多种方法达到目的，并且借助一些正则表达式可以编写高效脚本。但同时大量功能和参数也使初期编写时记不清可用的功能和对应语法，导致没有头绪和大量 bug...</p>
 ]]></content>
       <categories>
@@ -1124,7 +1618,7 @@ done 为 while 循环区间。分支语法 if elif 与最后的 fi 结尾。</p>
 <p><strong>beq, bne, j, jal, jr, bltzal</strong></p>
 <p><strong>nop, eret, mtc0, mfc0, syscall</strong></p>
 <h2 id="流程模块设计">流程模块设计</h2>
-<p><img src="image-20230311001413097.png" alt="image-20230311001413097" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311001413097.png" alt="image-20230311001413097" style="zoom:67%;" /></p>
 <h3 id="cp0">CP0</h3>
 <ul>
 <li>处理来自 CPU 的内部异常以及来自中断发生器与 timer 的外部中断，产生异常控制信号给 CPU</li>
@@ -1242,7 +1736,7 @@ done 为 while 循环区间。分支语法 if elif 与最后的 fi 结尾。</p>
 <ul>
 <li>对 CPU 向外设写入的数据进行分流，对外设向 CPU 写入的数据进行选择。</li>
 </ul>
-<p><img src="image-20230311001425849.png" alt="image-20230311001425849" width="67%" height="67%" /></p>
+<p><img data-src="image-20230311001425849.png" alt="image-20230311001425849" width="67%" height="67%" /></p>
 <ul>
 <li>CPU 从外设读：根据地址用 MUX 筛选；CPU 向外设写：写地址、数据直接全部发送，写使能用 byteen 以及写地址决定决定</li>
 <li>修改层级结构，在最高层通过系统桥将 CPU 与外置 DM,TC0,TC1, 以及中断生成器相连</li>
@@ -1739,7 +2233,7 @@ M 级指令的 Tnew，在各级 CU 中计算，发送至冲突单元（W 级 Tne
 <li>P6 新增乘除 Stall，在乘除运算即将开始或正在进行时如遇到乘除指令需要 Stall</li>
 <li>P7 新增 eret 的 Stall，eret 与 mtc0 的写后读冲突，需要单独判断阻塞，判断方法为当 D 级为 eret 即将读 CP0 的 EPC 时，EM 级如果有 mtc0 即将写入 CP0 的 EPC，即 rd 为 14 时，阻塞。</li>
 </ul>
-<p><img src="image-20230311001016596.png" alt="image-20230311001016596"/></p>
+<p><img data-src="image-20230311001016596.png" alt="image-20230311001016596"/></p>
 <h4 id="转发">转发</h4>
 <ul>
 <li><p>阻塞后，所有指令在需要读寄存器数据的时候都能够获得后续计算完毕的数据，每级转发出已算出的数据，发送给之前各级即可。</p></li>
@@ -1747,18 +2241,18 @@ M 级指令的 Tnew，在各级 CU 中计算，发送至冲突单元（W 级 Tne
 数据；M 级 DM 写入数据口需要 rt 数据</p></li>
 <li><p>需要写寄存器：E 级可转发出 D 级算的 PC+8；M 级可转发出 D 级算的 PC+8 和 E 级算的的 ALU_Y；W 级可转发出 D 级算的 PC+8，E 级算的的 ALU_Y 和 M 级读出的 DM 数据。<strong>根据当前指令 CU 译码得到的 GRF_WDSrc 进行选择</strong>。此外还有 W 级寄存器写入，可直接内部转发至 D 级读出</p></li>
 </ul>
-<p><img src="image-20230311001109169.png" alt="image-20230311001109169" style="zoom:67%;" /></p>
-<p><img src="image-20230311001116883.png" alt="image-20230311001116883" style="zoom:67%;" /></p>
-<p><img src="image-20230311001122673.png" alt="image-20230311001122673" style="zoom:67%;" /></p>
-<p><img src="image-20230311001129478.png" alt="image-20230311001129478" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311001109169.png" alt="image-20230311001109169" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311001116883.png" alt="image-20230311001116883" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311001122673.png" alt="image-20230311001122673" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311001129478.png" alt="image-20230311001129478" style="zoom:67%;" /></p>
 <ul>
 <li>在主模块中，获取各级需要读的寄存器编号（D_rs,D_rt,E_rs,E_rt,M_rt），寄存器原读数（D_rs_data,D_rt_data,E_rs_data,E_rt_data,M_rt_data），写入的寄存器编号（E_GRF_WA,M_GRF_WA,W_GRF_WA）和数据（E_GRF_WD,M_GRF_WD,W_GRF_WD）</li>
 <li>比较读的编号和写的编号是否有相等的，如有相等的则代表有数据已经更新需要转发，转发优先级为更新次序，最后一次更新优先转发，即优先转发距离需要数据的阶段近的数据，特判如果需要读 0 号寄存器的数据，直接转发 0</li>
 <li>转发的数据（D_rs_fw,D_rt_fw,E_rs_fw,E_rt_fw,M_rt_fw）发送至各级需要的部分运算，并传递给下一级</li>
 </ul>
-<p><img src="image-20230311001150971.png" alt="image-20230311001150971" style="zoom: 67%;" /></p>
+<p><img data-src="image-20230311001150971.png" alt="image-20230311001150971" style="zoom: 67%;" /></p>
 <h3 id="五级模块设计">五级模块设计</h3>
-<p><img src="image-20230311001621204.png" alt="image-20230311001621204" style="zoom:80%;" /></p>
+<p><img data-src="image-20230311001621204.png" alt="image-20230311001621204" style="zoom:80%;" /></p>
 <ul>
 <li><p>每个阶段之间以寄存器隔开，寄存器设计在每个模块输出处，使用 reg 类型</p></li>
 <li><p>每个阶段之间需要流水传递 Ins，PC，传给各级 CU 以译码出当前阶段的 rs，rt 以及需要写入的地址和写入数据的选择</p></li>
@@ -1870,7 +2364,7 @@ id="p6 更新乘除槽与储存器外置以及按字节访存">P6 更新乘除�
 <ul>
 <li>F 级与指令储存的数据交换</li>
 </ul>
-<p><img src="image-20230311001208043.png" alt="image-20230311001208043" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311001208043.png" alt="image-20230311001208043" style="zoom:67%;" /></p>
 <h4 id="decode">2. Decode</h4>
 <ul>
 <li>包括 D_CU, EXT, NPC (Branch), DEReg</li>
@@ -2716,7 +3210,7 @@ id="m_de 调整内存读出数据截取需要的字节后拓展">M_DE（调整�
 </table></li>
 </ul></li>
 <li>M 级与内存数据交换</li>
-<li><img src="image-20230311001314893.png" alt="image-20230311001314893" style="zoom:67%;" /></li>
+<li><img data-src="image-20230311001314893.png" alt="image-20230311001314893" style="zoom:67%;" /></li>
 </ul>
 <h4 id="writeback">5. Writeback</h4>
 <ul>
@@ -2824,18 +3318,18 @@ id="m_de 调整内存读出数据截取需要的字节后拓展">M_DE（调整�
 <li>中断测试</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.text </span><br><span class="line">lui $1,0xffff</span><br><span class="line">ori $1,$1,0xfc01</span><br><span class="line">mtc0 $1,$12</span><br><span class="line">lui $2,0xffff</span><br><span class="line">#int-grf</span><br><span class="line">ori $2,$2,0x1234</span><br><span class="line">#int-store</span><br><span class="line">sw $2,0($0)</span><br><span class="line">ori $3,$0,0xfc01</span><br><span class="line">#int-mfc0</span><br><span class="line">mtc0 $3,$12</span><br><span class="line">#int-load</span><br><span class="line">lw $4,0($0)</span><br><span class="line">lw $5,0($0)</span><br><span class="line">#int-stall</span><br><span class="line">add $6,$5,$4</span><br><span class="line">lui $7,0x7fff</span><br><span class="line">lui $8,0x7fff</span><br><span class="line">#int-beq</span><br><span class="line">beq $7,$8,label1</span><br><span class="line">#int&amp;exc-BD</span><br><span class="line">add $9,$7,$8</span><br><span class="line">#int-D beq</span><br><span class="line">addi $10,$0,0x0001</span><br><span class="line">addi $11,$0,0x0002</span><br><span class="line">beq $7,$8,label1</span><br><span class="line">nop</span><br><span class="line"></span><br><span class="line">label1:</span><br><span class="line">mult $7,$8</span><br><span class="line">syscall</span><br><span class="line">div $7,$8</span><br><span class="line">syscall</span><br><span class="line">mthi $7</span><br><span class="line">syscall</span><br><span class="line">mtlo $8</span><br><span class="line">syscall</span><br><span class="line">mfhi $10</span><br><span class="line">mflo $11</span><br><span class="line">mult $7,$8</span><br><span class="line">beq $7,$8,label2</span><br><span class="line">#int-many nop</span><br><span class="line">mflo $12</span><br><span class="line">addi $12,$0,0x0001</span><br><span class="line">addi $12,$0,0x0002</span><br><span class="line"></span><br><span class="line">label2:</span><br><span class="line">addi $13,$0,0x0001</span><br><span class="line"></span><br><span class="line">end:</span><br><span class="line">beq $0,$0,end</span><br><span class="line">nop</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.ktext 0x4180</span><br><span class="line">main_handler:</span><br><span class="line">mfc0 $26,$13</span><br><span class="line">mfc0 $27,$14</span><br><span class="line">ori $27,$0,0x007c</span><br><span class="line">and $26,$27,$26</span><br><span class="line">beq $0,$26,interrupt</span><br><span class="line">nop</span><br><span class="line">mfc0 $26,$14</span><br><span class="line">add $26,$26,4</span><br><span class="line">mtc0 $26,$14</span><br><span class="line">beq $0,$0,return</span><br><span class="line">nop</span><br><span class="line"></span><br><span class="line">interrupt:</span><br><span class="line">ori $27,$0,0x2137</span><br><span class="line">sw $27,0x7f20($0)</span><br><span class="line">beq $0,$0,return</span><br><span class="line">nop</span><br><span class="line"></span><br><span class="line">return:</span><br><span class="line">eret</span><br></pre></td></tr></table></figure>
-<p><img src="image-20230311001726074.png" alt="image-20230311001726074"/></p>
+<p><img data-src="image-20230311001726074.png" alt="image-20230311001726074"/></p>
 <ul>
 <li>异常测试：</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.text</span><br><span class="line">    mtc0 $0, $12</span><br><span class="line">    ori $at, $0, 0xfffc</span><br><span class="line"></span><br><span class="line"> #====OV=====</span><br><span class="line">    lui $t0, 0x7fff</span><br><span class="line">    lui $t1, 0xffff</span><br><span class="line">    add $t2, $t0, $t1</span><br><span class="line">    sub $t2, $t0, $t1</span><br><span class="line">    sub $t2, $t1, $t0</span><br><span class="line">    lui $t1, 0x7fff</span><br><span class="line">    add $t2, $t0, $t1</span><br><span class="line">    ori $t1, $t1, 0xffff</span><br><span class="line">    addi $t2, $t1, 0xfffffff0</span><br><span class="line">    addi $t1, $t1, 0x0010</span><br><span class="line"></span><br><span class="line"> #=====SYSCALL=====</span><br><span class="line">    syscall</span><br><span class="line">    </span><br><span class="line">    #=====ADEL=====</span><br><span class="line">    lui $t1, 0x7fff</span><br><span class="line">    jal label1</span><br><span class="line">    add $ra, $ra, $t1</span><br><span class="line">label1:</span><br><span class="line">    jr $ra</span><br><span class="line">    nop</span><br><span class="line">    jal label2</span><br><span class="line">    addi $ra, $ra, 1</span><br><span class="line">label2:</span><br><span class="line">    jr $ra</span><br><span class="line">    nop</span><br><span class="line">    ori $t0, $0, 0x7f00</span><br><span class="line">    ori $t2, $0, 0x7f20</span><br><span class="line">    sw $t0, 0($0)</span><br><span class="line">    lw $t0, 0($0)</span><br><span class="line">    lw $t0, 1($0)</span><br><span class="line">    lw $t0, 2($0)</span><br><span class="line">    lh $t0, 3($0)</span><br><span class="line">    lh $t0, 0($t0)</span><br><span class="line">    lh $t0, 2($t0)</span><br><span class="line">    lb $t0, 0($t0)</span><br><span class="line">    lb $t0, 3($t0)</span><br><span class="line">loop_timer1:</span><br><span class="line">    lw $t1, 0($t0)</span><br><span class="line">    addi $t0, $t0, 4</span><br><span class="line">    bne $t0, $t2, loop_timer1</span><br><span class="line">    nop</span><br><span class="line">    ori $t0, $0, 0x3000</span><br><span class="line">    lw $t0, 0($t0)</span><br><span class="line">    lui $t0, 0x7fff</span><br><span class="line">    ori $t0, $t0, 0xffff</span><br><span class="line"> lw $t0, 1($t0)</span><br><span class="line"> lw $t0, -4($0)</span><br><span class="line"> </span><br><span class="line"> #=====ADES=====</span><br><span class="line"> sw $0, 1($0)</span><br><span class="line">    sw $0, 2($0)</span><br><span class="line">    sh $0, 3($0)</span><br><span class="line">    sw $0, 4($0)</span><br><span class="line">    sh $0, 6($0)</span><br><span class="line">    sb $0, 7($0)</span><br><span class="line">    ori $t0, $0, 0x7f00</span><br><span class="line">    sh $0, 0($t0)</span><br><span class="line">    sh $0, 2($t0)</span><br><span class="line">    sb $0, 0($t0)</span><br><span class="line">    sb $0, 3($t0)</span><br><span class="line">    ori $t1, $0, 0x7f30</span><br><span class="line">loop_timer2:</span><br><span class="line"> sw $0, 0($t0)</span><br><span class="line"> addi $t0, $t0, 4</span><br><span class="line">    bne $t0, $t1, loop_timer2</span><br><span class="line">    nop</span><br><span class="line">    ori $t0, $0, 0x3000</span><br><span class="line">    sw $0, 0($t0)</span><br><span class="line">    lui $t0, 0x7fff</span><br><span class="line">    ori $t0, $t0, 0xffff</span><br><span class="line"> sw $0, 1($t0)</span><br><span class="line"> sw $0, -1($0)</span><br><span class="line"></span><br><span class="line"> #=====ALTOGETHER=====</span><br><span class="line"> lui $t0, 0x7fff</span><br><span class="line"> ori $t1, $t0, 0xffff</span><br><span class="line"> sw $0, 0($t0)</span><br><span class="line"> addi $t1, $t1, 1</span><br><span class="line"> syscall</span><br><span class="line"> </span><br><span class="line"> sw $0, 0($t0)</span><br><span class="line"> addi $t1, $t1, 1</span><br><span class="line"> nop</span><br><span class="line"> </span><br><span class="line"> sw $0, 0($t0)</span><br><span class="line"> addi $t1, $t1, 0</span><br><span class="line"> syscall</span><br><span class="line"> </span><br><span class="line"> sw $0, 0($0)</span><br><span class="line"> addi $t1, $t1, 1</span><br><span class="line"> syscall</span><br><span class="line"> </span><br><span class="line"> lui $t0, 0x8000</span><br><span class="line"> addi $t1, $t1, 1</span><br><span class="line"> beq $t0, $t1, end</span><br><span class="line"> nop</span><br><span class="line"></span><br><span class="line">end:</span><br><span class="line">    beq $0, $0, end</span><br><span class="line">    nop</span><br><span class="line"></span><br><span class="line">.ktext 0x4180</span><br><span class="line">_main_handler:</span><br><span class="line">    mfc0 $k0, $13</span><br><span class="line">    mfc0 $k0, $14</span><br><span class="line">    and $k0, $k0, $at</span><br><span class="line">    addi $k0, $k0, 4</span><br><span class="line">    mtc0 $k0, $14</span><br><span class="line">    eret</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><img src="image-20230311001804942.png" alt="image-20230311001804942"/></p>
+<p><img data-src="image-20230311001804942.png" alt="image-20230311001804942"/></p>
 <h2 id="掉的坑">掉的坑</h2>
 <ul>
 <li><strong>逻辑判断式中信号不可有高阻态否则出 x</strong>，删除赋值逻辑时需给 0，否则删除所有位置的这个信号</li>
 <li>地址异常中，合法地址包括 DM，TC0，TC1 以及 <strong> 中断发生器 </strong> 响应地址</li>
 </ul>
-<p><img src="image-20230311001827809.png" alt="image-20230311001827809" style="zoom:80%;" /></p>
+<p><img data-src="image-20230311001827809.png" alt="image-20230311001827809" style="zoom:80%;" /></p>
 <ul>
 <li>注意出现异常或中断时，除了需要将所有级寄存器修改至即将跳转至 handler 的样貌之外，还需要将 M 级读写字节使能设为 0000，防止后续指令的继续进行以及 <strong> 当前指令在 M 级对内存的写入</strong></li>
 <li>注意 eret 与 mtc0 的写后读冲突，需要单独判断阻塞，判断方法为当 D 级为 eret 即将读 CP0 的 EPC 时，EM 级如果有 mtc0 即将写入 CP0 的 EPC，即 rd 为 14 时，阻塞。</li>
@@ -2873,9 +3367,9 @@ an exception occurs in the branch delay slot.</p></li>
 <p>感谢你一路以来的不离不弃，坚守相伴，这一切的洗礼才刚刚开始，长路漫漫祝你前程似锦。</p>
 <p>​ 计组课程团队 ​ <span class="citation"
 data-cites="新北 5 号">@新北 5 号</span> ​ 2022.12.21</p>
-<p><img src="430ce62ac2101f40f1624ec2b8a9ef6.jpg" width="30%" /></p>
-<p><img src="cdf5af3d3ddb8c050cfe8e900e9345d.jpg" width="30%" /></p>
-<p><img src="87d0c733f6c32a8e759b783e29a9c42.jpg" width="100%" /></p>
+<p><img data-src="430ce62ac2101f40f1624ec2b8a9ef6.jpg" width="30%" /></p>
+<p><img data-src="cdf5af3d3ddb8c050cfe8e900e9345d.jpg" width="30%" /></p>
+<p><img data-src="87d0c733f6c32a8e759b783e29a9c42.jpg" width="100%" /></p>
 ]]></content>
       <categories>
         <category>Computer Orgnization</category>
@@ -3222,7 +3716,7 @@ M 级指令的 Tnew，在各级 CU 中计算，发送至冲突单元（W 级 Tne
 <li> 阻塞时需要暂停更新 PC 以及 F 级读出的指令，并且清空 D 级当前指令的译码输出，以替换为 nop 空泡 </li>
 <li> 新增乘除 Stall，在乘除运算即将开始或正在进行时如遇到乘除指令需要 Stall</li>
 </ul>
-<p><img src="image-20230311001016596.png" alt="image-20230311001016596"/></p>
+<p><img data-src="image-20230311001016596.png" alt="image-20230311001016596"/></p>
 <h4 id="转发"> 转发 </h4>
 <ul>
 <li><p> 阻塞后，所有指令在需要读寄存器数据的时候都能够获得后续计算完毕的数据，每级转发出已算出的数据，发送给之前各级即可。</p></li>
@@ -3230,16 +3724,16 @@ M 级指令的 Tnew，在各级 CU 中计算，发送至冲突单元（W 级 Tne
 数据；M 级 DM 写入数据口需要 rt 数据 </p></li>
 <li><p> 需要写寄存器：E 级可转发出 D 级算的 PC+8；M 级可转发出 D 级算的 PC+8 和 E 级算的的 ALU_Y；W 级可转发出 D 级算的 PC+8，E 级算的的 ALU_Y 和 M 级读出的 DM 数据。<strong> 根据当前指令 CU 译码得到的 GRF_WDSrc 进行选择 </strong>。此外还有 W 级寄存器写入，可直接内部转发至 D 级读出 </p></li>
 </ul>
-<p><img src="image-20230311001109169.png" alt="image-20230311001109169" style="zoom:67%;" /></p>
-<p><img src="image-20230311001116883.png" alt="image-20230311001116883" style="zoom:67%;" /></p>
-<p><img src="image-20230311001122673.png" alt="image-20230311001122673" style="zoom:67%;" /></p>
-<p><img src="image-20230311001129478.png" alt="image-20230311001129478" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311001109169.png" alt="image-20230311001109169" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311001116883.png" alt="image-20230311001116883" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311001122673.png" alt="image-20230311001122673" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311001129478.png" alt="image-20230311001129478" style="zoom:67%;" /></p>
 <ul>
 <li> 在主模块中，获取各级需要读的寄存器编号（D_rs,D_rt,E_rs,E_rt,M_rt），寄存器原读数（D_rs_data,D_rt_data,E_rs_data,E_rt_data,M_rt_data），写入的寄存器编号（E_GRF_WA,M_GRF_WA,W_GRF_WA）和数据（E_GRF_WD,M_GRF_WD,W_GRF_WD）</li>
 <li> 比较读的编号和写的编号是否有相等的，如有相等的则代表有数据已经更新需要转发，转发优先级为更新次序，最后一次更新优先转发，即优先转发距离需要数据的阶段近的数据，特判如果需要读 0 号寄存器的数据，直接转发 0</li>
 <li> 转发的数据（D_rs_fw,D_rt_fw,E_rs_fw,E_rt_fw,M_rt_fw）发送至各级需要的部分运算，并传递给下一级 </li>
 </ul>
-<p><img src="image-20230311001150971.png" alt="image-20230311001150971" style="zoom: 67%;" /></p>
+<p><img data-src="image-20230311001150971.png" alt="image-20230311001150971" style="zoom: 67%;" /></p>
 <h3 id="五级模块设计"> 五级模块设计 </h3>
 <ul>
 <li><p> 每个阶段之间以寄存器隔开，寄存器设计在每个模块输出处，使用 reg 类型 </p></li>
@@ -3346,7 +3840,7 @@ id="p6 更新乘除槽与储存器外置以及按字节访存">P6 更新乘除�
 <ul>
 <li>F 级与指令储存的数据交换 </li>
 </ul>
-<p><img src="image-20230311001208043.png" alt="image-20230311001208043" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311001208043.png" alt="image-20230311001208043" style="zoom:67%;" /></p>
 <h4 id="decode">2. Decode</h4>
 <ul>
 <li> 包括 D_CU, EXT, NPC (Branch), DEReg</li>
@@ -4148,9 +4642,9 @@ Busy 归零。</li>
 id="m_be 计算字节访存使能调整四字节写入数据">M_BE（计算字节访存使能，调整四字节写入数据）</h5>
 <ul>
 <li><p> 合并在 Memory 中，在写入的条件下，根据写入数据类型和写入地址低两位产生四个字节的每一位控制信号，即四位 ByteEn</p>
-<p><img src="image-20230311001222299.png" alt="image-20230311001222299" style="zoom:67%;" /></p></li>
+<p><img data-src="image-20230311001222299.png" alt="image-20230311001222299" style="zoom:67%;" /></p></li>
 <li><p> 后续再根据 ByteEn 调整将写入内存的数据，需将待写入的字节移动到对应为 En1 的位置 </p>
-<p><img src="image-20230311001240021.png" alt="image-20230311001240021" style="zoom:67%;" /></p></li>
+<p><img data-src="image-20230311001240021.png" alt="image-20230311001240021" style="zoom:67%;" /></p></li>
 </ul></li>
 <li><h5
 id="m_de 调整内存读出数据截取需要的字节后拓展">M_DE（调整内存读出数据，截取需要的字节后拓展）</h5>
@@ -4194,11 +4688,11 @@ id="m_de 调整内存读出数据截取需要的字节后拓展">M_DE（调整�
 </table></li>
 </ul></li>
 </ul>
-<p><img src="image-20230311001304148.png" alt="image-20230311001304148" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311001304148.png" alt="image-20230311001304148" style="zoom:67%;" /></p>
 <ul>
 <li>M 级与内存数据交换 </li>
 </ul>
-<p><img src="image-20230311001314893.png" alt="image-20230311001314893" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311001314893.png" alt="image-20230311001314893" style="zoom:67%;" /></p>
 <h4 id="writeback">5. Writeback</h4>
 <ul>
 <li> 包括 W_CU</li>
@@ -4301,11 +4795,11 @@ id="m_de 调整内存读出数据截取需要的字节后拓展">M_DE（调整�
 </table>
 <h2 id="测试同 p5p6 单独构造测试数据"> 测试 (同 P5，P6 单独构造测试数据)</h2>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.text</span><br><span class="line">                                        # 13</span><br><span class="line">    ori     $t0,    $0,         0xadce</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    ori     $t1,    $t0,        0xdefa</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    add     $t4,    $t2,        $t0</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         15</span><br><span class="line">    lw      $t4,    -7($t3)</span><br><span class="line">    sub     $t5,    $t4,        $t2</span><br><span class="line"></span><br><span class="line"># 14</span><br><span class="line">    ori     $t0,    $0,         0xefac</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    ori     $t1,    $t0,        0xfead</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    add     $t4,    $t0,        $t2</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         21</span><br><span class="line">    lw      $t4,    -13($t3)</span><br><span class="line">    sub     $t5,    $t2,        $t4</span><br><span class="line"></span><br><span class="line"># 15</span><br><span class="line">    ori     $t0,    $0,         0x0ace</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    ori     $t1,    $t0,        0x00a1</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    nop     </span><br><span class="line">    add     $t4,    $t2,        $t0</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         15</span><br><span class="line">    lw      $t4,    -7($t3)</span><br><span class="line">    nop     </span><br><span class="line">    sub     $t5,    $t4,        $t2</span><br><span class="line"></span><br><span class="line"># 16</span><br><span class="line">    lui     $t0,    0x1234</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    lui     $t1,    0xfead</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    nop     </span><br><span class="line">    add     $t4,    $t0,        $t2</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         25</span><br><span class="line">    lw      $t4,    -17($t3)</span><br><span class="line">    nop     </span><br><span class="line">    sub     $t5,    $t2,        $t4</span><br><span class="line"></span><br><span class="line"># 17</span><br><span class="line">    lui     $1,     0x13ac</span><br><span class="line">    ori     $2,     0x12ae</span><br><span class="line"></span><br><span class="line">    add     $3,     $1,         $2</span><br><span class="line">    ori     $4,     $3,         0xcd12</span><br><span class="line"></span><br><span class="line">    sub     $5,     $4,         $1</span><br><span class="line">    ori     $6,     $5,         0x4589</span><br><span class="line"></span><br><span class="line"># 18</span><br><span class="line">    lui     $1,     0x56ed</span><br><span class="line">    ori     $2,     0x349a</span><br><span class="line"></span><br><span class="line">    add     $3,     $1,         $2</span><br><span class="line">    nop     </span><br><span class="line">    ori     $4,     $3,         0xc102</span><br><span class="line"></span><br><span class="line">    sub     $5,     $4,         $1</span><br><span class="line">    nop     </span><br><span class="line">    ori     $6,     $5,         0x4ea9</span><br><span class="line"></span><br><span class="line"># 19</span><br><span class="line">    lui     $7,     0x1345</span><br><span class="line">    ori     $8,     $7,         0x1122</span><br><span class="line"></span><br><span class="line">    ori     $9,     $8,         0x3344</span><br><span class="line">    ori     $10,    $9,         0x00ff</span><br><span class="line"></span><br><span class="line"># 20</span><br><span class="line">    lui     $7,     0x2211</span><br><span class="line">    nop     </span><br><span class="line">    ori     $8,     $7,         0x3366</span><br><span class="line">    nop     </span><br><span class="line">    ori     $9,     $8,         0xf111</span><br><span class="line">    nop     </span><br><span class="line">    ori     $10,    $9,         0x00ff</span><br><span class="line"></span><br><span class="line"># 21</span><br><span class="line">    jal     label1</span><br><span class="line">    ori     $8,     $ra,        0x8899</span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">label1:</span><br><span class="line">                                        # 22</span><br><span class="line">    jal     label2</span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">label2:</span><br><span class="line">    ori     $9,     $ra,        0xaa12</span><br><span class="line">                                        # 23</span><br><span class="line">    ori     $t0,    $0,         35</span><br><span class="line">    sw      $ra,    24($0)</span><br><span class="line">    lw      $t1,    -11($t0)</span><br><span class="line">    ori     $t2,    $t1,        0xe2df</span><br><span class="line"></span><br><span class="line"># 24</span><br><span class="line">    sw      $t2,    36($0)</span><br><span class="line">    lw      $t3,    1($t0)</span><br><span class="line">    nop     </span><br><span class="line">    ori     $t4,    $t3,        0xaabb</span><br></pre></td></tr></table></figure>
-<p><img src="image-20230311001334635.png" alt="image-20230311001334635" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311001334635.png" alt="image-20230311001334635" style="zoom:67%;" /></p>
 <ul>
 <li> 对 0 号寄存器读写测试 </li>
 </ul>
-<p><img src="image-20230311001346059.png" alt="image-20230311001346059" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311001346059.png" alt="image-20230311001346059" style="zoom:67%;" /></p>
 <h2 id="注意事项"> 注意事项 </h2>
 <ul>
 <li> 乘除指令的 Tuse，Tnew：包括 md 指令 Tuse_rs=Tuse_rt=1;
@@ -4449,8 +4943,7 @@ mf 指令 E_Tnew=1</p>
 </table>
 <h2 id="关键数据通路"> 关键数据通路 </h2>
 <figure>
-<img
-src="f2cc47e84a3c52f62bd3772cc8883bdd6aa8df6cf3b732b96d0b6564a1128e9a.jpg"
+<img data-src="f2cc47e84a3c52f62bd3772cc8883bdd6aa8df6cf3b732b96d0b6564a1128e9a.jpg"
 alt="关键数据通路" />
 <figcaption aria-hidden="true"> 关键数据通路 </figcaption>
 </figure>
@@ -4728,7 +5221,7 @@ id="conflit 模块设计 at 控制阻塞直接转发">Conflit 模块设计：AT 
 M 级指令的 Tnew，在各级 CU 中计算，发送至冲突单元（W 级 Tnew 全是 0 不需要考虑，都可以内部转发解决）</li>
 <li> 阻塞时需要暂停更新 PC 以及 F 级读出的指令，并且清空 D 级当前指令的译码输出，以替换为 nop 空泡 </li>
 </ul>
-<p><img src="image-20230311000745591.png" alt="image-20230311000745591"/></p>
+<p><img data-src="image-20230311000745591.png" alt="image-20230311000745591"/></p>
 <h4 id="转发"> 转发 </h4>
 <ul>
 <li><p> 阻塞后，所有指令在需要读寄存器数据的时候都能够获得后续计算完毕的数据，每级转发出已算出的数据，发送给之前各级即可。</p></li>
@@ -4736,16 +5229,16 @@ M 级指令的 Tnew，在各级 CU 中计算，发送至冲突单元（W 级 Tne
 数据；M 级 DM 写入数据口需要 rt 数据 </p></li>
 <li><p> 需要写寄存器：E 级可转发出 D 级算的 PC+8；M 级可转发出 D 级算的 PC+8 和 E 级算的的 ALU_Y；W 级可转发出 D 级算的 PC+8，E 级算的的 ALU_Y 和 M 级读出的 DM 数据。<strong> 根据当前指令 CU 译码得到的 GRF_WDSrc 进行选择 </strong>。此外还有 W 级寄存器写入，可直接内部转发至 D 级读出 </p></li>
 </ul>
-<p><img src="image-20230311000822296.png" alt="image-20230311000822296" style="zoom:67%;" /></p>
-<p><img src="image-20221119123512795.png" alt="image-20221119123512795" style="zoom:67%;" /></p>
-<p><img src="image-20221119123500142.png" alt="image-20221119123500142" style="zoom:67%;" /></p>
-<p><img src="image-20221119123633639.png" alt="image-20221119123633639" style="zoom:67%;" /></p>
+<p><img data-src="image-20230311000822296.png" alt="image-20230311000822296" style="zoom:67%;" /></p>
+<p><img data-src="image-20221119123512795.png" alt="image-20221119123512795" style="zoom:67%;" /></p>
+<p><img data-src="image-20221119123500142.png" alt="image-20221119123500142" style="zoom:67%;" /></p>
+<p><img data-src="image-20221119123633639.png" alt="image-20221119123633639" style="zoom:67%;" /></p>
 <ul>
 <li> 在主模块中，获取各级需要读的寄存器编号（D_rs,D_rt,E_rs,E_rt,M_rt），寄存器原读数（D_rs_data,D_rt_data,E_rs_data,E_rt_data,M_rt_data），写入的寄存器编号（E_GRF_WA,M_GRF_WA,W_GRF_WA）和数据（E_GRF_WD,M_GRF_WD,W_GRF_WD）</li>
 <li> 比较读的编号和写的编号是否有相等的，如有相等的则代表有数据已经更新需要转发，转发优先级为更新次序，最后一次更新优先转发，即优先转发距离需要数据的阶段近的数据，特判如果需要读 0 号寄存器的数据，直接转发 0</li>
 <li> 转发的数据（D_rs_fw,D_rt_fw,E_rs_fw,E_rt_fw,M_rt_fw）发送至各级需要的部分运算，并传递给下一级 </li>
 </ul>
-<p><img src="C:\Users\MGLDT\AppData\Roaming\Typora\typora-user-images\image-20221119122330496.png" alt="image-20221119122330496" style="zoom:67%;" /></p>
+<p><img data-src="C:\Users\MGLDT\AppData\Roaming\Typora\typora-user-images\image-20221119122330496.png" alt="image-20221119122330496" style="zoom:67%;" /></p>
 <h3 id="五级模块设"> 五级模块设 </h3>
 <ul>
 <li><p> 每个阶段之间以寄存器隔开，寄存器设计在每个模块输出处，使用 reg 类型 </p></li>
@@ -5626,11 +6119,11 @@ DM_RD</p></li>
 <li> 枚举各指令排列和之间距离 </li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.text</span><br><span class="line">                                        # 13</span><br><span class="line">    ori     $t0,    $0,         0xadce</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    ori     $t1,    $t0,        0xdefa</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    add     $t4,    $t2,        $t0</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         15</span><br><span class="line">    lw      $t4,    -7($t3)</span><br><span class="line">    sub     $t5,    $t4,        $t2</span><br><span class="line"></span><br><span class="line"># 14</span><br><span class="line">    ori     $t0,    $0,         0xefac</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    ori     $t1,    $t0,        0xfead</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    add     $t4,    $t0,        $t2</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         21</span><br><span class="line">    lw      $t4,    -13($t3)</span><br><span class="line">    sub     $t5,    $t2,        $t4</span><br><span class="line"></span><br><span class="line"># 15</span><br><span class="line">    ori     $t0,    $0,         0x0ace</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    ori     $t1,    $t0,        0x00a1</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    nop     </span><br><span class="line">    add     $t4,    $t2,        $t0</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         15</span><br><span class="line">    lw      $t4,    -7($t3)</span><br><span class="line">    nop     </span><br><span class="line">    sub     $t5,    $t4,        $t2</span><br><span class="line"></span><br><span class="line"># 16</span><br><span class="line">    lui     $t0,    0x1234</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    lui     $t1,    0xfead</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    nop     </span><br><span class="line">    add     $t4,    $t0,        $t2</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         25</span><br><span class="line">    lw      $t4,    -17($t3)</span><br><span class="line">    nop     </span><br><span class="line">    sub     $t5,    $t2,        $t4</span><br><span class="line"></span><br><span class="line"># 17</span><br><span class="line">    lui     $1,     0x13ac</span><br><span class="line">    ori     $2,     0x12ae</span><br><span class="line"></span><br><span class="line">    add     $3,     $1,         $2</span><br><span class="line">    ori     $4,     $3,         0xcd12</span><br><span class="line"></span><br><span class="line">    sub     $5,     $4,         $1</span><br><span class="line">    ori     $6,     $5,         0x4589</span><br><span class="line"></span><br><span class="line"># 18</span><br><span class="line">    lui     $1,     0x56ed</span><br><span class="line">    ori     $2,     0x349a</span><br><span class="line"></span><br><span class="line">    add     $3,     $1,         $2</span><br><span class="line">    nop     </span><br><span class="line">    ori     $4,     $3,         0xc102</span><br><span class="line"></span><br><span class="line">    sub     $5,     $4,         $1</span><br><span class="line">    nop     </span><br><span class="line">    ori     $6,     $5,         0x4ea9</span><br><span class="line"></span><br><span class="line"># 19</span><br><span class="line">    lui     $7,     0x1345</span><br><span class="line">    ori     $8,     $7,         0x1122</span><br><span class="line"></span><br><span class="line">    ori     $9,     $8,         0x3344</span><br><span class="line">    ori     $10,    $9,         0x00ff</span><br><span class="line"></span><br><span class="line"># 20</span><br><span class="line">    lui     $7,     0x2211</span><br><span class="line">    nop     </span><br><span class="line">    ori     $8,     $7,         0x3366</span><br><span class="line">    nop     </span><br><span class="line">    ori     $9,     $8,         0xf111</span><br><span class="line">    nop     </span><br><span class="line">    ori     $10,    $9,         0x00ff</span><br><span class="line"></span><br><span class="line"># 21</span><br><span class="line">    jal     label1</span><br><span class="line">    ori     $8,     $ra,        0x8899</span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">label1:</span><br><span class="line">                                        # 22</span><br><span class="line">    jal     label2</span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">label2:</span><br><span class="line">    ori     $9,     $ra,        0xaa12</span><br><span class="line">                                        # 23</span><br><span class="line">    ori     $t0,    $0,         35</span><br><span class="line">    sw      $ra,    24($0)</span><br><span class="line">    lw      $t1,    -11($t0)</span><br><span class="line">    ori     $t2,    $t1,        0xe2df</span><br><span class="line"></span><br><span class="line"># 24</span><br><span class="line">    sw      $t2,    36($0)</span><br><span class="line">    lw      $t3,    1($t0)</span><br><span class="line">    nop     </span><br><span class="line">    ori     $t4,    $t3,        0xaabb</span><br></pre></td></tr></table></figure>
-<p><img src="image-20230311000946878.png" alt="image-20230311000946878"/></p>
+<p><img data-src="image-20230311000946878.png" alt="image-20230311000946878"/></p>
 <ul>
 <li> 对 0 号寄存器读写测试 </li>
 </ul>
-<p><img src="image-20230311000952084.png" alt="image-20230311000952084"/></p>
+<p><img data-src="image-20230311000952084.png" alt="image-20230311000952084"/></p>
 <h2 id="注意事项"> 注意事项 </h2>
 <ul>
 <li> 需要寄存器数据进行运算或是向后传递的端口需要的是接收转发后正确的数据 </li>
@@ -5732,7 +6225,7 @@ rt 寄存器数据，如之前为 lw 指令，则可能还需阻塞一周期。�
 </tbody>
 </table>
 <h3 id="数据通路">数据通路</h3>
-<p><img src="image-20230311000307141.png" alt="image-20230311000307141"/></p>
+<p><img data-src="image-20230311000307141.png" alt="image-20230311000307141"/></p>
 <h3 id="使用模块">使用模块</h3>
 <h4 id="一 ifuinstruction-fetch-unit">一、IFU（Instruction Fetch
 Unit）</h4>
@@ -6268,7 +6761,7 @@ Unit）</h4>
 </tbody>
 </table>
 <h3 id="logisim 图示">logisim 图示</h3>
-<p><img src="image-20221107194455075.png" alt="image-20221107194455075"/></p>
+<p><img data-src="image-20221107194455075.png" alt="image-20221107194455075"/></p>
 <h2 id="测试">测试</h2>
 <p>注：自造指令的同时借助 zby 同学的自动化测试工具大范围覆盖，以下仅放出自造指令，以及自动化测试结果截图。</p>
 <h3 id="asm 指令">asm 指令</h3>
@@ -6276,7 +6769,7 @@ Unit）</h4>
 <h4 id="机器码">机器码</h4>
 <figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">34040100</span><br><span class="line">34850123</span><br><span class="line">3c0601c8</span><br><span class="line">3c07ffff</span><br><span class="line">34e7ffff</span><br><span class="line">00868021</span><br><span class="line">00878821</span><br><span class="line">00e7a021</span><br><span class="line">00869023</span><br><span class="line">00879823</span><br><span class="line">ac040000</span><br><span class="line">ac050004</span><br><span class="line">ac060008</span><br><span class="line">ac07000c</span><br><span class="line">ac100010</span><br><span class="line">ac110014</span><br><span class="line">ac120018</span><br><span class="line">ac13002c</span><br><span class="line">ac140030</span><br><span class="line">8c040000</span><br><span class="line">8c05000c</span><br><span class="line">ac04001c</span><br><span class="line">ac050020</span><br><span class="line">34040001</span><br><span class="line">34050002</span><br><span class="line">34060001</span><br><span class="line">10850001</span><br><span class="line">10860001</span><br><span class="line">ad040024</span><br><span class="line">ad050028</span><br><span class="line">0c000c23</span><br><span class="line">0c000c23</span><br><span class="line">ad150040</span><br><span class="line">34a50004</span><br><span class="line">0c000c27</span><br><span class="line">ad050038</span><br><span class="line">ad1f003c</span><br><span class="line">36b50005</span><br><span class="line">03e00008</span><br><span class="line">ad050044</span><br><span class="line">ad1f0048</span><br></pre></td></tr></table></figure>
 <h4 id="输出文本比较">输出（文本比较）</h4>
-<p><img src="image-20221104233120667.png" alt="image-20221104233120667"/></p>
+<p><img data-src="image-20221104233120667.png" alt="image-20221104233120667"/></p>
 <p>左侧为 zby 测评机自 mars 导出的输出，右侧为 verilog 中的输出（0 号寄存器写入输出可有可无）</p>
 <h2 id="思考题">思考题</h2>
 <ol type="1">
@@ -6768,11 +7261,11 @@ Unit）</h4>
 <h3 id="机器码">机器码</h3>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">v2.0 raw</span><br><span class="line">340407cf</span><br><span class="line">3485006f</span><br><span class="line">3c063039</span><br><span class="line">3c07ffff</span><br><span class="line">34e7ffff</span><br><span class="line">00858020</span><br><span class="line">00e78820</span><br><span class="line">00f09020</span><br><span class="line">00928022</span><br><span class="line">00e78822</span><br><span class="line">00e49022</span><br><span class="line">02519822</span><br><span class="line">34080000</span><br><span class="line">ad040000</span><br><span class="line">00000000</span><br><span class="line">ad050004</span><br><span class="line">ad100008</span><br><span class="line">ad11000c</span><br><span class="line">ad120010</span><br><span class="line">8d0f0000</span><br><span class="line">8d0e0014</span><br><span class="line">35080001</span><br><span class="line">35290001</span><br><span class="line">354a0002</span><br><span class="line">110afff1</span><br><span class="line">11090001</span><br><span class="line">3c0b0457</span><br><span class="line">010f4020</span><br><span class="line">08000c1f</span><br><span class="line">ad0f0030</span><br><span class="line">8d0d0030</span><br></pre></td></tr></table></figure>
 <h4 id="mips 运行结果">mips 运行结果</h4>
-<p><img src="image-20230310234528268.png" alt="image-20230310234528268"/></p>
-<p><img src="image-20221030204922910.png" alt="image-20221030204922910"/></p>
+<p><img data-src="image-20230310234528268.png" alt="image-20230310234528268"/></p>
+<p><img data-src="image-20221030204922910.png" alt="image-20221030204922910"/></p>
 <h4 id="cpu 运行结果">CPU 运行结果</h4>
-<p><img src="image-20221030204850105.png" alt="image-20221030204850105"/></p>
-<p><img src="image-20221030204822588.png" alt="image-20221030204822588"/></p>
+<p><img data-src="image-20221030204850105.png" alt="image-20221030204850105"/></p>
+<p><img data-src="image-20221030204822588.png" alt="image-20221030204822588"/></p>
 <h2 id="思考题">思考题</h2>
 <ol type="1">
 <li><strong>上面我们介绍了通过 FSM 理解单周期 CPU

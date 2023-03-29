@@ -6,7 +6,7 @@
   <link href="https://steve-strange.github.io/atom.xml" rel="self"/>
   
   <link href="https://steve-strange.github.io/"/>
-  <updated>2023-03-19T06:31:49.275Z</updated>
+  <updated>2023-03-29T12:06:06.744Z</updated>
   <id>https://steve-strange.github.io/</id>
   
   <author>
@@ -17,11 +17,68 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Lab3 Report</title>
+    <link href="https://steve-strange.github.io/2023/03/28/14-52-04/"/>
+    <id>https://steve-strange.github.io/2023/03/28/14-52-04/</id>
+    <published>2023-03-28T06:52:04.000Z</published>
+    <updated>2023-03-29T12:06:06.744Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Lab3 Report</summary>
+    
+    
+    
+    <category term="Operation System" scheme="https://steve-strange.github.io/categories/Operation-System/"/>
+    
+    
+    <category term="Operation System" scheme="https://steve-strange.github.io/tags/Operation-System/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OS Homework2</title>
+    <link href="https://steve-strange.github.io/2023/03/26/20-50-14/"/>
+    <id>https://steve-strange.github.io/2023/03/26/20-50-14/</id>
+    <published>2023-03-26T12:50:14.000Z</published>
+    <updated>2023-03-29T12:05:52.254Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;OS homework2&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="OS" scheme="https://steve-strange.github.io/categories/OS/"/>
+    
+    
+    <category term="OS Homework" scheme="https://steve-strange.github.io/tags/OS-Homework/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Positive Psychology P5</title>
+    <link href="https://steve-strange.github.io/2023/03/18/15-52-53/"/>
+    <id>https://steve-strange.github.io/2023/03/18/15-52-53/</id>
+    <published>2023-03-18T07:52:53.000Z</published>
+    <updated>2023-03-27T06:30:50.729Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Positive Psychology P5 英语作业</summary>
+    
+    
+    
+    <category term="English" scheme="https://steve-strange.github.io/categories/English/"/>
+    
+    
+    <category term="Positive Psychology" scheme="https://steve-strange.github.io/tags/Positive-Psychology/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Positive Psychology P4</title>
     <link href="https://steve-strange.github.io/2023/03/18/15-52-53/"/>
     <id>https://steve-strange.github.io/2023/03/18/15-52-53/</id>
     <published>2023-03-18T07:52:53.000Z</published>
-    <updated>2023-03-19T06:31:49.275Z</updated>
+    <updated>2023-03-26T13:36:14.906Z</updated>
     
     
     <summary type="html">&lt;p&gt;Positive Psychology P4 英语作业</summary>
@@ -36,21 +93,21 @@
   </entry>
   
   <entry>
-    <title>Lab2-Report</title>
+    <title>Lab2 Report</title>
     <link href="https://steve-strange.github.io/2023/03/13/18-54-43/"/>
     <id>https://steve-strange.github.io/2023/03/13/18-54-43/</id>
     <published>2023-03-13T10:54:43.000Z</published>
-    <updated>2023-03-15T14:21:59.241Z</updated>
+    <updated>2023-03-29T11:48:48.516Z</updated>
     
     
-    <summary type="html">&lt;p&gt;Lab2-Report</summary>
+    <summary type="html">&lt;p&gt;Lab2 Report</summary>
     
     
     
-    <category term="Lab2-Report" scheme="https://steve-strange.github.io/categories/Lab2-Report/"/>
+    <category term="Operation System" scheme="https://steve-strange.github.io/categories/Operation-System/"/>
     
     
-    <category term="Lab2-Report" scheme="https://steve-strange.github.io/tags/Lab2-Report/"/>
+    <category term="Operation System" scheme="https://steve-strange.github.io/tags/Operation-System/"/>
     
   </entry>
   
@@ -102,7 +159,7 @@
     <link href="https://steve-strange.github.io/2023/03/11/11-52-15/"/>
     <id>https://steve-strange.github.io/2023/03/11/11-52-15/</id>
     <published>2023-03-11T03:52:15.000Z</published>
-    <updated>2023-03-24T03:27:40.361Z</updated>
+    <updated>2023-03-24T08:44:09.663Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;神经网络基础笔记-1&quot;&gt;神经网络基础笔记 1&lt;/h2&gt;</summary>
@@ -178,7 +235,7 @@
     <link href="https://steve-strange.github.io/2023/03/10/21-48-08/"/>
     <id>https://steve-strange.github.io/2023/03/10/21-48-08/</id>
     <published>2023-03-10T13:48:08.000Z</published>
-    <updated>2023-03-15T14:22:07.074Z</updated>
+    <updated>2023-03-28T06:54:02.033Z</updated>
     
     
     <summary type="html">&lt;p&gt;Lab1 Report</summary>
@@ -197,7 +254,7 @@
     <link href="https://steve-strange.github.io/2023/03/10/20-40-25/"/>
     <id>https://steve-strange.github.io/2023/03/10/20-40-25/</id>
     <published>2023-03-10T12:40:25.000Z</published>
-    <updated>2023-03-15T14:22:14.601Z</updated>
+    <updated>2023-03-28T06:53:50.292Z</updated>
     
     
     <summary type="html">&lt;p&gt;Lab0 Report</summary>
