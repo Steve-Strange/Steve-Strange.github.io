@@ -6,7 +6,7 @@
   <link href="https://steve-strange.github.io/atom.xml" rel="self"/>
   
   <link href="https://steve-strange.github.io/"/>
-  <updated>2023-03-29T12:06:06.744Z</updated>
+  <updated>2023-03-30T02:19:47.506Z</updated>
   <id>https://steve-strange.github.io/</id>
   
   <author>
@@ -17,11 +17,39 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>os-homework3</title>
+    <link href="https://steve-strange.github.io/2023/03/30/10-16-52/"/>
+    <id>https://steve-strange.github.io/2023/03/30/10-16-52/</id>
+    <published>2023-03-30T02:16:52.000Z</published>
+    <updated>2023-03-30T02:19:47.506Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">
+</summary>
+        
+      
+    
+    
+    
+    <category term="OS" scheme="https://steve-strange.github.io/categories/OS/"/>
+    
+    
+    <category term="Homework" scheme="https://steve-strange.github.io/tags/Homework/"/>
+    
+    <category term="OS" scheme="https://steve-strange.github.io/tags/OS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Lab3 Report</title>
     <link href="https://steve-strange.github.io/2023/03/28/14-52-04/"/>
     <id>https://steve-strange.github.io/2023/03/28/14-52-04/</id>
     <published>2023-03-28T06:52:04.000Z</published>
-    <updated>2023-03-29T12:06:06.744Z</updated>
+    <updated>2023-03-29T16:22:32.374Z</updated>
     
     
     <summary type="html">&lt;p&gt;Lab3 Report</summary>
@@ -36,11 +64,11 @@
   </entry>
   
   <entry>
-    <title>OS Homework2</title>
+    <title>os-homework2</title>
     <link href="https://steve-strange.github.io/2023/03/26/20-50-14/"/>
     <id>https://steve-strange.github.io/2023/03/26/20-50-14/</id>
     <published>2023-03-26T12:50:14.000Z</published>
-    <updated>2023-03-29T12:05:52.254Z</updated>
+    <updated>2023-03-30T02:19:59.503Z</updated>
     
     
     <summary type="html">&lt;p&gt;OS homework2&lt;/p&gt;</summary>
@@ -50,7 +78,30 @@
     <category term="OS" scheme="https://steve-strange.github.io/categories/OS/"/>
     
     
-    <category term="OS Homework" scheme="https://steve-strange.github.io/tags/OS-Homework/"/>
+    <category term="Homework" scheme="https://steve-strange.github.io/tags/Homework/"/>
+    
+    <category term="OS" scheme="https://steve-strange.github.io/tags/OS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Positive Psychology P4</title>
+    <link href="https://steve-strange.github.io/2023/03/18/15-52-53/"/>
+    <id>https://steve-strange.github.io/2023/03/18/15-52-53/</id>
+    <published>2023-03-18T07:52:53.000Z</published>
+    <updated>2023-03-30T02:20:33.614Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Positive Psychology P4 英语作业</summary>
+    
+    
+    
+    <category term="English" scheme="https://steve-strange.github.io/categories/English/"/>
+    
+    
+    <category term="Positive Psychology" scheme="https://steve-strange.github.io/tags/Positive-Psychology/"/>
+    
+    <category term="Homework" scheme="https://steve-strange.github.io/tags/Homework/"/>
     
   </entry>
   
@@ -59,7 +110,7 @@
     <link href="https://steve-strange.github.io/2023/03/18/15-52-53/"/>
     <id>https://steve-strange.github.io/2023/03/18/15-52-53/</id>
     <published>2023-03-18T07:52:53.000Z</published>
-    <updated>2023-03-27T06:30:50.729Z</updated>
+    <updated>2023-03-30T02:20:36.422Z</updated>
     
     
     <summary type="html">&lt;p&gt;Positive Psychology P5 英语作业</summary>
@@ -71,24 +122,7 @@
     
     <category term="Positive Psychology" scheme="https://steve-strange.github.io/tags/Positive-Psychology/"/>
     
-  </entry>
-  
-  <entry>
-    <title>Positive Psychology P4</title>
-    <link href="https://steve-strange.github.io/2023/03/18/15-52-53/"/>
-    <id>https://steve-strange.github.io/2023/03/18/15-52-53/</id>
-    <published>2023-03-18T07:52:53.000Z</published>
-    <updated>2023-03-26T13:36:14.906Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;Positive Psychology P4 英语作业</summary>
-    
-    
-    
-    <category term="English" scheme="https://steve-strange.github.io/categories/English/"/>
-    
-    
-    <category term="Positive Psychology" scheme="https://steve-strange.github.io/tags/Positive-Psychology/"/>
+    <category term="Homework" scheme="https://steve-strange.github.io/tags/Homework/"/>
     
   </entry>
   
@@ -178,7 +212,7 @@
     <link href="https://steve-strange.github.io/2023/03/11/00-46-53/"/>
     <id>https://steve-strange.github.io/2023/03/11/00-46-53/</id>
     <published>2023-03-10T16:46:53.000Z</published>
-    <updated>2023-03-18T07:56:59.842Z</updated>
+    <updated>2023-03-30T02:20:30.320Z</updated>
     
     
     <summary type="html">&lt;p&gt;Positive Psychology P3 英语作业</summary>
@@ -190,6 +224,8 @@
     
     <category term="Positive Psychology" scheme="https://steve-strange.github.io/tags/Positive-Psychology/"/>
     
+    <category term="Homework" scheme="https://steve-strange.github.io/tags/Homework/"/>
+    
   </entry>
   
   <entry>
@@ -197,7 +233,7 @@
     <link href="https://steve-strange.github.io/2023/03/11/00-46-52/"/>
     <id>https://steve-strange.github.io/2023/03/11/00-46-52/</id>
     <published>2023-03-10T16:46:52.000Z</published>
-    <updated>2023-03-18T07:53:14.847Z</updated>
+    <updated>2023-03-30T02:20:26.395Z</updated>
     
     
     <summary type="html">&lt;p&gt;Positive Psychology P2 英语作业</summary>
@@ -209,6 +245,8 @@
     
     <category term="Positive Psychology" scheme="https://steve-strange.github.io/tags/Positive-Psychology/"/>
     
+    <category term="Homework" scheme="https://steve-strange.github.io/tags/Homework/"/>
+    
   </entry>
   
   <entry>
@@ -216,7 +254,7 @@
     <link href="https://steve-strange.github.io/2023/03/10/22-50-28/"/>
     <id>https://steve-strange.github.io/2023/03/10/22-50-28/</id>
     <published>2023-03-10T14:50:28.000Z</published>
-    <updated>2023-03-18T07:53:20.142Z</updated>
+    <updated>2023-03-30T02:20:18.227Z</updated>
     
     
     <summary type="html">&lt;p&gt;Positive Psychology P1 英语作业</summary>
@@ -227,6 +265,8 @@
     
     
     <category term="Positive Psychology" scheme="https://steve-strange.github.io/tags/Positive-Psychology/"/>
+    
+    <category term="Homework" scheme="https://steve-strange.github.io/tags/Homework/"/>
     
   </entry>
   
