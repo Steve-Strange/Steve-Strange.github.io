@@ -150,7 +150,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text"> 思考题 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#thinking-3.1"><span class="nav-number">1.1.</span> <span class="nav-text">Thinking 3.1</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#thinking-3.2"><span class="nav-number">1.1.1.</span> <span class="nav-text">Thinking 3.2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#thinking-3.3"><span class="nav-number">1.1.2.</span> <span class="nav-text">Thinking 3.3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#thinking-3.4"><span class="nav-number">1.1.3.</span> <span class="nav-text">Thinking 3.4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#thinking-3.5"><span class="nav-number">1.1.4.</span> <span class="nav-text">Thinking 3.5</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text"> 思考题 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Thinking-3-1"><span class="nav-number">1.1.</span> <span class="nav-text">Thinking 3.1</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thinking-3-2"><span class="nav-number">1.1.1.</span> <span class="nav-text">Thinking 3.2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Thinking-3-3"><span class="nav-number">1.1.2.</span> <span class="nav-text">Thinking 3.3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Thinking-3-4"><span class="nav-number">1.1.3.</span> <span class="nav-text">Thinking 3.4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Thinking-3-5"><span class="nav-number">1.1.4.</span> <span class="nav-text">Thinking 3.5</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -293,45 +293,40 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>Lab3 Report <span id="more"></span></p>
+        <p>Lab3 Report</p>
+<span id="more"></span>
 <h2 id="思考题"> 思考题 </h2>
-<h3 id="thinking-3.1">Thinking 3.1</h3>
+<h3 id="Thinking-3-1">Thinking 3.1</h3>
 <ul>
 <li>e-&gt;env_pgdir[PDX(UVPT)] = PADDR(e-&gt;env_pgdir) | PTE_V
 <ul>
-<li>Map its own page table at 'UVPT' with readonly permission.</li>
+<li>Map its own page table at ‘UVPT’ with readonly permission.</li>
 <li> 在 env_pgdir 基地址之上，加上 PDX(UVPT) 的 UVPT 的页目录项偏移 </li>
 <li> 找到指向自己页表的页目录项后，赋上用 PADDR(e-&gt;env_pgdir) 取得页目录的物理地址，和 PTE_V 标志位表示只读 </li>
-</ul></li>
 </ul>
-<h4 id="thinking-3.2">Thinking 3.2</h4>
-<ul>
-<li>static void load_icode(struct Env <em>e, const void </em>binary,
-size_t size) 中，调用了 elf_load_seg(ph, binary + ph-&gt;p_offset,
-load_icode_mapper, e)</li>
-<li> 其中 'e' 为待 program segments 从 'binary'
-加载到的用户空间进程的环境，如果没有这个参数，则无法加载到用户空间进程的环境中 </li>
+</li>
 </ul>
-<h4 id="thinking-3.3">Thinking 3.3</h4>
+<h4 id="Thinking-3-2">Thinking 3.2</h4>
 <ul>
-<li>elf_load_seg 函数会从 ph 中获取
-va（该段需要被加载到的虚地址）、sgsize（该段在内
-存中的大小）、bin_size（该段在文件中的大小）和
-perm（该段被加载时的页面权限）
+<li>static void load_icode(struct Env *e, const void *binary, size_t size) 中，调用了 elf_load_seg(ph, binary + ph-&gt;p_offset, load_icode_mapper, e)</li>
+<li> 其中 ‘e’ 为待 program segments 从 ‘binary’ 加载到的用户空间进程的环境，如果没有这个参数，则无法加载到用户空间进程的环境中 </li>
+</ul>
+<h4 id="Thinking-3-3">Thinking 3.3</h4>
 <ul>
-<li> 内存中的大小和文件中的大小不一定相同，因为文件中的大小可能不足以填满整个页面，余下的部分用
-0 来填充。</li>
+<li>elf_load_seg 函数会从 ph 中获取 va（该段需要被加载到的虚地址）、sgsize（该段在内 <br>
+存中的大小）、bin_size（该段在文件中的大小）和 perm（该段被加载时的页面权限）
+<ul>
+<li> 内存中的大小和文件中的大小不一定相同，因为文件中的大小可能不足以填满整个页面，余下的部分用 0 来填充。</li>
 <li> 剩余空闲页面不够分配 </li>
 <li> 内存不够加载该段的所有数据 </li>
-</ul></li>
 </ul>
-<h4 id="thinking-3.4">Thinking 3.4</h4>
+</li>
+</ul>
+<h4 id="Thinking-3-4">Thinking 3.4</h4>
 <ul>
-<li> 是虚拟地址，因为程序入口为 e_entry (Entry point virtual
-address)，当我们运行进程时 CPU 将自动从 PC
-所指的位置开始执行二进制码，所以 PC 这个位置为虚拟地址 </li>
+<li> 是虚拟地址，因为程序入口为 e_entry (Entry point virtual address)，当我们运行进程时 CPU 将自动从 PC 所指的位置开始执行二进制码，所以 PC 这个位置为虚拟地址 </li>
 </ul>
-<h4 id="thinking-3.5">Thinking 3.5</h4>
+<h4 id="Thinking-3-5">Thinking 3.5</h4>
 <p> 试找出上述 5 个异常处理函数的具体实现位置 (?)</p>
 
     </div>
