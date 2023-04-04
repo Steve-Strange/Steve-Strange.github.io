@@ -6,7 +6,7 @@
   <link href="https://steve-strange.github.io/atom.xml" rel="self"/>
   
   <link href="https://steve-strange.github.io/"/>
-  <updated>2023-04-02T02:41:56.925Z</updated>
+  <updated>2023-04-04T09:05:14.526Z</updated>
   <id>https://steve-strange.github.io/</id>
   
   <author>
@@ -17,21 +17,72 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>lane-detection-1</title>
-    <link href="https://steve-strange.github.io/2023/04/02/10-40-55/"/>
-    <id>https://steve-strange.github.io/2023/04/02/10-40-55/</id>
-    <published>2023-04-02T02:40:55.000Z</published>
-    <updated>2023-04-02T02:41:56.925Z</updated>
+    <title>BlueSky_BookClothes_Collection</title>
+    <link href="https://steve-strange.github.io/2023/04/04/17-04-09/"/>
+    <id>https://steve-strange.github.io/2023/04/04/17-04-09/</id>
+    <published>2023-04-04T09:04:09.000Z</published>
+    <updated>2023-04-04T09:05:14.526Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
     
     
     
-    <category term="lane-detection-1" scheme="https://steve-strange.github.io/categories/lane-detection-1/"/>
+    <category term="BlueSky_BookClothes_Collection" scheme="https://steve-strange.github.io/categories/BlueSky-BookClothes-Collection/"/>
     
     
-    <category term="lane-detection-1" scheme="https://steve-strange.github.io/tags/lane-detection-1/"/>
+    <category term="BlueSky_BookClothes_Collection" scheme="https://steve-strange.github.io/tags/BlueSky-BookClothes-Collection/"/>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://steve-strange.github.io/2023/04/04/17-02-38/"/>
+    <id>https://steve-strange.github.io/2023/04/04/17-02-38/</id>
+    <published>2023-04-04T09:02:38.611Z</published>
+    <updated>2023-04-04T09:03:46.366Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">
+</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Lane Detection 1</title>
+    <link href="https://steve-strange.github.io/2023/04/02/10-40-55/"/>
+    <id>https://steve-strange.github.io/2023/04/02/10-40-55/</id>
+    <published>2023-04-02T02:40:55.000Z</published>
+    <updated>2023-04-02T07:23:05.003Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;o2f&quot;&gt;O2f&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;One to</summary>
+        
+      
+    
+    
+    
+    <category term="DeepLearning" scheme="https://steve-strange.github.io/categories/DeepLearning/"/>
+    
+    
+    <category term="DeepLearning" scheme="https://steve-strange.github.io/tags/DeepLearning/"/>
+    
+    <category term="Lane Detection" scheme="https://steve-strange.github.io/tags/Lane-Detection/"/>
     
   </entry>
   
@@ -205,7 +256,7 @@
     <link href="https://steve-strange.github.io/2023/03/11/11-52-15/"/>
     <id>https://steve-strange.github.io/2023/03/11/11-52-15/</id>
     <published>2023-03-11T03:52:15.000Z</published>
-    <updated>2023-03-24T08:44:09.663Z</updated>
+    <updated>2023-04-02T03:39:39.831Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;神经网络基础笔记-1&quot;&gt;神经网络基础笔记 1&lt;/h2&gt;</summary>
@@ -367,44 +418,6 @@
     
     
     <summary type="html">&lt;p&gt;5级流水线CPU设计文档+</summary>
-    
-    
-    
-    <category term="Computer Orgnization" scheme="https://steve-strange.github.io/categories/Computer-Orgnization/"/>
-    
-    
-    <category term="Computer Orgnization" scheme="https://steve-strange.github.io/tags/Computer-Orgnization/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>P5 设计文档</title>
-    <link href="https://steve-strange.github.io/2023/03/10/19-16-47/"/>
-    <id>https://steve-strange.github.io/2023/03/10/19-16-47/</id>
-    <published>2023-03-10T11:16:47.000Z</published>
-    <updated>2023-03-18T08:07:49.378Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;5级流水线CPU</summary>
-    
-    
-    
-    <category term="Computer Orgnization" scheme="https://steve-strange.github.io/categories/Computer-Orgnization/"/>
-    
-    
-    <category term="Computer Orgnization" scheme="https://steve-strange.github.io/tags/Computer-Orgnization/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>P4 设计文档</title>
-    <link href="https://steve-strange.github.io/2023/03/10/19-16-42/"/>
-    <id>https://steve-strange.github.io/2023/03/10/19-16-42/</id>
-    <published>2023-03-10T11:16:42.000Z</published>
-    <updated>2023-03-15T14:24:17.893Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;CPU设计文档</summary>
     
     
     
