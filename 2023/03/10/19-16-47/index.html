@@ -30,6 +30,7 @@
 <meta property="og:site_name" content="TARDIS">
 <meta property="og:description" content="5级流水线CPU">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://steve-strange.github.io/2023/03/10/19-16-47/f2cc47e84a3c52f62bd3772cc8883bdd6aa8df6cf3b732b96d0b6564a1128e9a.jpg">
 <meta property="og:image" content="https://steve-strange.github.io/2023/03/10/19-16-47/image-20230311000745591.png">
 <meta property="og:image" content="https://steve-strange.github.io/2023/03/10/19-16-47/image-20230311000822296.png">
 <meta property="og:image" content="https://steve-strange.github.io/2023/03/10/19-16-47/image-20221119123512795.png">
@@ -43,7 +44,7 @@
 <meta property="article:author" content="Sorcerer Inferior">
 <meta property="article:tag" content="Computer Orgnization">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://steve-strange.github.io/2023/03/10/19-16-47/image-20230311000745591.png">
+<meta name="twitter:image" content="https://steve-strange.github.io/2023/03/10/19-16-47/f2cc47e84a3c52f62bd3772cc8883bdd6aa8df6cf3b732b96d0b6564a1128e9a.jpg">
 
 
 <link rel="canonical" href="https://steve-strange.github.io/2023/03/10/19-16-47/">
@@ -159,7 +160,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="nav-number">1.</span> <span class="nav-text"> 五个阶段 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E6%95%B0%E6%8D%AE%E9%80%9A%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text"> 关键数据通路 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.</span> <span class="nav-text"> 流程模块设计 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cu%20%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.1.</span> <span class="nav-text">CU 模块设计 </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#t%20%E8%AE%A1%E7%AE%97%E8%A1%A8%E6%A0%BC"><span class="nav-number">3.1.1.</span> <span class="nav-text">T 计算表格 </span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#conflit%20%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%20at%20%E6%8E%A7%E5%88%B6%E9%98%BB%E5%A1%9E%E7%9B%B4%E6%8E%A5%E8%BD%AC%E5%8F%91"><span class="nav-number">3.2.</span> <span class="nav-text">Conflit 模块设计：AT 控制阻塞，直接转发 </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%BB%E5%A1%9E"><span class="nav-number">3.2.1.</span> <span class="nav-text"> 阻塞 </span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AC%E5%8F%91"><span class="nav-number">3.2.2.</span> <span class="nav-text"> 转发 </span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E7%BA%A7%E6%A8%A1%E5%9D%97%E8%AE%BE"><span class="nav-number">3.3.</span> <span class="nav-text"> 五级模块设 </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#fetch"><span class="nav-number">3.3.1.</span> <span class="nav-text">1. Fetch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#decode"><span class="nav-number">3.3.2.</span> <span class="nav-text">2. Decode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#execute"><span class="nav-number">3.3.3.</span> <span class="nav-text">3. Execute</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#memory"><span class="nav-number">3.3.4.</span> <span class="nav-text">4. Memory</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#writeback"><span class="nav-number">3.3.5.</span> <span class="nav-text">5. Writeback</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text"> 测试 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">5.</span> <span class="nav-text"> 注意事项 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text"> 思考题 </span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text"> 支持指令 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="nav-number">2.</span> <span class="nav-text"> 五个阶段 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E6%95%B0%E6%8D%AE%E9%80%9A%E8%B7%AF"><span class="nav-number">3.</span> <span class="nav-text"> 关键数据通路 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1"><span class="nav-number">4.</span> <span class="nav-text"> 流程模块设计 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CU%20%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1"><span class="nav-number">4.1.</span> <span class="nav-text">CU 模块设计 </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#T%20%E8%AE%A1%E7%AE%97%E8%A1%A8%E6%A0%BC"><span class="nav-number">4.1.1.</span> <span class="nav-text">T 计算表格 </span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conflit%20%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%EF%BC%9AAT%20%E6%8E%A7%E5%88%B6%E9%98%BB%E5%A1%9E%EF%BC%8C%E7%9B%B4%E6%8E%A5%E8%BD%AC%E5%8F%91"><span class="nav-number">4.2.</span> <span class="nav-text">Conflit 模块设计：AT 控制阻塞，直接转发 </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%BB%E5%A1%9E"><span class="nav-number">4.2.1.</span> <span class="nav-text"> 阻塞 </span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AC%E5%8F%91"><span class="nav-number">4.2.2.</span> <span class="nav-text"> 转发 </span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E7%BA%A7%E6%A8%A1%E5%9D%97%E8%AE%BE"><span class="nav-number">4.3.</span> <span class="nav-text"> 五级模块设 </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Fetch"><span class="nav-number">4.3.1.</span> <span class="nav-text">1. Fetch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Decode"><span class="nav-number">4.3.2.</span> <span class="nav-text">2. Decode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Execute"><span class="nav-number">4.3.3.</span> <span class="nav-text">3. Execute</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Memory"><span class="nav-number">4.3.4.</span> <span class="nav-text">4. Memory</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Writeback"><span class="nav-number">4.3.5.</span> <span class="nav-text">5. Writeback</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">5.</span> <span class="nav-text"> 测试 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">6.</span> <span class="nav-text"> 注意事项 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">7.</span> <span class="nav-text"> 思考题 </span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -174,13 +175,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -302,54 +303,56 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>5 级流水线 CPU <span id="more"></span> ## 支持指令 </p>
+        <p>5 级流水线 CPU</p>
+<span id="more"></span>
+<h2 id="支持指令"> 支持指令 </h2>
 <p>add, sub, ori, lw, sw, beq, lui, j, jr, jal, nop</p>
 <p>(其中 add，sub 为无符号加减法)</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>Instuction</th>
 <th></th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><em>add</em></td>
 <td>GPR[rd] = GPR[rs] + GPR[rt]</td>
 </tr>
-<tr class="even">
+<tr>
 <td><em>sub</em></td>
 <td>GPR[rd] = GPR[rs] - GPR[rt]</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><em>ori</em></td>
-<td>GPR[rt] = GPR[rs] | ZeroExt(Imm)</td>
+<td>GPR[rt] =  GPR[rs] | ZeroExt(Imm)</td>
 </tr>
-<tr class="even">
+<tr>
 <td><em>lui</em></td>
-<td>GPR[rt] = {imm, 16’b0}</td>
+<td>GPR[rt] =  {imm, 16’b0}</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><em>lw</em></td>
-<td>R[rt] = Mem[GPR[rs]+sign_ext(offset)]</td>
+<td>R[rt] =  Mem[GPR[rs]+sign_ext(offset)]</td>
 </tr>
-<tr class="even">
+<tr>
 <td><em>sw</em></td>
 <td>Mem[GPR[rs]+sign_ext(offset)] = R[rt]</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><em>beq</em></td>
-<td>if (GPR[rs] == GPR[rt]) PC = PC + 4 + BranchAddr</td>
+<td>if (GPR[rs] ==  GPR[rt])  PC = PC + 4 + BranchAddr</td>
 </tr>
-<tr class="even">
+<tr>
 <td><em>j</em></td>
 <td>PC = JumpAddr</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><em>jal</em></td>
-<td>PC = JumpAddr; GPR[31] = PC + 4</td>
+<td>PC =  JumpAddr; GPR[31] = PC + 4</td>
 </tr>
-<tr class="even">
+<tr>
 <td><em>jr</em></td>
 <td>PC = GPR[rs]</td>
 </tr>
@@ -357,40 +360,35 @@
 </table>
 <h2 id="五个阶段"> 五个阶段 </h2>
 <table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 5%" />
-<col style="width: 69%" />
-</colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th> 阶段 </th>
 <th> 简称 </th>
 <th> 功能概述 </th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td> 取指阶段 (Fetch)</td>
 <td>F</td>
 <td> 从指令存储器中读取指令 </td>
 </tr>
-<tr class="even">
+<tr>
 <td> 译码阶段 (Decode)</td>
 <td>D</td>
 <td> 从寄存器文件中读取源操作数并对指令译码以便得到控制信号 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td> 执行阶段 (Execute)</td>
 <td>E</td>
 <td> 使用 ALU 执行计算 </td>
 </tr>
-<tr class="even">
+<tr>
 <td> 存储阶段 (Memory)</td>
 <td>M</td>
 <td> 读或写数据存储器 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td> 写回阶段 (Writeback)</td>
 <td>W</td>
 <td> 将结果写回到寄存器文件 </td>
@@ -398,23 +396,17 @@
 </tbody>
 </table>
 <h2 id="关键数据通路"> 关键数据通路 </h2>
-<figure>
-<img data-src="f2cc47e84a3c52f62bd3772cc8883bdd6aa8df6cf3b732b96d0b6564a1128e9a.jpg"
-alt="关键数据通路" />
-<figcaption aria-hidden="true"> 关键数据通路 </figcaption>
-</figure>
+<p><img data-src="f2cc47e84a3c52f62bd3772cc8883bdd6aa8df6cf3b732b96d0b6564a1128e9a.jpg" alt=""></p>
 <h2 id="流程模块设计"> 流程模块设计 </h2>
-<h3 id="cu 模块设计">CU 模块设计 </h3>
+<h3 id="CU 模块设计">CU 模块设计 </h3>
 <ul>
 <li> 相较 P4，省去 RegWrite 信号，直接译出当前指令需要写入的地址，如不需写入，默认写至 0，在写入 GRF 时直接略去 </li>
-<li> 直接译出当前指令 rs, rt, rd, shamt, imm16,
-imm26 以及所有控制信号供每个阶段选取使用，还需译出 Tuse_rs/rt 以及 E_Tnew 与 M_Tnew，各级输出对应信号至 Conflict 模块 </li>
-<li> 将指令分类，分为：cal_r, cal_i, load, save, branch, shift, jreg,
-jadd, jlink（ori 被归为 cal_i）</li>
+<li> 直接译出当前指令 rs, rt, rd, shamt, imm16, imm26 以及所有控制信号供每个阶段选取使用，还需译出 Tuse_rs/rt 以及 E_Tnew 与 M_Tnew，各级输出对应信号至 Conflict 模块 </li>
+<li> 将指令分类，分为：cal_r, cal_i, load, save, branch, shift, jreg, jadd, jlink（ori 被归为 cal_i）</li>
 </ul>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>Port name</th>
 <th>Direction</th>
 <th>Type</th>
@@ -422,157 +414,157 @@ jadd, jlink（ori 被归为 cal_i）</li>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>Ins</td>
 <td>input</td>
 <td>[31:0]</td>
 <td> 当级指令 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>branchTrue</td>
 <td>input</td>
 <td></td>
 <td> 分支控制信号 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong> 控制信号 </strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>GRF_WA</td>
 <td>output</td>
 <td>[4:0]</td>
 <td> 写入的地址 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td>GRF_WDSrc</td>
 <td>output</td>
 <td>[2:0]</td>
 <td> 写入数据选择 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>ALUSrc</td>
 <td>output</td>
 <td></td>
 <td>ALU_B 的数据源选择 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td>ALUSelect</td>
 <td>output</td>
 <td>[2:0]</td>
 <td>ALU 运算类型选择 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>MemWrite</td>
 <td>output</td>
 <td></td>
 <td> 内存写入控制 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td>EXTSelect</td>
 <td>output</td>
 <td></td>
 <td>EXT 位拓展类型选择 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>BranchSelect</td>
 <td>output</td>
 <td>[2:0]</td>
 <td>branch 判断类型选择 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td>NPCSelect</td>
 <td>output</td>
 <td>[2:0]</td>
 <td>NPC 类型选择 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>ByteLW</td>
 <td>output</td>
 <td></td>
 <td> 字节写入读出控制 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong> 指令译码 </strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>opcode</td>
 <td>output</td>
 <td>[5:0]</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>funct</td>
 <td>output</td>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>rs</td>
 <td>output</td>
 <td>[4:0]</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>rt</td>
 <td>output</td>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>rd</td>
 <td>output</td>
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>shamt</td>
 <td>output</td>
 <td>[4:0]</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>imm16</td>
 <td>output</td>
 <td>[15:0]</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>imm26</td>
 <td>output</td>
 <td>[25:0]</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>T 计算 </strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>Tuse_rs</td>
 <td>output</td>
 <td>[1:0]</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>Tuse_rt</td>
 <td>output</td>
 <td>[1:0]</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>E_Tnew</td>
 <td>output</td>
 <td>[1:0]</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>M_Tnew</td>
 <td>output</td>
 <td>[1:0]</td>
@@ -580,10 +572,10 @@ jadd, jlink（ori 被归为 cal_i）</li>
 </tr>
 </tbody>
 </table>
-<h4 id="t 计算表格">T 计算表格 </h4>
+<h4 id="T 计算表格">T 计算表格 </h4>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>Ins</th>
 <th></th>
 <th>Tuse_rs</th>
@@ -594,7 +586,7 @@ jadd, jlink（ori 被归为 cal_i）</li>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>cal_r</td>
 <td>add||sub</td>
 <td>1</td>
@@ -603,7 +595,7 @@ jadd, jlink（ori 被归为 cal_i）</li>
 <td>0</td>
 <td>0</td>
 </tr>
-<tr class="even">
+<tr>
 <td>cal_i</td>
 <td>ori||lui</td>
 <td>1</td>
@@ -612,7 +604,7 @@ jadd, jlink（ori 被归为 cal_i）</li>
 <td>0</td>
 <td>0</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>load</td>
 <td>lw</td>
 <td>2</td>
@@ -621,7 +613,7 @@ jadd, jlink（ori 被归为 cal_i）</li>
 <td>1</td>
 <td>0</td>
 </tr>
-<tr class="even">
+<tr>
 <td>save</td>
 <td>sw</td>
 <td>1</td>
@@ -630,7 +622,7 @@ jadd, jlink（ori 被归为 cal_i）</li>
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>branch</td>
 <td>beq</td>
 <td>0</td>
@@ -639,7 +631,7 @@ jadd, jlink（ori 被归为 cal_i）</li>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>jreg</td>
 <td>jr</td>
 <td>0</td>
@@ -648,7 +640,7 @@ jadd, jlink（ori 被归为 cal_i）</li>
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>jadd</td>
 <td>j||jal</td>
 <td></td>
@@ -657,7 +649,7 @@ jadd, jlink（ori 被归为 cal_i）</li>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>jlink</td>
 <td>jal</td>
 <td></td>
@@ -668,54 +660,56 @@ jadd, jlink（ori 被归为 cal_i）</li>
 </tr>
 </tbody>
 </table>
-<h3
-id="conflit 模块设计 at 控制阻塞直接转发">Conflit 模块设计：AT 控制阻塞，直接转发 </h3>
+<h3 id="Conflit 模块设计：AT 控制阻塞，直接转发">Conflit 模块设计：AT 控制阻塞，直接转发 </h3>
 <h4 id="阻塞"> 阻塞 </h4>
 <ul>
 <li>D 级判断将要使用的寄存器数据是否能得到转发更新，即后续写入相同寄存器的 Tnew 是否有大于 Tuse 的，如果有则需要阻塞，以在后续能得到转发更新。特判 0 号寄存器不需要阻塞，能够直接获得数据 0</li>
-<li> 需要得到 D 级指令 rs, rt 的 Tuse，以及后续 E,
-M 级指令的 Tnew，在各级 CU 中计算，发送至冲突单元（W 级 Tnew 全是 0 不需要考虑，都可以内部转发解决）</li>
+<li> 需要得到 D 级指令 rs, rt 的 Tuse，以及后续 E, M 级指令的 Tnew，在各级 CU 中计算，发送至冲突单元（W 级 Tnew 全是 0 不需要考虑，都可以内部转发解决）</li>
 <li> 阻塞时需要暂停更新 PC 以及 F 级读出的指令，并且清空 D 级当前指令的译码输出，以替换为 nop 空泡 </li>
 </ul>
-<p><img data-src="image-20230311000745591.png" alt="image-20230311000745591"/></p>
+<img data-src="image-20230311000745591.png" alt="image-20230311000745591"/>
 <h4 id="转发"> 转发 </h4>
 <ul>
-<li><p> 阻塞后，所有指令在需要读寄存器数据的时候都能够获得后续计算完毕的数据，每级转发出已算出的数据，发送给之前各级即可。</p></li>
-<li><p> 需要读寄存器：D 级 GRF，Branch 计算需要 rs, rt 数据；E 级 ALU 需要 rs,rt
-数据；M 级 DM 写入数据口需要 rt 数据 </p></li>
-<li><p> 需要写寄存器：E 级可转发出 D 级算的 PC+8；M 级可转发出 D 级算的 PC+8 和 E 级算的的 ALU_Y；W 级可转发出 D 级算的 PC+8，E 级算的的 ALU_Y 和 M 级读出的 DM 数据。<strong> 根据当前指令 CU 译码得到的 GRF_WDSrc 进行选择 </strong>。此外还有 W 级寄存器写入，可直接内部转发至 D 级读出 </p></li>
+<li>
+<p> 阻塞后，所有指令在需要读寄存器数据的时候都能够获得后续计算完毕的数据，每级转发出已算出的数据，发送给之前各级即可。</p>
+</li>
+<li>
+<p> 需要读寄存器：D 级 GRF，Branch 计算需要 rs, rt 数据；E 级 ALU 需要 rs,rt 数据；M 级 DM 写入数据口需要 rt 数据 </p>
+</li>
+<li>
+<p> 需要写寄存器：E 级可转发出 D 级算的 PC+8；M 级可转发出 D 级算的 PC+8 和 E 级算的的 ALU_Y；W 级可转发出 D 级算的 PC+8，E 级算的的 ALU_Y 和 M 级读出的 DM 数据。<strong> 根据当前指令 CU 译码得到的 GRF_WDSrc 进行选择 </strong>。此外还有 W 级寄存器写入，可直接内部转发至 D 级读出 </p>
+</li>
 </ul>
-<p><img data-src="image-20230311000822296.png" alt="image-20230311000822296" style="zoom:67%;" /></p>
-<p><img data-src="image-20221119123512795.png" alt="image-20221119123512795" style="zoom:67%;" /></p>
-<p><img data-src="image-20221119123500142.png" alt="image-20221119123500142" style="zoom:67%;" /></p>
-<p><img data-src="image-20221119123633639.png" alt="image-20221119123633639" style="zoom:67%;" /></p>
+<img data-src="image-20230311000822296.png" alt="image-20230311000822296" style="zoom:67%;" />
+<img data-src="image-20221119123512795.png" alt="image-20221119123512795" style="zoom:67%;" />
+<img data-src="image-20221119123500142.png" alt="image-20221119123500142" style="zoom:67%;" />
+<img data-src="image-20221119123633639.png" alt="image-20221119123633639" style="zoom:67%;" />
 <ul>
 <li> 在主模块中，获取各级需要读的寄存器编号（D_rs,D_rt,E_rs,E_rt,M_rt），寄存器原读数（D_rs_data,D_rt_data,E_rs_data,E_rt_data,M_rt_data），写入的寄存器编号（E_GRF_WA,M_GRF_WA,W_GRF_WA）和数据（E_GRF_WD,M_GRF_WD,W_GRF_WD）</li>
 <li> 比较读的编号和写的编号是否有相等的，如有相等的则代表有数据已经更新需要转发，转发优先级为更新次序，最后一次更新优先转发，即优先转发距离需要数据的阶段近的数据，特判如果需要读 0 号寄存器的数据，直接转发 0</li>
 <li> 转发的数据（D_rs_fw,D_rt_fw,E_rs_fw,E_rt_fw,M_rt_fw）发送至各级需要的部分运算，并传递给下一级 </li>
 </ul>
-<p><img data-src="C:\Users\MGLDT\AppData\Roaming\Typora\typora-user-images\image-20221119122330496.png" alt="image-20221119122330496" style="zoom:67%;" /></p>
+<img data-src="C:\Users\MGLDT\AppData\Roaming\Typora\typora-user-images\image-20221119122330496.png" alt="image-20221119122330496" style="zoom:67%;" />
 <h3 id="五级模块设"> 五级模块设 </h3>
 <ul>
-<li><p> 每个阶段之间以寄存器隔开，寄存器设计在每个模块输出处，使用 reg 类型 </p></li>
-<li><p> 每个阶段之间需要流水传递 Ins，PC，传给各级 CU 以译码出当前阶段的 rs，rt 以及需要写入的地址和写入数据的选择 </p></li>
-<li><p> 部分阶段前后间需要传递需要使用的 NPC, EXTout, ALU_Y,
-DM_RD</p></li>
+<li>
+<p> 每个阶段之间以寄存器隔开，寄存器设计在每个模块输出处，使用 reg 类型 </p>
+</li>
+<li>
+<p> 每个阶段之间需要流水传递 Ins，PC，传给各级 CU 以译码出当前阶段的 rs，rt 以及需要写入的地址和写入数据的选择 </p>
+</li>
+<li>
+<p> 部分阶段前后间需要传递需要使用的 NPC, EXTout, ALU_Y, DM_RD</p>
+</li>
 </ul>
-<h4 id="fetch">1. Fetch</h4>
+<h4 id="1-Fetch">1. Fetch</h4>
 <ul>
 <li> 包含 F_IFU，FDReg</li>
 <li>Fetch</li>
 </ul>
 <table>
-<colgroup>
-<col style="width: 17%" />
-<col style="width: 12%" />
-<col style="width: 14%" />
-<col style="width: 55%" />
-</colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>Port name</th>
 <th>Direction</th>
 <th>Type</th>
@@ -723,67 +717,67 @@ DM_RD</p></li>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>clk</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>reset</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>F_Flush</td>
 <td>input</td>
 <td></td>
 <td> 清空延迟槽信号 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>F_Stall</td>
 <td>input</td>
 <td></td>
 <td> 阻塞更新 PC</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>NPC</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>D 级 NPC 计算出的 NPC 传入 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>F_PC</td>
 <td>output</td>
 <td>[31:0]</td>
 <td>F 级直接传给 NPC 的 F 级 PC，以直接计算 F_PC+4</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>F_Ins</td>
 <td></td>
 <td>[31:0]</td>
 <td> 指令流水 </td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>FD 寄存器 </strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>D_Stall</td>
 <td>input</td>
 <td></td>
 <td> 阻塞更新 FD 间寄存器 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>D_PC</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=F_PC</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>D_Ins</td>
 <td>output</td>
 <td>reg [31:0]</td>
@@ -796,7 +790,7 @@ DM_RD</p></li>
 </ul>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>Port name</th>
 <th>Direction</th>
 <th>Type</th>
@@ -804,37 +798,37 @@ DM_RD</p></li>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>clk</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>reset</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>F_Stall</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>NPC</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>PC</td>
 <td>output</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>Ins</td>
 <td>output</td>
 <td>[31:0]</td>
@@ -842,19 +836,13 @@ DM_RD</p></li>
 </tr>
 </tbody>
 </table>
-<h4 id="decode">2. Decode</h4>
+<h4 id="2-Decode">2. Decode</h4>
 <ul>
 <li> 包括 D_CU, EXT, NPC (Branch), DEReg</li>
 </ul>
-<table style="width:100%;">
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 15%" />
-<col style="width: 16%" />
-<col style="width: 35%" />
-</colgroup>
+<table>
 <thead>
-<tr class="header">
+<tr>
 <th>Port name</th>
 <th>Direction</th>
 <th>Type</th>
@@ -862,175 +850,175 @@ DM_RD</p></li>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>clk</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>reset</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>D_PC</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>PC 流水 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>D_Ins</td>
 <td>input</td>
 <td>[31:0]</td>
 <td> 指令流水 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>Conflict/Forward</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>Tuse_rs</td>
 <td>output</td>
 <td>[1:0]</td>
 <td>AT 算阻塞 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td>Tuse_rt</td>
 <td>output</td>
 <td>[1:0]</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>D_rs</td>
 <td>output</td>
 <td>[4:0]</td>
 <td>D 级指令读寄存器的编号 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td>D_rt</td>
 <td>output</td>
 <td>[4:0]</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>D_rs_data</td>
 <td>output</td>
 <td>[31:0]</td>
 <td>D 级指令读寄存器原数据 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td>D_rt_data</td>
 <td>output</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>D_rs_fw</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>D 级转发后寄存器数据 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td>D_rt_fw</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>EXT</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>imm16</td>
 <td></td>
 <td>[15:0]</td>
 <td>EXT 输入 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>EXTSelect</td>
 <td></td>
 <td></td>
 <td>EXT 功能选择 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td>D_EXT_out</td>
 <td></td>
 <td>[31:0]</td>
 <td>EXT 输出 </td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>NPC</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>NPCSelect</td>
 <td></td>
 <td>[2:0]</td>
 <td> 下一指令地址选择 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>branchTrue</td>
 <td></td>
 <td></td>
 <td> 是否分支信号 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td>F_PC</td>
 <td>input</td>
 <td>[31:0]</td>
 <td> 算 NPC 用 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>NPC</td>
 <td>output</td>
 <td>[31:0]</td>
 <td> 传给 F 级 IFU</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>DEReg</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>E_Flush</td>
 <td>input</td>
 <td></td>
 <td> 阻塞清空 DE 寄存器 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td>E_PC</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=D_PC</td>
 </tr>
-<tr class="even">
+<tr>
 <td>E_Ins</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=D_Ins</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>E_rs_data</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=<strong>D_rs_fw</strong></td>
 </tr>
-<tr class="even">
+<tr>
 <td>E_rt_data</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=<strong>D_rt_fw</strong></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>E_EXT_out</td>
 <td>output</td>
 <td>reg [31:0]</td>
@@ -1038,19 +1026,13 @@ DM_RD</p></li>
 </tr>
 </tbody>
 </table>
-<h4 id="execute">3. Execute</h4>
+<h4 id="3-Execute">3. Execute</h4>
 <ul>
 <li> 包括 E_CU, ALU, EMReg</li>
 </ul>
 <table>
-<colgroup>
-<col style="width: 27%" />
-<col style="width: 12%" />
-<col style="width: 13%" />
-<col style="width: 47%" />
-</colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>Port name</th>
 <th>Direction</th>
 <th>Type</th>
@@ -1058,157 +1040,157 @@ DM_RD</p></li>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>clk</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>reset</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>E_PC</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>PC 流水 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>E_Ins</td>
 <td>input</td>
 <td>[31:0]</td>
 <td> 指令流水 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>Conflict/Forward</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>E_Tnew</td>
 <td>output</td>
 <td>[1:0]</td>
 <td>AT 算阻塞 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td>E_rs</td>
 <td>output</td>
 <td>[4:0]</td>
 <td>E 级指令读寄存器的编号 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>E_rt</td>
 <td>output</td>
 <td>[4:0]</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>E_rs_data</td>
 <td>output</td>
 <td>[31:0]</td>
 <td>E 级指令读寄存器原数据 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>E_rt_data</td>
 <td>output</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>E_GRF_WA</td>
 <td>output</td>
 <td>[4:0]</td>
 <td>E 级指令写寄存器的编号 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>E_rs_fw</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>E 级接收转发后寄存器数据 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td>E_rt_fw</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>GRF_WDSrc</td>
 <td></td>
 <td>[2:0]</td>
 <td>E 级指令写寄存器的数据选择 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td>E_GRF_WD</td>
 <td>output</td>
 <td>[31:0]</td>
 <td>E 级指令写寄存器的数据 </td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>ALU</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>E_EXT_out</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>ALUSrc</td>
 <td></td>
 <td></td>
 <td>ALU_B 数据源选择 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td>ALUSelect</td>
 <td></td>
 <td>[2:0]</td>
 <td>ALU 功能选择 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>E_ALU_A</td>
 <td></td>
 <td>[31:0]</td>
 <td>=<strong>E_rs_fw</strong>：ALU_A 口数据 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td>E_ALU_B</td>
 <td></td>
 <td>[31:0]</td>
 <td>=<strong>E_rt_fw</strong>/E_EXT_out：ALU_B 口数据 </td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>EMReg</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>M_PC</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=E_PC</td>
 </tr>
-<tr class="even">
+<tr>
 <td>M_Ins</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=E_Ins</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>M_ALU_Y</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=E_ALU_Y</td>
 </tr>
-<tr class="even">
+<tr>
 <td>M_rt_data</td>
 <td>output</td>
 <td>reg [31:0]</td>
@@ -1221,7 +1203,7 @@ DM_RD</p></li>
 </ul>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>Port name</th>
 <th>Direction</th>
 <th>Type</th>
@@ -1229,43 +1211,43 @@ DM_RD</p></li>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>op</td>
 <td>input</td>
 <td>[2:0]</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>A</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>B</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>Y</td>
 <td>output</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>Greater</td>
 <td>output</td>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>Equal</td>
 <td>output</td>
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>Less</td>
 <td>output</td>
 <td></td>
@@ -1273,17 +1255,11 @@ DM_RD</p></li>
 </tr>
 </tbody>
 </table>
-<h4 id="memory">4. Memory</h4>
+<h4 id="4-Memory">4. Memory</h4>
 <p> 包括 M_CU, DM</p>
 <table>
-<colgroup>
-<col style="width: 31%" />
-<col style="width: 14%" />
-<col style="width: 15%" />
-<col style="width: 38%" />
-</colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>Port name</th>
 <th>Direction</th>
 <th>Type</th>
@@ -1291,139 +1267,139 @@ DM_RD</p></li>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>clk</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>reset</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>M_PC</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>M_Ins</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>Conflict/Forward</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>M_Tnew</td>
 <td>output</td>
 <td>[1:0]</td>
 <td>AT 算阻塞 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td>M_rt</td>
 <td>output</td>
 <td>[4:0]</td>
 <td>M 级指令读寄存器编号 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>M_rt_data</td>
 <td>output</td>
 <td>[31:0]</td>
 <td>M 级指令读寄存器数据 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td>M_rt_fw</td>
 <td>input</td>
 <td>[31:0]</td>
 <td>M 级接收转发后寄存器数据 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>M_GRF_WA</td>
 <td>output</td>
 <td>[4:0]</td>
 <td>M 级指令写寄存器编号 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td>GRF_WDSrc</td>
 <td></td>
 <td>[2:0]</td>
 <td>M 级指令写寄存器数据选择 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>M_ALU_Y</td>
 <td>input</td>
 <td>[31:0]</td>
 <td> 待转发的 E 级 ALU 计算结果 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td>M_GRF_WD</td>
 <td>output</td>
 <td>[31:0]</td>
 <td>M 级指令写寄存器数据 </td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>DM</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>MemWrite</td>
 <td></td>
 <td></td>
 <td>DM 写使能 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>DM_A</td>
 <td></td>
 <td>[31:0]</td>
 <td>=M_ALU_Y：DM 读写地址 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td>DM_WD</td>
 <td></td>
 <td>[31:0]</td>
 <td>=<strong>M_rt_fw</strong>：DM 写入数据 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>DM_RD</td>
 <td></td>
 <td>[31:0]</td>
 <td>DM 读出数据 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>MWReg</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>W_PC</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=M_PC</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>W_Ins</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=M_Ins</td>
 </tr>
-<tr class="even">
+<tr>
 <td>W_ALU_Y</td>
 <td>output</td>
 <td>reg [31:0]</td>
 <td>&lt;=M_ALU_Y</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>W_DM_RD</td>
 <td>output</td>
 <td>reg [31:0]</td>
@@ -1436,7 +1412,7 @@ DM_RD</p></li>
 </ul>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>Port name</th>
 <th>Direction</th>
 <th>Type</th>
@@ -1444,49 +1420,49 @@ DM_RD</p></li>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>reset</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>clk</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>WE</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>ByteLW</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>A</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>WD</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>RD</td>
 <td>output</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>PC</td>
 <td>input</td>
 <td>[31:0]</td>
@@ -1494,13 +1470,13 @@ DM_RD</p></li>
 </tr>
 </tbody>
 </table>
-<h4 id="writeback">5. Writeback</h4>
+<h4 id="5-Writeback">5. Writeback</h4>
 <ul>
 <li> 包括 W_CU</li>
 </ul>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>Port name</th>
 <th>Direction</th>
 <th>Type</th>
@@ -1508,61 +1484,61 @@ DM_RD</p></li>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>clk</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>reset</td>
 <td>input</td>
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>W_Ins</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>W_PC</td>
 <td>input</td>
 <td>[31:0]</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>Conflict/Forward</strong></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>W_GRF_WA</td>
 <td>output</td>
 <td>[4:0]</td>
 <td>W 级指令写寄存器编号 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td>W_ALU_Y</td>
 <td>input</td>
 <td>[31:0]</td>
 <td> 待转发的 E 级 ALU 计算结果 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>W_DM_RD</td>
 <td>input</td>
 <td>[31:0]</td>
 <td> 待转发的 M 级 DM 读出数据 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td>GRF_WDSrc</td>
 <td></td>
 <td>[2:0]</td>
 <td>W 级指令写寄存器数据选择 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>W_GRF_WD</td>
 <td>output</td>
 <td>[31:0]</td>
@@ -1575,11 +1551,11 @@ DM_RD</p></li>
 <li> 枚举各指令排列和之间距离 </li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br></pre></td><td class="code"><pre><span class="line">.text</span><br><span class="line">                                        # 13</span><br><span class="line">    ori     $t0,    $0,         0xadce</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    ori     $t1,    $t0,        0xdefa</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    add     $t4,    $t2,        $t0</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         15</span><br><span class="line">    lw      $t4,    -7($t3)</span><br><span class="line">    sub     $t5,    $t4,        $t2</span><br><span class="line"></span><br><span class="line"># 14</span><br><span class="line">    ori     $t0,    $0,         0xefac</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    ori     $t1,    $t0,        0xfead</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    add     $t4,    $t0,        $t2</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         21</span><br><span class="line">    lw      $t4,    -13($t3)</span><br><span class="line">    sub     $t5,    $t2,        $t4</span><br><span class="line"></span><br><span class="line"># 15</span><br><span class="line">    ori     $t0,    $0,         0x0ace</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    ori     $t1,    $t0,        0x00a1</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    nop     </span><br><span class="line">    add     $t4,    $t2,        $t0</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         15</span><br><span class="line">    lw      $t4,    -7($t3)</span><br><span class="line">    nop     </span><br><span class="line">    sub     $t5,    $t4,        $t2</span><br><span class="line"></span><br><span class="line"># 16</span><br><span class="line">    lui     $t0,    0x1234</span><br><span class="line">    sw      $t0,    12($0)</span><br><span class="line">    lui     $t1,    0xfead</span><br><span class="line">    sw      $t1,    8($0)</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         4</span><br><span class="line">    lw      $t2,    8($t3)</span><br><span class="line">    nop     </span><br><span class="line">    add     $t4,    $t0,        $t2</span><br><span class="line"></span><br><span class="line">    ori     $t3,    $0,         25</span><br><span class="line">    lw      $t4,    -17($t3)</span><br><span class="line">    nop     </span><br><span class="line">    sub     $t5,    $t2,        $t4</span><br><span class="line"></span><br><span class="line"># 17</span><br><span class="line">    lui     $1,     0x13ac</span><br><span class="line">    ori     $2,     0x12ae</span><br><span class="line"></span><br><span class="line">    add     $3,     $1,         $2</span><br><span class="line">    ori     $4,     $3,         0xcd12</span><br><span class="line"></span><br><span class="line">    sub     $5,     $4,         $1</span><br><span class="line">    ori     $6,     $5,         0x4589</span><br><span class="line"></span><br><span class="line"># 18</span><br><span class="line">    lui     $1,     0x56ed</span><br><span class="line">    ori     $2,     0x349a</span><br><span class="line"></span><br><span class="line">    add     $3,     $1,         $2</span><br><span class="line">    nop     </span><br><span class="line">    ori     $4,     $3,         0xc102</span><br><span class="line"></span><br><span class="line">    sub     $5,     $4,         $1</span><br><span class="line">    nop     </span><br><span class="line">    ori     $6,     $5,         0x4ea9</span><br><span class="line"></span><br><span class="line"># 19</span><br><span class="line">    lui     $7,     0x1345</span><br><span class="line">    ori     $8,     $7,         0x1122</span><br><span class="line"></span><br><span class="line">    ori     $9,     $8,         0x3344</span><br><span class="line">    ori     $10,    $9,         0x00ff</span><br><span class="line"></span><br><span class="line"># 20</span><br><span class="line">    lui     $7,     0x2211</span><br><span class="line">    nop     </span><br><span class="line">    ori     $8,     $7,         0x3366</span><br><span class="line">    nop     </span><br><span class="line">    ori     $9,     $8,         0xf111</span><br><span class="line">    nop     </span><br><span class="line">    ori     $10,    $9,         0x00ff</span><br><span class="line"></span><br><span class="line"># 21</span><br><span class="line">    jal     label1</span><br><span class="line">    ori     $8,     $ra,        0x8899</span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">label1:</span><br><span class="line">                                        # 22</span><br><span class="line">    jal     label2</span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">    nop     </span><br><span class="line">label2:</span><br><span class="line">    ori     $9,     $ra,        0xaa12</span><br><span class="line">                                        # 23</span><br><span class="line">    ori     $t0,    $0,         35</span><br><span class="line">    sw      $ra,    24($0)</span><br><span class="line">    lw      $t1,    -11($t0)</span><br><span class="line">    ori     $t2,    $t1,        0xe2df</span><br><span class="line"></span><br><span class="line"># 24</span><br><span class="line">    sw      $t2,    36($0)</span><br><span class="line">    lw      $t3,    1($t0)</span><br><span class="line">    nop     </span><br><span class="line">    ori     $t4,    $t3,        0xaabb</span><br></pre></td></tr></table></figure>
-<p><img data-src="image-20230311000946878.png" alt="image-20230311000946878"/></p>
+<img data-src="image-20230311000946878.png" alt="image-20230311000946878"/>
 <ul>
 <li> 对 0 号寄存器读写测试 </li>
 </ul>
-<p><img data-src="image-20230311000952084.png" alt="image-20230311000952084"/></p>
+<img data-src="image-20230311000952084.png" alt="image-20230311000952084"/>
 <h2 id="注意事项"> 注意事项 </h2>
 <ul>
 <li> 需要寄存器数据进行运算或是向后传递的端口需要的是接收转发后正确的数据 </li>
@@ -1588,24 +1564,27 @@ DM_RD</p></li>
 <li> 注意数据是否是直接发送，或是需要等待寄存器一个周期 </li>
 </ul>
 <h2 id="思考题"> 思考题 </h2>
-<ol type="1">
-<li> 提前分支判断也代表提前需要 rs,
-rt 寄存器数据，如之前为 lw 指令，则可能还需阻塞一周期。指令序列：</li>
+<ol>
+<li> 提前分支判断也代表提前需要 rs, rt 寄存器数据，如之前为 lw 指令，则可能还需阻塞一周期。指令序列：</li>
 </ol>
 <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lw </span>$<span class="built_in">t0</span>,<span class="number">0</span>($<span class="built_in">t2</span>)</span><br><span class="line"><span class="keyword">beq </span>$<span class="built_in">t0</span>,$<span class="built_in">t1</span>,<span class="number">0x3004</span></span><br></pre></td></tr></table></figure>
-<ol start="2" type="1">
+<ol start="2">
 <li> 因为延迟槽在处理的时候会将跳转前的必定执行的指令放在跳转指令后一句，此时 PC+4 处为延迟槽指令，跳转指令下一条实际距离跳转指令 8 字节，返回地址需保存 PC+8</li>
 <li> 直接从功能部件转发会导致转发与接收转发两个阶段数据通路相连，导致指令指令最短周期必须大幅增加以保证数据可以在两阶段中完整流动，降低整体执行效率 </li>
 <li> 如没有转发，W 级写入数据在上升沿才能开始写入，而读出则在上升沿瞬间已经执行，寄存器堆中数据还没有更新。实现方法为判断写入数据寄存器编号是否和读出寄存器编号相等，如相等则直接读出即将写入的数据。当寄存器为 0 时，直接转发 0</li>
-<li><ul>
+<li>
+<ul>
 <li> 需求者：D 级 branch 判断处以及 NPC 跳转地址处，E 级 ALU 计算处，M 级 DM 写入数据处 </li>
 <li> 供给者：DEReg 处写给 $31 的 PC+8，EMReg 处 ALU 计算结果，MW 处 DM 读出数据 </li>
-</ul></li>
-<li><ul>
+</ul>
+</li>
+<li>
+<ul>
 <li>branch 指令需要拓展输入数据来源以及 branch 类型，并且可能需要把是否跳转的信号传值各级 CU 控制是否读写和 PC 来源选择 </li>
 <li>GRF 写入地址可能是寄存器读出的数据（？），可在 Writeback 级内部转发读出结果至写入地址 </li>
 <li> 延迟槽可能需要清空，需要增加对 FD 寄存器的清空信号 </li>
-</ul></li>
+</ul>
+</li>
 <li> 译码器为一个输出包含输入指令的所有控制信号，指令分解部分，写入寄存器编号，读出寄存器编号，Tuse_rs，Tuse_rt，E_Tnew 和 M_Tnew。通过输入的指令全部译码，各流水级分别实例化，获取所需的控制信号与数据 </li>
 </ol>
 
