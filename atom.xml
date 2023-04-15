@@ -57,23 +57,6 @@
   </entry>
   
   <entry>
-    <title>蓝协衣物图书募集工作手册</title>
-    <link href="https://steve-strange.github.io/2023/04/04/17-04-09/"/>
-    <id>https://steve-strange.github.io/2023/04/04/17-04-09/</id>
-    <published>2023-04-04T09:04:09.000Z</published>
-    <updated>2023-04-04T09:07:25.961Z</updated>
-    
-    
-    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
-    
-    
-    
-    
-    <category term="Others" scheme="https://steve-strange.github.io/tags/Others/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Lane Detection 1</title>
     <link href="https://steve-strange.github.io/2023/04/02/10-40-55/"/>
     <id>https://steve-strange.github.io/2023/04/02/10-40-55/</id>
@@ -407,6 +390,25 @@
     
     
     <summary type="html">&lt;p&gt;5级流水线CPU设计文档+中断支持&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Computer Orgnization" scheme="https://steve-strange.github.io/categories/Computer-Orgnization/"/>
+    
+    
+    <category term="Computer Orgnization" scheme="https://steve-strange.github.io/tags/Computer-Orgnization/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>P6 设计文档</title>
+    <link href="https://steve-strange.github.io/2023/03/10/19-16-51/"/>
+    <id>https://steve-strange.github.io/2023/03/10/19-16-51/</id>
+    <published>2023-03-10T11:16:51.000Z</published>
+    <updated>2023-03-15T14:24:10.121Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;5级流水线CPU设计文档+&lt;/p&gt;</summary>
     
     
     
