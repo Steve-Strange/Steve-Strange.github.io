@@ -32,7 +32,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://steve-strange.github.io/2023/03/30/10-16-52/1b99f124d191239cd8170a53fdeb14fe8eeeaf3b41a2043606447929df40629d.png">
 <meta property="article:published_time" content="2023-03-30T02:16:52.000Z">
-<meta property="article:modified_time" content="2023-03-30T11:44:34.978Z">
+<meta property="article:modified_time" content="2023-04-18T14:17:57.838Z">
 <meta property="article:author" content="Sorcerer Inferior">
 <meta property="article:tag" content="Homework">
 <meta property="article:tag" content="OS">
@@ -258,9 +258,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-03-30 10:16:52 / 修改时间：19:44:34" itemprop="dateCreated datePublished" datetime="2023-03-30T10:16:52+08:00">2023-03-30</time>
+      <time title="创建时间：2023-03-30 10:16:52" itemprop="dateCreated datePublished" datetime="2023-03-30T10:16:52+08:00">2023-03-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-04-18 22:17:57" itemprop="dateModified" datetime="2023-04-18T22:17:57+08:00">2023-04-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -291,8 +297,8 @@
     <div class="post-body" itemprop="articleBody">
         <p>OS Homework3</p>
 <span id="more"></span>
-<p>1．
-一个 32 位的虚拟存储系统有两级页表，其逻辑地址中，第 22 到 31 位是第一级页表，12 位到 21 位是第二级页表，页内偏移占 0 到 11 位。一个进程的地址空间为 4GB，如果从 0x8000'0000 开始映射 4MB 大小页表空间，请问第一级页表所占 4KB 空间的起始地址？并说明理由。（注意 B 代表字节，一个 32 位地址占 4 字节）</p>
+<ol type="1">
+<li><p> 一个 32 位的虚拟存储系统有两级页表，其逻辑地址中，第 22 到 31 位是第一级页表，12 位到 21 位是第二级页表，页内偏移占 0 到 11 位。一个进程的地址空间为 4GB，如果从 0x8000'0000 开始映射 4MB 大小页表空间，请问第一级页表所占 4KB 空间的起始地址？并说明理由。（注意 B 代表字节，一个 32 位地址占 4 字节）</p>
 <ul>
 <li> 第二级页表第一个页表项地址为 0x8000'0000，其在虚拟空间中页号为 0x8000'0000
 &gt;&gt; 12 =
@@ -300,9 +306,8 @@
 * 0x8'0000 = 0x20'0000</li>
 <li> 第一级页表的第一项即指向第二级页表的第一项，所以第一级页表的起始地址为 0x8000'0000
 + 0x20'0000 = 0x8020'0000</li>
-</ul>
-<p>2．
-一个 32 位的虚拟存储系统有两级页表，其逻辑地址中，第 22 到 31 位是第一级页表（页目录）的索引，第 12 位到 21 位是第二级页表的索引，页内偏移占第 0 到 11 位。每个页表（目录）项包含 20 位物理页框号和 12 位标志位，其中最后 1 位为页有效位。</p>
+</ul></li>
+<li><p> 一个 32 位的虚拟存储系统有两级页表，其逻辑地址中，第 22 到 31 位是第一级页表（页目录）的索引，第 12 位到 21 位是第二级页表的索引，页内偏移占第 0 到 11 位。每个页表（目录）项包含 20 位物理页框号和 12 位标志位，其中最后 1 位为页有效位。</p>
 <ul>
 <li> 请问进程整个的地址空间有多少字节？一页有多少字节？
 <ul>
@@ -349,7 +354,8 @@
 <li> 所以虚拟地址为 0000 0000 1100 0000 0001 0011 0010
 0110，即 0x00C0'1028</li>
 </ul></li>
-</ul>
+</ul></li>
+</ol>
 
     </div>
 
