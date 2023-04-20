@@ -151,7 +151,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#o2f"><span class="nav-number">1.</span> <span class="nav-text">O2f</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bev-lanedet"><span class="nav-number">2.</span> <span class="nav-text">BEV-LaneDet</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#O2f"><span class="nav-number">1.</span> <span class="nav-text">O2f</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BEV-LaneDet"><span class="nav-number">2.</span> <span class="nav-text">BEV-LaneDet</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -166,18 +166,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -296,46 +296,52 @@
     <div class="post-body" itemprop="articleBody">
         <p>Lane Detection 1</p>
 <span id="more"></span>
-<h2 id="o2f">O2f</h2>
+<h2 id="O2f">O2f</h2>
 <ul>
-<li><p>One to Few</p></li>
-<li><p>去除手工制作的组件，以实现端到端的检测</p>
+<li>
+<p>One to Few</p>
+</li>
+<li>
+<p>去除手工制作的组件，以实现端到端的检测</p>
 <ul>
 <li>训练样本的设计</li>
 <li>非最大值抑制（NMS），用于删除重复的预测</li>
-</ul></li>
-<li><p>端到端：输入是原始数据，输出是最后的结果。</p>
-<ul>
-<li>其输入数据是未经任何人为加工的原始样本形式，后续则是堆叠在输入层上的众多操作层。这些操作层整体可以看作一个复杂的函数 Fcnn，最终的损失函数由数据损失（data
-loss）和模型参数的正则化损失（regularization
-loss）共同组成，模型深度的训练则是在最终损失驱动下对模型进行参数更新并将误差反向传播至网络各层。模型的训练可以简单抽象为从原始数据向最终目标的直接拟合，而中间的这些部件起到了将原始数据 <strong> 映射为特征 </strong> 随后在映射为 <strong> 样本标记 </strong> 的作用</li>
-</ul></li>
-<li><p>原来输入端不是直接的原始数据，而是在原始数据中提取的特征，这一点在图像问题上尤为突出，因为图像像素数太多，数据维度高，会产生维度灾难，所以原来一个思路是手工提取图像的一些关键特征</p></li>
 </ul>
-<h2 id="bev-lanedet">BEV-LaneDet</h2>
+</li>
+<li>
+<p>端到端：输入是原始数据，输出是最后的结果。</p>
 <ul>
-<li>首先，引入了 Virutal
-Camera，统一了安装在不同车辆上的相机的内 / 外参数，以保证相机之间空间关系的一致性。由于统一的视觉空间，它可以有效地促进网络的学习过程
+<li>其输入数据是未经任何人为加工的原始样本形式，后续则是堆叠在输入层上的众多操作层。这些操作层整体可以看作一个复杂的函数 Fcnn，最终的损失函数由数据损失（data loss）和模型参数的正则化损失（regularization loss）共同组成，模型深度的训练则是在最终损失驱动下对模型进行参数更新并将误差反向传播至网络各层。模型的训练可以简单抽象为从原始数据向最终目标的直接拟合，而中间的这些部件起到了将原始数据 <strong> 映射为特征 </strong> 随后在映射为 <strong> 样本标记 </strong> 的作用</li>
+</ul>
+</li>
+<li>
+<p>原来输入端不是直接的原始数据，而是在原始数据中提取的特征，这一点在图像问题上尤为突出，因为图像像素数太多，数据维度高，会产生维度灾难，所以原来一个思路是手工提取图像的一些关键特征</p>
+</li>
+</ul>
+<h2 id="BEV-LaneDet">BEV-LaneDet</h2>
 <ul>
-<li>通过 homography 矩阵<span
-class="math inline">\(P_{i,j}\)</span>将当前摄像机的图像投射到虚拟像机的视图中</li>
-</ul></li>
-<li>其次，提出了一个简单而有效的三维车道表示法，称为关键点表示法(Key-Points
-Representation), 这个模块更适合于表示复杂多样的三维车道结构
+<li>首先，引入了 Virutal Camera，统一了安装在不同车辆上的相机的内 / 外参数，以保证相机之间空间关系的一致性。由于统一的视觉空间，它可以有效地促进网络的学习过程
+<ul>
+<li>通过 homography 矩阵 $P_{i,j}$ 将当前摄像机的图像投射到虚拟像机的视图中</li>
+</ul>
+</li>
+<li>其次，提出了一个简单而有效的三维车道表示法，称为关键点表示法(Key-Points Representation), 这个模块更适合于表示复杂多样的三维车道结构
 <ul>
 <li>道路坐标 z=0 平面划分 s1*s2 个网格(0.5m*0.5m)</li>
 <li>直接预测具有相同分辨率的四个 head，包括置信度 confidence、用于聚类的 embedding、gird 中心到车道在 y 方向的偏移 offset 以及每个 grid 的平均高度 height</li>
-</ul></li>
-<li>最后，本文提出了一个轻量级和芯片友好的空间转换模块，名为空间转换金字塔(Spatial
-Transformation Pyramid)，用于将多尺度的前视特征转换成 BEV 特征
+</ul>
+</li>
+<li>最后，本文提出了一个轻量级和芯片友好的空间转换模块，名为空间转换金字塔(Spatial Transformation Pyramid)，用于将多尺度的前视特征转换成 BEV 特征
 <ul>
 <li>空间转化模块对视觉 3D 任务尤为关键，基于深度的方法和基于 transformer 的方法在计算量上开销很大，而且在部署到自动驾驶芯片上也不太方便。</li>
 <li>即基于 MLP 的视图转化模块（VRM）
 <ul>
 <li>低分辨率的特征更适合在 VRM 中进行空间转换。低分辨率的特征包含更多的全局信息，需要较少的映射参数，比较容易学习。</li>
 <li>受 FPN 的启发，本文设计了一个基于 VRM 的空间变换金字塔。通过实验比较，本文最终分别用输入图像的 1/64 分辨率特征 S64 和 1/32 分辨率特征 S32 进行变换，然后将变换结果串联起来，一起送往提取 BEV 的特征。</li>
-</ul></li>
-</ul></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
     </div>

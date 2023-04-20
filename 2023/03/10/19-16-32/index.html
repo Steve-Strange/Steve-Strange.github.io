@@ -155,10 +155,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#cpu%20%E6%B5%81%E7%A8%8B%E8%8D%89%E7%A8%BF"><span class="nav-number">1.</span> <span class="nav-text">CPU 流程，草稿</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E6%8C%87%E4%BB%A4"><span class="nav-number">1.1.</span> <span class="nav-text">支持指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%9D%97"><span class="nav-number">1.2.</span> <span class="nav-text">使用模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%20ifuinstruction-fetch-unit"><span class="nav-number">1.2.1.</span> <span class="nav-text">一、IFU（Instruction Fetch
-Unit）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%20grfgeneral-register-file"><span class="nav-number">1.2.2.</span> <span class="nav-text">三、GRF（General Register
-File）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9B%20aluarithmetic-logical-unit"><span class="nav-number">1.2.3.</span> <span class="nav-text">四、ALU（Arithmetic &amp; logical
-Unit）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%94%20dmdata-memory"><span class="nav-number">1.2.4.</span> <span class="nav-text">五、DM（Data Memory）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AD%20extbit-extender"><span class="nav-number">1.2.5.</span> <span class="nav-text">六、EXT（Bit Extender）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%83%20cucontrol-unit"><span class="nav-number">1.2.6.</span> <span class="nav-text">七、CU（Control Unit）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">2.</span> <span class="nav-text">测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81"><span class="nav-number">2.1.</span> <span class="nav-text">汇编代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E7%A0%81"><span class="nav-number">2.2.</span> <span class="nav-text">机器码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mips%20%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">2.2.1.</span> <span class="nav-text">mips 运行结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cpu%20%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">2.2.2.</span> <span class="nav-text">CPU 运行结果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">思考题</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU%20%E6%B5%81%E7%A8%8B%EF%BC%8C%E8%8D%89%E7%A8%BF"><span class="nav-number">1.</span> <span class="nav-text">CPU 流程，草稿</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E6%8C%87%E4%BB%A4"><span class="nav-number">1.1.</span> <span class="nav-text">支持指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%9D%97"><span class="nav-number">1.2.</span> <span class="nav-text">使用模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E3%80%81IFU%EF%BC%88Instruction-Fetch-Unit%EF%BC%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">一、IFU（Instruction Fetch Unit）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E3%80%81GRF%EF%BC%88General-Register-File%EF%BC%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">三、GRF（General Register File）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9B%E3%80%81ALU%EF%BC%88Arithmetic-logical-Unit%EF%BC%89"><span class="nav-number">1.2.3.</span> <span class="nav-text">四、ALU（Arithmetic &amp; logical Unit）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%94%E3%80%81DM%EF%BC%88Data-Memory%EF%BC%89"><span class="nav-number">1.2.4.</span> <span class="nav-text">五、DM（Data Memory）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AD%E3%80%81EXT%EF%BC%88Bit-Extender%EF%BC%89"><span class="nav-number">1.2.5.</span> <span class="nav-text">六、EXT（Bit Extender）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%83%E3%80%81CU%EF%BC%88Control-Unit%EF%BC%89"><span class="nav-number">1.2.6.</span> <span class="nav-text">七、CU（Control Unit）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">2.</span> <span class="nav-text">测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81"><span class="nav-number">2.1.</span> <span class="nav-text">汇编代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E7%A0%81"><span class="nav-number">2.2.</span> <span class="nav-text">机器码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mips%20%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">2.2.1.</span> <span class="nav-text">mips 运行结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU%20%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">2.2.2.</span> <span class="nav-text">CPU 运行结果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">思考题</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -173,18 +170,18 @@ Unit）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -301,9 +298,10 @@ Unit）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>P3 设计文档 <span id="more"></span></p>
-<h2 id="cpu 流程草稿">CPU 流程，草稿</h2>
-<ol type="1">
+        <p>P3 设计文档</p>
+<span id="more"></span>
+<h2 id="CPU 流程，草稿">CPU 流程，草稿</h2>
+<ol>
 <li>取指令(PC,IM)</li>
 <li>指令译码(CU)</li>
 <li>指令执行(GRF,ALU)</li>
@@ -315,16 +313,21 @@ Unit）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href
 <p>add, sub, ori, lw, sw, beq, lui, j, nop</p>
 <p>(其中 add，sub 为无符号加减法)</p>
 <h3 id="使用模块">使用模块</h3>
-<h4 id="一 ifuinstruction-fetch-unit">一、IFU（Instruction Fetch
-Unit）</h4>
+<h4 id="一、IFU（Instruction-Fetch-Unit）">一、IFU（Instruction Fetch Unit）</h4>
 <ul>
-<li><p>包括 PC 和 IM</p></li>
-<li><p>IM 用 ROM 实现，容量为 32bit × 32 字。（5 位地址）</p></li>
-<li><p>PC 始终为 4 的倍数（字节寻址，32bit=4 字节），所以取 32 位地址中 2-6 位对应 ROM 中指令地址</p></li>
+<li>
+<p>包括 PC 和 IM</p>
+</li>
+<li>
+<p>IM 用 ROM 实现，容量为 32bit × 32 字。（5 位地址）</p>
+</li>
+<li>
+<p>PC 始终为 4 的倍数（字节寻址，32bit=4 字节），所以取 32 位地址中 2-6 位对应 ROM 中指令地址</p>
+</li>
 </ul>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>端口名</th>
 <th>输入 / 输出</th>
 <th>位宽</th>
@@ -332,43 +335,43 @@ Unit）</h4>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>clk</td>
 <td>in</td>
 <td>1</td>
 <td>时钟信号</td>
 </tr>
-<tr class="even">
+<tr>
 <td>reset</td>
 <td>in</td>
 <td>1</td>
 <td>异步复位</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>PCSrc</td>
 <td>in</td>
 <td>1</td>
 <td>下一指令地址选择信号</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Jump</td>
 <td>in</td>
 <td>1</td>
 <td>跳转控制信号</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>shiftResult</td>
 <td>in</td>
 <td>32</td>
 <td>偏移后的指令地址</td>
 </tr>
-<tr class="even">
+<tr>
 <td>jumpAdd</td>
 <td>in</td>
 <td>32</td>
 <td>直接跳转的指令地址</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>D</td>
 <td>out</td>
 <td>32</td>
@@ -376,8 +379,7 @@ Unit）</h4>
 </tr>
 </tbody>
 </table>
-<h4 id="三 grfgeneral-register-file">三、GRF（General Register
-File）</h4>
+<h4 id="三、GRF（General-Register-File）">三、GRF（General Register File）</h4>
 <ul>
 <li>存储 $0~$31 这 32 个寄存器数据</li>
 <li>具有异步复位，读、写功能</li>
@@ -386,7 +388,7 @@ File）</h4>
 </ul>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>端口名</th>
 <th>输入 / 输出</th>
 <th>位宽</th>
@@ -394,55 +396,55 @@ File）</h4>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>clk</td>
 <td>in</td>
 <td>1</td>
 <td>时钟信号</td>
 </tr>
-<tr class="even">
+<tr>
 <td>reset</td>
 <td>in</td>
 <td>1</td>
 <td>异步复位</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>WE</td>
 <td>in</td>
 <td>1</td>
 <td>写入使能信号</td>
 </tr>
-<tr class="even">
+<tr>
 <td>A1</td>
 <td>in</td>
 <td>5</td>
 <td>输出数据到 RD1 的寄存器的地址</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>A2</td>
 <td>in</td>
 <td>5</td>
 <td>输出数据到 RD2 的寄存器的地址</td>
 </tr>
-<tr class="even">
+<tr>
 <td>WA</td>
 <td>in</td>
 <td>5</td>
 <td>输入到寄存器的地址</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>WD</td>
 <td>in</td>
 <td>32</td>
 <td>写入的数据</td>
 </tr>
-<tr class="even">
+<tr>
 <td>RD1</td>
 <td>out</td>
 <td>32</td>
 <td>RD1 输出的数据</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>RD2</td>
 <td>out</td>
 <td>32</td>
@@ -450,21 +452,18 @@ File）</h4>
 </tr>
 </tbody>
 </table>
-<h4 id="四 aluarithmetic-logical-unit">四、ALU（Arithmetic &amp; logical
-Unit）</h4>
+<h4 id="四、ALU（Arithmetic-logical-Unit）">四、ALU（Arithmetic &amp; logical Unit）</h4>
 <ul>
-<li><p>提供 32 位加、减、或运算及大小比较功能，</p></li>
-<li><p>加减法按无符号处理</p></li>
+<li>
+<p>提供 32 位加、减、或运算及大小比较功能，</p>
+</li>
+<li>
+<p>加减法按无符号处理</p>
+</li>
 </ul>
 <table>
-<colgroup>
-<col style="width: 9%" />
-<col style="width: 12%" />
-<col style="width: 5%" />
-<col style="width: 72%" />
-</colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>端口名</th>
 <th>输入 / 输出</th>
 <th>位宽</th>
@@ -472,43 +471,43 @@ Unit）</h4>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>op</td>
 <td>in</td>
 <td>3</td>
 <td>ALU 功能控制信号 000：加，001：减，010：或，比较：任意</td>
 </tr>
-<tr class="even">
+<tr>
 <td>A</td>
 <td>in</td>
 <td>32</td>
 <td>输入 1</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>B</td>
 <td>in</td>
 <td>32</td>
 <td>输入 2</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Y</td>
 <td>out</td>
 <td>32</td>
 <td>输出</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>Greater</td>
 <td>out</td>
 <td>1</td>
 <td>A&gt;B</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Equal</td>
 <td>out</td>
 <td>1</td>
 <td>A=B</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>Less</td>
 <td>out</td>
 <td>1</td>
@@ -516,15 +515,14 @@ Unit）</h4>
 </tr>
 </tbody>
 </table>
-<h4 id="五 dmdata-memory">五、DM（Data Memory）</h4>
+<h4 id="五、DM（Data-Memory）">五、DM（Data Memory）</h4>
 <ul>
-<li>使用 RAM 实现，有 <strong> 异步复位 </strong> 功能，复位值为
-0x00000000。容量为 32bit × 32 字（5 位地址），使用双端口模式</li>
+<li>使用 RAM 实现，有 <strong> 异步复位 </strong> 功能，复位值为 0x00000000。容量为 32bit × 32 字（5 位地址），使用双端口模式</li>
 <li>地址始终为 4 的倍数（lw/rw 每次操作一个字 =4 字节），所以取 32 位地址中 2-6 位对应 RAM 地址，对于 lb/rb 等指令还需更改</li>
 </ul>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>端口名</th>
 <th>输入 / 输出</th>
 <th>位宽</th>
@@ -532,37 +530,37 @@ Unit）</h4>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>clk</td>
 <td>in</td>
 <td>1</td>
 <td>时钟信号</td>
 </tr>
-<tr class="even">
+<tr>
 <td>reset</td>
 <td>in</td>
 <td>1</td>
 <td>异步复位</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>WE</td>
 <td>in</td>
 <td>1</td>
 <td>写入使能信号</td>
 </tr>
-<tr class="even">
+<tr>
 <td>A</td>
 <td>in</td>
 <td>5</td>
 <td>将要读 / 写的寄存器的地址</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>WD</td>
 <td>in</td>
 <td>32</td>
 <td>写入的数据</td>
 </tr>
-<tr class="even">
+<tr>
 <td>RD</td>
 <td>out</td>
 <td>32</td>
@@ -570,13 +568,13 @@ Unit）</h4>
 </tr>
 </tbody>
 </table>
-<h4 id="六 extbit-extender">六、EXT（Bit Extender）</h4>
+<h4 id="六、EXT（Bit-Extender）">六、EXT（Bit Extender）</h4>
 <ul>
 <li>将 16 位偏移量 / 立即数拓展至 32 位</li>
 </ul>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>端口名</th>
 <th>输入 / 输出</th>
 <th>位宽</th>
@@ -584,19 +582,19 @@ Unit）</h4>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>EXT Select</td>
 <td>in</td>
 <td>1</td>
 <td>选择符号拓展 / 无符号拓展（0/1）</td>
 </tr>
-<tr class="even">
+<tr>
 <td>in</td>
 <td>in</td>
 <td>16</td>
 <td>16 位输入</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>out</td>
 <td>out</td>
 <td>32</td>
@@ -604,7 +602,7 @@ Unit）</h4>
 </tr>
 </tbody>
 </table>
-<h4 id="七 cucontrol-unit">七、CU（Control Unit）</h4>
+<h4 id="七、CU（Control-Unit）">七、CU（Control Unit）</h4>
 <ul>
 <li>生成所有控制信号的组合逻辑电路</li>
 <li>根据每条指令的数据通路列出如下控制信号表格</li>
@@ -613,22 +611,8 @@ Unit）</h4>
 <li>再将控制信号用或门收集所有需要触发的指令（多连接一个常数 0 防止没有被选择的时候输出 X）</li>
 </ul>
 <table>
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 11%" />
-<col style="width: 10%" />
-<col style="width: 8%" />
-<col style="width: 6%" />
-<col style="width: 6%" />
-<col style="width: 6%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
-<col style="width: 9%" />
-<col style="width: 4%" />
-<col style="width: 10%" />
-</colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>Instuction</th>
 <th>Opcode(in)</th>
 <th>Funct (in)</th>
@@ -644,7 +628,7 @@ Unit）</h4>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>add</td>
 <td>000000</td>
 <td>100000</td>
@@ -658,7 +642,7 @@ Unit）</h4>
 <td>0</td>
 <td>000</td>
 </tr>
-<tr class="even">
+<tr>
 <td>sub</td>
 <td>000000</td>
 <td>100010</td>
@@ -672,7 +656,7 @@ Unit）</h4>
 <td>0</td>
 <td>001</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>ori</td>
 <td>001101</td>
 <td></td>
@@ -686,7 +670,7 @@ Unit）</h4>
 <td>0</td>
 <td>010</td>
 </tr>
-<tr class="even">
+<tr>
 <td>lw</td>
 <td>100011</td>
 <td></td>
@@ -700,7 +684,7 @@ Unit）</h4>
 <td>0</td>
 <td>000</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>sw</td>
 <td>101011</td>
 <td></td>
@@ -714,7 +698,7 @@ Unit）</h4>
 <td>0</td>
 <td>000</td>
 </tr>
-<tr class="even">
+<tr>
 <td>beq</td>
 <td>000100</td>
 <td></td>
@@ -728,7 +712,7 @@ Unit）</h4>
 <td>0</td>
 <td>000</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>lui</td>
 <td>001111</td>
 <td></td>
@@ -742,7 +726,7 @@ Unit）</h4>
 <td>0</td>
 <td>011</td>
 </tr>
-<tr class="even">
+<tr>
 <td>j</td>
 <td>000010</td>
 <td></td>
@@ -764,49 +748,46 @@ Unit）</h4>
 <h3 id="机器码">机器码</h3>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">v2.0 raw</span><br><span class="line">340407cf</span><br><span class="line">3485006f</span><br><span class="line">3c063039</span><br><span class="line">3c07ffff</span><br><span class="line">34e7ffff</span><br><span class="line">00858020</span><br><span class="line">00e78820</span><br><span class="line">00f09020</span><br><span class="line">00928022</span><br><span class="line">00e78822</span><br><span class="line">00e49022</span><br><span class="line">02519822</span><br><span class="line">34080000</span><br><span class="line">ad040000</span><br><span class="line">00000000</span><br><span class="line">ad050004</span><br><span class="line">ad100008</span><br><span class="line">ad11000c</span><br><span class="line">ad120010</span><br><span class="line">8d0f0000</span><br><span class="line">8d0e0014</span><br><span class="line">35080001</span><br><span class="line">35290001</span><br><span class="line">354a0002</span><br><span class="line">110afff1</span><br><span class="line">11090001</span><br><span class="line">3c0b0457</span><br><span class="line">010f4020</span><br><span class="line">08000c1f</span><br><span class="line">ad0f0030</span><br><span class="line">8d0d0030</span><br></pre></td></tr></table></figure>
 <h4 id="mips 运行结果">mips 运行结果</h4>
-<p><img data-src="image-20230310234528268.png" alt="image-20230310234528268"/></p>
-<p><img data-src="image-20221030204922910.png" alt="image-20221030204922910"/></p>
-<h4 id="cpu 运行结果">CPU 运行结果</h4>
-<p><img data-src="image-20221030204850105.png" alt="image-20221030204850105"/></p>
-<p><img data-src="image-20221030204822588.png" alt="image-20221030204822588"/></p>
+<img data-src="image-20230310234528268.png" alt="image-20230310234528268"/>
+<img data-src="image-20221030204922910.png" alt="image-20221030204922910"/>
+<h4 id="CPU 运行结果">CPU 运行结果</h4>
+<img data-src="image-20221030204850105.png" alt="image-20221030204850105"/>
+<img data-src="image-20221030204822588.png" alt="image-20221030204822588"/>
 <h2 id="思考题">思考题</h2>
-<ol type="1">
-<li><strong>上面我们介绍了通过 FSM 理解单周期 CPU
-的基本方法。请大家指出单周期 CPU
-所用到的模块中，哪些发挥状态存储功能，哪些发挥状态转移功能。</strong>
-<ol type="1">
+<ol>
+<li><strong>上面我们介绍了通过 FSM 理解单周期 CPU 的基本方法。请大家指出单周期 CPU 所用到的模块中，哪些发挥状态存储功能，哪些发挥状态转移功能。</strong>
+<ol>
 <li>状态储存：PC, GRF, IM, DM（储存指令以及数据的状态）</li>
 <li>状态转移：ALU, EXT, CU（组合逻辑）</li>
-</ol></li>
-<li><strong>现在我们的模块中 IM 使用 ROM， DM 使用 RAM， GRF 使用
-Register，这种做法合理吗？
-请给出分析，若有改进意见也请一并给出。</strong>
-<ol type="1">
+</ol>
+</li>
+<li><strong>现在我们的模块中 IM 使用 ROM， DM 使用 RAM， GRF 使用 Register，这种做法合理吗？ 请给出分析，若有改进意见也请一并给出。</strong>
+<ol>
 <li>合理，IM 用 ROM 存储指令，掉电后不会丢失，并且需要人为进行修改，保证指令不会在运行中被更改；数据储存用 RAM，读出和写入且访问速度快于 ROM，方便每个周期读出或者写入；同时内存可能很大，不可用 Register 实现；GRF 一共 32 个数据，每个周期内需要频繁同时读出和写入，用 Register 效率最高</li>
-</ol></li>
+</ol>
+</li>
 <li><strong>在上述提示的模块之外，你是否在实际实现时设计了其他的模块？如果是的话，请给出介绍和设计的思路。</strong>
-<ol type="1">
+<ol>
 <li>暂无</li>
-</ol></li>
-<li><strong>事实上，实现 <code>nop</code>
-空指令，我们并不需要将它加入控制信号真值表，为什么？</strong>
-<ol type="1">
+</ol>
+</li>
+<li><strong>事实上，实现 <code>nop</code> 空指令，我们并不需要将它加入控制信号真值表，为什么？</strong>
+<ol>
 <li>CU 中无指令被选择时，所有控制信号输出 0，不对 GRF 写入，不对 DM 写入，rs 与 rt 均全为 0，在 GRF 选择的均为 0 号寄存器，输出为 0，ALU 运算后仍为 0，即操作为将 0 写回 $0 寄存器，所以不需要加入控制信号真值表</li>
-</ol></li>
-<li><strong>上文提到，MARS 不能导出 PC 与 DM 起始地址均为 0
-的机器码。实际上，可以避免手工修改的麻烦。请查阅相关资料进行了解，并阐释为了解决这个问题，你最终采用的方法。</strong>
-<ol type="1">
+</ol>
+</li>
+<li><strong>上文提到，MARS 不能导出 PC 与 DM 起始地址均为 0 的机器码。实际上，可以避免手工修改的麻烦。请查阅相关资料进行了解，并阐释为了解决这个问题，你最终采用的方法。</strong>
+<ol>
 <li>将地址减去 0x30000000，映射到 0x00000000 为起始地址</li>
-</ol></li>
-<li><strong>阅读 Pre 的 <a
-target="_blank" rel="noopener" href="http://cscore.buaa.edu.cn/tutorial/mips/mips-6/mips6-1/">“MIPS
-指令集及汇编语言”</a>
-一节中给出的测试样例，评价其强度（可从各个指令的覆盖情况，单一指令各种行为的覆盖情况等方面分析），并指出具体的不足之处。</strong>
-<ol type="1">
+</ol>
+</li>
+<li><strong>阅读 Pre 的 <a target="_blank" rel="noopener" href="http://cscore.buaa.edu.cn/tutorial/mips/mips-6/mips6-1/">“MIPS 指令集及汇编语言”</a> 一节中给出的测试样例，评价其强度（可从各个指令的覆盖情况，单一指令各种行为的覆盖情况等方面分析），并指出具体的不足之处。</strong>
+<ol>
 <li>beq 指令强度不足，只包括向后跳转，没有测试向前跳转的负立即数</li>
 <li>ori 指令还可测试对 $0 寄存器赋值，检测是否会修改</li>
 <li>对 DM 和 GRF，存取数据地址最好包含整个要求的地址范围和 32 个寄存器，保证范围设置正确，连接正确</li>
-</ol></li>
+</ol>
+</li>
 </ol>
 
     </div>
