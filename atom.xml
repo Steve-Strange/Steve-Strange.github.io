@@ -6,7 +6,7 @@
   <link href="https://steve-strange.github.io/atom.xml" rel="self"/>
   
   <link href="https://steve-strange.github.io/"/>
-  <updated>2023-04-22T13:51:44.745Z</updated>
+  <updated>2023-04-24T17:29:02.951Z</updated>
   <id>https://steve-strange.github.io/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>航概大作业</title>
+    <link href="https://steve-strange.github.io/2023/04/25/01-26-35/"/>
+    <id>https://steve-strange.github.io/2023/04/25/01-26-35/</id>
+    <published>2023-04-24T17:26:35.000Z</published>
+    <updated>2023-04-24T17:29:02.951Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;阿拉斯加航空261号班机空难分析——航空航天概论大作业&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Others" scheme="https://steve-strange.github.io/categories/Others/"/>
+    
+    
+    <category term="Homework" scheme="https://steve-strange.github.io/tags/Homework/"/>
+    
+  </entry>
   
   <entry>
     <title>Whether Human Nature Needs to be Obeyed</title>
@@ -394,25 +413,6 @@
     
     
     <summary type="html">&lt;p&gt;Lab1 Report</summary>
-    
-    
-    
-    <category term="Operation System" scheme="https://steve-strange.github.io/categories/Operation-System/"/>
-    
-    
-    <category term="Operation System" scheme="https://steve-strange.github.io/tags/Operation-System/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Lab0 Report</title>
-    <link href="https://steve-strange.github.io/2023/03/10/20-40-25/"/>
-    <id>https://steve-strange.github.io/2023/03/10/20-40-25/</id>
-    <published>2023-03-10T12:40:25.000Z</published>
-    <updated>2023-03-28T06:53:50.292Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;Lab0 Report</summary>
     
     
     
