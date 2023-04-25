@@ -31,7 +31,7 @@
 <meta property="og:description" content="Lab3 Report">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-28T06:52:04.000Z">
-<meta property="article:modified_time" content="2023-04-15T11:43:46.959Z">
+<meta property="article:modified_time" content="2023-04-25T13:49:30.818Z">
 <meta property="article:author" content="Sorcerer Inferior">
 <meta property="article:tag" content="Operation System">
 <meta name="twitter:card" content="summary">
@@ -165,7 +165,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -264,7 +264,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-15 19:43:46" itemprop="dateModified" datetime="2023-04-15T19:43:46+08:00">2023-04-15</time>
+      <time title="修改时间：2023-04-25 21:49:30" itemprop="dateModified" datetime="2023-04-25T21:49:30+08:00">2023-04-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -297,22 +297,33 @@
 <h2 id="思考题"> 思考题 </h2>
 <h3 id="thinking-3.1">Thinking 3.1</h3>
 <ul>
+<li> 请结合 MOS 中的页目录自映射应用解释代码中
+e-&gt;env_pgdir[PDX(UVPT)]= PADDR(e-&gt;env_pgdir) | PTE_V 的含义
+<ul>
 <li>e-&gt;env_pgdir[PDX(UVPT)] = PADDR(e-&gt;env_pgdir) | PTE_V
 <ul>
 <li>Map its own page table at 'UVPT' with readonly permission.</li>
 <li> 在 env_pgdir 基地址之上，加上 PDX(UVPT) 的 UVPT 的页目录项偏移 </li>
 <li> 找到指向自己页表的页目录项后，赋上用 PADDR(e-&gt;env_pgdir) 取得页目录的物理地址，和 PTE_V 标志位表示只读 </li>
 </ul></li>
+</ul></li>
 </ul>
 <h3 id="thinking-3.2">Thinking 3.2</h3>
+<ul>
+<li> 请结合 MOS 中的页目录自映射应用解释代码中
+e-&gt;env_pgdir[PDX(UVPT)]= PADDR(e-&gt;env_pgdir) | PTE_V 的含义
 <ul>
 <li>static void load_icode(struct Env <em>e, const void</em>binary,
 size_t size) 中，调用了 elf_load_seg(ph, binary + ph-&gt;p_offset,
 load_icode_mapper, e)</li>
 <li> 其中 'e' 为待 program segments 从 'binary'
 加载到的用户空间进程的环境，如果没有这个参数，则无法加载到用户空间进程的环境中 </li>
+</ul></li>
 </ul>
 <h3 id="thinking-3.3">Thinking 3.3 (?)</h3>
+<ul>
+<li> 结合 elf_load_seg
+的参数和实现，考虑该函数需要处理哪些页面加载的情况。
 <ul>
 <li>elf_load_seg 函数会从 ph 中获取
 va（该段需要被加载到的虚地址）、sgsize（该段在内
@@ -324,32 +335,51 @@ perm（该段被加载时的页面权限）
 <li> 剩余空闲页面不够分配 </li>
 <li> 内存不够加载该段的所有数据 </li>
 </ul></li>
+<li><figure>
+<img data-src="832fae3980443d6a82bf20330dadd3779c0a03b4321793857eb1c40922980285.png"
+alt="图 1" />
+<figcaption aria-hidden="true"> 图 1</figcaption>
+</figure></li>
+</ul></li>
 </ul>
 <h3 id="thinking-3.4">Thinking 3.4</h3>
+<ul>
+<li> 你认为这里的 env_tf.cp0_epc 存储的是物理地址还是虚拟地址?
 <ul>
 <li> 是虚拟地址，因为程序入口为 e_entry (Entry point virtual
 address)，当我们运行进程时 CPU 将自动从 PC
 所指的位置开始执行二进制码，所以 PC 这个位置为虚拟地址 </li>
+</ul></li>
 </ul>
 <h3 id="thinking-3.5">Thinking 3.5</h3>
+<ul>
+<li> 试找出上述 5 个异常处理函数的具体实现位置。
 <ul>
 <li><p>handle_int 在 genex.S 文件中 </p></li>
 <li><p>handle_mod、handle_tlb 和 handle_sys 都是通过 genex.S 文件中的宏函数 BUILD_HANDLER 实现的 </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">.macro BUILD_HANDLER exception handler</span><br><span class="line">NESTED(handle_\exception, TF_SIZE, zero)</span><br><span class="line">  move    a0, sp</span><br><span class="line">  jal     \handler</span><br><span class="line">  j       ret_from_exception</span><br><span class="line">END(handle_\exception)</span><br><span class="line">.endm</span><br><span class="line"></span><br><span class="line"># ...</span><br><span class="line"></span><br><span class="line">BUILD_HANDLER tlb do_tlb_refill</span><br><span class="line"></span><br><span class="line">#if !defined(LAB) || LAB &gt;= 4</span><br><span class="line">BUILD_HANDLER mod do_tlb_mod</span><br><span class="line">BUILD_HANDLER sys do_syscall</span><br></pre></td></tr></table></figure></li>
+</ul></li>
 </ul>
 <h3 id="thinking-3.6">Thinking 3.6</h3>
+<ul>
+<li> 阅读 init.c、kclock.S、env_asm.S 和 genex.S
+这几个文件，并尝试说出 enable_irq 和 timer_irq 中每行汇编代码的作用。
 <ul>
 <li><p>enable_irq</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">LEAF(enable_irq)</span><br><span class="line">  li      t0, (STATUS_CU0 | STATUS_IM4 | STATUS_IEc) # Timer interrupt (STATUS_IM4) will be enabled. 给 t0 为可以打开时钟中断的值 </span><br><span class="line">  mtc0    t0, CP0_STATUS  #设置给 CP0 中断状态 </span><br><span class="line">  jr      ra</span><br><span class="line">END(enable_irq)</span><br></pre></td></tr></table></figure></li>
 <li><p>timer_irq</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">NESTED(handle_int, TF_SIZE, zero)</span><br><span class="line">  mfc0    t0, CP0_CAUSE # 中断原因 </span><br><span class="line">  mfc0    t2, CP0_STATUS  # 中断开关状态 </span><br><span class="line">  and     t0, t2      # 中断置 1 的位上且有中断 enable</span><br><span class="line">  andi    t1, t0, STATUS_IM4  # 再要求时钟中断 enable</span><br><span class="line">  bnez    t1, timer_irq # 如果 t1 为 1，表示确实有中断，则跳到 timer_irq</span><br><span class="line">  // TODO: handle other irqs</span><br><span class="line">timer_irq:</span><br><span class="line">  sw      zero, (KSEG1 | DEV_RTC_ADDRESS | DEV_RTC_INTERRUPT_ACK)  #关闭时钟中断，进行中断处理 </span><br><span class="line">  li      a0, 0  # 传入参数 0？</span><br><span class="line">  j       schedule # 走到调度函数，进行进程调度 </span><br><span class="line">END(handle_int)</span><br></pre></td></tr></table></figure></li>
+</ul></li>
 </ul>
 <h3 id="thinking-3.7">Thinking 3.7</h3>
+<ul>
+<li> 阅读相关代码，思考操作系统是怎么根据时钟中断切换进程的。
 <ul>
 <li> 首先设置实时中断的频率，每次发生实时中断时在 handle_int 中的 timer_irq 里，调用 schedule 函数，进行进程调度 </li>
 <li> 调度中每次首先判断当前要运行的进程地址是否需要让步，是否还有剩余时间片，进程地址是否存在，以及运行状态是否是可运行，即：(yield
 || !count || !e || e-&gt;env_status != ENV_RUNNABLE)</li>
 <li> 如果都满足，则将其的时间片数量 count-- ，再运行这一个时间片。</li>
+</ul></li>
 </ul>
 <h2 id="难点分析"> 难点分析 </h2>
 <h3 id="exercise-3.1">Exercise 3.1</h3>

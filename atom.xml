@@ -6,7 +6,7 @@
   <link href="https://steve-strange.github.io/atom.xml" rel="self"/>
   
   <link href="https://steve-strange.github.io/"/>
-  <updated>2023-04-25T04:38:59.026Z</updated>
+  <updated>2023-04-25T13:49:58.654Z</updated>
   <id>https://steve-strange.github.io/</id>
   
   <author>
@@ -17,11 +17,30 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Lab4 Report</title>
+    <link href="https://steve-strange.github.io/2023/04/25/16-07-15/"/>
+    <id>https://steve-strange.github.io/2023/04/25/16-07-15/</id>
+    <published>2023-04-25T08:07:15.000Z</published>
+    <updated>2023-04-25T13:49:58.654Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Lab4 Report&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Operation System" scheme="https://steve-strange.github.io/categories/Operation-System/"/>
+    
+    
+    <category term="Operation System" scheme="https://steve-strange.github.io/tags/Operation-System/"/>
+    
+  </entry>
+  
+  <entry>
     <title>航概大作业</title>
     <link href="https://steve-strange.github.io/2023/04/25/01-26-35/"/>
     <id>https://steve-strange.github.io/2023/04/25/01-26-35/</id>
     <published>2023-04-24T17:26:35.000Z</published>
-    <updated>2023-04-25T04:38:59.026Z</updated>
+    <updated>2023-04-25T06:11:45.203Z</updated>
     
     
     <summary type="html">&lt;p&gt;阿拉斯加航空261号班机空难分析——航空航天概论大作业&lt;/p&gt;</summary>
@@ -183,7 +202,7 @@
     <link href="https://steve-strange.github.io/2023/03/28/14-52-04/"/>
     <id>https://steve-strange.github.io/2023/03/28/14-52-04/</id>
     <published>2023-03-28T06:52:04.000Z</published>
-    <updated>2023-04-15T11:43:46.959Z</updated>
+    <updated>2023-04-25T13:49:30.818Z</updated>
     
     
     <summary type="html">&lt;p&gt;Lab3 Report</summary>
@@ -265,7 +284,7 @@
     <link href="https://steve-strange.github.io/2023/03/13/18-54-43/"/>
     <id>https://steve-strange.github.io/2023/03/13/18-54-43/</id>
     <published>2023-03-13T10:54:43.000Z</published>
-    <updated>2023-03-29T11:48:48.516Z</updated>
+    <updated>2023-04-25T11:22:32.452Z</updated>
     
     
     <summary type="html">&lt;p&gt;Lab2 Report</summary>
@@ -401,25 +420,6 @@
     <category term="Positive Psychology" scheme="https://steve-strange.github.io/tags/Positive-Psychology/"/>
     
     <category term="Homework" scheme="https://steve-strange.github.io/tags/Homework/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Lab1 Report</title>
-    <link href="https://steve-strange.github.io/2023/03/10/21-48-08/"/>
-    <id>https://steve-strange.github.io/2023/03/10/21-48-08/</id>
-    <published>2023-03-10T13:48:08.000Z</published>
-    <updated>2023-03-28T06:54:02.033Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;Lab1 Report</summary>
-    
-    
-    
-    <category term="Operation System" scheme="https://steve-strange.github.io/categories/Operation-System/"/>
-    
-    
-    <category term="Operation System" scheme="https://steve-strange.github.io/tags/Operation-System/"/>
     
   </entry>
   

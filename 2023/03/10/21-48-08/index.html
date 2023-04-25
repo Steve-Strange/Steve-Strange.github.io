@@ -32,7 +32,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://steve-strange.github.io/2023/03/10/21-48-08/image-20230307161525500.png">
 <meta property="article:published_time" content="2023-03-10T13:48:08.000Z">
-<meta property="article:modified_time" content="2023-03-28T06:54:02.033Z">
+<meta property="article:modified_time" content="2023-04-25T11:14:30.813Z">
 <meta property="article:author" content="Sorcerer Inferior">
 <meta property="article:tag" content="Operation System">
 <meta name="twitter:card" content="summary">
@@ -167,7 +167,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -266,7 +266,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-28 14:54:02" itemprop="dateModified" datetime="2023-03-28T14:54:02+08:00">2023-03-28</time>
+      <time title="修改时间：2023-04-25 19:14:30" itemprop="dateModified" datetime="2023-04-25T19:14:30+08:00">2023-04-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -299,6 +299,11 @@
 <h2 id="思考题">思考题</h2>
 <h3 id="thinking-1.1">Thinking 1.1</h3>
 <ul>
+<li>请阅读附录中的编译链接详解，尝试分别使用实验环境中的原生 x86
+工具链（gcc、ld、readelf、objdump 等）和 MIPS 交叉编译工具链（带有
+mips-linux-gnu- 前缀），重复其中的编译和解析过程，观察相应的结果，并解释其中向
+objdump 传入的参数的含义。
+<ul>
 <li>编译程序 hello.c，再用 objdump 反编译.o 与可执行文件</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">x86：</span><br><span class="line">gcc -c hello.c 生成 hello.o 文件 </span><br><span class="line">gcc -o hello_x86 hello.c 链接</span><br><span class="line">objdump -DSt hello.o x86 工具链反编译 x86 下的.o 文件</span><br><span class="line">objdump -DSt hello_x86 x86 工具链反编译 x86 下的可执行文件</span><br><span class="line">mips-linux-gnu-objdump -DSt hello.o :can<span class="string">&#x27;t disassemble for architecture UNKNOWN!  </span></span><br><span class="line"><span class="string">mips-linux-gnu-objdump -DSt hello_x86 :can&#x27;</span>t disassemble <span class="keyword">for</span> architecture UNKNOWN!</span><br><span class="line"></span><br><span class="line">=&gt;mips-linux-gnu- 工具链不可反编译 x86 下的.o 与可执行文件</span><br><span class="line"></span><br><span class="line">MIPS 交叉编译工具链：</span><br><span class="line">mips-linux-gnu-gcc -c hello.c 生成 hello.o 文件</span><br><span class="line">mips-linux-gnu-gcc -o hello_mips hello.o 链接</span><br><span class="line">objdump -DSt hello.o x86 工具链反编译 mips 下的.o 文件</span><br><span class="line">objdump -DSt hello_mips x86 工具链反编译 mips 下的可执行文件</span><br><span class="line">mips-linux-gnu-objdump -DSt hello.o mips-linux-gnu- 工具链工具链反编译 mips 下的.o 文件</span><br><span class="line">mips-linux-gnu-objdump -DSt hello_mips &gt;mips-linux-gnu- 工具链反编译 mips 下的可执行文件</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-D </span><br><span class="line">--disassemble-all </span><br><span class="line"> 与 -d 类似，但反汇编所有 section.</span><br><span class="line"></span><br><span class="line">-S </span><br><span class="line">--<span class="built_in">source</span> </span><br><span class="line">尽可能反汇编出源代码，尤其当编译的时候指定了 -g 这种调试参数时，效果比较明显。隐含了 -d 参数。 </span><br><span class="line"></span><br><span class="line">-t：显示可执行文件的符号表。</span><br></pre></td></tr></table></figure>
@@ -306,23 +311,36 @@
 <li>反编译.o 文件时某一些指令的地址为 0，没有取得应有的地址，但在链接成为可执行文件后，则被填入地址。</li>
 <li>通过观察不同工具链编译出的可执行文件和使用 objdump
 解析的结果，可以发现它们在汇编指令和符号表等方面存在差异。不同的工具链可能使用不同的指令集，因此编译出的可执行文件也会有所不同。</li>
+</ul></li>
 </ul>
 <h3 id="thinking-1.2">Thinking 1.2</h3>
 <ul>
+<li><p>尝试使用我们编写的 readelf 程序，解析之前在 target
+目录下生成的内核 ELF 文件。</p>
+<ul>
 <li>readelf 解析之前在 target 目录下生成的内核 ELF 文件结果</li>
 </ul>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">0:0x0</span><br><span class="line">1:0x80400000</span><br><span class="line">2:0x80401a80</span><br><span class="line">3:0x80401a98</span><br><span class="line">4:0x80401ab0</span><br><span class="line">5:0x0</span><br><span class="line">6:0x0</span><br><span class="line">7:0x0</span><br><span class="line">8:0x0</span><br><span class="line">9:0x0</span><br><span class="line">10:0x0</span><br><span class="line">11:0x0</span><br><span class="line">12:0x0</span><br><span class="line">13:0x0</span><br><span class="line">14:0x0</span><br><span class="line">15:0x0</span><br><span class="line">16:0x0</span><br></pre></td></tr></table></figure>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">0:0x0</span><br><span class="line">1:0x80400000</span><br><span class="line">2:0x80401a80</span><br><span class="line">3:0x80401a98</span><br><span class="line">4:0x80401ab0</span><br><span class="line">5:0x0</span><br><span class="line">6:0x0</span><br><span class="line">7:0x0</span><br><span class="line">8:0x0</span><br><span class="line">9:0x0</span><br><span class="line">10:0x0</span><br><span class="line">11:0x0</span><br><span class="line">12:0x0</span><br><span class="line">13:0x0</span><br><span class="line">14:0x0</span><br><span class="line">15:0x0</span><br><span class="line">16:0x0</span><br></pre></td></tr></table></figure></li>
+<li><p>也许你会发现我们编写的 readelf 程序是不能解析 readelf
+文件本身的，而我们刚才介绍的系统工具 readelf
+则可以解析，这是为什么呢？（提示：尝试使用 readelf-h，并阅读
+tools/readelf 目录下的 Makefile，观察 readelf 与 hello 的不同）</p>
 <ul>
 <li>使用 readelf -h 得到两个文件文件头差异</li>
 </ul>
 <p><img data-src="image-20230307161525500.png" alt="image-20230307161525500"/></p>
 <ul>
 <li>编写的 readelf 中 Elf32_Ehdr 等针对的是 32 位的 ELF 的解析，hello 程序 ELF 类别是 32 位，可被编写的 readelf 解析，但 readelf 文件本身位 64 位 ELF，不可被解析。系统工具则都可解析</li>
+</ul></li>
 </ul>
 <h3 id="thinking-1.3">Thinking 1.3</h3>
 <ul>
-<li><p>在实验操作系统的启动过程中，有一个引导加载程序的阶段。引导加载程序位于启动入口地址处，它的作用是将内核从磁盘中加载到内存中，并将控制权转移到内核入口地址。实验操作系统的内核入口地址放置在内存布局图的正确位置时，引导加载程序可以正确地将控制权转移到内核入口地址处，进入内核。</p></li>
-<li><p>因此，尽管内核入口地址不是启动入口地址，但通过引导加载程序的正确执行，内核入口仍然可以被正确地跳转到。</p></li>
+<li>在理论课上我们了解到，MIPS 体系结构上电时，启动入口地址为
+0xBFC00000（其实启动入口地址是根据具体型号而定的，由硬件逻辑确定，也有可能不是这个地址，但一定是一个确定的地址），但实验操作系统的内核入口并没有放在上电启动地址，而是按照内存布局图放置。思考为什么这样放置内核还能保证内核入口被正确跳转到？（提示：思考实验中启动过程的两阶段分别由谁执行。）
+<ul>
+<li>在实验操作系统的启动过程中，有一个引导加载程序的阶段。引导加载程序位于启动入口地址处，它的作用是将内核从磁盘中加载到内存中，并将控制权转移到内核入口地址。实验操作系统的内核入口地址放置在内存布局图的正确位置时，引导加载程序可以正确地将控制权转移到内核入口地址处，进入内核。</li>
+<li>因此，尽管内核入口地址不是启动入口地址，但通过引导加载程序的正确执行，内核入口仍然可以被正确地跳转到。</li>
+</ul></li>
 </ul>
 <h2 id="难点分析">难点分析</h2>
 <ul>
