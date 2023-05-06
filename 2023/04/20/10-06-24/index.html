@@ -30,16 +30,12 @@
 <meta property="og:site_name" content="TARDIS">
 <meta property="og:description" content="OS note">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://steve-strange.github.io/2023/04/20/10-06-24/e2ab0b96f08e7aa1ca7e86fd8ce93a877a174cc16821831449d48ad16bdb5c38.png">
-<meta property="og:image" content="https://steve-strange.github.io/2023/04/20/10-06-24/f43ce82acb476530ced777e2507ab79821eb99b4a547a43e76a8cafbdb7fcb98.png">
-<meta property="og:image" content="https://steve-strange.github.io/2023/04/20/10-06-24/1e1e784914613a8ff7cd95e35ddd7f149f224aea36aa1e8f666ecf5e8419a956.png">
 <meta property="article:published_time" content="2023-04-20T02:06:24.000Z">
-<meta property="article:modified_time" content="2023-04-20T15:51:48.640Z">
+<meta property="article:modified_time" content="2023-05-06T13:37:53.717Z">
 <meta property="article:author" content="Sorcerer Inferior">
-<meta property="article:tag" content="OS">
+<meta property="article:tag" content="Operation System">
 <meta property="article:tag" content="Notes">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://steve-strange.github.io/2023/04/20/10-06-24/e2ab0b96f08e7aa1ca7e86fd8ce93a877a174cc16821831449d48ad16bdb5c38.png">
 
 
 <link rel="canonical" href="https://steve-strange.github.io/2023/04/20/10-06-24/">
@@ -155,7 +151,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E5%BC%95%E5%AF%BC"><span class="nav-number">1.</span> <span class="nav-text">系统引导</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bootloader"><span class="nav-number">1.1.</span> <span class="nav-text">Bootloader</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#U-Boot"><span class="nav-number">1.1.1.</span> <span class="nav-text">U-Boot</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%B1%82%E6%AC%A1"><span class="nav-number">2.1.</span> <span class="nav-text">存储层次</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E7%9A%84%E7%9B%AE%E6%A0%87"><span class="nav-number">2.2.</span> <span class="nav-text">存储管理的目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E9%81%93%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">2.3.</span> <span class="nav-text">单道程序的内存管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E9%81%93%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86"><span class="nav-number">2.4.</span> <span class="nav-text">多道程序的存储管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E7%A2%8E%E7%89%87"><span class="nav-number">2.5.</span> <span class="nav-text">系统中的碎片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%8C%BA%E5%BC%8F%E5%88%86%E9%85%8D"><span class="nav-number">2.6.</span> <span class="nav-text">分区式分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%9F%E8%B8%AA%E5%86%85%E5%AD%98"><span class="nav-number">2.7.</span> <span class="nav-text">跟踪内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E6%93%8D%E4%BD%9C%E7%AE%97%E6%B3%95"><span class="nav-number">2.8.</span> <span class="nav-text">分区分配操作算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E9%A1%BA%E5%BA%8F%E6%90%9C%E7%B4%A2%E7%9A%84%E5%88%86%E9%85%8D%E7%AE%97%E6%B3%95"><span class="nav-number">2.8.1.</span> <span class="nav-text">基于顺序搜索的分配算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%B4%A2%E5%BC%95%E6%90%9C%E7%B4%A2%E7%9A%84%E5%88%86%E9%85%8D%E7%AE%97%E6%B3%95"><span class="nav-number">2.8.2.</span> <span class="nav-text">基于索引搜索的分配算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%99%E4%BC%B4%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.8.3.</span> <span class="nav-text">伙伴系统</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E7%9A%84%E9%93%BE%E6%8E%A5%E5%92%8C%E8%A3%85%E5%85%A5"><span class="nav-number">3.</span> <span class="nav-text">程序的链接和装入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5"><span class="nav-number">3.1.</span> <span class="nav-text">链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A3%85%E5%85%A5"><span class="nav-number">3.2.</span> <span class="nav-text">装入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E6%AE%B5"><span class="nav-number">3.3.</span> <span class="nav-text">程序段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E3%80%81%E8%BF%9B%E7%A8%8B%E5%92%8C%E4%BD%9C%E4%B8%9A"><span class="nav-number">4.</span> <span class="nav-text">程序、进程和作业</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E9%A1%B5%E5%BC%8F%E5%82%A8%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">5.</span> <span class="nav-text">分页式储存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%AF%E5%88%86%E9%A1%B5%E7%B3%BB%E7%BB%9F"><span class="nav-number">5.1.</span> <span class="nav-text">纯分页系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%B0%E5%9D%80%E7%BB%93%E6%9E%84"><span class="nav-number">5.2.</span> <span class="nav-text">地址结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">5.3.</span> <span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.4.</span> <span class="nav-text"></span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E5%BC%95%E5%AF%BC"><span class="nav-number">1.</span> <span class="nav-text">系统引导</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bootloader"><span class="nav-number">1.1.</span> <span class="nav-text">Bootloader</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#u-boot"><span class="nav-number">1.1.1.</span> <span class="nav-text">U-Boot</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%B1%82%E6%AC%A1"><span class="nav-number">2.1.</span> <span class="nav-text">存储层次</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E7%9A%84%E7%9B%AE%E6%A0%87"><span class="nav-number">2.2.</span> <span class="nav-text">存储管理的目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E9%81%93%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">2.3.</span> <span class="nav-text">单道程序的内存管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E9%81%93%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86"><span class="nav-number">2.4.</span> <span class="nav-text">多道程序的存储管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E7%A2%8E%E7%89%87"><span class="nav-number">2.5.</span> <span class="nav-text">系统中的碎片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%8C%BA%E5%BC%8F%E5%88%86%E9%85%8D"><span class="nav-number">2.6.</span> <span class="nav-text">分区式分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%9F%E8%B8%AA%E5%86%85%E5%AD%98"><span class="nav-number">2.7.</span> <span class="nav-text">跟踪内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E6%93%8D%E4%BD%9C%E7%AE%97%E6%B3%95"><span class="nav-number">2.8.</span> <span class="nav-text">分区分配操作算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E9%A1%BA%E5%BA%8F%E6%90%9C%E7%B4%A2%E7%9A%84%E5%88%86%E9%85%8D%E7%AE%97%E6%B3%95"><span class="nav-number">2.8.1.</span> <span class="nav-text">基于顺序搜索的分配算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%B4%A2%E5%BC%95%E6%90%9C%E7%B4%A2%E7%9A%84%E5%88%86%E9%85%8D%E7%AE%97%E6%B3%95"><span class="nav-number">2.8.2.</span> <span class="nav-text">基于索引搜索的分配算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%99%E4%BC%B4%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.8.3.</span> <span class="nav-text">伙伴系统</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E7%9A%84%E9%93%BE%E6%8E%A5%E5%92%8C%E8%A3%85%E5%85%A5"><span class="nav-number">3.</span> <span class="nav-text">程序的链接和装入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5"><span class="nav-number">3.1.</span> <span class="nav-text">链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A3%85%E5%85%A5"><span class="nav-number">3.2.</span> <span class="nav-text">装入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E6%AE%B5"><span class="nav-number">3.3.</span> <span class="nav-text">程序段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E8%BF%9B%E7%A8%8B%E5%92%8C%E4%BD%9C%E4%B8%9A"><span class="nav-number">4.</span> <span class="nav-text">程序、进程和作业</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E9%A1%B5%E5%BC%8F%E5%82%A8%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">5.</span> <span class="nav-text">分页式储存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%AF%E5%88%86%E9%A1%B5%E7%B3%BB%E7%BB%9F"><span class="nav-number">5.1.</span> <span class="nav-text">纯分页系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%B0%E5%9D%80%E7%BB%93%E6%9E%84"><span class="nav-number">5.2.</span> <span class="nav-text">地址结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">5.3.</span> <span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#section"><span class="nav-number">5.4.</span> <span class="nav-text"></span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -176,12 +172,12 @@
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -261,9 +257,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-04-20 10:06:24 / 修改时间：23:51:48" itemprop="dateCreated datePublished" datetime="2023-04-20T10:06:24+08:00">2023-04-20</time>
+      <time title="创建时间：2023-04-20 10:06:24" itemprop="dateCreated datePublished" datetime="2023-04-20T10:06:24+08:00">2023-04-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-05-06 21:37:53" itemprop="dateModified" datetime="2023-05-06T21:37:53+08:00">2023-05-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -271,7 +273,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+          <a href="/categories/Operation-System/" itemprop="url" rel="index"><span itemprop="name">Operation System</span></a>
         </span>
     </span>
 
@@ -295,25 +297,28 @@
         <p>OS note</p>
 <span id="more"></span>
 <h2 id="系统引导">系统引导</h2>
-<h3 id="Bootloader">Bootloader</h3>
+<h3 id="bootloader">Bootloader</h3>
 <ul>
 <li>引导加载程序是系统加电后运行的第一段软件代码</li>
 <li>Boot: 初始化系统硬件使之运行起来，至少是部分运行起来；</li>
 <li>Loader: 将操作系统映像加载到内存中，并跳转到操作系统的代码运行</li>
 <li>分为 stage1 和 stage2</li>
 </ul>
-<h4 id="U-Boot">U-Boot</h4>
+<h4 id="u-boot">U-Boot</h4>
 <ul>
 <li>stage1: 依赖于 cpu 体系结构的代码，且可以用汇编语言来实现</li>
-<li>stage2: 用 C 语言来实现，这样可以实现复杂的功能，而且有更好的可读性和移植性</li>
+<li>stage2:
+用 C 语言来实现，这样可以实现复杂的功能，而且有更好的可读性和移植性</li>
 <li>MIPS 的基本地址空间
 <ul>
-<li>kuseg: 0x0000’0000~0x7fff’ffff 用户态可用，地址需要 MMU 转换</li>
-<li>kseg0: 0x8000’0000~0x9fff’ffff 最高位清零即可映射到物理地址段 512M(0x000’0000~0x1fff’ffff)，需要通过 cache 存取</li>
-<li>kseg1: 0xa000’0000~0xbfff’ffff 高三位清零可映射到相应的物理地址上，但不需通过 cache 存取，系统启动时唯一正常工作的地址空间</li>
-<li>kseg2: 0xc000’0000~0xffff’ffff 只能在核心态下使用并且要经过 MMU 的转换</li>
-</ul>
-</li>
+<li>kuseg: 0x0000'0000~0x7fff'ffff 用户态可用，地址需要 MMU 转换</li>
+<li>kseg0: 0x8000'0000~0x9fff'ffff
+最高位清零即可映射到物理地址段 512M(0x000'0000~0x1fff'ffff)，需要通过 cache 存取</li>
+<li>kseg1: 0xa000'0000~0xbfff'ffff
+高三位清零可映射到相应的物理地址上，但不需通过 cache 存取，系统启动时唯一正常工作的地址空间</li>
+<li>kseg2: 0xc000'0000~0xffff'ffff
+只能在核心态下使用并且要经过 MMU 的转换</li>
+</ul></li>
 </ul>
 <h2 id="内存管理">内存管理</h2>
 <h3 id="存储层次">存储层次</h3>
@@ -321,7 +326,7 @@
 <li>寄存器 -&gt; 快速缓存 -&gt; 主存 -&gt; 外存</li>
 </ul>
 <h3 id="存储管理的目标">存储管理的目标</h3>
-<ol>
+<ol type="1">
 <li>地址独立：程序发出的地址与物理地址无关</li>
 <li>地址保护：一个程序不能访问另一个程序的地址空间</li>
 </ol>
@@ -340,13 +345,11 @@
 <li>内部碎片：分配给作业的存储空间中未被利用的部分
 <ul>
 <li>无法被整理，但作业完成后会得到释放</li>
-</ul>
-</li>
+</ul></li>
 <li>外部碎片：系统中无法利用的小的空闲分区。如分区与分区之间存在的碎片
 <ul>
 <li>动态分区管理会产生外部碎片，外部碎片可以被整理后清除</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <h3 id="分区式分配">分区式分配</h3>
 <ul>
@@ -356,34 +359,35 @@
 <ul>
 <li>单一队列的分配方式</li>
 <li>多队列分配方式</li>
-</ul>
-</li>
+</ul></li>
 <li>易于实现，开销小，分区总数固定，限制了并发执行的程序数目</li>
 <li>没有外碎片，但有内碎片</li>
-</ul>
-</li>
+</ul></li>
 <li>可变式分区：分区的边界可以移动，即分区的大小可变
 <ul>
 <li>没有内碎片，但有外碎片</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <h3 id="跟踪内存">跟踪内存</h3>
 <ul>
 <li>位图表示法：给每个分配单元赋予一个字位，用来记录该分配单元是否闲置</li>
-<li>链表表示法：将分配单元按照是否闲置链接起来<br>
-<img data-src="e2ab0b96f08e7aa1ca7e86fd8ce93a877a174cc16821831449d48ad16bdb5c38.png" alt=""></li>
+<li>链表表示法：将分配单元按照是否闲置链接起来 <img data-src="e2ab0b96f08e7aa1ca7e86fd8ce93a877a174cc16821831449d48ad16bdb5c38.png"
+alt="图 1" /></li>
 </ul>
 <h3 id="分区分配操作算法">分区分配操作算法</h3>
 <h4 id="基于顺序搜索的分配算法">基于顺序搜索的分配算法</h4>
-<ol>
-<li>首次适应算法（First Fit）：每个空白区按其在存储空间中地址递增的顺序连在一起，在为作业分配存储区域时，从这个空白区域链的始端开始查找，选择第一个足以满足请求的空白块。</li>
-<li>下次适应算法（Next Fit）：把存储空间中空白区构成一个循环链，每次为存储请求查找合适的分区时，总是从上次查找结束的地方开始，只要找到一个足够大的空白区，就将它划分后分配出去。</li>
-<li>最佳适应算法（Best Fit）：为一个作业选择分区时，总是寻找其大小最接近于作业所要求的存储区域。</li>
-<li>最坏适应算法（Worst Fit）：为作业选择存储区域时，总是寻找最大的空白区。</li>
+<ol type="1">
+<li>首次适应算法（First
+Fit）：每个空白区按其在存储空间中地址递增的顺序连在一起，在为作业分配存储区域时，从这个空白区域链的始端开始查找，选择第一个足以满足请求的空白块。</li>
+<li>下次适应算法（Next
+Fit）：把存储空间中空白区构成一个循环链，每次为存储请求查找合适的分区时，总是从上次查找结束的地方开始，只要找到一个足够大的空白区，就将它划分后分配出去。</li>
+<li>最佳适应算法（Best
+Fit）：为一个作业选择分区时，总是寻找其大小最接近于作业所要求的存储区域。</li>
+<li>最坏适应算法（Worst
+Fit）：为作业选择存储区域时，总是寻找最大的空白区。</li>
 </ol>
 <h4 id="基于索引搜索的分配算法">基于索引搜索的分配算法</h4>
-<ol>
+<ol type="1">
 <li>快速适应算法：把空闲分区按容量大小进行分类，经常用到长度的空闲区设立单独的空闲区链表。系统为多个空闲链表设立一张管理索引表。根据程序的长度，寻找到能容纳它的最小空闲区链表，取下第一块进行分配即可。</li>
 </ol>
 <h4 id="伙伴系统">伙伴系统</h4>
@@ -395,8 +399,9 @@
 <ul>
 <li>静态链接：当我们希望共享库的函数代码直接链接入程序代码中</li>
 <li>动态链接：用于链接共享库代码。当程序运行中需要某些目标模块时，才对它们进行链接，高效且节省内存空间但慢</li>
-<li>编译 C 程序的时候，是以.c 文件作为编译单元的，编译为.o，将这些.o 文件链接到一起，形成最终的可执行文件，将之前未填写的地址填写，重定位(Relocation)<br>
-<img data-src="f43ce82acb476530ced777e2507ab79821eb99b4a547a43e76a8cafbdb7fcb98.png" alt=""></li>
+<li>编译 C 程序的时候，是以.c 文件作为编译单元的，编译为.o，将这些.o 文件链接到一起，形成最终的可执行文件，将之前未填写的地址填写，重定位(Relocation)
+<img data-src="f43ce82acb476530ced777e2507ab79821eb99b4a547a43e76a8cafbdb7fcb98.png"
+alt="图 4" /></li>
 </ul>
 <h3 id="装入">装入</h3>
 <ul>
@@ -406,14 +411,15 @@
 </ul>
 <h3 id="程序段">程序段</h3>
 <ul>
-<li>bss 段：（bss segment）用来存放程序中 <strong> 未初始化 </strong> 的全局变量的一块内存区域，于静态内存分配</li>
+<li>bss 段：（bss
+segment）用来存放程序中 <strong> 未初始化 </strong> 的全局变量的一块内存区域，于静态内存分配</li>
 <li>data 段：存放程序中 <strong> 已初始化 </strong> 的全局变量的一块内存区域。数据段属于静态内存分配</li>
 <li>text 段：存放程序执行代码的一块内存区域，大小确定，只读</li>
 <li>栈(stack)：存放、交换临时数据的内存区</li>
-<li>堆(heap)：存放进程运行中动态分配的内存段<br>
-<img data-src="1e1e784914613a8ff7cd95e35ddd7f149f224aea36aa1e8f666ecf5e8419a956.png" alt=""></li>
+<li>堆(heap)：存放进程运行中动态分配的内存段 <img data-src="1e1e784914613a8ff7cd95e35ddd7f149f224aea36aa1e8f666ecf5e8419a956.png"
+alt="图 2" /></li>
 </ul>
-<h2 id="程序、进程和作业">程序、进程和作业</h2>
+<h2 id="程序进程和作业">程序、进程和作业</h2>
 <ul>
 <li>程序是静止的，是存放在磁盘上的可执行文件</li>
 <li>进程是动态的，有生存周期，包括程序和程序处理对象，是一个程序对某个数据集的执行过程，是分配资源的基本单位。分为系统进程、用户进程</li>
@@ -441,16 +447,14 @@
 <li>进程页表：每个进程有一个页表，描述该进程占用的物理页面及逻辑排列顺序
 <ul>
 <li>逻辑页号（本进程的地址空间）－&gt; 物理页面号（实际内存空间）</li>
-</ul>
-</li>
+</ul></li>
 <li>物理页面表：整个系统有一个物理页面表，描述物理内存空间的分配使用状况
 <ul>
 <li>位图 / 空闲页面链表</li>
-</ul>
-</li>
+</ul></li>
 <li>请求表：整个系统有一个请求表，描述系统内各个进程页表的位置和大小，用于地址转换，也可以结合到各进程的 PCB 里</li>
 </ul>
-<h3 id=""></h3>
+<h3 id="section"></h3>
 
     </div>
 
@@ -477,7 +481,7 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/OS/" rel="tag"># OS</a>
+              <a href="/tags/Operation-System/" rel="tag"># Operation System</a>
               <a href="/tags/Notes/" rel="tag"># Notes</a>
           </div>
 

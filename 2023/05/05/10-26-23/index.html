@@ -150,7 +150,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text"> 思考题 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Thinking-5-2"><span class="nav-number">1.1.</span> <span class="nav-text">Thinking 5.2</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text"> 思考题 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#thinking-5.2"><span class="nav-number">1.1.</span> <span class="nav-text">Thinking 5.2</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -171,12 +171,12 @@
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -290,25 +290,20 @@
         <p>Lab5 Report</p>
 <span id="more"></span>
 <h2 id="思考题"> 思考题 </h2>
-<h3 id="Thinking-5-2">Thinking 5.2</h3>
+<h3 id="thinking-5.2">Thinking 5.2</h3>
 <ul>
-<li>
-<p> 查找代码中的相关定义，试回答一个磁盘块中最多能存储多少个文件控制块？一个目录下最多能有多少个文件？我们的文件系统支持的单个文件最大为多大？</p>
+<li><p> 查找代码中的相关定义，试回答一个磁盘块中最多能存储多少个文件控制块？一个目录下最多能有多少个文件？我们的文件系统支持的单个文件最大为多大？</p>
 <ul>
-<li>
-<pre><code class="language-c">    fsformat.c:
-        #define NBLOCK 1024 // The number of blocks in the disk.
-        // 一个磁盘块中最多能存储 1024 个文件控制块
-    fs.c:
-        #define BY2BLK BY2PG
-        #define NINDIRECT (BY2BLK / 4)
-        #define MAXFILESIZE (NINDIRECT * BY2BLK)
-        // 一个文件最大为 2^(10+12) = 4MB
-    
-</code></pre>
-</li>
-</ul>
-</li>
+<li><div class="sourceCode" id="cb1"><pre
+class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>    fsformat<span class="op">.</span>c<span class="op">:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>        <span class="pp">#define NBLOCK </span><span class="dv">1024</span><span class="pp"> </span><span class="co">// The number of blocks in the disk.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">// 一个磁盘块中最多能存储 1024 个文件控制块 </span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    fs<span class="op">.</span>c<span class="op">:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="pp">#define BY2BLK BY2PG</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="pp">#define NINDIRECT </span><span class="op">(</span><span class="pp">BY2BLK </span><span class="op">/</span><span class="pp"> </span><span class="dv">4</span><span class="op">)</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="pp">#define MAXFILESIZE </span><span class="op">(</span><span class="pp">NINDIRECT </span><span class="op">*</span><span class="pp"> BY2BLK</span><span class="op">)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="co">// 一个文件最大为 2^(10+12) = 4MB</span></span></code></pre></div></li>
+</ul></li>
 </ul>
 
     </div>
