@@ -6,7 +6,7 @@
   <link href="https://steve-strange.github.io/atom.xml" rel="self"/>
   
   <link href="https://steve-strange.github.io/"/>
-  <updated>2023-05-09T03:14:32.216Z</updated>
+  <updated>2023-05-14T06:31:32.095Z</updated>
   <id>https://steve-strange.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>os-homework6</title>
+    <link href="https://steve-strange.github.io/2023/05/12/23-26-17/"/>
+    <id>https://steve-strange.github.io/2023/05/12/23-26-17/</id>
+    <published>2023-05-12T15:26:17.000Z</published>
+    <updated>2023-05-14T06:31:32.095Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;&lt;p&gt; 文件系统的性能对整体系统的性能影响很大，请总结在实现文件系统时可以从哪些方面提高文件系统的性能，简要给出这些手段的具体解决思路。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;</summary>
+        
+      
+    
+    
+    
+    <category term="Operation System" scheme="https://steve-strange.github.io/categories/Operation-System/"/>
+    
+    
+    <category term="Homework" scheme="https://steve-strange.github.io/tags/Homework/"/>
+    
+    <category term="Operation System" scheme="https://steve-strange.github.io/tags/Operation-System/"/>
+    
+  </entry>
   
   <entry>
     <title>os-homework5</title>
@@ -399,25 +429,6 @@
     
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>DeepLearning 1</title>
-    <link href="https://steve-strange.github.io/2023/03/11/11-52-15/"/>
-    <id>https://steve-strange.github.io/2023/03/11/11-52-15/</id>
-    <published>2023-03-11T03:52:15.000Z</published>
-    <updated>2023-04-02T03:39:39.831Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;神经网络基础笔记-1&quot;&gt;神经网络基础笔记 1&lt;/h2&gt;</summary>
-    
-    
-    
-    <category term="DeepLearning" scheme="https://steve-strange.github.io/categories/DeepLearning/"/>
-    
-    
-    <category term="DeepLearning" scheme="https://steve-strange.github.io/tags/DeepLearning/"/>
     
   </entry>
   
