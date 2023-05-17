@@ -30,11 +30,13 @@
 <meta property="og:site_name" content="TARDIS">
 <meta property="og:description" content="Lab5 Report">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://steve-strange.github.io/2023/05/05/10-26-23/2023-05-16-10-33-16.png">
 <meta property="article:published_time" content="2023-05-05T02:26:23.000Z">
-<meta property="article:modified_time" content="2023-05-15T09:27:03.827Z">
+<meta property="article:modified_time" content="2023-05-16T06:16:37.594Z">
 <meta property="article:author" content="Sorcerer Inferior">
 <meta property="article:tag" content="Operation System">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://steve-strange.github.io/2023/05/05/10-26-23/2023-05-16-10-33-16.png">
 
 
 <link rel="canonical" href="https://steve-strange.github.io/2023/05/05/10-26-23/">
@@ -150,7 +152,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text"> 思考题 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#thinking-5.1"><span class="nav-number">1.1.</span> <span class="nav-text">Thinking 5.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#thinking-5.2"><span class="nav-number">1.2.</span> <span class="nav-text">Thinking 5.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#thinking-5.5"><span class="nav-number">1.3.</span> <span class="nav-text">Thinking 5.5</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">思考题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#thinking-5.1"><span class="nav-number">1.1.</span> <span class="nav-text">Thinking 5.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#thinking-5.2"><span class="nav-number">1.2.</span> <span class="nav-text">Thinking 5.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#thinking-5.7"><span class="nav-number">1.3.</span> <span class="nav-text">Thinking 5.7</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%BE%E7%82%B9%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">难点分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#exercise-5.1"><span class="nav-number">2.1.</span> <span class="nav-text">Exercise 5.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#exercise-5.3"><span class="nav-number">2.2.</span> <span class="nav-text">Exercise 5.3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#exercise-5.4"><span class="nav-number">2.3.</span> <span class="nav-text">Exercise 5.4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#exercise-5.5"><span class="nav-number">2.4.</span> <span class="nav-text">Exercise 5.5</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -264,7 +266,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-05-15 17:27:03" itemprop="dateModified" datetime="2023-05-15T17:27:03+08:00">2023-05-15</time>
+      <time title="修改时间：2023-05-16 14:16:37" itemprop="dateModified" datetime="2023-05-16T14:16:37+08:00">2023-05-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -295,23 +297,23 @@
     <div class="post-body" itemprop="articleBody">
         <p>Lab5 Report</p>
 <span id="more"></span>
-<h2 id="思考题"> 思考题 </h2>
+<h2 id="思考题">思考题</h2>
 <h3 id="thinking-5.1">Thinking 5.1</h3>
 <ul>
-<li><p> 如果通过 kseg0 读写设备，那么对于设备的写入会缓存到 Cache
+<li><p>如果通过 kseg0 读写设备，那么对于设备的写入会缓存到 Cache
 中。这是一种错误的行为，在实际编写代码的时候这么做会引发不可预知的问题。请思考：这么做这会引发什么问题？对于不同种类的设备（如我们提到的串口设备和
 IDE 磁盘）的操作会有差异吗？可以从缓存的性质和缓存更新的策略来考虑。</p>
 <ul>
-<li> 外设更新后对内存也进行了更新，但是 cache
+<li>外设更新后对内存也进行了更新，但是 cache
 中的没有被更新，如果我们通过 kseg0 来访问设备，那么就会导致总是优先通过
 cache 获取缓存的数据，而缓存的数据没有更新，从而导致错误。</li>
-<li> 磁盘作为块设备，总是以块为单位进行读写，而且会经常进行读写，写的时候相应的内存会标记为
+<li>磁盘作为块设备，总是以块为单位进行读写，而且会经常进行读写，写的时候相应的内存会标记为
 dirty，从而写回，更新缓存，因此这种错误对磁盘出现概率较小；但是与之相反，串口设备等字符型设备就很容易发生这种错误。</li>
 </ul></li>
 </ul>
 <h3 id="thinking-5.2">Thinking 5.2</h3>
 <ul>
-<li><p> 查找代码中的相关定义，试回答一个磁盘块中最多能存储多少个文件控制块？一个目录下最多能有多少个文件？我们的文件系统支持的单个文件最大为多大？</p>
+<li><p>查找代码中的相关定义，试回答一个磁盘块中最多能存储多少个文件控制块？一个目录下最多能有多少个文件？我们的文件系统支持的单个文件最大为多大？</p>
 <ul>
 <li><p>```c fsformat.c: #define NBLOCK 1024 // The number of blocks in
 the disk. // 一个磁盘块中最多能存储 1024 个文件控制块 fs.h: BY2FILE =
@@ -319,37 +321,45 @@ the disk. // 一个磁盘块中最多能存储 1024 个文件控制块 fs.h: BY2
 因此一个磁盘块中包含 4KB / 256B = 16 个文件控制块。 NINDIRECT = (BY2BLK /
 4) = 1024 一个目录包含 1024 个指向磁盘块的指针，即最多有 1024 * 16 =
 16384 个文件。 MAXFILESIZE = (NINDIRECT * BY2BLK) = 2^(10+12) = 4MB</p>
-<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">### Thinking 5.3</span></span><br><span class="line"></span><br><span class="line">- 块缓存所在的地址空间为 [<span class="number">0x10000000</span>, <span class="number">0x50000000</span>), 因此我们的内核能够支持的磁盘大小为 <span class="number">0x40000000</span>, 也就是 <span class="number">1</span>GB</span><br><span class="line">  </span><br><span class="line"><span class="meta">### Thinking 5.4</span></span><br><span class="line"></span><br><span class="line">- 在本实验中，fs/serv.h、user<span class="keyword">/include/</span>fs.h 等文件中出现了许多宏定义，试列举你认为较为重要的宏定义，同时进行解释，并描述其主要应用之处 </span><br><span class="line">  - fs/serv.h</span><br><span class="line"></span><br><span class="line">    - ```c</span><br><span class="line">      <span class="meta">#<span class="keyword">define</span> PTE_DIRTY 0x0002 <span class="comment">// 文件系统 cache 修改标志位 </span></span></span><br><span class="line"></span><br><span class="line">      <span class="meta">#<span class="keyword">define</span> BY2SECT 512       <span class="comment">// 一个磁盘扇区大小 </span></span></span><br><span class="line">      <span class="meta">#<span class="keyword">define</span> SECT2BLK (BY2BLK / BY2SECT)   <span class="comment">// 一个磁盘块中包含的扇区数 </span></span></span><br><span class="line"></span><br><span class="line">      <span class="comment">/* Disk block n, when in memory, is mapped into the file system</span></span><br><span class="line"><span class="comment">      * server&#x27;s address space at DISKMAP+(n*BY2BLK). */</span></span><br><span class="line">      <span class="meta">#<span class="keyword">define</span> DISKMAP 0x10000000    <span class="comment">// 磁盘映射到内存的起始地址 </span></span></span><br><span class="line"></span><br><span class="line">      <span class="comment">/* Maximum disk size we can handle (1GB) */</span></span><br><span class="line">      <span class="meta">#<span class="keyword">define</span> DISKMAX 0x40000000    <span class="comment">// 磁盘最大容量 </span></span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">### Thinking 5.3</span></span><br><span class="line"></span><br><span class="line">- 块缓存所在的地址空间为[<span class="number">0x10000000</span>, <span class="number">0x50000000</span>), 因此我们的内核能够支持的磁盘大小为<span class="number">0x40000000</span>, 也就是<span class="number">1</span>GB</span><br><span class="line">  </span><br><span class="line"><span class="meta">### Thinking 5.4</span></span><br><span class="line"></span><br><span class="line">- 在本实验中，fs/serv.h、user<span class="keyword">/include/</span>fs.h 等文件中出现了许多宏定义，试列举你认为较为重要的宏定义，同时进行解释，并描述其主要应用之处</span><br><span class="line">  - fs/serv.h</span><br><span class="line"></span><br><span class="line">    - ```c</span><br><span class="line">      <span class="meta">#<span class="keyword">define</span> PTE_DIRTY 0x0002 <span class="comment">// 文件系统 cache 修改标志位</span></span></span><br><span class="line"></span><br><span class="line">      <span class="meta">#<span class="keyword">define</span> BY2SECT 512       <span class="comment">// 一个磁盘扇区大小</span></span></span><br><span class="line">      <span class="meta">#<span class="keyword">define</span> SECT2BLK (BY2BLK / BY2SECT)   <span class="comment">// 一个磁盘块中包含的扇区数</span></span></span><br><span class="line"></span><br><span class="line">      <span class="comment">/* Disk block n, when in memory, is mapped into the file system</span></span><br><span class="line"><span class="comment">      * server&#x27;s address space at DISKMAP+(n*BY2BLK). */</span></span><br><span class="line">      <span class="meta">#<span class="keyword">define</span> DISKMAP 0x10000000    <span class="comment">// 磁盘映射到内存的起始地址</span></span></span><br><span class="line"></span><br><span class="line">      <span class="comment">/* Maximum disk size we can handle (1GB) */</span></span><br><span class="line">      <span class="meta">#<span class="keyword">define</span> DISKMAX 0x40000000    <span class="comment">// 磁盘最大容量</span></span></span><br></pre></td></tr></table></figure></li>
 <li><p>user/include/fs.h</p>
 <ul>
-<li><div class="sourceCode" id="cb1"><pre
-class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define BY2BLK BY2PG  </span><span class="co">// 磁盘块大小和页大小相同，4K</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define NDIRECT </span><span class="dv">10</span><span class="pp">    </span><span class="co">//10 个直接指针，用来记录文件的数据块在磁盘上的位置，最大表示 40KB 的文件 </span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define NINDIRECT </span><span class="op">(</span><span class="pp">BY2BLK </span><span class="op">/</span><span class="pp"> </span><span class="dv">4</span><span class="op">)</span><span class="pp">    </span><span class="co">// 存储指向文件内容的磁盘块中，最多储存 1024 个间接指针 </span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#define MAXFILESIZE </span><span class="op">(</span><span class="pp">NINDIRECT </span><span class="op">*</span><span class="pp"> BY2BLK</span><span class="op">)</span><span class="pp">    </span><span class="co">// 一个文件最大大小，1024 * 4K = 4MB</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#define BY2FILE </span><span class="dv">256</span><span class="pp">   </span><span class="co">// 一个文件控制块大小 </span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> File <span class="op">&#123;</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">char</span> f_name<span class="op">[</span>MAXNAMELEN<span class="op">];</span>  <span class="co">// filename</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">uint32_t</span> f_size<span class="op">;</span>  <span class="co">// file size in bytes</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">uint32_t</span> f_type<span class="op">;</span>  <span class="co">// file type</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">uint32_t</span> f_direct<span class="op">[</span>NDIRECT<span class="op">];</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">uint32_t</span> f_indirect<span class="op">;</span>    <span class="co">// 指向存储指向文件内容的间接指针的磁盘块 </span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">struct</span> File <span class="op">*</span>f_dir<span class="op">;</span>   <span class="co">// 指向文件所属的文件目录 </span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">char</span> f_pad<span class="op">[</span>BY2FILE <span class="op">-</span> MAXNAMELEN <span class="op">-</span> <span class="op">(</span><span class="dv">3</span> <span class="op">+</span> NDIRECT<span class="op">)</span> <span class="op">*</span> <span class="dv">4</span> <span class="op">-</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">void</span> <span class="op">*)];</span>    <span class="co">// 填充字节，对齐 256</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span> __attribute__<span class="op">((</span>aligned<span class="op">(</span><span class="dv">4</span><span class="op">),</span> packed<span class="op">));</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="pp">#define FILE2BLK </span><span class="op">(</span><span class="pp">BY2BLK </span><span class="op">/</span><span class="pp"> </span><span class="kw">sizeof</span><span class="op">(</span><span class="kw">struct</span><span class="pp"> File</span><span class="op">))</span><span class="pp">    </span><span class="co">// 一个磁盘块中最多能存储 16 个文件控制块 </span></span></code></pre></div></li>
+<li><p>```c #define BY2BLK BY2PG // 磁盘块大小和页大小相同，4K #define
+NDIRECT 10 //10 个直接指针，用来记录文件的数据块在磁盘上的位置，最大表示
+40KB 的文件 #define NINDIRECT (BY2BLK / 4)
+// 存储指向文件内容的磁盘块中，最多储存 1024 个间接指针</p>
+<p>#define MAXFILESIZE (NINDIRECT * BY2BLK) // 一个文件最大大小，1024 *
+4K = 4MB</p>
+<p>#define BY2FILE 256 // 一个文件控制块大小 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### Thinking <span class="number">5.5</span></span><br><span class="line"></span><br><span class="line">- 在 Lab4“系统调用与 fork”的实验中我们实现了极为重要的 fork 函数。那么 fork 前后的父子进程是否会共享文件描述符和定位指针呢？请在完成上述练习的基础上 编写一个程序进行验证。</span><br><span class="line">  - 会，一个进程所有的文件描述符都存储在 [FDTABLE, FILEBASE) 这一地址空间中。在 fork 函数执行时，会将这父进程页表中映射一部分地址的页表项拷贝到子进程的页表中，因此 fork 前后的父子进程会共享文件描述符和定位指针。</span><br><span class="line"></span><br><span class="line">### Thinking <span class="number">5.6</span></span><br><span class="line"></span><br><span class="line">- 请解释 <span class="built_in">File</span>, Fd, Filefd 结构体及其各个域的作用。比如各个结构体会在哪些过程中被使用，是否对应磁盘上的物理实体还是单纯的内存数据等。说明形式自定，要求简洁明了，可大致勾勒出文件系统数据结构与物理实体的对应关系与设计框架。</span><br><span class="line"></span><br><span class="line">  - ```c</span><br><span class="line">      <span class="keyword">struct</span> <span class="title class_">File</span> &#123;</span><br><span class="line">        <span class="type">char</span> f_name[MAXNAMELEN];  <span class="comment">// filename</span></span><br><span class="line">        <span class="type">uint32_t</span> f_size;  <span class="comment">// file size in bytes</span></span><br><span class="line">        <span class="type">uint32_t</span> f_type;  <span class="comment">// file type</span></span><br><span class="line">        <span class="type">uint32_t</span> f_direct[NDIRECT];</span><br><span class="line">        <span class="type">uint32_t</span> f_indirect;    <span class="comment">// 指向存储指向文件内容的间接指针的磁盘块</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">struct</span> <span class="title class_">File</span> *f_dir;   <span class="comment">// 指向文件所属的文件目录</span></span><br><span class="line">        <span class="type">char</span> f_pad[BY2FILE - MAXNAMELEN - (<span class="number">3</span> + NDIRECT) * <span class="number">4</span> - <span class="built_in">sizeof</span>(<span class="type">void</span> *)];    <span class="comment">// 填充字节，对齐 256</span></span><br><span class="line">      &#125; __attribute__((<span class="built_in">aligned</span>(<span class="number">4</span>), packed));</span><br><span class="line"></span><br><span class="line">      <span class="meta">#<span class="keyword">define</span> FILE2BLK (BY2BLK / sizeof(struct File))    <span class="comment">// 一个磁盘块中最多能存储 16 个文件控制块</span></span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">struct</span> <span class="title class_">Fd</span> &#123;   <span class="comment">// 文件描述符，在寻找访问，打开时需要使用</span></span><br><span class="line">        u_int fd_dev_id;    <span class="comment">// 文件所在设备的设备号</span></span><br><span class="line">        u_int fd_offset;    <span class="comment">// 文件偏移量</span></span><br><span class="line">        u_int fd_omode;     <span class="comment">// 文件打开模式</span></span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">struct</span> <span class="title class_">Filefd</span> &#123;     <span class="comment">// 文件描述符和文件控制块的映射</span></span><br><span class="line">        <span class="keyword">struct</span> <span class="title class_">Fd</span> f_fd;   </span><br><span class="line">        <span class="comment">//Filefd 结构体的第一个成员就是 Fd，因此指向 Filefd 的指针同样指向这个 Fd 的起始位置，故可以进行强制转换。</span></span><br><span class="line">        u_int f_fileid;</span><br><span class="line">        <span class="keyword">struct</span> <span class="title class_">File</span> f_file;   <span class="comment">// 对应的文件控制块</span></span><br><span class="line">      &#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p></li>
 </ul></li>
 </ul></li>
 </ul>
-<h3 id="thinking-5.5">Thinking 5.5</h3>
+<h3 id="thinking-5.7">Thinking 5.7</h3>
 <ul>
-<li></li>
+<li><p>图中有多种不同形式的箭头，请解释这些不同箭头的差别，并思考我们的操作系统是如何实现对应类型的进程间通信的。
+<img data-src="2023-05-16-10-33-16.png" alt="文件系统服务时序图" /></p>
+<ul>
+<li>ENV_CREATE(user_env)和 ENV_CREATE(fs_serv)都是异步消息，由 init()发出创建消息后，init()函数即可返回执行后续步骤，由 fs 和 user 线程执行自己的初始化工作。</li>
+<li>fs 线程初始化 serv_init()和 fs_init()完成后，进入 serv()函数等待，直到收到 User 线程的 ipc_send(fsreq)请求被唤醒。User 线程向 fs 线程 ipc_send(fsreq)发送请求为同步消息，发送后自身进入阻塞 ENV_NOT_RUNNABLE 等待被唤醒的 fs 线程服务结束时 ipc_send(dst_va), 用户线程接收到数据后继续运行，此后 fs 线程进入阻塞，等待下次被用户唤醒。</li>
+</ul></li>
 </ul>
+<h2 id="难点分析">难点分析</h2>
+<h3 id="exercise-5.1">Exercise 5.1</h3>
+<ul>
+<li>sys_write_dev 和 sys_read_dev 中都要注意检查[pa,
+pa+len)全部范围的地址有效性</li>
+<li>注意 memcpy 的 src 和 dst,
+设备地址永远为物理地址 +KSEG1，因为提前映射到 KSEG1 段虚拟地址</li>
+</ul>
+<h3 id="exercise-5.3">Exercise 5.3</h3>
+<ul>
+<li>注意每次通信需要发送的内容和地址，以及数据结构需要的指针地址，提前设定临时变量</li>
+</ul>
+<h3 id="exercise-5.4">Exercise 5.4</h3>
+<ul>
+<li>位图数据结构为 int 数组，一个 int 可以表示 32 个位，能存 32 个 block 是否空闲的信息，检查或修改某一个块的位图时，需要通过位运算找到 int 中对应位。</li>
+</ul>
+<h3 id="exercise-5.5">Exercise 5.5</h3>
 
     </div>
 
