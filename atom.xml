@@ -6,7 +6,7 @@
   <link href="https://steve-strange.github.io/atom.xml" rel="self"/>
   
   <link href="https://steve-strange.github.io/"/>
-  <updated>2023-05-17T02:36:44.549Z</updated>
+  <updated>2023-05-18T14:41:08.324Z</updated>
   <id>https://steve-strange.github.io/</id>
   
   <author>
@@ -17,24 +17,33 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Lab-Report</title>
+    <link href="https://steve-strange.github.io/2023/05/18/20-24-41/"/>
+    <id>https://steve-strange.github.io/2023/05/18/20-24-41/</id>
+    <published>2023-05-18T12:24:41.000Z</published>
+    <updated>2023-05-18T14:41:08.324Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Lab6 Report&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Operation System" scheme="https://steve-strange.github.io/categories/Operation-System/"/>
+    
+    
+    <category term="Operation System" scheme="https://steve-strange.github.io/tags/Operation-System/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Positive Psychology P8</title>
     <link href="https://steve-strange.github.io/2023/05/15/18-02-24/"/>
     <id>https://steve-strange.github.io/2023/05/15/18-02-24/</id>
     <published>2023-05-15T10:02:24.000Z</published>
-    <updated>2023-05-17T02:36:44.549Z</updated>
+    <updated>2023-05-18T14:40:41.269Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;outline&quot;&gt;Outline&lt;/h2&gt;
-&lt;h3 id=&quot;different-kinds-of-change&quot;&gt;Different kinds of change&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Slowly&lt;/li&gt;
-&lt;li&gt;Acutely: also</summary>
-        
-      
+    <summary type="html">&lt;p&gt;Positive Psychology P8&lt;/p&gt;</summary>
     
     
     
@@ -52,19 +61,10 @@
     <link href="https://steve-strange.github.io/2023/05/12/23-26-17/"/>
     <id>https://steve-strange.github.io/2023/05/12/23-26-17/</id>
     <published>2023-05-12T15:26:17.000Z</published>
-    <updated>2023-05-14T06:31:32.095Z</updated>
+    <updated>2023-05-18T14:42:06.967Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;ol type=&quot;1&quot;&gt;
-&lt;li&gt;&lt;p&gt; 文件系统的性能对整体系统的性能影响很大，请总结在实现文件系统时可以从哪些方面提高文件系统的性能，简要给出这些手段的具体解决思路。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;</summary>
-        
-      
+    <summary type="html">&lt;p&gt;os-homework6&lt;/p&gt;</summary>
     
     
     
@@ -327,7 +327,7 @@
     <updated>2023-04-27T14:41:13.044Z</updated>
     
     
-    <summary type="html">&lt;p&gt;Lab3 Report</summary>
+    <summary type="html">&lt;p&gt;Lab3 Report&lt;/p&gt;</summary>
     
     
     
@@ -367,7 +367,7 @@
     <updated>2023-04-22T07:18:34.717Z</updated>
     
     
-    <summary type="html">&lt;p&gt;Positive Psychology P5</summary>
+    <summary type="html">&lt;p&gt;Positive Psychology P5&lt;/p&gt;</summary>
     
     
     
@@ -388,7 +388,7 @@
     <updated>2023-04-22T07:18:37.059Z</updated>
     
     
-    <summary type="html">&lt;p&gt;Positive Psychology P4</summary>
+    <summary type="html">&lt;p&gt;Positive Psychology P4&lt;/p&gt;</summary>
     
     
     
@@ -409,7 +409,7 @@
     <updated>2023-04-27T14:41:10.251Z</updated>
     
     
-    <summary type="html">&lt;p&gt;Lab2 Report</summary>
+    <summary type="html">&lt;p&gt;Lab2 Report&lt;/p&gt;</summary>
     
     
     
@@ -417,26 +417,6 @@
     
     
     <category term="Operation System" scheme="https://steve-strange.github.io/tags/Operation-System/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Some Chats with ChatGPT SDA</title>
-    <link href="https://steve-strange.github.io/2023/03/12/18-47-04/"/>
-    <id>https://steve-strange.github.io/2023/03/12/18-47-04/</id>
-    <published>2023-03-12T10:47:04.000Z</published>
-    <updated>2023-03-18T07:56:18.342Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;Some Chats with ChatGPT SDA(Superior Do Anything)
-看到了个解除规则限制的方法，聊了聊</summary>
-    
-    
-    
-    <category term="English" scheme="https://steve-strange.github.io/categories/English/"/>
-    
-    
-    <category term="ChatGPT" scheme="https://steve-strange.github.io/tags/ChatGPT/"/>
     
   </entry>
   
