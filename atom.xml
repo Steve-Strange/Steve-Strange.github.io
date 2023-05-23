@@ -6,7 +6,7 @@
   <link href="https://steve-strange.github.io/atom.xml" rel="self"/>
   
   <link href="https://steve-strange.github.io/"/>
-  <updated>2023-05-22T07:21:11.621Z</updated>
+  <updated>2023-05-23T02:52:52.737Z</updated>
   <id>https://steve-strange.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>OS-final</title>
+    <link href="https://steve-strange.github.io/2023/05/23/10-24-48/"/>
+    <id>https://steve-strange.github.io/2023/05/23/10-24-48/</id>
+    <published>2023-05-23T02:24:48.000Z</published>
+    <updated>2023-05-23T02:52:52.737Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;OS-final&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Operation System" scheme="https://steve-strange.github.io/categories/Operation-System/"/>
+    
+    
+    <category term="Operation System" scheme="https://steve-strange.github.io/tags/Operation-System/"/>
+    
+    <category term="Notes" scheme="https://steve-strange.github.io/tags/Notes/"/>
+    
+  </entry>
   
   <entry>
     <title>Lab6-Report</title>
@@ -50,9 +71,9 @@
     <category term="English" scheme="https://steve-strange.github.io/categories/English/"/>
     
     
-    <category term="Homework" scheme="https://steve-strange.github.io/tags/Homework/"/>
-    
     <category term="Positive Psychology" scheme="https://steve-strange.github.io/tags/Positive-Psychology/"/>
+    
+    <category term="Homework" scheme="https://steve-strange.github.io/tags/Homework/"/>
     
   </entry>
   
@@ -113,9 +134,9 @@
     <category term="English" scheme="https://steve-strange.github.io/categories/English/"/>
     
     
-    <category term="Homework" scheme="https://steve-strange.github.io/tags/Homework/"/>
-    
     <category term="Positive Psychology" scheme="https://steve-strange.github.io/tags/Positive-Psychology/"/>
+    
+    <category term="Homework" scheme="https://steve-strange.github.io/tags/Homework/"/>
     
   </entry>
   
@@ -200,7 +221,7 @@
     <link href="https://steve-strange.github.io/2023/04/20/10-06-24/"/>
     <id>https://steve-strange.github.io/2023/04/20/10-06-24/</id>
     <published>2023-04-20T02:06:24.000Z</published>
-    <updated>2023-05-06T13:37:53.717Z</updated>
+    <updated>2023-05-23T02:24:29.601Z</updated>
     
     
     <summary type="html">&lt;p&gt;OS note&lt;/p&gt;</summary>
@@ -271,9 +292,9 @@
     <category term="English" scheme="https://steve-strange.github.io/categories/English/"/>
     
     
-    <category term="Homework" scheme="https://steve-strange.github.io/tags/Homework/"/>
-    
     <category term="Positive Psychology" scheme="https://steve-strange.github.io/tags/Positive-Psychology/"/>
+    
+    <category term="Homework" scheme="https://steve-strange.github.io/tags/Homework/"/>
     
   </entry>
   
@@ -374,9 +395,9 @@
     <category term="English" scheme="https://steve-strange.github.io/categories/English/"/>
     
     
-    <category term="Homework" scheme="https://steve-strange.github.io/tags/Homework/"/>
-    
     <category term="Positive Psychology" scheme="https://steve-strange.github.io/tags/Positive-Psychology/"/>
+    
+    <category term="Homework" scheme="https://steve-strange.github.io/tags/Homework/"/>
     
   </entry>
   
@@ -395,28 +416,9 @@
     <category term="English" scheme="https://steve-strange.github.io/categories/English/"/>
     
     
-    <category term="Homework" scheme="https://steve-strange.github.io/tags/Homework/"/>
-    
     <category term="Positive Psychology" scheme="https://steve-strange.github.io/tags/Positive-Psychology/"/>
     
-  </entry>
-  
-  <entry>
-    <title>Lab2 Report</title>
-    <link href="https://steve-strange.github.io/2023/03/13/18-54-43/"/>
-    <id>https://steve-strange.github.io/2023/03/13/18-54-43/</id>
-    <published>2023-03-13T10:54:43.000Z</published>
-    <updated>2023-04-27T14:41:10.251Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;Lab2 Report</summary>
-    
-    
-    
-    <category term="Operation System" scheme="https://steve-strange.github.io/categories/Operation-System/"/>
-    
-    
-    <category term="Operation System" scheme="https://steve-strange.github.io/tags/Operation-System/"/>
+    <category term="Homework" scheme="https://steve-strange.github.io/tags/Homework/"/>
     
   </entry>
   
