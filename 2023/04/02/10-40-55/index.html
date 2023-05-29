@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://steve-strange.github.io/2023/04/02/10-40-55/2023-05-21-00-30-28.png">
 <meta property="og:image" content="https://steve-strange.github.io/2023/04/02/10-40-55/2023-05-21-00-42-40.png">
 <meta property="article:published_time" content="2023-04-02T02:40:55.000Z">
-<meta property="article:modified_time" content="2023-05-20T16:43:44.823Z">
+<meta property="article:modified_time" content="2023-05-24T02:01:00.412Z">
 <meta property="article:author" content="Sorcerer Inferior">
 <meta property="article:tag" content="DeepLearning">
 <meta property="article:tag" content="Lane Detection">
@@ -269,7 +269,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-05-21 00:43:44" itemprop="dateModified" datetime="2023-05-21T00:43:44+08:00">2023-05-21</time>
+      <time title="修改时间：2023-05-24 10:01:00" itemprop="dateModified" datetime="2023-05-24T10:01:00+08:00">2023-05-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -377,6 +377,7 @@
 <li>2 条直线判断距离是否小于 80 像素，小于则认为是同一条直线（双实线等问题）</li>
 </ul>
 </li>
+<li>linear fitting</li>
 </ul>
 <h2 id="Lane-Detection-A-Survey-with-New-Results">Lane Detection: A Survey with New Results</h2>
 <ul>
@@ -385,13 +386,35 @@
 </ul>
 <h2 id="Lane-Line-Detection-Optimization-Algorithm-based-on-Improved-Hough-Transform-and-R-least-Squares-with-Dual-Removal">Lane Line Detection Optimization Algorithm based on Improved Hough Transform and R-least Squares with Dual Removal</h2>
 <ul>
-<li>Lane line edge extraction based on sobel operator with large law</li>
-<li>OTSU 阈值分割算法, 类间方差最大化。
+<li>
+<p>Lane line edge extraction based on sobel operator with large law</p>
+</li>
+<li>
+<p>OTSU 阈值分割算法, 类间方差最大化。</p>
 <ul>
 <li>像素灰度 i 概率为 ni/n (n1, n2 … nL)</li>
 <li>分出两个灰度区间，使得分割的最大类间方差最大，灰度差距和最显著<br>
 <img data-src="2023-05-21-00-30-28.png" alt=""><br>
 <img data-src="2023-05-21-00-42-40.png" alt=""></li>
+</ul>
+</li>
+<li>
+<p>In this study, an improved algorithm based on traditional Hough transform and least square method is proposed for lane line detection. In this paper, the road image is preprocessed to obtain the edge points of the lane line, and then two methods of lane line fitting are optimized to improve the accuracy and real-time performance of lane line detection. In the actual detection, a detection algorithm combining improved Hough transform and r-lsdr method is designed, and Kalman filter is used to track the lane line.</p>
+</li>
+<li>
+<p>Hough transformation and improvement</p>
+<ul>
+<li>Constraints of polar angle size and direction</li>
+<li>Constraint of polar diameter</li>
+<li>Use the Soble operator twice to get the edge of single pixel width.</li>
+<li>Find the two directions with the maximum number of edge points as rough directions of lane lines.</li>
+</ul>
+</li>
+<li>
+<p>Least Square Method and Optimization</p>
+<ul>
+<li>The sample points with too large errors are eliminated by a certain threshold.</li>
+<li>Remove the sample points with the largest error, until the proportion of the number of remaining points in the original sample quantity is equal to the threshold value R.</li>
 </ul>
 </li>
 </ul>
