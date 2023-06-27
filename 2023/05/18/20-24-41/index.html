@@ -152,7 +152,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">思考题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Thinking-6-1"><span class="nav-number">1.1.</span> <span class="nav-text">Thinking 6.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thinking-6-2"><span class="nav-number">1.2.</span> <span class="nav-text">Thinking 6.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thinking-6-3"><span class="nav-number">1.3.</span> <span class="nav-text">Thinking 6.3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thinking-6-4"><span class="nav-number">1.4.</span> <span class="nav-text">Thinking 6.4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thinking-6-5"><span class="nav-number">1.5.</span> <span class="nav-text">Thinking 6.5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thinking-6-6"><span class="nav-number">1.6.</span> <span class="nav-text">Thinking 6.6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thinking-6-7"><span class="nav-number">1.7.</span> <span class="nav-text">Thinking 6.7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thinking-6-8"><span class="nav-number">1.8.</span> <span class="nav-text">Thinking 6.8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shell"><span class="nav-number">1.9.</span> <span class="nav-text">Shell</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E6%84%9F%E6%83%B3"><span class="nav-number">2.</span> <span class="nav-text">实验感想</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">思考题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#thinking-6.1"><span class="nav-number">1.1.</span> <span class="nav-text">Thinking 6.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#thinking-6.2"><span class="nav-number">1.2.</span> <span class="nav-text">Thinking 6.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#thinking-6.3"><span class="nav-number">1.3.</span> <span class="nav-text">Thinking 6.3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#thinking-6.4"><span class="nav-number">1.4.</span> <span class="nav-text">Thinking 6.4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#thinking-6.5"><span class="nav-number">1.5.</span> <span class="nav-text">Thinking 6.5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#thinking-6.6"><span class="nav-number">1.6.</span> <span class="nav-text">Thinking 6.6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#thinking-6.7"><span class="nav-number">1.7.</span> <span class="nav-text">Thinking 6.7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#thinking-6.8"><span class="nav-number">1.8.</span> <span class="nav-text">Thinking 6.8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shell"><span class="nav-number">1.9.</span> <span class="nav-text">Shell</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E6%84%9F%E6%83%B3"><span class="nav-number">2.</span> <span class="nav-text">实验感想</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -298,138 +298,152 @@
         <p>Lab6 Report</p>
 <span id="more"></span>
 <h2 id="思考题">思考题</h2>
-<h3 id="Thinking-6-1">Thinking 6.1</h3>
+<h3 id="thinking-6.1">Thinking 6.1</h3>
 <ul>
-<li>
-<p>示例代码中，父进程操作管道的写端，子进程操作管道的读端。如果现在想让父进程作为“读者”，代码应当如何修改？</p>
-  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (fork()) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">-1</span>:</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="number">0</span>: <span class="comment">/* 子进程 - 作为管道的写者 */</span></span><br><span class="line">    close(fildes[<span class="number">0</span>]); <span class="comment">/* 关闭不用的读端 */</span></span><br><span class="line">    write(fildes[<span class="number">1</span>], <span class="string">&quot;Hello world\n&quot;</span>, <span class="number">12</span>); <span class="comment">/* 向管道中写数据 */</span></span><br><span class="line">    close(fildes[<span class="number">1</span>]); <span class="comment">/* 写入结束，关闭写端 */</span>        </span><br><span class="line"></span><br><span class="line">    <span class="built_in">exit</span>(EXIT_SUCCESS);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">default</span>: <span class="comment">/* 父进程 - 作为管道的读者 */</span></span><br><span class="line">    close(fildes[<span class="number">1</span>]); <span class="comment">/* 关闭不用的写端 */</span></span><br><span class="line">    read(fildes[<span class="number">0</span>], buf, <span class="number">100</span>); <span class="comment">/* 从管道中读数据 */</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;father-process read:%s&quot;</span>,buf); <span class="comment">/* 打印读到的数据 */</span></span><br><span class="line">    close(fildes[<span class="number">0</span>]); <span class="comment">/* 读取结束，关闭读端 */</span></span><br><span class="line">    <span class="built_in">exit</span>(EXIT_SUCCESS);</span><br><span class="line"></span><br><span class="line">    运行结果</span><br><span class="line">    father-process read:Hello world</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li><p>示例代码中，父进程操作管道的写端，子进程操作管道的读端。如果现在想让父进程作为“读者”，代码应当如何修改？</p>
+<p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (fork()) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">-1</span>:</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="number">0</span>: <span class="comment">/* 子进程 - 作为管道的写者 */</span></span><br><span class="line">    close(fildes[<span class="number">0</span>]); <span class="comment">/* 关闭不用的读端 */</span></span><br><span class="line">    write(fildes[<span class="number">1</span>], <span class="string">&quot;Hello world\n&quot;</span>, <span class="number">12</span>); <span class="comment">/* 向管道中写数据 */</span></span><br><span class="line">    close(fildes[<span class="number">1</span>]); <span class="comment">/* 写入结束，关闭写端 */</span>        </span><br><span class="line"></span><br><span class="line">    <span class="built_in">exit</span>(EXIT_SUCCESS);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">default</span>: <span class="comment">/* 父进程 - 作为管道的读者 */</span></span><br><span class="line">    close(fildes[<span class="number">1</span>]); <span class="comment">/* 关闭不用的写端 */</span></span><br><span class="line">    read(fildes[<span class="number">0</span>], buf, <span class="number">100</span>); <span class="comment">/* 从管道中读数据 */</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;father-process read:%s&quot;</span>,buf); <span class="comment">/* 打印读到的数据 */</span></span><br><span class="line">    close(fildes[<span class="number">0</span>]); <span class="comment">/* 读取结束，关闭读端 */</span></span><br><span class="line">    <span class="built_in">exit</span>(EXIT_SUCCESS);</span><br><span class="line"></span><br><span class="line">    运行结果</span><br><span class="line">    father-process read:Hello world</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li>
 </ul>
-<h3 id="Thinking-6-2">Thinking 6.2</h3>
+<h3 id="thinking-6.2">Thinking 6.2</h3>
 <ul>
-<li>上面这种不同步修改 pp_ref 而导致的进程竞争问题在 user/lib/fd.c 中的 dup 函数中也存在。请结合代码模仿上述情景，分析一下我们的 dup 函数中为什么会出现预想之外的情况？
+<li>上面这种不同步修改 pp_ref 而导致的进程竞争问题在 user/lib/fd.c 中的
+dup 函数中也存在。请结合代码模仿上述情景，分析一下我们的 dup
+函数中为什么会出现预想之外的情况？
 <ul>
 <li>如果先复制了 fd 描述符再复制内容，完成了描述符而未完成对应的文件内容映射时被打断切换，另一个进程访问这个 newfd 的内容，此时描述符复制完毕但映射仍是 oldfd 对应的文件内容，访问到旧文件内容，出现错误。</li>
 <li>先复制文件内容再复制 fd 时，如果被打断，fd 尚未复制无法访问，不会出现错误。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="Thinking-6-3">Thinking 6.3</h3>
+<h3 id="thinking-6.3">Thinking 6.3</h3>
 <ul>
 <li>阅读上述材料并思考：为什么系统调用一定是原子操作呢？如果你觉得不是所有的系统调用都是原子操作，请给出反例。希望能结合相关代码进行分析说明。
 <ul>
 <li>系统调用一定是原子操作，因为在通过系统调用陷入内核态时汇编代码关闭了时钟中断。
 <ul>
-<li>R3000 中 SR 寄存器的低六位中，一组数值表示一种 CPU 的运行状态，其中 KU 位表示是否位于用户模式下，为 1 表示位于用户模式下；IE 位表示中断是否开启，为 1 表示开启，否则不开启，而 KUc 和 IEc 则为 CPU 当前实际的运行状态。陷入内核态处理系统调用时，通过对 IEc 置 0 已关闭所有中断。</li>
-</ul>
-</li>
+<li>R3000 中 SR 寄存器的低六位中，一组数值表示一种 CPU 的运行状态，其中
+KU 位表示是否位于用户模式下，为 1 表示位于用户模式下；IE
+位表示中断是否开启，为 1 表示开启，否则不开启，而 KUc 和 IEc 则为
+CPU 当前实际的运行状态。陷入内核态处理系统调用时，通过对 IEc 置 0 已关闭所有中断。</li>
+</ul></li>
 <li>系统调用过程一般比较复杂而且非常常用，如果它是可被打断的，那么会给用户程序带来很大不确定性，需要讨论设计更多同步互斥情况。</li>
 <li>系统调用中包括设备的读写，如果这些操作不是原子的，可能被打断覆盖了将要读或写的数据或读到尚未写完毕的数据，出现类似 dup 中的情况。</li>
-<li>有些系统调用直接和上下文打交道。比如 syscall_set_trapframe(envid, tf); 我们执行这个语句后显然期望接下来 envid 在新的 tf 夏运行，但如果这个被切换了，恰好切换到 envid 进程，就可能在原 tf 错误地继续执行。</li>
+<li>有些系统调用直接和上下文打交道。比如 syscall_set_trapframe(envid,
+tf);
+我们执行这个语句后显然期望接下来 envid 在新的 tf 夏运行，但如果这个被切换了，恰好切换到 envid 进程，就可能在原 tf 错误地继续执行。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="Thinking-6-4">Thinking 6.4</h3>
+<h3 id="thinking-6.4">Thinking 6.4</h3>
 <ul>
 <li>仔细阅读上面这段话，并思考下列问题
 <ul>
-<li>按照上述说法控制 pipe_close 中 fd 和 pipe unmap 的顺序，是否可以解决上述场景的进程竞争问题？给出你的分析过程。
+<li>按照上述说法控制 pipe_close 中 fd 和 pipe unmap
+的顺序，是否可以解决上述场景的进程竞争问题？给出你的分析过程。
 <ul>
 <li>可以。判断 pipe_is_closed 的条件是 pageref(fd)==pageref(pipe)，且一定有 pageref(fd)&lt;=pageref(pipe)。</li>
-<li>先 unmap 掉 fd，先把 pageref(fd)减小，使 pipe_close 中 pageref(pipe) &gt; pageref(fd)永远成立，即可以不会出现 pipe_is_closed 误判</li>
-</ul>
-</li>
-<li>我们只分析了 close 时的情形，在 fd.c 中有一个 dup 函数，用于复制文件描述符。试想，如果要复制的文件描述符指向一个管道，那么是否会出现与 close 类似的问题？请模仿上述材料写写你的理解。
+<li>先 unmap 掉 fd，先把 pageref(fd)减小，使 pipe_close 中 pageref(pipe) &gt;
+pageref(fd)永远成立，即可以不会出现 pipe_is_closed 误判</li>
+</ul></li>
+<li>我们只分析了 close 时的情形，在 fd.c 中有一个 dup
+函数，用于复制文件描述符。试想，如果要复制的文件描述符指向一个管道，那么是否会出现与
+close 类似的问题？请模仿上述材料写写你的理解。
 <ul>
-<li>会出现，如果先对 fd 进行 map 后对 page 进行 map 的话，会诱发 page_ref(fd) == page_ref(pipe)这样的情况。假如在执行完 syscall_mem_map(0, oldfd, 0, newfd, vpt[VPN(oldfd)] &amp; (PTE_D | PTE_LIBRARY))语句之后立刻切换到该管道的另一个同为读或写的进程执行，此时该进程通过 pageref(pipe)得到 pipe 页面的引用次数为 2，又因为 pageref(oldfd)也变成了 2，两者相等，该进程调用_pipe_is_closed 后得出管道另一侧关闭的结论，从而造成程序运行错误。</li>
+<li>会出现，如果先对 fd 进行 map 后对 page 进行 map 的话，会诱发 page_ref(fd) ==
+page_ref(pipe)这样的情况。假如在执行完 syscall_mem_map(0, oldfd, 0,
+newfd, vpt[VPN(oldfd)] &amp; (PTE_D |
+PTE_LIBRARY))语句之后立刻切换到该管道的另一个同为读或写的进程执行，此时该进程通过 pageref(pipe)得到 pipe 页面的引用次数为 2，又因为 pageref(oldfd)也变成了 2，两者相等，该进程调用_pipe_is_closed 后得出管道另一侧关闭的结论，从而造成程序运行错误。</li>
+</ul></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Thinking-6-5">Thinking 6.5</h3>
+<h3 id="thinking-6.5">Thinking 6.5</h3>
 <ul>
-<li>
-<p>思考以下三个问题。</p>
-</li>
-<li>
-<p>认真回看 Lab5 文件系统相关代码，弄清打开文件的过程。</p>
+<li><p>思考以下三个问题。</p></li>
+<li><p>认真回看 Lab5 文件系统相关代码，弄清打开文件的过程。</p>
 <ul>
 <li>user/lib/file.c 中 open 函数先 fd_alloc 分配一个新文件的 fd，然后用 user/lib/fsipc.c 中 fsipc_open 打开</li>
-<li>fsipc_open 调用 fsipc(FSREQ_OPEN, req, fd, &amp;perm)并返回结果，fsipc 则通过 ipc_send 发送请求给文件系统服务程序 serv 进程，ipc_recv 接收返回值</li>
-<li>serv 进程中 serve 接受 env-&gt;env_ipc_value 返回值到 req，发送的 FSREQ_OPEN 和接收的 case FSREQ_OPEN 对应，转入调用 serve_open</li>
+<li>fsipc_open 调用 fsipc(FSREQ_OPEN, req, fd,
+&amp;perm)并返回结果，fsipc 则通过 ipc_send 发送请求给文件系统服务程序 serv 进程，ipc_recv 接收返回值</li>
+<li>serv 进程中 serve 接受 env-&gt;env_ipc_value 返回值到 req，发送的 FSREQ_OPEN 和接收的 case
+FSREQ_OPEN 对应，转入调用 serve_open</li>
 <li>serve_open 中调用 open_alloc 分配出一个 open 结构体，准备保存打开文件内容方式，再调用 file_open 通过文件路径找到文件，之后完善 open 结构体，发送链接后的 Filefd 到 envid</li>
 <li>最后在 open 中获取该 Filefd，根据其中的文件信息调用 fsipc_map，将文件全部内容映射到内存</li>
-</ul>
-</li>
-<li>
-<p>回顾 Lab1 与 Lab3，思考如何读取并加载 ELF 文件。</p>
+</ul></li>
+<li><p>回顾 Lab1 与 Lab3，思考如何读取并加载 ELF 文件。</p>
 <ul>
 <li>先用 open 打开二进制文件，将所有内容就都加载进内存</li>
 <li>由 kern/env.c 文件中的 load_icode 得到 ELF 文件的的 elf 头，获取段头表、段头数量，文件大小等信息，然后使用 ELF_FOREACH_PHDR_OFF 对于其中每一段用 elf_load_seg 映射到由段头规定的虚地址开头的连续虚拟内存中</li>
 <li>最后把 cp0_epc 设置为 elf 文件指定的起始地址，中断后跳转到此处，开始执行</li>
-</ul>
-</li>
-<li>
-<p>在 Lab1 中我们介绍了 data text bss 段及它们的含义，data 段存放初始化过的全局变量，bss 段存放未初始化的全局变量。关于 memsize 和 filesize ，我们在 Note1.3.4 中也解释了它们的含义与特点。关于 Note 1.3.4，注意其中关于“bss 段并不在文件中占数据”表述的含义。回顾 Lab3 并思考：elf_load_seg() 和 load_icode_mapper()函数是如何确保加载 ELF 文件时，bss 段数据被正确加载进虚拟内存空间。bss 段在 ELF 中并不占空间，但 ELF 加载进内存后，bss 段的数据占据了空间，并且初始值都是 0。请回顾 elf_load_seg() 和 load_icode_mapper() 的实现，思考这一点是如何实现的？</p>
+</ul></li>
+<li><p>在 Lab1 中我们介绍了 data text bss 段及它们的含义，data
+段存放初始化过的全局变量，bss 段存放未初始化的全局变量。关于 memsize 和
+filesize ，我们在 Note1.3.4 中也解释了它们的含义与特点。关于 Note
+1.3.4，注意其中关于“bss 段并不在文件中占数据”表述的含义。回顾 Lab3
+并思考：elf_load_seg() 和 load_icode_mapper()函数是如何确保加载 ELF
+文件时，bss 段数据被正确加载进虚拟内存空间。bss 段在 ELF
+中并不占空间，但 ELF 加载进内存后，bss
+段的数据占据了空间，并且初始值都是 0。请回顾 elf_load_seg() 和
+load_icode_mapper() 的实现，思考这一点是如何实现的？</p>
 <ul>
-<li>elf_load_seg()中：size_t bin_size = ph-&gt;p_filesz; size_t sgsize = ph-&gt;p_memsz; 如果磁盘实际使用的大小 bin_size 小于段的大小 sgsize，就将 map_page 中的 src 设为 NULL，相应空间会加载到内存，但其中回调函数 load_icode_mapper 中不进行 memcpy，所以数据保持初始值 0</li>
+<li>elf_load_seg()中：size_t bin_size = ph-&gt;p_filesz; size_t sgsize =
+ph-&gt;p_memsz;
+如果磁盘实际使用的大小 bin_size 小于段的大小 sgsize，就将 map_page 中的 src 设为 NULL，相应空间会加载到内存，但其中回调函数 load_icode_mapper 中不进行 memcpy，所以数据保持初始值 0</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="Thinking-6-6">Thinking 6.6</h3>
+<h3 id="thinking-6.6">Thinking 6.6</h3>
 <ul>
-<li>通过阅读代码空白段的注释我们知道，将标准输入或输出定向到文件，需要我们将其 dup 到 0 或 1 号文件描述符（fd）。那么问题来了：在哪步，0 和 1 被“安排”为标准输入和标准输出？请分析代码执行流程，给出答案。
+<li>通过阅读代码空白段的注释我们知道，将标准输入或输出定向到文件，需要我们将其
+dup 到 0 或 1 号文件描述符（fd）。那么问题来了：在哪步，0 和 1
+被“安排”为标准输入和标准输出？请分析代码执行流程，给出答案。
 <ul>
-<li>
-<p>user/sh.b:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// stdin should be 0, because no file descriptors are open yet</span></span><br><span class="line"><span class="keyword">if</span> ((r = opencons()) != <span class="number">0</span>) &#123;</span><br><span class="line">    user_panic(<span class="string">&quot;opencons: %d&quot;</span>, r);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// stdout</span></span><br><span class="line"><span class="keyword">if</span> ((r = dup(<span class="number">0</span>, <span class="number">1</span>)) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">    user_panic(<span class="string">&quot;dup: %d&quot;</span>, r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li><p>user/sh.b:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// stdin should be 0, because no file descriptors are open yet</span></span><br><span class="line"><span class="keyword">if</span> ((r = opencons()) != <span class="number">0</span>) &#123;</span><br><span class="line">    user_panic(<span class="string">&quot;opencons: %d&quot;</span>, r);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// stdout</span></span><br><span class="line"><span class="keyword">if</span> ((r = dup(<span class="number">0</span>, <span class="number">1</span>)) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">    user_panic(<span class="string">&quot;dup: %d&quot;</span>, r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="Thinking-6-7">Thinking 6.7</h3>
+<h3 id="thinking-6.7">Thinking 6.7</h3>
 <ul>
-<li>在 shell 中执行的命令分为内置命令和外部命令。在执行内置命令时 shell 不需要 fork 一个子 shell，如 Linux 系统中的 cd 命令。在执行外部命令时 shell 需要 fork 一个子 shell，然后子 shell 去执行这条命令。据此判断，在 MOS 中我们用到的 shell 命令是内置命令还是外部命令？请思考为什么 Linux 的 cd 命令是内部命令而不是外部命令？
+<li>在 shell 中执行的命令分为内置命令和外部命令。在执行内置命令时 shell
+不需要 fork 一个子 shell，如 Linux 系统中的 cd 命令。在执行外部命令时
+shell 需要 fork 一个子 shell，然后子 shell 去执行这条命令。据此判断，在
+MOS 中我们用到的 shell 命令是内置命令还是外部命令？请思考为什么 Linux 的
+cd 命令是内部命令而不是外部命令？
 <ul>
-<li>
-<p>在 MOS 中我们用到的 shell 命令是外部命令，在 user/fs.c 的 main 的循环中，readline 得到的命令全都 fork()出了子 shell 去执行</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">    <span class="keyword">if</span> (interactive) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n$ &quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    readline(buf, <span class="keyword">sizeof</span> buf);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (buf[<span class="number">0</span>] == <span class="string">&#x27;#&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (echocmds) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;# %s\n&quot;</span>, buf);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ((r = fork()) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        user_panic(<span class="string">&quot;fork: %d&quot;</span>, r);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (r == <span class="number">0</span>) &#123; <span class="comment">// 子进程</span></span><br><span class="line">        runcmd(buf);</span><br><span class="line">        <span class="built_in">exit</span>();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        wait(r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>linux 的 cd 命令之所以为内部命令，若设置为外部指令，在 cd 的时候多次调用 fork 生成子进程，过于低效。将其作为 shell 的一个内置函数实现，在解析到 cd 命令时，只需要调用该函数即可，提高系统的运行效率。</p>
-</li>
+<li><p>在 MOS 中我们用到的 shell 命令是外部命令，在 user/fs.c 的 main 的循环中，readline 得到的命令全都 fork()出了子 shell 去执行</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">    <span class="keyword">if</span> (interactive) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n$ &quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    readline(buf, <span class="keyword">sizeof</span> buf);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (buf[<span class="number">0</span>] == <span class="string">&#x27;#&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (echocmds) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;# %s\n&quot;</span>, buf);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ((r = fork()) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        user_panic(<span class="string">&quot;fork: %d&quot;</span>, r);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (r == <span class="number">0</span>) &#123; <span class="comment">// 子进程</span></span><br><span class="line">        runcmd(buf);</span><br><span class="line">        <span class="built_in">exit</span>();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        wait(r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure></li>
+<li><p>linux 的 cd 命令之所以为内部命令，若设置为外部指令，在 cd 的时候多次调用 fork 生成子进程，过于低效。将其作为 shell 的一个内置函数实现，在解析到 cd 命令时，只需要调用该函数即可，提高系统的运行效率。</p></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="Thinking-6-8">Thinking 6.8</h3>
+<h3 id="thinking-6.8">Thinking 6.8</h3>
 <ul>
 <li>在你的 shell 中输入命令 ls.b | cat.b &gt; motd。
 <ul>
-<li>
-<p>请问你可以在你的 shell 中观察到几次 spawn ？分别对应哪个进程？</p>
+<li>请问你可以在你的 shell 中观察到几次 spawn ？分别对应哪个进程？
 <ul>
 <li>可以观察到 2 次 spawn，分别对应 3805 和 4006 进程，也就是 ls.b 命令和 cat.b 命令的两个进程。</li>
 </ul>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">        $ ls.b | cat.b &gt; motd</span><br><span class="line">        [00002803] pipecreate </span><br><span class="line">        [00003805] destroying 00003805</span><br><span class="line">        [00003805] free env 00003805</span><br><span class="line">        i am killed ... </span><br><span class="line">        [00004006] destroying 00004006</span><br><span class="line">        [00004006] free env 00004006</span><br><span class="line">        i am killed ... </span><br><span class="line">        [00003004] destroying 00003004</span><br><span class="line">        [00003004] free env 00003004</span><br><span class="line">        i am killed ... </span><br><span class="line">        [00002803] destroying 00002803</span><br><span class="line">        [00002803] free env 00002803</span><br><span class="line">        i am killed ...</span><br><span class="line"></span><br><span class="line">  - 请问你可以在你的 shell 中观察到几次进程销毁？分别对应哪个进程？</span><br><span class="line">    - 可以观察到 4 次进程销毁，分别对应 3805、4006、3004、2803 四个进程，即 ls.b 命令进程、cat.b 命令进程、管道 fork 出的子 shell 进程以及开始 main 函数中 fork 出的子 shell 进程。</span><br><span class="line"></span><br><span class="line">## 实验难点 </span><br><span class="line"></span><br><span class="line">### 管道</span><br><span class="line"></span><br><span class="line">- Pipe 流程</span><br><span class="line">  - 用户进程创建 pipe</span><br><span class="line">    - 分配两个文件描述符 fd</span><br><span class="line">    - 将两个文件描述符的数据对应的虚拟地址空间映射到同一个物理页</span><br><span class="line">    - 设置两个文件描述符的属性</span><br><span class="line">    - 返回 fd[0] 和 fd[1]</span><br><span class="line">  - 用户进程使用 pipe</span><br><span class="line">    - 读者</span><br><span class="line">      - 当读指针落后于写指针时，从循环缓冲区中读取 1 字节，将读指针后移</span><br><span class="line">      - 当读指针追上写指针时</span><br><span class="line">      - 若写者已经关闭或已经读取了部分内容，返回当前读取的字节数</span><br><span class="line">      - 否则，阻塞等待（写者没有关闭且未读取任何内容）</span><br><span class="line">    - 写者</span><br><span class="line">      - 当写指针领先于读指针不超过 BY2PIPE 时，将 1 字节写入循环缓冲区，将写指针后移</span><br><span class="line">      - 当写指针领先于读指针等于 BY2PIPE 时</span><br><span class="line">      - 若读者已经关闭，成功返回</span><br><span class="line">      - 否则，阻塞等待（读者没有关闭且未写完所有内容</span><br><span class="line"></span><br><span class="line">- 因为对 pipe 的操作不是原子操作，所以会出现不同步修改导致的进程竞争问题。在判断 pipe 是否关闭时，可通过调整关闭管道解除文件映射时 unmap、map 的顺序解决</span><br><span class="line"></span><br><span class="line">- _pipe_is_closed 中要读取 pageref(fd) 和 pageref(pipe)，但这个用户态函数随时可能被打断，数据可能被改变，判断错误。这里的处理是两个 pageref 之前存下 env_runs, 读之后和之后 env_runs 比较，如果相同就代表过程中没有被切换，结果是可靠，否则重读。</span><br><span class="line"></span><br><span class="line">    ```c</span><br><span class="line">        do &#123;</span><br><span class="line">            runs = env-&gt;env_runs;</span><br><span class="line">            fd_ref = pageref(fd);</span><br><span class="line">            pipe_ref = pageref(p);</span><br><span class="line">        &#125;while(runs != env-&gt;env_runs);</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">        $ ls.b | cat.b &gt; motd</span><br><span class="line">        [00002803] pipecreate </span><br><span class="line">        [00003805] destroying 00003805</span><br><span class="line">        [00003805] free env 00003805</span><br><span class="line">        i am killed ... </span><br><span class="line">        [00004006] destroying 00004006</span><br><span class="line">        [00004006] free env 00004006</span><br><span class="line">        i am killed ... </span><br><span class="line">        [00003004] destroying 00003004</span><br><span class="line">        [00003004] free env 00003004</span><br><span class="line">        i am killed ... </span><br><span class="line">        [00002803] destroying 00002803</span><br><span class="line">        [00002803] free env 00002803</span><br><span class="line">        i am killed ...</span><br><span class="line"></span><br><span class="line">  - 请问你可以在你的 shell 中观察到几次进程销毁？分别对应哪个进程？</span><br><span class="line">    - 可以观察到 4 次进程销毁，分别对应 3805、4006、3004、2803 四个进程，即 ls.b 命令进程、cat.b 命令进程、管道 fork 出的子 shell 进程以及开始 main 函数中 fork 出的子 shell 进程。</span><br><span class="line"></span><br><span class="line">## 实验难点 </span><br><span class="line"></span><br><span class="line">### 管道</span><br><span class="line"></span><br><span class="line">- Pipe 流程</span><br><span class="line">  - 用户进程创建 pipe</span><br><span class="line">    - 分配两个文件描述符 fd</span><br><span class="line">    - 将两个文件描述符的数据对应的虚拟地址空间映射到同一个物理页</span><br><span class="line">    - 设置两个文件描述符的属性</span><br><span class="line">    - 返回 fd[0] 和 fd[1]</span><br><span class="line">  - 用户进程使用 pipe</span><br><span class="line">    - 读者</span><br><span class="line">      - 当读指针落后于写指针时，从循环缓冲区中读取 1 字节，将读指针后移</span><br><span class="line">      - 当读指针追上写指针时</span><br><span class="line">      - 若写者已经关闭或已经读取了部分内容，返回当前读取的字节数</span><br><span class="line">      - 否则，阻塞等待（写者没有关闭且未读取任何内容）</span><br><span class="line">    - 写者</span><br><span class="line">      - 当写指针领先于读指针不超过 BY2PIPE 时，将 1 字节写入循环缓冲区，将写指针后移</span><br><span class="line">      - 当写指针领先于读指针等于 BY2PIPE 时</span><br><span class="line">      - 若读者已经关闭，成功返回</span><br><span class="line">      - 否则，阻塞等待（读者没有关闭且未写完所有内容</span><br><span class="line"></span><br><span class="line">- 因为对 pipe 的操作不是原子操作，所以会出现不同步修改导致的进程竞争问题。在判断 pipe 是否关闭时，可通过调整关闭管道解除文件映射时 unmap、map 的顺序解决</span><br><span class="line"></span><br><span class="line">- _pipe_is_closed 中要读取 pageref(fd) 和 pageref(pipe)，但这个用户态函数随时可能被打断，数据可能被改变，判断错误。这里的处理是两个 pageref 之前存下 env_runs, 读之后和之后 env_runs 比较，如果相同就代表过程中没有被切换，结果是可靠，否则重读。</span><br><span class="line"></span><br><span class="line">    ```c</span><br><span class="line">        do &#123;</span><br><span class="line">            runs = env-&gt;env_runs;</span><br><span class="line">            fd_ref = pageref(fd);</span><br><span class="line">            pipe_ref = pageref(p);</span><br><span class="line">        &#125;while(runs != env-&gt;env_runs);</span><br></pre></td></tr></table></figure></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="Shell">Shell</h3>
-<p><img data-src="2023-06-05-17-46-52.png" alt=""></p>
+<h3 id="shell">Shell</h3>
+<figure>
+<img data-src="2023-06-05-17-46-52.png" alt="Shell 整体流程" />
+<figcaption aria-hidden="true">Shell 整体流程</figcaption>
+</figure>
 <ul>
-<li>spawn ：调用文件系统中的可执行文件并执行，产生的子进程装载新的 ELF 文件
+<li>spawn ：调用文件系统中的可执行文件并执行，产生的子进程装载新的 ELF
+文件
 <ul>
 <li>使用文件系统提供的 open 函数打开即将装载的 ELF 文件 prog</li>
 <li>使用系统调用 syscall_exofork 函数为子进程申请一个进程控制块。</li>
-<li>使用 init_stack 函数为子进程初始化栈空间，将需要传递的参数 argv 传入子进程。</li>
-<li>使用 elf_load_seg 将 ELF 文件的各个段加载进子进程。(这里与 lab3 不同的是，当前我们处于用户态，具体的 mapper 需要系统调用)</li>
-<li>设置子进程的运行现场寄存器，将 tf-&gt;cp0_epc 设置为程序入口点，tf-&gt;regs[29] 设置为装载参数后的栈顶指针，从而在子进程被唤醒时以正确的状态开始运行。</li>
-<li>将父进程的共享页面映射给子进程，与 fork 不同的是，这里只映射共享页面。</li>
+<li>使用 init_stack 函数为子进程初始化栈空间，将需要传递的参数 argv
+传入子进程。</li>
+<li>使用 elf_load_seg 将 ELF
+文件的各个段加载进子进程。(这里与 lab3 不同的是，当前我们处于用户态，具体的
+mapper 需要系统调用)</li>
+<li>设置子进程的运行现场寄存器，将 tf-&gt;cp0_epc
+设置为程序入口点，tf-&gt;regs[29]
+设置为装载参数后的栈顶指针，从而在子进程被唤醒时以正确的状态开始运行。</li>
+<li>将父进程的共享页面映射给子进程，与 fork
+不同的是，这里只映射共享页面。</li>
 <li>使用系统调用 syscall_set_env_status 唤醒子进程。</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <h2 id="实验感想">实验感想</h2>
 <ul>

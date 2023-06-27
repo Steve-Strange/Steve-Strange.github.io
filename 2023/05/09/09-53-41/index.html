@@ -289,42 +289,41 @@
     <div class="post-body" itemprop="articleBody">
         <p>os-homework5</p>
 <span id="more"></span>
-<ol>
-<li>
-<p> 有五个进程 P1、P2、P3、P4、P5，它们同时依次进入就绪队列，它们的优先数和需要的处理器时间如下表 </p>
+<ol type="1">
+<li><p> 有五个进程 P1、P2、P3、P4、P5，它们同时依次进入就绪队列，它们的优先数和需要的处理器时间如下表 </p>
 <table>
 <thead>
-<tr>
-<th style="text-align:center"> 进程 </th>
-<th style="text-align:center"> 处理器时间 </th>
-<th style="text-align:center"> 优先级（数小优先级高）</th>
+<tr class="header">
+<th style="text-align: center;"> 进程 </th>
+<th style="text-align: center;"> 处理器时间 </th>
+<th style="text-align: center;"> 优先级（数小优先级高）</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:center">P1</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">3</td>
+<tr class="odd">
+<td style="text-align: center;">P1</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">3</td>
 </tr>
-<tr>
-<td style="text-align:center">P2</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
+<tr class="even">
+<td style="text-align: center;">P2</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
 </tr>
-<tr>
-<td style="text-align:center">P3</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">3</td>
+<tr class="odd">
+<td style="text-align: center;">P3</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
 </tr>
-<tr>
-<td style="text-align:center">P4</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">4</td>
+<tr class="even">
+<td style="text-align: center;">P4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
 </tr>
-<tr>
-<td style="text-align:center">P5</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">2</td>
+<tr class="odd">
+<td style="text-align: center;">P5</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">2</td>
 </tr>
 </tbody>
 </table>
@@ -336,65 +335,58 @@
 <li> 短作业优先: P2, P4, P3, P5, P1</li>
 <li> 非抢占式的优先数: P2, P5, P1, P3, P4</li>
 <li> 轮转法: P1, P2, P3, P4, P5, P1, P3, P4</li>
-</ul>
-</li>
+</ul></li>
 <li> 分别计算上述算法中各进程的周转时间和等待时间，以及平均周转时间 </li>
-</ul>
-</li>
-<li>
-<p> 死锁产生的四个必要条件是什么 </p>
+</ul></li>
+<li><p> 死锁产生的四个必要条件是什么 </p>
 <ul>
 <li> 互斥条件：资源是独占的且排他使用，进程互斥使用资源，即任意时刻一个资源只能给一个进程使用，其他进程若申请一个资源，而该资源被另一进程占有时，则申请者等待直到资源被占有者释放。</li>
 <li> 不可剥夺条件：进程所获得的资源在未使用完毕之前，不被其他进程强行剥夺，而只能由获得该资源的进程资源释放。</li>
 <li> 请求和保持条件：进程每次申请它所需要的一部分资源，在申请新的资源的同时，继续占用已分配到的资源。</li>
 <li> 循环等待条件：在发生死锁时必然存在一个进程等待队列 {P1,P2,…,Pn}, 其中 P1 等待 P2 占有的资源，P2 等待 P3 占有的资源，…，Pn 等待 P1 占有的资源，形成一个进程等待环路，环路中每一个进程所占有的资源同时被另一个申请，也就是前一个进程占有后一个进程所深情地资源。</li>
-</ul>
-</li>
-<li>
-<p> 某系统中有 n 个进程和 m 台打印机，系统约定：打印机只能一台一台地申请、一台一台地释放，每个进程需要同时使用的打印机台数不超过 m。如果 n 个进程同时需要使用打印机的总数小于 m+n，试讨论，该系统可能发生死锁吗? 并简述理由 </p>
+</ul></li>
+<li><p> 某系统中有 n 个进程和 m 台打印机，系统约定：打印机只能一台一台地申请、一台一台地释放，每个进程需要同时使用的打印机台数不超过 m。如果 n 个进程同时需要使用打印机的总数小于 m+n，试讨论，该系统可能发生死锁吗? 并简述理由 </p>
 <ul>
-<li> 不可能，设 n 个进程同时需要使用 x 个打印机，1 &lt;= x &lt;= m, nx &lt; m+n, 如果死锁，需要 n 个进程各取得 x-1 个打印机时，同时再需要最后一个时没有打印机了。即 m &lt; n(x-1), 即 m+n &lt; nx，与题意矛盾，所以不可能死锁 </li>
-</ul>
-</li>
-<li>
-<p> 线程的基本概念是什么？引入线程的好处是什么？</p>
+<li> 不可能，设 n 个进程同时需要使用 x 个打印机，1 &lt;= x &lt;= m, nx &lt;
+m+n,
+如果死锁，需要 n 个进程各取得 x-1 个打印机时，同时再需要最后一个时没有打印机了。即
+m &lt; n(x-1), 即 m+n &lt; nx，与题意矛盾，所以不可能死锁 </li>
+</ul></li>
+<li><p> 线程的基本概念是什么？引入线程的好处是什么？</p>
 <ul>
 <li> 线程是进程中的一个实体，是一个 CPU 调度和分派的单位，基本上不拥有资源，只有必不可少的少量资源，可以与其他同进程的线程共享进程拥有的所有资源 </li>
 <li> 减少并发程序执行时所付出的时空开销，使得并发粒度更细、并发性更好，共享资源便捷 </li>
-</ul>
-</li>
-<li>
-<p> 一个系统有 4 个进程和 5 个可分配资源，当前分配和最大需求如下 </p>
-</li>
+</ul></li>
+<li><p> 一个系统有 4 个进程和 5 个可分配资源，当前分配和最大需求如下 </p></li>
 </ol>
 <table>
 <thead>
-<tr>
-<th style="text-align:center"> 已分配资源 </th>
-<th style="text-align:center"> 最大需求量 </th>
-<th style="text-align:center"> 可用资源 </th>
+<tr class="header">
+<th style="text-align: center;"> 已分配资源 </th>
+<th style="text-align: center;"> 最大需求量 </th>
+<th style="text-align: center;"> 可用资源 </th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:center"> 进程 A</td>
-<td style="text-align:center">10211</td>
-<td style="text-align:center">11213</td>
+<tr class="odd">
+<td style="text-align: center;"> 进程 A</td>
+<td style="text-align: center;">10211</td>
+<td style="text-align: center;">11213</td>
 </tr>
-<tr>
-<td style="text-align:center"> 进程 B</td>
-<td style="text-align:center">20110</td>
-<td style="text-align:center">22210</td>
+<tr class="even">
+<td style="text-align: center;"> 进程 B</td>
+<td style="text-align: center;">20110</td>
+<td style="text-align: center;">22210</td>
 </tr>
-<tr>
-<td style="text-align:center"> 进程 C</td>
-<td style="text-align:center">11010</td>
-<td style="text-align:center">21310</td>
+<tr class="odd">
+<td style="text-align: center;"> 进程 C</td>
+<td style="text-align: center;">11010</td>
+<td style="text-align: center;">21310</td>
 </tr>
-<tr>
-<td style="text-align:center"> 进程 D</td>
-<td style="text-align:center">11110</td>
-<td style="text-align:center">11221</td>
+<tr class="even">
+<td style="text-align: center;"> 进程 D</td>
+<td style="text-align: center;">11110</td>
+<td style="text-align: center;">11221</td>
 </tr>
 </tbody>
 </table>
@@ -407,11 +399,10 @@
 <li>B： 2100</li>
 <li>C： 200</li>
 <li>D： 111</li>
-</ul>
-</li>
-<li>x = 0 时都不可满足，x = 1 时可满足 D，完成后可用资源可用资源向量为 11222，这时候进程 A 可以分配资源执行，当 A 结束时，可用资源向量为 21433。进程 C 可以被满足，当 C 执行结束后，可用资源向量为 32443。最后进程 B 可满足。所以 x 的最小值为 1。</li>
-</ul>
-</li>
+</ul></li>
+<li>x = 0 时都不可满足，x = 1
+时可满足 D，完成后可用资源可用资源向量为 11222，这时候进程 A 可以分配资源执行，当 A 结束时，可用资源向量为 21433。进程 C 可以被满足，当 C 执行结束后，可用资源向量为 32443。最后进程 B 可满足。所以 x 的最小值为 1。</li>
+</ul></li>
 </ul>
 
     </div>
