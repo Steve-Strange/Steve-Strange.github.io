@@ -6,7 +6,7 @@
   <link href="https://steve-strange.github.io/atom.xml" rel="self"/>
   
   <link href="https://steve-strange.github.io/"/>
-  <updated>2023-07-17T10:36:32.907Z</updated>
+  <updated>2023-07-28T09:39:07.637Z</updated>
   <id>https://steve-strange.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://steve-strange.github.io/2023/07/11/11-40-44/"/>
     <id>https://steve-strange.github.io/2023/07/11/11-40-44/</id>
     <published>2023-07-11T03:40:44.000Z</published>
-    <updated>2023-07-17T10:36:32.907Z</updated>
+    <updated>2023-07-28T09:39:07.637Z</updated>
     
     
     <summary type="html">&lt;p&gt;IELTS speaking topics&lt;/p&gt;</summary>
@@ -31,7 +31,28 @@
     <category term="English" scheme="https://steve-strange.github.io/categories/English/"/>
     
     
-    <category term="Vocabulary" scheme="https://steve-strange.github.io/tags/Vocabulary/"/>
+    <category term="English" scheme="https://steve-strange.github.io/tags/English/"/>
+    
+    <category term="IELTS" scheme="https://steve-strange.github.io/tags/IELTS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IELTS writing task</title>
+    <link href="https://steve-strange.github.io/2023/07/11/11-40-44/"/>
+    <id>https://steve-strange.github.io/2023/07/11/11-40-44/</id>
+    <published>2023-07-11T03:40:44.000Z</published>
+    <updated>2023-08-28T02:45:37.684Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;IELTS writing task&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="English" scheme="https://steve-strange.github.io/categories/English/"/>
+    
+    
+    <category term="English" scheme="https://steve-strange.github.io/tags/English/"/>
     
     <category term="IELTS" scheme="https://steve-strange.github.io/tags/IELTS/"/>
     
@@ -42,7 +63,7 @@
     <link href="https://steve-strange.github.io/2023/07/11/11-40-44/"/>
     <id>https://steve-strange.github.io/2023/07/11/11-40-44/</id>
     <published>2023-07-11T03:40:44.000Z</published>
-    <updated>2023-07-17T10:23:25.754Z</updated>
+    <updated>2023-08-19T01:43:48.901Z</updated>
     
     
     <summary type="html">&lt;p&gt;IELTS Vocabulary&lt;/p&gt;</summary>
@@ -52,7 +73,7 @@
     <category term="English" scheme="https://steve-strange.github.io/categories/English/"/>
     
     
-    <category term="Vocabulary" scheme="https://steve-strange.github.io/tags/Vocabulary/"/>
+    <category term="English" scheme="https://steve-strange.github.io/tags/English/"/>
     
     <category term="IELTS" scheme="https://steve-strange.github.io/tags/IELTS/"/>
     
@@ -392,27 +413,6 @@
     <category term="DeepLearning" scheme="https://steve-strange.github.io/tags/DeepLearning/"/>
     
     <category term="Lane Detection" scheme="https://steve-strange.github.io/tags/Lane-Detection/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>os-homework3</title>
-    <link href="https://steve-strange.github.io/2023/03/30/10-16-52/"/>
-    <id>https://steve-strange.github.io/2023/03/30/10-16-52/</id>
-    <published>2023-03-30T02:16:52.000Z</published>
-    <updated>2023-04-27T18:39:50.337Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;OS Homework3&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Operation System" scheme="https://steve-strange.github.io/categories/Operation-System/"/>
-    
-    
-    <category term="Homework" scheme="https://steve-strange.github.io/tags/Homework/"/>
-    
-    <category term="Operation System" scheme="https://steve-strange.github.io/tags/Operation-System/"/>
     
   </entry>
   
