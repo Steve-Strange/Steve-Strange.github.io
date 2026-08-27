@@ -39,7 +39,7 @@
 
     #overlay {
       position: absolute;
-      top: 58%;
+      top: 42%;
       left: 50%;
       translate: -50% -50%;
       width: max-content;
@@ -63,7 +63,7 @@
     #mode-select {
       position: absolute;
       left: 50%;
-      bottom: 18px;
+      bottom: 14px;
       z-index: 2;
       display: flex;
       translate: -50% 0;
@@ -74,7 +74,7 @@
     }
 
     #mode-select button {
-      width: 54px;
+      width: 70px;
       height: 34px;
       border: 0;
       border-right: 1px solid #ffffff70;
@@ -88,7 +88,36 @@
     #mode-select button:last-child { border-right: 0; }
     #mode-select button[aria-pressed="true"] { background: #f7f7f8; color: #171719; }
     #mode-select button:focus-visible { outline: 2px solid #28c4f5; outline-offset: -3px; }
-    #game-shell[data-state="playing"] #mode-select { display: none; }
+
+    #start-help {
+      position: absolute;
+      right: 12px;
+      bottom: 57px;
+      left: 12px;
+      color: #d8d8dc;
+      font-size: 12px;
+      line-height: 1.5;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    #start-help p { margin: 0; }
+    #mode-help { color: #fff; font-weight: 700; }
+
+    kbd {
+      display: inline-block;
+      min-width: 19px;
+      padding: 1px 4px;
+      border: 1px solid #ffffff80;
+      border-radius: 3px;
+      background: #111114b8;
+      color: #fff;
+      font: inherit;
+      line-height: 1.25;
+    }
+
+    #game-shell[data-state="playing"] #mode-select,
+    #game-shell[data-state="playing"] #start-help { display: none; }
 
     [hidden] { display: none !important; }
 
@@ -116,8 +145,12 @@
     </canvas>
     <button id="overlay" type="button" aria-label="开始游戏">TAP TO START</button>
     <div id="mode-select" role="group" aria-label="游戏模式">
-      <button type="button" data-mode="ai" aria-pressed="true">1P</button>
-      <button type="button" data-mode="pvp" aria-pressed="false">2P</button>
+      <button type="button" data-mode="ai" aria-label="人机模式，快捷键 1" aria-pressed="true">1P AI</button>
+      <button type="button" data-mode="pvp" aria-label="双人模式，快捷键 2" aria-pressed="false">2P VS</button>
+    </div>
+    <div id="start-help">
+      <p id="mode-help">蓝方：<kbd>F</kbd> / <kbd>Space</kbd> 开火 · 红方：AI</p>
+      <p><kbd>1</kbd>/<kbd>2</kbd> 切换模式 · <kbd>Space</kbd> 开始 · <kbd>R</kbd> 重开</p>
     </div>
     <p id="live" class="sr-only" aria-live="polite">等待开始</p>
   </main>
@@ -137,6 +170,7 @@
       const canvas = document.getElementById('arena');
       const overlay = document.getElementById('overlay');
       const modeButtons = [...document.querySelectorAll('#mode-select button')];
+      const modeHelp = document.getElementById('mode-help');
       const live = document.getElementById('live');
       const ctx = canvas.getContext('2d');
 
@@ -193,6 +227,20 @@
         overlay.hidden = true;
         live.textContent = '决斗开始';
         ensureAudio();
+      }
+
+      function setMode(nextMode) {
+        mode = nextMode;
+        shell.dataset.mode = mode;
+        modeButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.mode === mode)));
+        modeHelp.innerHTML = mode === 'ai'
+          ? '蓝方：<kbd>F</kbd> / <kbd>Space</kbd> 开火 · 红方：AI'
+          : '蓝方：<kbd>F</kbd> 开火 · 红方：<kbd>J</kbd> 开火';
+        resetRound();
+        overlay.hidden = false;
+        overlay.textContent = 'TAP TO START';
+        overlay.setAttribute('aria-label', '开始游戏');
+        live.textContent = mode === 'ai' ? '人机模式' : '双人模式';
       }
 
       function ensureAudio() {
@@ -629,22 +677,24 @@
       }
 
       overlay.addEventListener('click', beginRound);
-      modeButtons.forEach(button => button.addEventListener('click', () => {
-        mode = button.dataset.mode;
-        shell.dataset.mode = mode;
-        modeButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
-        resetRound();
-        overlay.hidden = false;
-        overlay.textContent = 'TAP TO START';
-        overlay.setAttribute('aria-label', '开始游戏');
-        live.textContent = mode === 'ai' ? '人机模式' : '双人模式';
-      }));
+      modeButtons.forEach(button => button.addEventListener('click', () => setMode(button.dataset.mode)));
       canvas.addEventListener('pointerdown', event => {
         event.preventDefault();
         const rect = canvas.getBoundingClientRect();
         fire(mode === 'ai' || event.clientX < rect.left + rect.width / 2 ? player : enemy);
       });
       addEventListener('keydown', event => {
+        if (event.repeat) return;
+        if (state !== 'playing' && ['Digit1', 'Numpad1', 'Digit2', 'Numpad2'].includes(event.code)) {
+          event.preventDefault();
+          setMode(event.code.endsWith('1') ? 'ai' : 'pvp');
+          return;
+        }
+        if (event.code === 'KeyR') {
+          event.preventDefault();
+          beginRound();
+          return;
+        }
         if (!['KeyF', 'KeyJ', 'Space'].includes(event.code)) return;
         const actor = event.code === 'KeyF' || (mode === 'ai' && event.code === 'Space')
           ? player
