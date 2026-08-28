@@ -22,7 +22,7 @@
 
     #game-shell {
       position: relative;
-      width: min(100vw, 800px, calc(100svh * 4 / 3));
+      width: min(100vw, 780px, calc(100svh * 4 / 3));
       aspect-ratio: 4 / 3;
       max-height: 100svh;
       overflow: hidden;
@@ -149,6 +149,7 @@
       <button type="button" data-mode="pvp" aria-label="双人模式，快捷键 2" aria-pressed="false">2P VS</button>
     </div>
     <div id="start-help">
+      <p>开火会推动枪身 · 子弹相撞抵消 · 命中三次获胜</p>
       <p id="mode-help">蓝方：<kbd>F</kbd> / <kbd>Space</kbd> 开火 · 红方：AI</p>
       <p><kbd>1</kbd>/<kbd>2</kbd> 切换模式 · <kbd>Space</kbd> 开始 · <kbd>R</kbd> 重开</p>
     </div>
@@ -159,8 +160,8 @@
     (() => {
       'use strict';
 
-      const W = 600;
-      const H = 450;
+      const W = 580;
+      const H = 435;
       const PLAYER = '#28c4f5';
       const ENEMY = '#ff244d';
       const BG = '#242427';
@@ -196,8 +197,8 @@
         return {
           side,
           color: isPlayer ? PLAYER : ENEMY,
-          x: isPlayer ? 165 : 435,
-          y: 225,
+          x: isPlayer ? 160 : 420,
+          y: H / 2,
           vx: 0,
           vy: 0,
           angle: isPlayer ? 0 : Math.PI,
@@ -414,7 +415,7 @@
         const damping = Math.pow(.993, dt * 60);
         actor.vx *= damping;
         actor.vy *= damping;
-        actor.spin *= Math.pow(.997, dt * 60);
+        actor.spin *= Math.pow(.996, dt * 60);
         actor.x += actor.vx * dt;
         actor.y += actor.vy * dt;
         actor.angle += actor.spin * dt;

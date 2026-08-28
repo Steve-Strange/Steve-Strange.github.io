@@ -17,8 +17,9 @@
     .best strong { display: block; font-size: 23px; line-height: 1.1; }
     .message { position: fixed; top: 48%; left: 50%; z-index: 3; translate: -50% -50%; width: min(88vw, 390px); color: #18333a; text-align: center; }
     .message h1 { margin: 0 0 8px; font-size: clamp(34px, 10vw, 58px); letter-spacing: 0; }
-    .message p { margin: 0 0 18px; font-size: 14px; }
-    .message button { min-width: 144px; height: 44px; border: 0; border-radius: 4px; color: #fff; background: #d94f50; font: 800 14px Arial, sans-serif; cursor: pointer; }
+    .message p { margin: 5px 0; font-size: 14px; line-height: 1.45; }
+    .message .rules { font-weight: 800; }
+    .message button { min-width: 144px; height: 44px; margin-top: 14px; border: 0; border-radius: 4px; color: #fff; background: #d94f50; font: 800 14px Arial, sans-serif; cursor: pointer; }
     .message[hidden] { display: none; }
     .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
   </style>
@@ -29,7 +30,8 @@
   <div class="best"><span>BEST</span><strong id="best">0</strong></div>
   <div class="message" id="message">
     <h1>SKY HOPPER</h1>
-    <p><b>Space</b>、点击或触屏起跳</p>
+    <p class="rules" id="rules">穿过一组管道得 1 分 · 撞到管道或地面结束</p>
+    <p id="controls-copy"><b>Space</b>、点击或触屏起跳　<b>R</b> 重开</p>
     <button type="button" id="start">START</button>
   </div>
   <p class="sr-only" id="live" aria-live="polite">等待开始</p>
@@ -44,6 +46,8 @@
       const canvas = document.getElementById('game');
       const ctx = canvas.getContext('2d');
       const message = document.getElementById('message');
+      const rules = document.getElementById('rules');
+      const controlsCopy = document.getElementById('controls-copy');
       const live = document.getElementById('live');
       const bestNode = document.getElementById('best');
       const engine = Engine.create({ enableSleeping: false });
@@ -117,7 +121,8 @@
         localStorage.setItem('sky-hopper-best', String(best));
         bestNode.textContent = String(best);
         message.querySelector('h1').textContent = score ? `SCORE ${score}` : 'TRY AGAIN';
-        message.querySelector('p').textContent = 'Space 或点击重新开始 · R 重开';
+        rules.textContent = `本局 ${score} 分 · 最高 ${best} 分`;
+        controlsCopy.textContent = 'Space、点击或触屏重新开始 · R 重开';
         message.querySelector('button').textContent = 'PLAY AGAIN';
         message.hidden = false;
         live.textContent = `游戏结束，得分 ${score}`;

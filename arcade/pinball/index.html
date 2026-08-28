@@ -17,10 +17,13 @@
     .stats { display: flex; gap: 24px; text-align: right; }
     .stat span { display: block; color: #8ca5a4; font-size: 10px; font-weight: 700; }
     .stat strong { display: block; min-width: 54px; color: #fff; font-size: 22px; line-height: 1.15; }
-    .message { position: absolute; top: 44%; left: 50%; translate: -50% -50%; width: min(88vw, 430px); text-align: center; pointer-events: auto; }
+    .message { position: absolute; top: 44%; left: 50%; translate: -50% -50%; width: min(90vw, 470px); text-align: center; pointer-events: auto; }
     .message h1 { margin: 0 0 8px; color: #78f2d3; font-size: clamp(30px, 7vw, 54px); letter-spacing: 0; }
-    .message p { margin: 0 0 20px; color: #c5cfce; font-size: 13px; }
-    .message button { min-width: 150px; height: 44px; border: 0; border-radius: 4px; color: #071012; background: #78f2d3; font: 800 14px Arial, sans-serif; cursor: pointer; }
+    .message p { margin: 5px 0; color: #c5cfce; font-size: 13px; line-height: 1.45; }
+    .message .rules { color: #fff; font-weight: 700; }
+    .message button { min-width: 150px; height: 44px; margin-top: 14px; border: 0; border-radius: 4px; color: #071012; background: #78f2d3; font: 800 14px Arial, sans-serif; cursor: pointer; }
+    .source-link { display: block; width: max-content; margin: 12px auto 0; color: #8ca5a4; font-size: 11px; text-decoration: none; }
+    .source-link:hover, .source-link:focus-visible { color: #78f2d3; }
     .message[hidden] { display: none; }
     .controls { position: absolute; right: 0; bottom: max(18px, env(safe-area-inset-bottom)); left: 0; display: flex; justify-content: center; gap: 14px; pointer-events: auto; }
     .control { width: 64px; height: 52px; border: 1px solid #ffffff55; border-radius: 5px; color: #fff; background: #071012d9; font: 800 23px Arial, sans-serif; touch-action: none; cursor: pointer; }
@@ -37,13 +40,16 @@
       <a class="back" href="/arcade/" aria-label="返回游戏库" title="返回游戏库">‹</a>
       <div class="stats">
         <div class="stat"><span>SCORE</span><strong id="score">000000</strong></div>
+        <div class="stat"><span>MULTI</span><strong id="multiplier">1×</strong></div>
         <div class="stat"><span>BALLS</span><strong id="balls">3</strong></div>
       </div>
     </div>
     <div class="message" id="message">
       <h1>NEON PINBALL</h1>
-      <p><b>A / ←</b> 左挡板　<b>D / →</b> 右挡板　<b>Space</b> 发球</p>
+      <p class="rules" id="rules">撞击保险杠得分 · 点亮三枚目标提升倍率 · 每局 3 球</p>
+      <p id="controls-copy"><b>A / ←</b> 左挡板　<b>D / →</b> 右挡板　<b>Space</b> 发球　<b>R</b> 重开</p>
       <button type="button" id="start">LAUNCH BALL</button>
+      <a class="source-link" href="https://alula.github.io/SpaceCadetPinball/" target="_blank" rel="noopener noreferrer">经典 Space Cadet 开源网页移植 ↗</a>
     </div>
     <div class="controls" aria-label="弹球控制">
       <button class="control" id="left" type="button" aria-label="左挡板" title="左挡板">↙</button>
@@ -64,8 +70,11 @@
       const SCALE = 60;
       const canvas = document.getElementById('scene');
       const scoreNode = document.getElementById('score');
+      const multiplierNode = document.getElementById('multiplier');
       const ballsNode = document.getElementById('balls');
       const message = document.getElementById('message');
+      const rules = document.getElementById('rules');
+      const controlsCopy = document.getElementById('controls-copy');
       const live = document.getElementById('live');
       const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
       const scene = new THREE.Scene();
@@ -73,6 +82,8 @@
       const engine = Engine.create({ enableSleeping: false });
       const meshes = new Map();
       const flashes = new Map();
+      const targets = [];
+      const targetLit = new Set();
       const keys = { left: false, right: false };
       let ball;
       let ballMesh;
@@ -80,6 +91,9 @@
       let rightFlipper;
       let score = 0;
       let balls = 3;
+      let multiplier = 1;
+      let targetBankLocked = false;
+      let leftPlungerLane = false;
       let state = 'idle';
       let lastTime = performance.now();
       let audio;
@@ -111,8 +125,38 @@
       board.receiveShadow = true;
       scene.add(board);
 
+      const art = document.createElement('canvas');
+      art.width = W;
+      art.height = H;
+      const artCtx = art.getContext('2d');
+      artCtx.strokeStyle = '#2a8478';
+      artCtx.lineWidth = 5;
+      artCtx.beginPath();
+      artCtx.moveTo(72, 790); artCtx.lineTo(145, 610); artCtx.lineTo(95, 300); artCtx.quadraticCurveTo(300, 70, 505, 300); artCtx.lineTo(455, 610); artCtx.lineTo(528, 790);
+      artCtx.stroke();
+      artCtx.strokeStyle = '#a73e5b';
+      artCtx.lineWidth = 3;
+      for (const [x, y, r] of [[205, 245, 58], [390, 255, 58], [300, 390, 64]]) {
+        artCtx.beginPath(); artCtx.arc(x, y, r, 0, Math.PI * 2); artCtx.stroke();
+      }
+      artCtx.fillStyle = '#78f2d3';
+      artCtx.font = '800 28px Arial';
+      artCtx.textAlign = 'center';
+      artCtx.fillText('NEON CIRCUIT', W / 2, 90);
+      artCtx.fillStyle = '#8ca5a4';
+      artCtx.font = '700 15px Arial';
+      artCtx.fillText('LIGHT TARGET BANK · BUILD MULTIPLIER', W / 2, 116);
+      const boardArt = new THREE.Mesh(
+        new THREE.PlaneGeometry(W / SCALE, H / SCALE),
+        new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(art), transparent: true, depthWrite: false })
+      );
+      boardArt.rotation.x = -Math.PI / 2;
+      boardArt.position.y = -.115;
+      scene.add(boardArt);
+
       function addBox(x, y, width, height, angle = 0, color = 0x24544f, label = 'wall', depth = .45) {
-        const body = Bodies.rectangle(x, y, width, height, { isStatic: true, angle, label, restitution: .65, friction: 0 });
+        const restitution = label === 'slingshot' ? 1.18 : label.startsWith('target') ? .9 : .65;
+        const body = Bodies.rectangle(x, y, width, height, { isStatic: true, angle, label, restitution, friction: 0 });
         const mesh = new THREE.Mesh(new THREE.BoxGeometry(width / SCALE, depth, height / SCALE), material(color, color === 0x24544f ? 0x08211e : 0x000000));
         mesh.castShadow = true;
         mesh.receiveShadow = true;
@@ -148,6 +192,11 @@
       addBumper(300, 390, 42, 0xf05d7a);
       addBumper(175, 505, 30, 0xffc857);
       addBumper(425, 510, 30, 0x3de3c2);
+      addBox(168, 635, 122, 18, .38, 0x3de3c2, 'slingshot', .38);
+      addBox(432, 635, 122, 18, -.38, 0xf05d7a, 'slingshot', .38);
+      for (const [index, x, color] of [[0, 230, 0x3de3c2], [1, 300, 0xffc857], [2, 370, 0xf05d7a]]) {
+        targets.push(addBox(x, 570, 46, 15, 0, color, `target-${index}`, .5));
+      }
 
       leftFlipper = addBox(255, 735, 118, 24, .35, 0x3de3c2, 'flipper', .38);
       rightFlipper = addBox(345, 735, 118, 24, Math.PI - .35, 0xf05d7a, 'flipper', .38);
@@ -174,20 +223,35 @@
         ballMesh.castShadow = true;
         scene.add(ballMesh);
         World.add(engine.world, ball);
+        leftPlungerLane = false;
         state = 'ready';
+      }
+
+      function resetTargetBank() {
+        targetLit.clear();
+        targetBankLocked = false;
+        for (const target of targets) meshes.get(target.id).material.emissive.setHex(0x000000);
+      }
+
+      function addScore(points) {
+        score += points * multiplier;
+        scoreNode.textContent = String(score).padStart(6, '0');
       }
 
       function launch() {
         if (state === 'idle' || state === 'over') {
           score = 0;
           balls = 3;
+          multiplier = 1;
           scoreNode.textContent = '000000';
           ballsNode.textContent = '3';
+          multiplierNode.textContent = '1×';
+          resetTargetBank();
           makeBall();
         }
         if (state !== 'ready') return;
         message.hidden = true;
-        Body.setVelocity(ball, { x: -2.1, y: -19 });
+        Body.setVelocity(ball, { x: -1.5, y: -34 });
         state = 'playing';
         tone(210, .08);
         live.textContent = '发球';
@@ -202,7 +266,8 @@
         if (balls <= 0) {
           state = 'over';
           message.querySelector('h1').textContent = 'GAME OVER';
-          message.querySelector('p').textContent = `SCORE ${String(score).padStart(6, '0')} · R 重新开始`;
+          rules.textContent = `最终得分 ${String(score).padStart(6, '0')} · 最高倍率 ${multiplier}×`;
+          controlsCopy.textContent = 'Space 或点击重新开始 · R 重开';
           message.querySelector('button').textContent = 'PLAY AGAIN';
           message.hidden = false;
           live.textContent = `游戏结束，得分 ${score}`;
@@ -225,18 +290,34 @@
 
       Events.on(engine, 'collisionStart', event => {
         for (const pair of event.pairs) {
-          const bumper = pair.bodyA.label === 'bumper' ? pair.bodyA : pair.bodyB.label === 'bumper' ? pair.bodyB : null;
-          const hitBall = pair.bodyA.label === 'ball' || pair.bodyB.label === 'ball';
-          if (!bumper || !hitBall) continue;
-          score += 100;
-          scoreNode.textContent = String(score).padStart(6, '0');
-          flashes.set(bumper.id, 1);
-          const dx = ball.position.x - bumper.position.x;
-          const dy = ball.position.y - bumper.position.y;
-          const length = Math.hypot(dx, dy) || 1;
-          Body.setVelocity(ball, { x: ball.velocity.x + dx / length * 4.5, y: ball.velocity.y + dy / length * 4.5 });
-          tone(380 + score % 500, .06);
-          navigator.vibrate?.(12);
+          const other = pair.bodyA === ball ? pair.bodyB : pair.bodyB === ball ? pair.bodyA : null;
+          if (!other) continue;
+          if (other.label === 'bumper') {
+            addScore(100);
+            flashes.set(other.id, 1);
+            const dx = ball.position.x - other.position.x;
+            const dy = ball.position.y - other.position.y;
+            const length = Math.hypot(dx, dy) || 1;
+            Body.setVelocity(ball, { x: ball.velocity.x + dx / length * 4.5, y: ball.velocity.y + dy / length * 4.5 });
+            tone(380 + score % 500, .06);
+            navigator.vibrate?.(12);
+          } else if (other.label.startsWith('target')) {
+            addScore(targetLit.has(other.id) ? 50 : 250);
+            targetLit.add(other.id);
+            meshes.get(other.id).material.emissive.setHex(meshes.get(other.id).material.color.getHex());
+            if (targetLit.size === targets.length && !targetBankLocked) {
+              targetBankLocked = true;
+              multiplier = Math.min(5, multiplier + 1);
+              multiplierNode.textContent = `${multiplier}×`;
+              addScore(1000);
+              live.textContent = `目标组完成，倍率 ${multiplier} 倍`;
+              tone(920, .14);
+              setTimeout(resetTargetBank, 700);
+            } else tone(620, .06);
+          } else if (other.label === 'slingshot') {
+            addScore(50);
+            tone(280, .045);
+          }
         }
       });
 
@@ -257,11 +338,17 @@
         positionFlipper(rightFlipper, 395, keys.right ? Math.PI + .42 : Math.PI - .34);
         Engine.update(engine, dt);
         if (ball) {
+          if (state === 'playing' && !leftPlungerLane && ball.position.y < 205) {
+            Body.setVelocity(ball, { x: -8, y: ball.velocity.y });
+            leftPlungerLane = true;
+          }
           ballMesh.position.set(toX(ball.position.x), .55, toZ(ball.position.y));
           ballMesh.rotation.x += ball.velocity.y * .002;
           ballMesh.rotation.z -= ball.velocity.x * .002;
           if (ball.position.y > H + 40) drain();
         }
+        document.body.dataset.state = state;
+        document.body.dataset.multiplier = String(multiplier);
         for (const body of engine.world.bodies) if (body.label === 'bumper') {
           const flash = Math.max(0, (flashes.get(body.id) || 0) - dt / 260);
           flashes.set(body.id, flash);
@@ -302,6 +389,8 @@
       makeBall();
       console.assert(THREE.REVISION === '160', 'Three.js revision');
       console.assert(engine.world.bodies.filter(body => body.label === 'bumper').length === 5, 'bumper setup');
+      console.assert(targets.length === 3, 'target bank setup');
+      console.assert(engine.world.bodies.filter(body => body.label === 'slingshot').length === 2, 'slingshot setup');
       resize();
       requestAnimationFrame(frame);
       document.body.dataset.selfCheck = 'ok';
