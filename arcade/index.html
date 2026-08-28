@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#091011">
+  <meta name="description" content="王子腾的浏览器游戏库：物理、交互与经典机制复现。">
+  <link rel="canonical" href="https://steve-strange.github.io/arcade/">
+  <link rel="icon" type="image/png" href="/images/a.png">
+  <link rel="stylesheet" href="/assets/portfolio.css">
+  <link rel="stylesheet" href="/assets/arcade.css">
+  <script defer src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script defer src="/assets/portfolio.js"></script>
+  <title>Arcade Lab｜Ziteng Wang</title>
+</head>
+<body class="arcade-page">
+  <a class="skip-link" href="#games">跳到游戏</a>
+  <header class="site-header is-scrolled" data-header>
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="返回个人主页">
+        <span class="brand-mark" aria-hidden="true">ZW</span>
+        <span class="brand-name">Ziteng Wang</span>
+      </a>
+      <nav class="site-nav" id="site-nav" aria-label="主导航" data-nav>
+        <a href="/#research">研究</a>
+        <a href="/#publications">论文</a>
+        <a href="/#projects">系统</a>
+        <a href="/arcade/" aria-current="page">游戏</a>
+        <a href="/#experience">经历</a>
+        <a href="/archives/">博客</a>
+      </nav>
+      <div class="header-actions">
+        <a class="icon-link" href="https://github.com/Steve-Strange" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><i data-lucide="github"></i></a>
+        <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="打开菜单" title="菜单" data-menu-toggle>
+          <i class="menu-icon-open" data-lucide="menu"></i><i class="menu-icon-close" data-lucide="x"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="arcade-main">
+    <section class="arcade-intro" aria-labelledby="arcade-title">
+      <div class="page-width arcade-intro-inner">
+        <div>
+          <p class="arcade-kicker">PLAYABLE EXPERIMENTS</p>
+          <h1 id="arcade-title">Arcade Lab</h1>
+          <p>围绕物理反馈、单键交互和经典机制制作的浏览器小游戏。</p>
+        </div>
+        <div class="arcade-count"><strong>03</strong><span>可直接游玩</span></div>
+      </div>
+    </section>
+
+    <section class="game-shelf" id="games" aria-label="游戏列表">
+      <div class="page-width game-grid">
+        <article class="game-card">
+          <a class="game-cover" href="/recoil-duel/" aria-label="开始反冲决斗">
+            <img src="/assets/media/arcade-recoil.png" alt="反冲决斗中蓝红手枪对射的游戏画面" width="960" height="720">
+            <span class="game-launch" aria-hidden="true"><i data-lucide="play"></i></span>
+          </a>
+          <div class="game-body">
+            <p class="game-type">PHYSICS DUEL · 1P / 2P</p>
+            <h2>反冲决斗</h2>
+            <p>枪口自旋，开火同时移动。用每一次后坐力完成瞄准、闪避与位置调整。</p>
+            <div class="game-meta"><span>键盘</span><span>触屏</span><span>本地双人</span></div>
+          </div>
+        </article>
+
+        <article class="game-card">
+          <a class="game-cover" href="/arcade/pinball/" aria-label="开始霓虹弹球">
+            <img src="/assets/media/arcade-pinball.png" alt="带有发光挡板与碰撞器的三维弹球台" width="800" height="600">
+            <span class="game-launch" aria-hidden="true"><i data-lucide="play"></i></span>
+          </a>
+          <div class="game-body">
+            <p class="game-type">3D PINBALL · PHYSICS</p>
+            <h2>Neon Pinball</h2>
+            <p>三维桌面、真实碰撞和双挡板控制。击中目标，守住每一颗球。</p>
+            <div class="game-meta"><span>Three.js</span><span>Matter.js</span><span>单人</span></div>
+          </div>
+        </article>
+
+        <article class="game-card">
+          <a class="game-cover" href="/arcade/sky-hopper/" aria-label="开始天空跃鸟">
+            <img src="/assets/media/arcade-sky-hopper.png" alt="黄色小鸟穿越空中障碍的游戏画面" width="800" height="600">
+            <span class="game-launch" aria-hidden="true"><i data-lucide="play"></i></span>
+          </a>
+          <div class="game-body">
+            <p class="game-type">ONE BUTTON · ENDLESS</p>
+            <h2>Sky Hopper</h2>
+            <p>单键控制高度，在连续变化的空隙中保持节奏，挑战最高距离。</p>
+            <div class="game-meta"><span>单键</span><span>触屏</span><span>无尽模式</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="page-width footer-inner">
+      <div><p class="footer-name">Arcade Lab</p><p>Browser games by Ziteng Wang</p></div>
+      <div class="footer-links"><a href="/">个人主页</a><a href="https://github.com/Steve-Strange">GitHub</a></div>
+      <p class="copyright">© <span data-year>2026</span> Ziteng Wang</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#070b0c">
+  <meta name="description" content="可直接游玩的三维物理弹球游戏。">
+  <title>Neon Pinball｜Arcade Lab</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; }
+    body { margin: 0; overflow: hidden; background: #070b0c; color: #fff; font-family: Arial, "Microsoft YaHei", sans-serif; }
+    canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+    .hud { position: fixed; inset: 0; z-index: 2; pointer-events: none; }
+    .topbar { position: absolute; top: max(14px, env(safe-area-inset-top)); right: 18px; left: 18px; display: flex; justify-content: space-between; align-items: flex-start; }
+    .back { width: 42px; height: 42px; display: grid; place-items: center; border: 1px solid #ffffff55; border-radius: 4px; color: #fff; background: #071012cc; pointer-events: auto; text-decoration: none; font-size: 24px; }
+    .stats { display: flex; gap: 24px; text-align: right; }
+    .stat span { display: block; color: #8ca5a4; font-size: 10px; font-weight: 700; }
+    .stat strong { display: block; min-width: 54px; color: #fff; font-size: 22px; line-height: 1.15; }
+    .message { position: absolute; top: 44%; left: 50%; translate: -50% -50%; width: min(88vw, 430px); text-align: center; pointer-events: auto; }
+    .message h1 { margin: 0 0 8px; color: #78f2d3; font-size: clamp(30px, 7vw, 54px); letter-spacing: 0; }
+    .message p { margin: 0 0 20px; color: #c5cfce; font-size: 13px; }
+    .message button { min-width: 150px; height: 44px; border: 0; border-radius: 4px; color: #071012; background: #78f2d3; font: 800 14px Arial, sans-serif; cursor: pointer; }
+    .message[hidden] { display: none; }
+    .controls { position: absolute; right: 0; bottom: max(18px, env(safe-area-inset-bottom)); left: 0; display: flex; justify-content: center; gap: 14px; pointer-events: auto; }
+    .control { width: 64px; height: 52px; border: 1px solid #ffffff55; border-radius: 5px; color: #fff; background: #071012d9; font: 800 23px Arial, sans-serif; touch-action: none; cursor: pointer; }
+    .control-launch { width: 76px; color: #071012; background: #ffd166; border-color: #ffd166; }
+    .control:active, .control.is-active { translate: 0 2px; background: #78f2d3; color: #071012; }
+    .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+    @media (pointer: fine) and (min-width: 800px) { .controls { opacity: .58; } .control { width: 58px; height: 44px; } }
+  </style>
+</head>
+<body>
+  <canvas id="scene" aria-label="三维霓虹弹球台"></canvas>
+  <div class="hud">
+    <div class="topbar">
+      <a class="back" href="/arcade/" aria-label="返回游戏库" title="返回游戏库">‹</a>
+      <div class="stats">
+        <div class="stat"><span>SCORE</span><strong id="score">000000</strong></div>
+        <div class="stat"><span>BALLS</span><strong id="balls">3</strong></div>
+      </div>
+    </div>
+    <div class="message" id="message">
+      <h1>NEON PINBALL</h1>
+      <p><b>A / ←</b> 左挡板　<b>D / →</b> 右挡板　<b>Space</b> 发球</p>
+      <button type="button" id="start">LAUNCH BALL</button>
+    </div>
+    <div class="controls" aria-label="弹球控制">
+      <button class="control" id="left" type="button" aria-label="左挡板" title="左挡板">↙</button>
+      <button class="control control-launch" id="launch" type="button" aria-label="发球" title="发球">↑</button>
+      <button class="control" id="right" type="button" aria-label="右挡板" title="右挡板">↘</button>
+    </div>
+    <p class="sr-only" id="live" aria-live="polite">等待发球</p>
+  </div>
+
+  <script src="/lib/three-r160/three.min.js"></script>
+  <script src="/lib/matter/matter.min.js"></script>
+  <script>
+    (() => {
+      'use strict';
+      const { Engine, World, Bodies, Body, Events } = Matter;
+      const W = 600;
+      const H = 900;
+      const SCALE = 60;
+      const canvas = document.getElementById('scene');
+      const scoreNode = document.getElementById('score');
+      const ballsNode = document.getElementById('balls');
+      const message = document.getElementById('message');
+      const live = document.getElementById('live');
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(42, 1, .1, 100);
+      const engine = Engine.create({ enableSleeping: false });
+      const meshes = new Map();
+      const flashes = new Map();
+      const keys = { left: false, right: false };
+      let ball;
+      let ballMesh;
+      let leftFlipper;
+      let rightFlipper;
+      let score = 0;
+      let balls = 3;
+      let state = 'idle';
+      let lastTime = performance.now();
+      let audio;
+
+      renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+      renderer.setClearColor(0x070b0c, 1);
+      renderer.shadowMap.enabled = true;
+      scene.fog = new THREE.Fog(0x070b0c, 24, 60);
+
+      const ambient = new THREE.AmbientLight(0x85a6a0, .7);
+      const keyLight = new THREE.DirectionalLight(0xffffff, 1.05);
+      keyLight.position.set(-5, 12, 7);
+      keyLight.castShadow = true;
+      scene.add(ambient, keyLight);
+      const cyanLight = new THREE.PointLight(0x3de3c2, 1.7, 12);
+      cyanLight.position.set(-3, 3, -2);
+      const goldLight = new THREE.PointLight(0xffc857, 1.4, 10);
+      goldLight.position.set(3, 3, 1);
+      scene.add(cyanLight, goldLight);
+
+      function toX(x) { return (x - W / 2) / SCALE; }
+      function toZ(y) { return (y - H / 2) / SCALE; }
+      function material(color, emissive = 0x000000) {
+        return new THREE.MeshPhongMaterial({ color, emissive, shininess: 80 });
+      }
+
+      const board = new THREE.Mesh(new THREE.BoxGeometry(W / SCALE, .45, H / SCALE), material(0x152322));
+      board.position.y = -.35;
+      board.receiveShadow = true;
+      scene.add(board);
+
+      function addBox(x, y, width, height, angle = 0, color = 0x24544f, label = 'wall', depth = .45) {
+        const body = Bodies.rectangle(x, y, width, height, { isStatic: true, angle, label, restitution: .65, friction: 0 });
+        const mesh = new THREE.Mesh(new THREE.BoxGeometry(width / SCALE, depth, height / SCALE), material(color, color === 0x24544f ? 0x08211e : 0x000000));
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+        scene.add(mesh);
+        meshes.set(body.id, mesh);
+        World.add(engine.world, body);
+        syncMesh(body);
+        return body;
+      }
+
+      function addBumper(x, y, radius, color) {
+        const body = Bodies.circle(x, y, radius, { isStatic: true, label: 'bumper', restitution: 1.35, friction: 0 });
+        const mesh = new THREE.Mesh(new THREE.CylinderGeometry(radius / SCALE, radius / SCALE, .62, 32), material(color, color));
+        mesh.castShadow = true;
+        scene.add(mesh);
+        meshes.set(body.id, mesh);
+        flashes.set(body.id, 0);
+        World.add(engine.world, body);
+        syncMesh(body);
+        return body;
+      }
+
+      addBox(15, 450, 30, 900);
+      addBox(585, 450, 30, 900);
+      addBox(300, 15, 600, 30);
+      addBox(505, 520, 12, 610, 0, 0x5a4130);
+      addBox(130, 808, 260, 18, .26);
+      addBox(470, 808, 260, 18, -.26);
+      addBox(78, 160, 180, 18, -.55, 0x5a4130);
+      addBox(452, 142, 190, 18, .55, 0x5a4130);
+      addBumper(205, 245, 38, 0x3de3c2);
+      addBumper(390, 255, 38, 0xffc857);
+      addBumper(300, 390, 42, 0xf05d7a);
+      addBumper(175, 505, 30, 0xffc857);
+      addBumper(425, 510, 30, 0x3de3c2);
+
+      leftFlipper = addBox(255, 735, 118, 24, .35, 0x3de3c2, 'flipper', .38);
+      rightFlipper = addBox(345, 735, 118, 24, Math.PI - .35, 0xf05d7a, 'flipper', .38);
+
+      function syncMesh(body) {
+        const mesh = meshes.get(body.id);
+        if (!mesh) return;
+        mesh.position.set(toX(body.position.x), body.label === 'bumper' ? .25 : .08, toZ(body.position.y));
+        mesh.rotation.y = -body.angle;
+      }
+
+      function positionFlipper(body, pivotX, angle) {
+        const half = 59;
+        Body.setPosition(body, { x: pivotX + Math.cos(angle) * half, y: 735 + Math.sin(angle) * half }, true);
+        Body.setAngle(body, angle, true);
+        syncMesh(body);
+      }
+
+      function makeBall() {
+        if (ball) World.remove(engine.world, ball);
+        if (ballMesh) scene.remove(ballMesh);
+        ball = Bodies.circle(548, 755, 13, { label: 'ball', restitution: .72, friction: .002, frictionAir: .006, density: .004 });
+        ballMesh = new THREE.Mesh(new THREE.SphereGeometry(13 / SCALE, 24, 18), material(0xf7fbff, 0x213c44));
+        ballMesh.castShadow = true;
+        scene.add(ballMesh);
+        World.add(engine.world, ball);
+        state = 'ready';
+      }
+
+      function launch() {
+        if (state === 'idle' || state === 'over') {
+          score = 0;
+          balls = 3;
+          scoreNode.textContent = '000000';
+          ballsNode.textContent = '3';
+          makeBall();
+        }
+        if (state !== 'ready') return;
+        message.hidden = true;
+        Body.setVelocity(ball, { x: -2.1, y: -19 });
+        state = 'playing';
+        tone(210, .08);
+        live.textContent = '发球';
+      }
+
+      function drain() {
+        if (state !== 'playing') return;
+        state = 'draining';
+        balls -= 1;
+        ballsNode.textContent = String(balls);
+        tone(75, .18);
+        if (balls <= 0) {
+          state = 'over';
+          message.querySelector('h1').textContent = 'GAME OVER';
+          message.querySelector('p').textContent = `SCORE ${String(score).padStart(6, '0')} · R 重新开始`;
+          message.querySelector('button').textContent = 'PLAY AGAIN';
+          message.hidden = false;
+          live.textContent = `游戏结束，得分 ${score}`;
+        } else {
+          setTimeout(() => { makeBall(); launch(); }, 650);
+        }
+      }
+
+      function tone(frequency, duration) {
+        audio ||= new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audio.createOscillator();
+        const gain = audio.createGain();
+        oscillator.frequency.value = frequency;
+        gain.gain.setValueAtTime(.045, audio.currentTime);
+        gain.gain.exponentialRampToValueAtTime(.001, audio.currentTime + duration);
+        oscillator.connect(gain).connect(audio.destination);
+        oscillator.start();
+        oscillator.stop(audio.currentTime + duration);
+      }
+
+      Events.on(engine, 'collisionStart', event => {
+        for (const pair of event.pairs) {
+          const bumper = pair.bodyA.label === 'bumper' ? pair.bodyA : pair.bodyB.label === 'bumper' ? pair.bodyB : null;
+          const hitBall = pair.bodyA.label === 'ball' || pair.bodyB.label === 'ball';
+          if (!bumper || !hitBall) continue;
+          score += 100;
+          scoreNode.textContent = String(score).padStart(6, '0');
+          flashes.set(bumper.id, 1);
+          const dx = ball.position.x - bumper.position.x;
+          const dy = ball.position.y - bumper.position.y;
+          const length = Math.hypot(dx, dy) || 1;
+          Body.setVelocity(ball, { x: ball.velocity.x + dx / length * 4.5, y: ball.velocity.y + dy / length * 4.5 });
+          tone(380 + score % 500, .06);
+          navigator.vibrate?.(12);
+        }
+      });
+
+      function resize() {
+        const width = innerWidth;
+        const height = innerHeight;
+        renderer.setSize(width, height, false);
+        camera.aspect = width / height;
+        camera.position.set(0, camera.aspect < .8 ? 18 : 11.5, camera.aspect < .8 ? 20.5 : 13.2);
+        camera.lookAt(new THREE.Vector3(0, 0, .5));
+        camera.updateProjectionMatrix();
+      }
+
+      function frame(now) {
+        const dt = Math.min(now - lastTime, 33.3);
+        lastTime = now;
+        positionFlipper(leftFlipper, 205, keys.left ? -.42 : .34);
+        positionFlipper(rightFlipper, 395, keys.right ? Math.PI + .42 : Math.PI - .34);
+        Engine.update(engine, dt);
+        if (ball) {
+          ballMesh.position.set(toX(ball.position.x), .55, toZ(ball.position.y));
+          ballMesh.rotation.x += ball.velocity.y * .002;
+          ballMesh.rotation.z -= ball.velocity.x * .002;
+          if (ball.position.y > H + 40) drain();
+        }
+        for (const body of engine.world.bodies) if (body.label === 'bumper') {
+          const flash = Math.max(0, (flashes.get(body.id) || 0) - dt / 260);
+          flashes.set(body.id, flash);
+          meshes.get(body.id).scale.setScalar(1 + flash * .16);
+        }
+        renderer.render(scene, camera);
+        requestAnimationFrame(frame);
+      }
+
+      function setControl(side, pressed) {
+        keys[side] = pressed;
+        document.getElementById(side).classList.toggle('is-active', pressed);
+      }
+
+      addEventListener('keydown', event => {
+        if (['KeyA', 'ArrowLeft'].includes(event.code)) setControl('left', true);
+        else if (['KeyD', 'ArrowRight'].includes(event.code)) setControl('right', true);
+        else if (event.code === 'Space') launch();
+        else if (event.code === 'KeyR') { state = 'idle'; launch(); }
+        else return;
+        event.preventDefault();
+      });
+      addEventListener('keyup', event => {
+        if (['KeyA', 'ArrowLeft'].includes(event.code)) setControl('left', false);
+        if (['KeyD', 'ArrowRight'].includes(event.code)) setControl('right', false);
+      });
+      for (const side of ['left', 'right']) {
+        const button = document.getElementById(side);
+        button.addEventListener('pointerdown', event => { event.preventDefault(); button.setPointerCapture(event.pointerId); setControl(side, true); });
+        button.addEventListener('pointerup', () => setControl(side, false));
+        button.addEventListener('pointercancel', () => setControl(side, false));
+      }
+      document.getElementById('start').addEventListener('click', launch);
+      document.getElementById('launch').addEventListener('click', launch);
+      addEventListener('resize', resize);
+      document.addEventListener('visibilitychange', () => { lastTime = performance.now(); });
+
+      makeBall();
+      console.assert(THREE.REVISION === '160', 'Three.js revision');
+      console.assert(engine.world.bodies.filter(body => body.label === 'bumper').length === 5, 'bumper setup');
+      resize();
+      requestAnimationFrame(frame);
+      document.body.dataset.selfCheck = 'ok';
+      document.body.dataset.ready = 'true';
+    })();
+  </script>
+</body>
+</html>
