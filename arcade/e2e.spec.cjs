@@ -138,6 +138,8 @@ test('Racer steering, brake, collision and restart', async ({ page }) => {
 test('Pinball ball moves and scores; flippers release on blur; restart clears round', async ({ page }) => {
   await page.goto(`${base}/arcade/?game=pinball`);
   const frame = page.frameLocator('#game-frame');
+  await expect(page.locator('#game-title')).toHaveText('3D Pinball');
+  await expect(frame.locator('body')).toHaveAttribute('data-theme', 'classic');
   await frame.locator('#start').click();
   await expect(frame.locator('body')).toHaveAttribute('data-state', 'playing');
   const before = await frame.locator('canvas').screenshot();
