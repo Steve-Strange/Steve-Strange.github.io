@@ -1,0 +1,13 @@
+.embedded #start-help, .embedded #mode-select, .embedded .back,
+.embedded .message #controls-copy, .embedded .message .source-link,
+.embedded .standalone-help, .embedded .standalone-mode { display: none !important; }
+.embedded #overlay { font-size: 30px; line-height: 1.1; top: 42%; }
+.embedded #game-shell { width: min(100vw, calc(100svh * 4 / 3)); box-shadow: none; }
+.embedded .message { top: auto; bottom: 22px; translate: -50% 0; width: 90%; }
+.embedded .message h1 { font-size: 24px; }
+.embedded .message .rules { display: none; }
+.embedded .message button { margin-top: 4px; }
+.embedded body[data-state="idle"] .message h1,
+.embedded body[data-state="ready"] .message h1 { display: none; }
+.embedded .hud .message { bottom: 84px; }
+@media (max-width: 400px) { .embedded #overlay { font-size: 23px; } .embedded .message h1 { font-size: 20px; } }

@@ -48,7 +48,7 @@
       border: 0;
       background: transparent;
       color: #fff;
-      font: italic 900 clamp(24px, 8vw, 38px) / .9 Arial, sans-serif;
+      font: italic 900 32px / 1.1 Arial, sans-serif;
       letter-spacing: 0;
       text-align: center;
       text-shadow: 0 3px 0 #7b8899, 0 6px 0 #34475e, 0 9px 18px #000a;
@@ -137,6 +137,8 @@
       #game-shell { box-shadow: 0 0 42px #0008; }
     }
   </style>
+  <link rel="stylesheet" href="/assets/game-embed.css">
+  <script src="/assets/game-bridge.js"></script>
 </head>
 <body>
   <main id="game-shell" data-state="idle" data-mode="ai" aria-label="反冲决斗游戏">
@@ -243,15 +245,17 @@
         overlay.textContent = 'TAP TO START';
         overlay.setAttribute('aria-label', '开始游戏');
         live.textContent = mode === 'ai' ? '人机模式' : '双人模式';
+        if (parent !== window) parent.postMessage({ arcade: true, action: 'mode-changed', value: mode }, location.origin);
       }
 
       function ensureAudio() {
+        if (!(window.AudioContext || window.webkitAudioContext)) return;
         audioContext ||= new (window.AudioContext || window.webkitAudioContext)();
         audioContext.resume();
       }
 
       function playShot(side) {
-        if (!audioContext) return;
+        if (!audioContext || window.arcadeMuted) return;
         const now = audioContext.currentTime;
         const oscillator = audioContext.createOscillator();
         const gain = audioContext.createGain();
@@ -266,7 +270,7 @@
       }
 
       function playImpact() {
-        if (!audioContext) return;
+        if (!audioContext || window.arcadeMuted) return;
         const length = Math.floor(audioContext.sampleRate * .22);
         const buffer = audioContext.createBuffer(1, length, audioContext.sampleRate);
         const data = buffer.getChannelData(0);
@@ -710,7 +714,7 @@
       function frame(now) {
         const dt = Math.min((now - lastTime) / 1000, .033);
         lastTime = now;
-        update(dt);
+        if (!window.arcadePaused) update(dt);
         draw();
         requestAnimationFrame(frame);
       }
@@ -725,6 +729,7 @@
 
       overlay.addEventListener('click', beginRound);
       modeButtons.forEach(button => button.addEventListener('click', () => setMode(button.dataset.mode)));
+      addEventListener('arcade-mode', event => setMode(event.detail));
       canvas.addEventListener('pointerdown', event => {
         event.preventDefault();
         const rect = canvas.getBoundingClientRect();

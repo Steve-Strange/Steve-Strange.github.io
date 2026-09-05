@@ -16,13 +16,15 @@
     .best span { display: block; font-size: 10px; font-weight: 800; }
     .best strong { display: block; font-size: 23px; line-height: 1.1; }
     .message { position: fixed; top: 48%; left: 50%; z-index: 3; translate: -50% -50%; width: min(88vw, 390px); color: #18333a; text-align: center; }
-    .message h1 { margin: 0 0 8px; font-size: clamp(34px, 10vw, 58px); letter-spacing: 0; }
+    .message h1 { margin: 0 0 8px; font-size: 34px; letter-spacing: 0; }
     .message p { margin: 5px 0; font-size: 14px; line-height: 1.45; }
     .message .rules { font-weight: 800; }
     .message button { min-width: 144px; height: 44px; margin-top: 14px; border: 0; border-radius: 4px; color: #fff; background: #d94f50; font: 800 14px Arial, sans-serif; cursor: pointer; }
     .message[hidden] { display: none; }
     .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
   </style>
+  <link rel="stylesheet" href="/assets/game-embed.css">
+  <script src="/assets/game-bridge.js"></script>
 </head>
 <body>
   <canvas id="game" aria-label="黄色小鸟穿越空中障碍"></canvas>
@@ -40,7 +42,7 @@
     (() => {
       'use strict';
       const { Engine, World, Bodies, Body, Events } = Matter;
-      const W = 420;
+      let W = 420;
       const H = 720;
       const R = 18;
       const canvas = document.getElementById('game');
@@ -57,13 +59,12 @@
       const pipes = [];
       let state = 'idle';
       let score = 0;
-      let best = Number(localStorage.getItem('sky-hopper-best') || 0);
+      let best = window.arcadeStorage.get('sky-hopper-best');
       let spawnTimer = 0;
       let lastTime = performance.now();
       let viewScale = 1;
       let viewX = 0;
       let viewY = 0;
-      let audio;
 
       engine.gravity.y = 1.1;
       Body.setStatic(bird, true);
@@ -118,7 +119,7 @@
         if (state !== 'playing') return;
         state = 'over';
         best = Math.max(best, score);
-        localStorage.setItem('sky-hopper-best', String(best));
+        window.arcadeStorage.set('sky-hopper-best', best);
         bestNode.textContent = String(best);
         message.querySelector('h1').textContent = score ? `SCORE ${score}` : 'TRY AGAIN';
         rules.textContent = `本局 ${score} 分 · 最高 ${best} 分`;
@@ -130,16 +131,7 @@
       }
 
       function tone(frequency, duration) {
-        audio ||= new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = audio.createOscillator();
-        const gain = audio.createGain();
-        oscillator.type = 'triangle';
-        oscillator.frequency.value = frequency;
-        gain.gain.setValueAtTime(.04, audio.currentTime);
-        gain.gain.exponentialRampToValueAtTime(.001, audio.currentTime + duration);
-        oscillator.connect(gain).connect(audio.destination);
-        oscillator.start();
-        oscillator.stop(audio.currentTime + duration);
+        window.arcadeTone(frequency, duration);
       }
 
       Events.on(engine, 'collisionStart', event => {
@@ -148,6 +140,11 @@
 
       function resize() {
         const dpr = Math.min(devicePixelRatio || 1, 2);
+        W = Math.max(420, H * innerWidth / innerHeight);
+        Body.setPosition(ceiling, { x: W / 2, y: -24 });
+        Body.setPosition(ground, { x: W / 2, y: H + 24 });
+        Body.setVertices(ceiling, [{ x: 0, y: -48 }, { x: W, y: -48 }, { x: W, y: 0 }, { x: 0, y: 0 }]);
+        Body.setVertices(ground, [{ x: 0, y: H }, { x: W, y: H }, { x: W, y: H + 48 }, { x: 0, y: H + 48 }]);
         canvas.width = Math.round(innerWidth * dpr);
         canvas.height = Math.round(innerHeight * dpr);
         viewScale = Math.min(innerWidth / W, innerHeight / H);
@@ -178,7 +175,8 @@
             pipes.splice(i, 1);
           }
         }
-        Engine.update(engine, dt);
+        const steps = Math.max(1, Math.ceil(dt / 16.667));
+        for (let step = 0; step < steps; step++) Engine.update(engine, dt / steps);
         Body.setAngle(bird, Math.max(-.45, Math.min(1.1, bird.velocity.y * .07)));
         if (bird.position.y > H + R || bird.position.y < -R) end();
       }
@@ -235,7 +233,7 @@
         ctx.scale(viewScale, viewScale);
         ctx.fillStyle = '#9bcbd8';
         ctx.fillRect(0, 0, W, H);
-        cloud(42, 112, 34); cloud(270, 185, 26); cloud(318, 72, 38);
+        for (let x = 42; x < W; x += 290) { cloud(x, 112, 34); cloud(x + 150, 185, 26); }
         ctx.fillStyle = '#6e9da5';
         for (let x = 0; x < W; x += 38) ctx.fillRect(x, 590 - (x % 76), 27, 130 + (x % 76));
         ctx.fillStyle = '#4d7777';
@@ -253,7 +251,8 @@
       function frame(now) {
         const dt = Math.min(now - lastTime, 33.3);
         lastTime = now;
-        update(dt);
+        if (!window.arcadePaused) update(dt);
+        document.body.dataset.state = state;
         canvas.dataset.score = String(score);
         canvas.dataset.state = state;
         draw();

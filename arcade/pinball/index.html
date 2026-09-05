@@ -18,7 +18,7 @@
     .stat span { display: block; color: #8ca5a4; font-size: 10px; font-weight: 700; }
     .stat strong { display: block; min-width: 54px; color: #fff; font-size: 22px; line-height: 1.15; }
     .message { position: absolute; top: 44%; left: 50%; translate: -50% -50%; width: min(90vw, 470px); text-align: center; pointer-events: auto; }
-    .message h1 { margin: 0 0 8px; color: #78f2d3; font-size: clamp(30px, 7vw, 54px); letter-spacing: 0; }
+    .message h1 { margin: 0 0 8px; color: #78f2d3; font-size: 32px; letter-spacing: 0; }
     .message p { margin: 5px 0; color: #c5cfce; font-size: 13px; line-height: 1.45; }
     .message .rules { color: #fff; font-weight: 700; }
     .message button { min-width: 150px; height: 44px; margin-top: 14px; border: 0; border-radius: 4px; color: #071012; background: #78f2d3; font: 800 14px Arial, sans-serif; cursor: pointer; }
@@ -32,6 +32,8 @@
     .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
     @media (pointer: fine) and (min-width: 800px) { .controls { opacity: .58; } .control { width: 58px; height: 44px; } }
   </style>
+  <link rel="stylesheet" href="/assets/game-embed.css">
+  <script src="/assets/game-bridge.js"></script>
 </head>
 <body>
   <canvas id="scene" aria-label="三维霓虹弹球台"></canvas>
@@ -96,7 +98,8 @@
       let leftPlungerLane = false;
       let state = 'idle';
       let lastTime = performance.now();
-      let audio;
+      let drainDelay = 0;
+      let targetResetDelay = 0;
 
       renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
       renderer.setClearColor(0x070b0c, 1);
@@ -217,7 +220,7 @@
 
       function makeBall() {
         if (ball) World.remove(engine.world, ball);
-        if (ballMesh) scene.remove(ballMesh);
+        if (ballMesh) { scene.remove(ballMesh); ballMesh.geometry.dispose(); ballMesh.material.dispose(); }
         ball = Bodies.circle(548, 755, 13, { label: 'ball', restitution: .72, friction: .002, frictionAir: .006, density: .004 });
         ballMesh = new THREE.Mesh(new THREE.SphereGeometry(13 / SCALE, 24, 18), material(0xf7fbff, 0x213c44));
         ballMesh.castShadow = true;
@@ -240,6 +243,7 @@
 
       function launch() {
         if (state === 'idle' || state === 'over') {
+          drainDelay = targetResetDelay = 0;
           score = 0;
           balls = 3;
           multiplier = 1;
@@ -272,20 +276,12 @@
           message.hidden = false;
           live.textContent = `游戏结束，得分 ${score}`;
         } else {
-          setTimeout(() => { makeBall(); launch(); }, 650);
+          drainDelay = 650;
         }
       }
 
       function tone(frequency, duration) {
-        audio ||= new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = audio.createOscillator();
-        const gain = audio.createGain();
-        oscillator.frequency.value = frequency;
-        gain.gain.setValueAtTime(.045, audio.currentTime);
-        gain.gain.exponentialRampToValueAtTime(.001, audio.currentTime + duration);
-        oscillator.connect(gain).connect(audio.destination);
-        oscillator.start();
-        oscillator.stop(audio.currentTime + duration);
+        window.arcadeTone(frequency, duration);
       }
 
       Events.on(engine, 'collisionStart', event => {
@@ -312,7 +308,7 @@
               addScore(1000);
               live.textContent = `目标组完成，倍率 ${multiplier} 倍`;
               tone(920, .14);
-              setTimeout(resetTargetBank, 700);
+              targetResetDelay = 700;
             } else tone(620, .06);
           } else if (other.label === 'slingshot') {
             addScore(50);
@@ -326,17 +322,25 @@
         const height = innerHeight;
         renderer.setSize(width, height, false);
         camera.aspect = width / height;
-        camera.position.set(0, camera.aspect < .8 ? 18 : 11.5, camera.aspect < .8 ? 20.5 : 13.2);
-        camera.lookAt(new THREE.Vector3(0, 0, .5));
+        const distance = Math.max(1, 1.05 / camera.aspect);
+        camera.position.set(0, 13.2 * distance, 15.1 * distance);
+        camera.lookAt(new THREE.Vector3(0, 0, 1.4));
         camera.updateProjectionMatrix();
       }
 
       function frame(now) {
         const dt = Math.min(now - lastTime, 33.3);
         lastTime = now;
-        positionFlipper(leftFlipper, 205, keys.left ? -.42 : .34);
-        positionFlipper(rightFlipper, 395, keys.right ? Math.PI + .42 : Math.PI - .34);
-        Engine.update(engine, dt);
+        if (!window.arcadePaused) {
+          positionFlipper(leftFlipper, 175, keys.left ? -.42 : .34);
+          positionFlipper(rightFlipper, 425, keys.right ? Math.PI + .42 : Math.PI - .34);
+          if (state === 'playing') {
+            const steps = Math.max(1, Math.ceil(dt / 8.333));
+            for (let step = 0; step < steps; step++) Engine.update(engine, dt / steps);
+          }
+          if (drainDelay > 0 && (drainDelay -= dt) <= 0) { makeBall(); launch(); }
+          if (targetResetDelay > 0 && (targetResetDelay -= dt) <= 0) resetTargetBank();
+        }
         if (ball) {
           if (state === 'playing' && !leftPlungerLane && ball.position.y < 205) {
             Body.setVelocity(ball, { x: -8, y: ball.velocity.y });
@@ -375,11 +379,20 @@
         if (['KeyA', 'ArrowLeft'].includes(event.code)) setControl('left', false);
         if (['KeyD', 'ArrowRight'].includes(event.code)) setControl('right', false);
       });
+      addEventListener('blur', () => { setControl('left', false); setControl('right', false); });
       for (const side of ['left', 'right']) {
         const button = document.getElementById(side);
         button.addEventListener('pointerdown', event => { event.preventDefault(); button.setPointerCapture(event.pointerId); setControl(side, true); });
         button.addEventListener('pointerup', () => setControl(side, false));
         button.addEventListener('pointercancel', () => setControl(side, false));
+        button.addEventListener('lostpointercapture', () => setControl(side, false));
+        button.addEventListener('keydown', event => {
+          if (!['Space', 'Enter'].includes(event.code)) return;
+          event.preventDefault(); setControl(side, true);
+        });
+        button.addEventListener('keyup', event => {
+          if (['Space', 'Enter'].includes(event.code)) setControl(side, false);
+        });
       }
       document.getElementById('start').addEventListener('click', launch);
       document.getElementById('launch').addEventListener('click', launch);

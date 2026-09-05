@@ -3,103 +3,81 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#091011">
-  <meta name="description" content="王子腾的浏览器游戏库：物理、交互与经典机制复现。">
+  <meta name="theme-color" content="#f5f6f7">
+  <meta name="description" content="王子腾的游戏室：反冲决斗、霓虹弹球、Sky Hopper、五子棋、小恐龙和赛车。">
   <link rel="canonical" href="https://steve-strange.github.io/arcade/">
   <link rel="icon" type="image/png" href="/images/a.png">
   <link rel="stylesheet" href="/assets/portfolio.css">
   <link rel="stylesheet" href="/assets/arcade.css">
-  <script defer src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script defer src="/lib/lucide/lucide.min.js"></script>
   <script defer src="/assets/portfolio.js"></script>
+  <script defer src="/assets/arcade.js"></script>
   <title>Arcade Lab｜Ziteng Wang</title>
 </head>
 <body class="arcade-page">
   <a class="skip-link" href="#games">跳到游戏</a>
   <header class="site-header is-scrolled" data-header>
     <div class="header-inner">
-      <a class="brand" href="/" aria-label="返回个人主页">
-        <span class="brand-mark" aria-hidden="true">ZW</span>
-        <span class="brand-name">Ziteng Wang</span>
-      </a>
+      <a class="brand" href="/" aria-label="返回个人主页"><span class="brand-mark" aria-hidden="true">ZW</span><span class="brand-name">Ziteng Wang</span></a>
       <nav class="site-nav" id="site-nav" aria-label="主导航" data-nav>
-        <a href="/#research">研究</a>
-        <a href="/#publications">论文</a>
-        <a href="/#projects">系统</a>
-        <a href="/arcade/" aria-current="page">游戏</a>
-        <a href="/#experience">经历</a>
-        <a href="/archives/">博客</a>
+        <a href="/#research">研究</a><a href="/#publications">论文</a><a href="/#projects">系统</a><a href="/arcade/" aria-current="page">游戏</a><a href="/#experience">经历</a><a href="/archives/">博客</a>
       </nav>
       <div class="header-actions">
         <a class="icon-link" href="https://github.com/Steve-Strange" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><i data-lucide="github"></i></a>
-        <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="打开菜单" title="菜单" data-menu-toggle>
-          <i class="menu-icon-open" data-lucide="menu"></i><i class="menu-icon-close" data-lucide="x"></i>
-        </button>
+        <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="打开菜单" title="菜单" data-menu-toggle><i class="menu-icon-open" data-lucide="menu"></i><i class="menu-icon-close" data-lucide="x"></i></button>
       </div>
     </div>
   </header>
-
-  <main class="arcade-main">
+  <main class="arcade-main page-width">
     <section class="arcade-intro" aria-labelledby="arcade-title">
-      <div class="page-width arcade-intro-inner">
-        <div>
-          <p class="arcade-kicker">PLAYABLE EXPERIMENTS</p>
-          <h1 id="arcade-title">Arcade Lab</h1>
-          <p>围绕物理反馈、单键交互和经典机制制作的浏览器小游戏。</p>
-        </div>
-        <div class="arcade-count"><strong>03</strong><span>可直接游玩</span></div>
-      </div>
+      <h1 id="arcade-title">Arcade Lab<span>游戏室</span></h1>
+      <p class="arcade-count"><span class="status-dot"></span>6 款游戏 <span class="count-divider">/</span> 随时来一局</p>
     </section>
-
-    <section class="game-shelf" id="games" aria-label="游戏列表">
-      <div class="page-width game-grid">
-        <article class="game-card">
-          <a class="game-cover" href="/recoil-duel/" aria-label="开始反冲决斗">
-            <img src="/assets/media/arcade-recoil.png" alt="反冲决斗中蓝红手枪对射的游戏画面" width="960" height="720">
-            <span class="game-launch" aria-hidden="true"><i data-lucide="play"></i></span>
-          </a>
-          <div class="game-body">
-            <p class="game-type">PHYSICS DUEL · 1P / 2P</p>
-            <h2>反冲决斗</h2>
-            <p>枪口自旋，开火同时移动。用每一次后坐力完成瞄准、闪避与位置调整。</p>
-            <div class="game-meta"><span>键盘</span><span>触屏</span><span>本地双人</span></div>
+    <section class="play-layout" id="games" aria-label="游戏区">
+      <div class="play-column">
+        <div class="stage-bar">
+          <div class="now-playing"><i data-lucide="gamepad-2"></i><span id="stage-name">反冲决斗</span><select id="game-picker" aria-label="切换游戏"></select></div>
+          <div class="stage-tools">
+            <button id="pause-game" class="tool" type="button" aria-label="暂停" title="暂停" aria-pressed="false"><i data-lucide="pause"></i></button>
+            <button id="restart-game" class="tool" type="button" aria-label="重新开始" title="重新开始"><i data-lucide="rotate-ccw"></i></button>
+            <button id="mute-game" class="tool" type="button" aria-label="静音" title="静音" aria-pressed="false"><i data-lucide="volume-2"></i></button>
+            <button id="fullscreen-game" class="tool" type="button" aria-label="全屏" title="全屏"><i data-lucide="maximize"></i></button>
+            <a id="open-game" class="tool" href="/recoil-duel/" target="_blank" rel="noopener" aria-label="独立打开游戏" title="独立打开"><i data-lucide="external-link"></i></a>
           </div>
-        </article>
-
-        <article class="game-card">
-          <a class="game-cover" href="/arcade/pinball/" aria-label="开始霓虹弹球">
-            <img src="/assets/media/arcade-pinball.png" alt="带有发光挡板与碰撞器的三维弹球台" width="800" height="600">
-            <span class="game-launch" aria-hidden="true"><i data-lucide="play"></i></span>
-          </a>
-          <div class="game-body">
-            <p class="game-type">3D PINBALL · PHYSICS</p>
-            <h2>Neon Pinball</h2>
-            <p>三维桌面、发射轨道、双挡板和目标倍率系统。击中目标，守住每一颗球。</p>
-            <div class="game-meta"><span>Three.js</span><span>Matter.js</span><span>单人</span></div>
-          </div>
-        </article>
-
-        <article class="game-card">
-          <a class="game-cover" href="/arcade/sky-hopper/" aria-label="开始天空跃鸟">
-            <img src="/assets/media/arcade-sky-hopper.png" alt="黄色小鸟穿越空中障碍的游戏画面" width="800" height="600">
-            <span class="game-launch" aria-hidden="true"><i data-lucide="play"></i></span>
-          </a>
-          <div class="game-body">
-            <p class="game-type">ONE BUTTON · ENDLESS</p>
-            <h2>Sky Hopper</h2>
-            <p>单键控制高度，在连续变化的空隙中保持节奏，挑战最高距离。</p>
-            <div class="game-meta"><span>单键</span><span>触屏</span><span>无尽模式</span></div>
-          </div>
-        </article>
+        </div>
+        <div class="game-stage" id="game-stage">
+          <iframe id="game-frame" title="反冲决斗" src="/recoil-duel/?embed=1" allow="autoplay; fullscreen" tabindex="0"></iframe>
+          <button class="pause-screen" id="resume-game" type="button" hidden><i data-lucide="play"></i><span>继续游戏</span></button>
+          <p class="frame-error" id="frame-error" hidden>游戏未能载入。<button type="button" id="retry-game">重新载入</button></p>
+        </div>
       </div>
+      <aside class="game-info" aria-labelledby="game-title">
+        <p class="game-type" id="game-type">01 / PHYSICS DUEL</p>
+        <h2 id="game-title">反冲决斗</h2>
+        <p class="game-tagline" id="game-tagline">每一枪，也是下一步。</p>
+        <p class="game-description" id="game-description">零重力场地，青红双枪。枪口不停自旋，用开火的后坐力调整位置，也等待下一次瞄准。</p>
+        <div class="game-mode" id="game-mode" role="group" aria-label="对战模式">
+          <button type="button" data-mode="ai" aria-pressed="true">人机对战</button>
+          <button type="button" data-mode="pvp" aria-pressed="false">本地双人</button>
+        </div>
+        <div class="info-section"><h3>玩法</h3><p id="game-rules">命中三次获胜。子弹相撞会抵消；枪体碰到边界会反弹。</p></div>
+        <div class="info-section"><h3>操作</h3><dl class="key-list" id="game-controls"></dl></div>
+        <div class="game-note"><i data-lucide="fingerprint"></i><span id="game-note">单键决斗 · 1–2 人</span></div>
+        <p class="sr-only" id="arcade-live" role="status"></p>
+      </aside>
+    </section>
+    <section class="game-shelf" aria-labelledby="shelf-title">
+      <div class="shelf-heading"><h2 id="shelf-title">换个游戏</h2><span>THE COLLECTION / 06</span></div>
+      <nav class="game-grid" aria-label="选择游戏">
+        <a class="game-card" href="?game=recoil" data-game="recoil" aria-current="true"><img src="/assets/media/arcade-recoil.png" alt="青红双枪决斗" width="400" height="300"><span><b>反冲决斗</b><small>物理 · 双人</small></span><i data-lucide="arrow-up-right"></i></a>
+        <a class="game-card" href="?game=pinball" data-game="pinball"><img src="/assets/media/arcade-pinball.png" alt="霓虹三维弹球台" width="400" height="300"><span><b>Neon Pinball</b><small>街机 · 弹球</small></span><i data-lucide="arrow-up-right"></i></a>
+        <a class="game-card" href="?game=sky-hopper" data-game="sky-hopper"><img src="/assets/media/arcade-sky-hopper.png" alt="晴空小鸟与管道" width="400" height="300"><span><b>Sky Hopper</b><small>轻快 · 飞行</small></span><i data-lucide="arrow-up-right"></i></a>
+        <a class="game-card" href="?game=gomoku" data-game="gomoku"><img src="/assets/media/arcade-gomoku.png" alt="木色棋盘上的黑白棋子" width="400" height="300"><span><b>五子棋</b><small>棋盘 · 策略</small></span><i data-lucide="arrow-up-right"></i></a>
+        <a class="game-card" href="?game=dino" data-game="dino"><img src="/assets/media/arcade-dino.png" alt="像素小恐龙跳过仙人掌" width="400" height="300"><span><b>Dino Run</b><small>像素 · 跑酷</small></span><i data-lucide="arrow-up-right"></i></a>
+        <a class="game-card" href="?game=racer" data-game="racer"><img src="/assets/media/arcade-racer.png" alt="红色赛车穿过公路车流" width="400" height="300"><span><b>Pocket Racer</b><small>复古 · 赛车</small></span><i data-lucide="arrow-up-right"></i></a>
+      </nav>
     </section>
   </main>
-
-  <footer class="site-footer">
-    <div class="page-width footer-inner">
-      <div><p class="footer-name">Arcade Lab</p><p>Browser games by Ziteng Wang</p></div>
-      <div class="footer-links"><a href="/">个人主页</a><a href="https://github.com/Steve-Strange">GitHub</a></div>
-      <p class="copyright">© <span data-year>2026</span> Ziteng Wang</p>
-    </div>
-  </footer>
+  <footer class="arcade-footer page-width"><span>© <span data-year>2026</span> Ziteng Wang</span><a href="/">回到个人主页 <i data-lucide="arrow-up-right"></i></a></footer>
 </body>
 </html>
