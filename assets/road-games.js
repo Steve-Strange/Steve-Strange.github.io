@@ -10,7 +10,7 @@
   const bestNode = document.getElementById('best');
   const live = document.getElementById('live');
   const engine = Engine.create();
-  engine.gravity.y = racing ? 0 : .95;
+  engine.gravity.y = racing ? 0 : 2.4;
   const player = Bodies.rectangle(racing ? 400 : 126, racing ? 465 : floor - 24, racing ? 36 : 30, racing ? 66 : 44, { inertia: Infinity, friction: 0, frictionAir: 0, restitution: 0, label: 'player' });
   const ground = Bodies.rectangle(W / 2, floor + 24, W * 3, 48, { isStatic: true, friction: 0, label: 'ground' });
   Composite.add(engine.world, racing ? [player] : [player, ground]);
@@ -61,7 +61,7 @@
     if (state !== 'playing') { reset(); return; }
     if (window.arcadePaused || player.bounds.max.y < floor - 4 || Math.abs(player.velocity.y) > 1) return;
     setDuck(false);
-    Body.setVelocity(player, { x: 0, y: -13.3 });
+    Body.setVelocity(player, { x: 0, y: -10.8 });
     window.arcadeTone(530, .05);
   }
   function spawn() {
@@ -89,7 +89,7 @@
     const speed = racing ? (held.has('brake') ? 3.1 : 6 + Math.min(distance / 400, 5)) : 6 + Math.min(distance / 160, 5);
     distance += speed * dt / 160;
     timer -= dt;
-    if (timer <= 0) { spawn(); timer = racing ? Math.max(650, 1400 - distance * .35) : (1000 + Math.random() * 650) * 6 / speed; }
+    if (timer <= 0) { spawn(); timer = racing ? Math.max(650, 1400 - distance * .35) : Math.max(720, (1000 + Math.random() * 650) * 6 / speed); }
     if (racing) {
       const turn = Number(held.has('right')) - Number(held.has('left'));
       Body.setPosition(player, { x: Math.max(250, Math.min(550, player.position.x + turn * dt * .38)), y: 465 });

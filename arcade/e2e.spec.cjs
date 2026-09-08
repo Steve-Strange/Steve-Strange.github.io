@@ -115,6 +115,78 @@ test('Dino jumps, hits an obstacle, restarts and saves best', async ({ page }) =
   await expect(page.locator('#best')).toHaveText(best);
 });
 
+test('Dino has a short jump and clears consecutive tall cacti through maximum speed', async ({ page }) => {
+  await page.addInitScript(() => {
+    let now = 0, frame, matter;
+    Object.defineProperty(performance, 'now', { value: () => now });
+    window.requestAnimationFrame = callback => { frame = callback; return 1; };
+    window.stepDino = dt => { now += dt; frame(now); };
+    Object.defineProperty(window, 'Matter', {
+      get: () => matter,
+      set(value) {
+        matter = value;
+        const create = value.Engine.create;
+        value.Engine.create = (...args) => (window.dinoEngine = create(...args));
+      }
+    });
+    // Mix tall cacti with minimum gaps; values stay below the flying-bird threshold.
+    const random = [.6, .6, 0];
+    let index = 0;
+    Math.random = () => random[index++ % random.length];
+  });
+  for (const fps of [30, 60, 120]) for (const lead of [.2, .3]) {
+    await page.goto(`${base}/arcade/dino/`);
+    const result = await page.evaluate(({ fps, lead }) => {
+      const dt = 1000 / fps;
+      const canvas = document.getElementById('game');
+      const player = window.dinoEngine.world.bodies.find(body => body.label === 'player');
+      const key = code => dispatchEvent(new KeyboardEvent('keydown', { code }));
+      const settle = () => { for (let i = 0; i < Math.ceil(200 / dt); i++) window.stepDino(dt); };
+      key('KeyR'); settle();
+      const groundY = player.position.y;
+      key('Space');
+      let rise = 0, airtime = 0;
+      do {
+        window.stepDino(dt); airtime += dt;
+        rise = Math.max(rise, groundY - player.position.y);
+      } while (player.position.y < groundY - 1 && airtime < 2000);
+      key('KeyR'); settle();
+      const jumps = new Set(), cleared = new Set(), tallCleared = new Set();
+      const inputs = ['Space', 'ArrowUp', 'touch'];
+      let previousX, previousId, speed = 6;
+      for (let elapsed = 0; elapsed < 30000 && canvas.dataset.state === 'playing'; elapsed += dt) {
+        const obstacles = window.dinoEngine.world.bodies.filter(body => body.label === 'obstacle');
+        for (const obstacle of obstacles) if (obstacle.bounds.max.x < player.bounds.min.x) {
+          cleared.add(obstacle.id);
+          if (obstacle.bounds.max.y - obstacle.bounds.min.y > 50) tallCleared.add(obstacle.id);
+        }
+        const next = obstacles.find(body => body.position.x > player.position.x && !jumps.has(body.id));
+        if (next) {
+          if (next.id === previousId) speed = (previousX - next.position.x) / dt * 16.667;
+          previousId = next.id; previousX = next.position.x;
+          if (next.position.x - player.position.x < speed * 60 * lead) {
+            const input = inputs[jumps.size % inputs.length];
+            if (input === 'touch') canvas.dispatchEvent(new PointerEvent('pointerdown', { pointerId: 1 }));
+            else key(input);
+            jumps.add(next.id);
+          }
+        }
+        window.stepDino(dt);
+      }
+      return { fps, lead, rise, airtime, state: canvas.dataset.state, cleared: cleared.size, tallCleared: tallCleared.size, speed, score: Number(canvas.dataset.score) };
+    }, { fps, lead });
+    expect(result.rise).toBeGreaterThan(75);
+    expect(result.rise).toBeLessThan(105);
+    expect(result.airtime).toBeGreaterThan(450);
+    expect(result.airtime).toBeLessThan(650);
+    expect(result.state).toBe('playing');
+    expect(result.cleared).toBeGreaterThan(20);
+    expect(result.tallCleared).toBeGreaterThan(5);
+    expect(result.speed).toBeGreaterThan(10.5);
+    console.log('Dino handling:', result);
+  }
+});
+
 test('Racer steering, brake, collision and restart', async ({ page }) => {
   await page.addInitScript(() => { Math.random = () => .5; });
   await page.goto(`${base}/arcade/racer/`);
