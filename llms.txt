@@ -1,0 +1,19 @@
+# Ziteng Wang / 王子腾
+
+> Beihang University researcher working on VR/HCI and disassembly planning.
+
+## Publications
+
+- [Collaborative Disassembly for Multiple Users in Virtual Reality](https://steve-strange.github.io/publications/collaborative-disassembly/index.md): Dynamic Parallel Disassembly and Tasking connects simulation-validated planning, parallel task sets, and proximity-aware allocation for collaborative VR. DOI: 10.1109/tvcg.2026.3732564.
+- [DSPT: Disassembly Sequence Planning Transformer for Interaction Guidance in VR](https://steve-strange.github.io/publications/dspt/index.md): A Transformer uses disassembly-sequence and part-history features to predict removal candidates for interactive VR guidance. DOI: 10.1080/10447318.2025.2607559.
+- [MOA: Efficient Scene-Aware Multi-Object Arrangement in VR](https://steve-strange.github.io/publications/moa/index.md): Scene-aware selection and auxiliary manipulation structures support controller-free arrangement of many occluded objects in VR. DOI: 10.1109/tvcg.2025.3636062.
+- [Align-Box: Enable Fast Bare-Hand Multi-Object Alignment in VR](https://steve-strange.github.io/publications/align-box/index.md): A two-box interaction metaphor maps an object enclosing box to a proxy box for bare-hand group-based and object-based alignment in VR. DOI: 10.1080/10447318.2026.2621281.
+- [Multimodal Contrastive Learning for Cybersickness Recognition Using Brain Connectivity Graph Representation](https://steve-strange.github.io/publications/cybersickness-bcgr/index.md): Brain connectivity graph representations align EEG, video, and motion for multimodal cybersickness recognition. DOI: 10.1109/tvcg.2025.3616797.
+- [FanPad: A Fan Layout Touchpad Keyboard for Text Entry in VR](https://steve-strange.github.io/publications/fanpad/index.md): A curved, customizable QWERTY layout follows thumb movement on two VR controller touchpads. DOI: 10.1109/vr58804.2024.00045.
+
+## Citation data
+
+- [BibTeX](https://steve-strange.github.io/publications/publications.bib)
+- [Structured catalog](https://steve-strange.github.io/publications/papers.json)
+
+Use publisher records for authoritative bibliographic updates. Explainers distinguish study evidence from limitations.

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Multimodal Contrastive Learning for Cybersickness Recognition Using Brain Connectivity Graph Representation | Ziteng Wang</title>
+<meta name="description" content="Brain connectivity graph representations align EEG, video, and motion for multimodal cybersickness recognition.">
+<meta name="author" content="Ziteng Wang"><meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://steve-strange.github.io/publications/cybersickness-bcgr/">
+<meta property="og:type" content="article"><meta property="og:title" content="Multimodal Contrastive Learning for Cybersickness Recognition Using Brain Connectivity Graph Representation">
+<meta property="og:description" content="Brain connectivity graph representations align EEG, video, and motion for multimodal cybersickness recognition."><meta property="og:url" content="https://steve-strange.github.io/publications/cybersickness-bcgr/">
+<meta property="og:image" content="https://steve-strange.github.io/publications/cybersickness-bcgr/overview.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/assets/publications.css"><script defer src="/assets/publications.js"></script>
+<meta name="citation_title" content="Multimodal Contrastive Learning for Cybersickness Recognition Using Brain Connectivity Graph Representation">
+<meta name="citation_publication_date" content="2025/11">
+<meta name="citation_doi" content="10.1109/tvcg.2025.3616797">
+<meta name="citation_abstract_html_url" content="https://steve-strange.github.io/publications/cybersickness-bcgr/">
+<meta name="citation_journal_title" content="IEEE Transactions on Visualization and Computer Graphics">
+<meta name="citation_volume" content="31">
+<meta name="citation_issue" content="11">
+<meta name="citation_firstpage" content="10080">
+<meta name="citation_lastpage" content="10089">
+<meta name="citation_language" content="en">
+<meta name="citation_author" content="Peike Wang">
+<meta name="citation_author" content="Ming Li">
+<meta name="citation_author" content="Ziteng Wang">
+<meta name="citation_author" content="Yong-Jin Liu">
+<meta name="citation_author" content="Lili Wang"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "ScholarlyArticle", "@id": "https://steve-strange.github.io/publications/cybersickness-bcgr/#article", "headline": "Multimodal Contrastive Learning for Cybersickness Recognition Using Brain Connectivity Graph Representation", "name": "Multimodal Contrastive Learning for Cybersickness Recognition Using Brain Connectivity Graph Representation", "author": [{"@type": "Person", "name": "Peike Wang"}, {"@type": "Person", "name": "Ming Li"}, {"@type": "Person", "name": "Ziteng Wang"}, {"@type": "Person", "name": "Yong-Jin Liu"}, {"@type": "Person", "name": "Lili Wang"}], "datePublished": "2025-11", "abstract": "Cybersickness significantly impairs user comfort and immersion in virtual reality (VR). Effective identification of cybersickness leveraging physiological, visual, and motion data is a critical prerequisite for its mitigation. However, current methods primarily employ direct feature fusion across modalities, which often leads to limited accuracy due to inadequate modeling of inter-modal relationships. In this paper, we propose a multimodal contrastive learning method for cybersickness recognition. First, we introduce Brain Connectivity Graph Representation (BCGR), an innovative graph-based representation that captures cybersickness-related connectivity patterns across modalities. We further develop three BCGR instances: E-BCGR, constructed based on EEG signals; MV-BCGR, constructed based on video and motion data; and S-BCGR, obtained through our proposed standardized decomposition algorithm. Then, we propose a connectivity-constrained contrastive fusion module, which aligns E-BCGR and MV-BCGR into a shared latent space via graph contrastive learning while utilizing S-BCGR as a connectivity constraint to enhance representation quality. Moreover, we construct a multimodal cybersickness dataset comprising synchronized EEG, video, and motion data collected in VR environments to promote further research in this domain. Experimental results demonstrate that our method outperforms existing state-of-the-art methods across four critical evaluation metrics: accuracy, sensitivity, specificity, and the area under the curve. Source code: https://github.com/PEKEW/cybersickness-bcgr.", "description": "Brain connectivity graph representations align EEG, video, and motion for multimodal cybersickness recognition.", "inLanguage": "en", "identifier": "10.1109/tvcg.2025.3616797", "sameAs": "https://doi.org/10.1109/tvcg.2025.3616797", "url": "https://steve-strange.github.io/publications/cybersickness-bcgr/", "isPartOf": {"@type": "Periodical", "name": "IEEE Transactions on Visualization and Computer Graphics"}, "keywords": ["Cybersickness", "EEG", "Brain connectivity graph representation", "Multimodal contrastive learning", "BCGR"]}</script>
+</head><body><a class="skip" href="#main">跳到正文</a>
+<header><a class="brand" href="/">王子腾 <span>Ziteng Wang</span></a><nav aria-label="主导航"><a href="/publications/">论文 / Papers</a><a href="https://scholar.google.com/citations?user=FDuEOccAAAAJ">Scholar</a><a href="/assets/ziteng-wang-cv.pdf">简历</a></nav></header>
+<main id="main"><article class="paper-detail">
+<p class="breadcrumb"><a href="/publications/">← 全部论文</a></p>
+<p class="kicker">IEEE TVCG · 2025-11 · 已发表</p>
+<h1 lang="en">Multimodal Contrastive Learning for Cybersickness Recognition Using Brain Connectivity Graph Representation</h1>
+<p class="authors" lang="en">Peike Wang, Ming Li, Ziteng Wang, Yong-Jin Liu, Lili Wang</p>
+<p class="role">王子腾：第三作者 / Third author</p>
+<p class="bibliography">IEEE Transactions on Visualization and Computer Graphics 31(11), pp. 10080-10089 · <a href="https://doi.org/10.1109/tvcg.2025.3616797">10.1109/tvcg.2025.3616797</a></p>
+<section class="abstract" aria-labelledby="abstract-title"><h2 id="abstract-title">Abstract</h2><p lang="en">Cybersickness significantly impairs user comfort and immersion in virtual reality (VR). Effective identification of cybersickness leveraging physiological, visual, and motion data is a critical prerequisite for its mitigation. However, current methods primarily employ direct feature fusion across modalities, which often leads to limited accuracy due to inadequate modeling of inter-modal relationships. In this paper, we propose a multimodal contrastive learning method for cybersickness recognition. First, we introduce Brain Connectivity Graph Representation (BCGR), an innovative graph-based representation that captures cybersickness-related connectivity patterns across modalities. We further develop three BCGR instances: E-BCGR, constructed based on EEG signals; MV-BCGR, constructed based on video and motion data; and S-BCGR, obtained through our proposed standardized decomposition algorithm. Then, we propose a connectivity-constrained contrastive fusion module, which aligns E-BCGR and MV-BCGR into a shared latent space via graph contrastive learning while utilizing S-BCGR as a connectivity constraint to enhance representation quality. Moreover, we construct a multimodal cybersickness dataset comprising synchronized EEG, video, and motion data collected in VR environments to promote further research in this domain. Experimental results demonstrate that our method outperforms existing state-of-the-art methods across four critical evaluation metrics: accuracy, sensitivity, specificity, and the area under the curve. Source code: https://github.com/PEKEW/cybersickness-bcgr.</p></section>
+<div class="actions"><a class="button" href="https://doi.org/10.1109/tvcg.2025.3616797">出版全文 / Publisher</a><a class="button" href="cite.bib">BibTeX</a><a class="button" href="index.md">纯文本 / Markdown</a><a class="button" href="https://github.com/PEKEW/cybersickness-bcgr">代码</a></div>
+<nav class="toc" aria-label="文章目录"><a href="#explanation">方法讲解</a><a href="#results">实验与证据</a><a href="#limitations">适用边界</a><a href="#cite">引用</a></nav>
+<section id="explanation"><p class="kicker">THE IDEA</p><h2>把 EEG、视频与运动数据表示为脑连接图，再用带连接约束的对比学习融合信息，识别 VR 晕动症。</h2><p class="english-summary" lang="en">Brain connectivity graph representations align EEG, video, and motion for multimodal cybersickness recognition.</p><p>EEG、视觉与运动数据都含有晕动症线索，但简单拼接特征不一定能建立模态间的关系。该方法让不同模态先进入可比较的连接图表示，再学习一致的表示。</p><figure><img src="overview.webp" alt="论文图 1：同步数据采集、脑连接图构建和连接约束对比融合。"><figcaption>论文图 1：同步数据采集、脑连接图构建和连接约束对比融合。</figcaption></figure><ol class="method-steps"><li><h3>同步采集三个模态</h3><p>在 VR 中记录 EEG、第一人称视频与运动数据，为同一时间片建立对齐的样本。</p></li><li><h3>构建 BCGR</h3><p>从 EEG 构建 E-BCGR；用标准化分解得到 S-BCGR；从视频和运动构建 MV-BCGR。</p></li><li><h3>用连接约束做对比融合</h3><p>Connectivity-Constrained Contrastive Fusion（CCCF）将表示对齐到共同潜在空间，并以 S-BCGR 约束连接结构，完成晕动症识别。</p></li></ol></section>
+<section id="results"><h2>实验告诉我们什么</h2><div class="table-wrap"><table><thead><tr><th>评测</th><th>结果 / 观察</th><th>解释范围</th></tr></thead><tbody><tr><th>准确率</th><td>84.17%</td><td>作者稿中的三模态完整模型。</td></tr><tr><th>敏感度 / 特异度</th><td>85.09% / 84.18%</td><td>分别衡量对阳性和阴性样本的识别。</td></tr><tr><th>AUC</th><td>92.22%</td><td>在论文数据与评测协议下的结果。</td></tr></tbody></table></div><p class="source-note">书目信息来自 Crossref；方法与指标来自本地作者稿图 1、表 1–3 和结论。</p></section>
+
+<section id="limitations"><h2>适用边界</h2><p>数据使用是否出现晕动症的二分类标签，不能直接预测症状严重程度。实验识别性能不等于临床诊断能力，也不代表对所有用户、设备和 VR 内容都有同样表现。</p><h3>我的贡献</h3><p>参与搭建同步 EEG、视频与运动数据的 VR 晕动症多模态数据集。</p></section>
+<section id="cite"><h2>引用这篇论文</h2><p lang="en">Peike Wang, Ming Li, Ziteng Wang, Yong-Jin Liu, Lili Wang. Multimodal Contrastive Learning for Cybersickness Recognition Using Brain Connectivity Graph Representation. IEEE Transactions on Visualization and Computer Graphics, 2025. DOI: 10.1109/tvcg.2025.3616797</p><div class="actions"><a class="button" href="cite.bib" download>下载 BibTeX</a><button class="button" data-copy="bibtex">复制 BibTeX</button><span role="status" data-copy-status></span></div><pre id="bibtex" lang="en">@article{cybersicknessbcgr2025,
+  title = {{Multimodal Contrastive Learning for Cybersickness Recognition Using Brain Connectivity Graph Representation}},
+  author = {Peike Wang and Ming Li and Ziteng Wang and Yong-Jin Liu and Lili Wang},
+  journal = {IEEE Transactions on Visualization and Computer Graphics},
+  year = {2025},
+  volume = {31},
+  number = {11},
+  pages = {10080--10089},
+  doi = {10.1109/tvcg.2025.3616797},
+  url = {https://doi.org/10.1109/tvcg.2025.3616797}
+}
+</pre></section>
+<aside class="related"><h2>继续阅读</h2><a href="/publications/fanpad/">FanPad</a></aside></article></main>
+<footer>王子腾 · Ziteng Wang · Beihang University <a href="/publications/">全部论文</a> <a href="mailto:wzt2694630726@gmail.com">联系作者</a><p>引用请使用论文正式题名与 DOI。研究说明与出版全文相互补充。</p></footer>
+</body></html>
