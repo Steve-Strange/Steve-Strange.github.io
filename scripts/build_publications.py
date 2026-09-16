@@ -104,7 +104,7 @@ for p in PAPERS:
 
 index = '<section class="intro"><p class="kicker">RESEARCH PUBLICATIONS</p><h1>论文与方法讲解</h1><p class="lead">从 VR 输入、多物体交互与感知，到多人协同拆卸规划。</p><p lang="en">Research by Ziteng Wang · Beihang University. Explore the methods, evidence, demos, and citations behind six published papers.</p><div class="actions"><a class="button" href="publications.bib" download>全部 BibTeX</a><a class="button" href="https://scholar.google.com/citations?user=FDuEOccAAAAJ">Google Scholar</a></div></section><div class="paper-grid">' + ''.join(card(p) for p in PAPERS) + '</div>'
 (ROOT/'publications/index.html').write_text(shell('论文与方法讲解 / Research Publications','Six research papers by Ziteng Wang on virtual reality, interaction, cybersickness, and collaborative disassembly.','/publications/',index,structured={'@context':'https://schema.org','@type':'CollectionPage','name':'Research publications by Ziteng Wang','url':BASE+'/publications/','hasPart':[{'@type':'ScholarlyArticle','name':p['title'],'url':BASE+'/publications/'+p['slug']+'/'} for p in PAPERS]}))
-(ROOT/'publications/publications.bib').write_text(all_bib)
+(ROOT/'publications/publications.bib').write_text(all_bib.rstrip() + '\n')
 (ROOT/'robots.txt').write_text('User-agent: *\nAllow: /\n\nSitemap: '+BASE+'/sitemap.xml\n')
 # Preserve discovery of existing blog and game pages alongside research pages.
 ET.register_namespace('', 'http://www.sitemaps.org/schemas/sitemap/0.9')
