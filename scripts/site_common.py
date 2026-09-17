@@ -1,11 +1,18 @@
 """Shared static navigation, language URLs and metadata. No runtime framework."""
 import html
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'https://steve-strange.github.io'
 ESC = html.escape
+
+
+def version_assets(text):
+    # Invalidate cached scripts together with the new bilingual HTML and game routes.
+    return re.sub(r'((?:src|href)="/assets/[^"?]+\.(?:css|js))(?:\?[^"\s]*)?"',
+                  r'\1?v=20260917-bilingual"', text)
 
 
 def local(path, lang):
@@ -50,7 +57,7 @@ def footer(lang='en'):
 def shell(title, description, path, body, lang='en', *, css='publications', active='', metadata='', structured=None, image='', body_class=''):
     zh = lang == 'zh'
     data = json.dumps(structured or {}, ensure_ascii=False).replace('<', '\\u003c')
-    return f'''<!doctype html>
+    return version_assets(f'''<!doctype html>
 <html lang="{'zh-CN' if zh else 'en'}"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{ESC(title) if path == '/' else ESC(title) + (' | 王子腾 · 北航' if zh else ' | Ziteng Wang · Beihang University')}</title>
@@ -71,4 +78,4 @@ def shell(title, description, path, body, lang='en', *, css='publications', acti
 {header(path, lang, active)}
 {body}
 {footer(lang)}
-</body></html>'''
+</body></html>''')

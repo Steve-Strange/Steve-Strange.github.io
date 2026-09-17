@@ -3,7 +3,7 @@ import json
 import re
 from html import unescape
 from xml.etree import ElementTree as ET
-from site_common import ROOT, BASE, ESC, shell, header, footer, local
+from site_common import ROOT, BASE, ESC, shell, header, footer, local, version_assets
 import build_publications
 
 
@@ -64,7 +64,7 @@ for path in ROOT.rglob('index.html'):
     text = text.replace('class="use-motion legacy-page"', 'class="legacy-page"')
     if 'class="shared-footer"' not in text:
         text = text.replace('</body>', footer() + '\n</body>')
-    path.write_text(text)
+    path.write_text(version_assets(text))
 
 for lang in ['en', 'zh']:
     title = '关于我' if lang == 'zh' else 'About me'
@@ -113,7 +113,7 @@ for source in sorted((ROOT / 'scripts/templates/games').glob('*.html')):
             text = text.replace('href="/arcade/', 'href="/zh/arcade/')
         out = ROOT / local(path, lang).strip('/')
         out.mkdir(parents=True, exist_ok=True)
-        (out / 'play.html').write_text(text)
+        (out / 'play.html').write_text(version_assets(text))
         title = re.search(r'<title>(.*?)</title>', text, re.S)[1].split('｜')[0]
         body = f'<main id="main" class="standalone-game"><iframe src="play.html" title="{ESC(title)}" allow="autoplay; fullscreen"></iframe></main>'
         (out / 'index.html').write_text(shell(title, title, path, body, lang, css='portfolio', active='arcade'))
