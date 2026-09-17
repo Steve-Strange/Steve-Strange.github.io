@@ -4,46 +4,44 @@ Xuehuai Shi, Yuhan Duan, Ziteng Wang, Jian Wu, Zhiwen Shao, Jieming Yin, Lili Wa
 
 IEEE Transactions on Visualization and Computer Graphics, 2026-02. DOI: https://doi.org/10.1109/tvcg.2025.3636062
 
-Ziteng Wang: 通讯作者（署名第三） / Corresponding author
+Ziteng Wang: Corresponding author (third in the author list)
 
 ## Abstract
 
 3D multi-object arrangement is a fundamental task in VR that relies on accurate and natural initial selection alongside rapid and convenient subsequent manipulation to ensure high efficiency. However, existing methods fail to support efficient multi-object arrangement in highly occluded scenes with densely packed candidate objects through controller-free natural interactions. In this article, we propose an efficient, scene-aware multi-object arrangement method (MOA) designed for fast, precise, and convenient object arrangement. First, MOA introduces an importance-driven multi-object initial selection algorithm that assigns higher spatiotemporally correlated object importance (IMP) to target objects, establishing a natural multi-object initial selection mode that enables quick and accurate selection of high-IMP objects. Subsequently, it presents an auxiliary-structure-guided multi-object manipulation algorithm that constructs an auxiliary manipulation structure to assist subsequent multi-object manipulation, alongside a multi-modal interaction mode that facilitates swift and natural manipulation. Compared to state-of-the-art controller-free and controller-based methods, MOA significantly improves task performance, reduces task load, and enhances convenience in complex multi-object arrangement scenes involving hundreds of highly occluded objects need to be arranged.
 
-## 方法讲解
-
-在大量物体互相遮挡的 VR 场景中，结合眼动、裸手和场景线索，先选中目标，再成组调整布局。
+## Method
 
 Scene-aware selection and auxiliary manipulation structures support controller-free arrangement of many occluded objects in VR.
 
-整理一组家具或密集物体时，选对对象和移动对象同样重要。只优化某一次抓取，无法解决连续选择、遮挡和成组布局带来的操作负担。
+When arranging furniture or densely packed objects, selecting the right objects matters as much as moving them. Improving one grab alone does not address repeated selection, occlusion and group arrangement.
 
-### 借助场景线索确定重要性
+### Use scene context to estimate importance
 
-以时空相关的 object importance（IMP）帮助区分目标和干扰对象，支持自然的多物体初始选择。
+Spatiotemporally correlated object importance (IMP) separates targets from distractors and supports natural initial selection of multiple objects.
 
-### 构建辅助操作结构
+### Build an auxiliary manipulation structure
 
-为已选物体构建辅助结构，让后续调整有可操作的参照，降低逐一处理物体的负担。
+Give selected objects an actionable spatial reference, reducing the need to manipulate each object individually.
 
-### 组合多模态交互
+### Combine input modalities
 
-结合眼动与裸手等输入完成选择和操纵，使初始选取与后续布局成为连续流程。
+Eye and bare-hand input connect initial selection and subsequent manipulation into a continuous arrangement workflow.
 
-## 实验与证据
+## Evidence
 
-场景 · 包含数百个、高度遮挡物体的复杂布局任务 · 关注多物体整理，不是孤立的单物体选择。
-对比 · 与无手柄和有手柄方法比较 · 出版摘要报告任务表现、负担与便利性改善；本页不补造缺失的量化结果。
+Task setting · Complex arrangement scenes with hundreds of highly occluded objects · Focuses on arranging groups, rather than isolated single-object selection.
+Comparisons · Controller-free and controller-based methods · The published abstract reports better task performance, lower workload and improved convenience. Quantitative tables are not available in the reviewed materials.
 
-出版卷期：IEEE TVCG 32(2), 2183–2199, 2026；摘要来自 Semantic Scholar 对该 DOI 的记录，PubMed 记录 PMID 41284398 交叉核对书目信息。
+Issue metadata: IEEE TVCG 32(2), 2183–2199, 2026. Abstract: Semantic Scholar's record for this DOI; bibliographic details cross-checked with PubMed, PMID 41284398.
 
-## 适用边界
+## Limitations
 
-当前说明依据出版摘要和作者材料。具体性能取决于场景组织、输入追踪质量和任务设计；没有完整终稿的评测表，不能据此承诺固定的效率提升。
+This explanation uses the published abstract and author-provided material. Performance depends on scene organization, tracking quality and task design. Without the complete final evaluation tables, it cannot support a fixed numerical efficiency claim.
 
-## 我的贡献
+## My contribution
 
-负责方法提出、设计与实现，以及对比方法、用户实验和演示系统。通讯作者角色沿用个人简历记录。
+Worked on the method, design and implementation, comparison methods, user studies and demonstration system. The corresponding-author role follows the author's CV record.
 
 ## BibTeX
 

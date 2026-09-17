@@ -1,83 +1,87 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f5f6f7">
-  <meta name="description" content="王子腾的游戏室：反冲决斗、经典三维弹球、Sky Hopper、五子棋、小恐龙和赛车。">
-  <link rel="canonical" href="https://steve-strange.github.io/arcade/">
-  <link rel="icon" type="image/png" href="/images/a.png">
-  <link rel="stylesheet" href="/assets/portfolio.css">
-  <link rel="stylesheet" href="/assets/arcade.css">
-  <script defer src="/lib/lucide/lucide.min.js"></script>
-  <script defer src="/assets/portfolio.js"></script>
-  <script defer src="/assets/arcade.js"></script>
-  <title>Arcade Lab｜Ziteng Wang</title>
-</head>
-<body class="arcade-page">
-  <a class="skip-link" href="#games">跳到游戏</a>
-  <header class="site-header is-scrolled" data-header>
-    <div class="header-inner">
-      <a class="brand" href="/" aria-label="返回个人主页"><span class="brand-mark" aria-hidden="true">ZW</span><span class="brand-name">Ziteng Wang</span></a>
-      <nav class="site-nav" id="site-nav" aria-label="主导航" data-nav>
-        <a href="/#research">研究</a><a href="/#publications">论文</a><a href="/#projects">系统</a><a href="/arcade/" aria-current="page">游戏</a><a href="/#experience">经历</a><a href="/archives/">博客</a>
-      </nav>
-      <div class="header-actions">
-        <a class="icon-link" href="https://github.com/Steve-Strange" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><i data-lucide="github"></i></a>
-        <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="打开菜单" title="菜单" data-menu-toggle><i class="menu-icon-open" data-lucide="menu"></i><i class="menu-icon-close" data-lucide="x"></i></button>
-      </div>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arcade Lab | Ziteng Wang · Beihang University</title>
+<meta name="description" content="Six browser games: Recoil Duel, 3D Pinball, Sky Hopper, Gomoku, Dino Run and Pocket Racer.">
+<meta name="author" content="Ziteng Wang"><meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#091011">
+<link rel="canonical" href="https://steve-strange.github.io/arcade/">
+<link rel="alternate" hreflang="en" href="https://steve-strange.github.io/arcade/">
+<link rel="alternate" hreflang="zh-CN" href="https://steve-strange.github.io/zh/arcade/">
+<link rel="alternate" hreflang="x-default" href="https://steve-strange.github.io/arcade/">
+<link rel="icon" type="image/png" href="/images/a.png">
+<meta property="og:type" content="website"><meta property="og:title" content="Arcade Lab">
+<meta property="og:description" content="Six browser games: Recoil Duel, 3D Pinball, Sky Hopper, Gomoku, Dino Run and Pocket Racer."><meta property="og:url" content="https://steve-strange.github.io/arcade/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://steve-strange.github.io/images/Head.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/assets/portfolio.css"><link rel="stylesheet" href="/assets/site.css">
+<script defer src="/lib/lucide/lucide.min.js"></script><script defer src="/assets/portfolio.js"></script>
+<link rel="stylesheet" href="/assets/arcade.css"><script defer src="/assets/arcade-i18n.js"></script><script defer src="/assets/arcade.js"></script><script type="application/ld+json">{}</script>
+</head><body class="arcade-page"><a class="skip-link" href="#main">Skip to content</a>
+<!-- shared-header:start -->
+<header id="global-header" class="site-header" data-header>
+  <div class="header-inner">
+    <a class="brand" href="/" aria-label="Home"><span class="brand-mark" aria-hidden="true">ZW</span><span class="brand-name">Ziteng Wang</span></a>
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation" data-nav><a href="/#research">Research</a><a href="/publications/">Publications</a><a href="/#projects">Systems</a><a href="/arcade/" aria-current="page">Arcade</a><a href="/#experience">Background</a><a href="/archives/">Blog</a></nav>
+    <div class="header-actions">
+      <a class="header-cv" href="/assets/ziteng-wang-cv.pdf" aria-label="CV (Chinese PDF)">CV</a>
+      <a class="language-switch" data-language-switch href="/zh/arcade/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+      <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu" data-menu-toggle><span aria-hidden="true">☰</span></button>
     </div>
-  </header>
-  <main class="arcade-main page-width">
+  </div>
+</header>
+<!-- shared-header:end -->
+<main id="main" class="arcade-main page-width">
     <section class="arcade-intro" aria-labelledby="arcade-title">
-      <h1 id="arcade-title">Arcade Lab<span>游戏室</span></h1>
-      <p class="arcade-count"><span class="status-dot"></span>6 款游戏 <span class="count-divider">/</span> 随时来一局</p>
+      <h1 id="arcade-title">Arcade Lab<span>Browser games</span></h1>
+      <p class="arcade-count"><span class="status-dot"></span>6 games <span class="count-divider">/</span> Ready when you are</p>
     </section>
-    <section class="play-layout" id="games" aria-label="游戏区">
+    <section class="play-layout" id="games" aria-label="Play area">
       <div class="play-column">
         <div class="stage-bar">
-          <div class="now-playing"><i data-lucide="gamepad-2"></i><span id="stage-name">反冲决斗</span><select id="game-picker" aria-label="切换游戏"></select></div>
+          <div class="now-playing"><i data-lucide="gamepad-2"></i><span id="stage-name">Recoil Duel</span><select id="game-picker" aria-label="Switch game"></select></div>
           <div class="stage-tools">
-            <button id="pause-game" class="tool" type="button" aria-label="暂停" title="暂停" aria-pressed="false"><i data-lucide="pause"></i></button>
-            <button id="restart-game" class="tool" type="button" aria-label="重新开始" title="重新开始"><i data-lucide="rotate-ccw"></i></button>
-            <button id="mute-game" class="tool" type="button" aria-label="静音" title="静音" aria-pressed="false"><i data-lucide="volume-2"></i></button>
-            <button id="fullscreen-game" class="tool" type="button" aria-label="全屏" title="全屏"><i data-lucide="maximize"></i></button>
-            <a id="open-game" class="tool" href="/recoil-duel/" target="_blank" rel="noopener" aria-label="独立打开游戏" title="独立打开"><i data-lucide="external-link"></i></a>
+            <button id="pause-game" class="tool" type="button" aria-label="Pause" title="Pause" aria-pressed="false"><i data-lucide="pause"></i></button>
+            <button id="restart-game" class="tool" type="button" aria-label="Restart" title="Restart"><i data-lucide="rotate-ccw"></i></button>
+            <button id="mute-game" class="tool" type="button" aria-label="Mute" title="Mute" aria-pressed="false"><i data-lucide="volume-2"></i></button>
+            <button id="fullscreen-game" class="tool" type="button" aria-label="Fullscreen" title="Fullscreen"><i data-lucide="maximize"></i></button>
+            <a id="open-game" class="tool" href="/recoil-duel/" target="_blank" rel="noopener" aria-label="Open game in a new tab" title="Open game"><i data-lucide="external-link"></i></a>
           </div>
         </div>
         <div class="game-stage" id="game-stage">
-          <iframe id="game-frame" title="反冲决斗" src="/recoil-duel/?embed=1" allow="autoplay; fullscreen" tabindex="0"></iframe>
-          <button class="pause-screen" id="resume-game" type="button" hidden><i data-lucide="play"></i><span>继续游戏</span></button>
-          <p class="frame-error" id="frame-error" hidden>游戏未能载入。<button type="button" id="retry-game">重新载入</button></p>
+          <iframe id="game-frame" title="Recoil Duel" src="/recoil-duel/play.html?embed=1" allow="autoplay; fullscreen" tabindex="0"></iframe>
+          <button class="pause-screen" id="resume-game" type="button" hidden><i data-lucide="play"></i><span>Resume</span></button>
+          <p class="frame-error" id="frame-error" hidden>The game could not load. <button type="button" id="retry-game">Reload</button></p>
         </div>
       </div>
       <aside class="game-info" aria-labelledby="game-title">
         <p class="game-type" id="game-type">01 / PHYSICS DUEL</p>
-        <h2 id="game-title">反冲决斗</h2>
-        <p class="game-tagline" id="game-tagline">每一枪，也是下一步。</p>
-        <p class="game-description" id="game-description">零重力场地，青红双枪。枪口不停自旋，用开火的后坐力调整位置，也等待下一次瞄准。</p>
-        <div class="game-mode" id="game-mode" role="group" aria-label="对战模式">
-          <button type="button" data-mode="ai" aria-pressed="true">人机对战</button>
-          <button type="button" data-mode="pvp" aria-pressed="false">本地双人</button>
+        <h2 id="game-title">Recoil Duel</h2>
+        <p class="game-tagline" id="game-tagline">Every shot is your next move.</p>
+        <p class="game-description" id="game-description">Two spinning guns meet in zero gravity. Use recoil to move, then wait for the next clear shot.</p>
+        <div class="game-mode" id="game-mode" role="group" aria-label="Game mode">
+          <button type="button" data-mode="ai" aria-pressed="true">Play against AI</button>
+          <button type="button" data-mode="pvp" aria-pressed="false">Local two-player</button>
         </div>
-        <div class="info-section"><h3>玩法</h3><p id="game-rules">命中三次获胜。子弹相撞会抵消；枪体碰到边界会反弹。</p></div>
-        <div class="info-section"><h3>操作</h3><dl class="key-list" id="game-controls"></dl></div>
-        <div class="game-note"><i data-lucide="fingerprint"></i><span id="game-note">单键决斗 · 1–2 人</span></div>
+        <div class="info-section"><h3>Rules</h3><p id="game-rules">Land three hits to win. Bullets cancel each other on impact; guns bounce off the arena walls.</p></div>
+        <div class="info-section"><h3>Controls</h3><dl class="key-list" id="game-controls"></dl></div>
+        <div class="game-note"><i data-lucide="fingerprint"></i><span id="game-note">One-button duel · 1–2 players</span></div>
         <p class="sr-only" id="arcade-live" role="status"></p>
       </aside>
     </section>
     <section class="game-shelf" aria-labelledby="shelf-title">
-      <div class="shelf-heading"><h2 id="shelf-title">换个游戏</h2><span>THE COLLECTION / 06</span></div>
-      <nav class="game-grid" aria-label="选择游戏">
-        <a class="game-card" href="?game=recoil" data-game="recoil" aria-current="true"><img src="/assets/media/arcade-recoil.png" alt="青红双枪决斗" width="400" height="300"><span><b>反冲决斗</b><small>物理 · 双人</small></span><i data-lucide="arrow-up-right"></i></a>
-        <a class="game-card" href="?game=pinball" data-game="pinball"><img src="/assets/media/arcade-pinball.png" alt="蓝色台面与红白碰撞器的经典三维弹球台" width="400" height="300"><span><b>3D Pinball</b><small>经典 · 弹球</small></span><i data-lucide="arrow-up-right"></i></a>
-        <a class="game-card" href="?game=sky-hopper" data-game="sky-hopper"><img src="/assets/media/arcade-sky-hopper.png" alt="晴空小鸟与管道" width="400" height="300"><span><b>Sky Hopper</b><small>轻快 · 飞行</small></span><i data-lucide="arrow-up-right"></i></a>
-        <a class="game-card" href="?game=gomoku" data-game="gomoku"><img src="/assets/media/arcade-gomoku.png" alt="木色棋盘上的黑白棋子" width="400" height="300"><span><b>五子棋</b><small>棋盘 · 策略</small></span><i data-lucide="arrow-up-right"></i></a>
-        <a class="game-card" href="?game=dino" data-game="dino"><img src="/assets/media/arcade-dino.png" alt="像素小恐龙跳过仙人掌" width="400" height="300"><span><b>Dino Run</b><small>像素 · 跑酷</small></span><i data-lucide="arrow-up-right"></i></a>
-        <a class="game-card" href="?game=racer" data-game="racer"><img src="/assets/media/arcade-racer.png" alt="红色赛车穿过公路车流" width="400" height="300"><span><b>Pocket Racer</b><small>复古 · 赛车</small></span><i data-lucide="arrow-up-right"></i></a>
+      <div class="shelf-heading"><h2 id="shelf-title">Choose a game</h2><span>THE COLLECTION / 06</span></div>
+      <nav class="game-grid" aria-label="Choose a game">
+        <a class="game-card" href="?game=recoil" data-game="recoil" aria-current="true"><img src="/assets/media/arcade-recoil.png" alt="Blue and red guns in a recoil duel" width="400" height="300"><span><b>Recoil Duel</b><small>Physics · Two players</small></span><i data-lucide="arrow-up-right"></i></a>
+        <a class="game-card" href="?game=pinball" data-game="pinball"><img src="/assets/media/arcade-pinball.png" alt="Classic pinball with a blue playfield and red-and-white bumpers" width="400" height="300"><span><b>3D Pinball</b><small>Classic · Pinball</small></span><i data-lucide="arrow-up-right"></i></a>
+        <a class="game-card" href="?game=sky-hopper" data-game="sky-hopper"><img src="/assets/media/arcade-sky-hopper.png" alt="A bird flying between pipes" width="400" height="300"><span><b>Sky Hopper</b><small>Flying · One button</small></span><i data-lucide="arrow-up-right"></i></a>
+        <a class="game-card" href="?game=gomoku" data-game="gomoku"><img src="/assets/media/arcade-gomoku.png" alt="Black and white stones on a wooden board" width="400" height="300"><span><b>Gomoku</b><small>Board · Strategy</small></span><i data-lucide="arrow-up-right"></i></a>
+        <a class="game-card" href="?game=dino" data-game="dino"><img src="/assets/media/arcade-dino.png" alt="A pixel dinosaur jumping over cacti" width="400" height="300"><span><b>Dino Run</b><small>Pixel · Runner</small></span><i data-lucide="arrow-up-right"></i></a>
+        <a class="game-card" href="?game=racer" data-game="racer"><img src="/assets/media/arcade-racer.png" alt="A red car weaving through traffic" width="400" height="300"><span><b>Pocket Racer</b><small>Retro · Racing</small></span><i data-lucide="arrow-up-right"></i></a>
       </nav>
     </section>
   </main>
-  <footer class="arcade-footer page-width"><span>© <span data-year>2026</span> Ziteng Wang</span><a href="/">回到个人主页 <i data-lucide="arrow-up-right"></i></a></footer>
-</body>
-</html>
+
+<footer class="shared-footer"><div><strong>Ziteng Wang</strong><p>Beihang University · Embodied AI · VR · HCI</p></div><nav aria-label="Contact and profiles"><a href="mailto:wzt2694630726@gmail.com">Email</a><a href="https://scholar.google.com/citations?user=FDuEOccAAAAJ">Google Scholar</a><a href="https://github.com/Steve-Strange">GitHub</a></nav><small>© <span data-year>2026</span> Ziteng Wang</small></footer>
+</body></html>

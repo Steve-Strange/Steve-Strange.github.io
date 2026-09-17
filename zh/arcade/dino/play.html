@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f6f2">
+  <title>小恐龙｜游戏室</title>
+  <link rel="stylesheet" href="/assets/road-games.css">
+  <link rel="stylesheet" href="/assets/game-embed.css">
+  <script src="/assets/game-bridge.js"></script>
+  <script defer src="/lib/lucide/lucide.min.js"></script>
+  <script defer src="/lib/matter/matter.min.js"></script>
+  <script defer src="/assets/road-games.js"></script>
+<meta name="robots" content="noindex, follow"><link rel="canonical" href="https://steve-strange.github.io/zh/arcade/dino/"></head>
+<body data-game="dino">
+  <canvas id="game" aria-label="像素小恐龙跑过仙人掌与飞鸟"></canvas>
+  <div class="topbar"><a class="back" href="/zh/arcade/?game=dino" aria-label="返回游戏室" title="返回游戏室"><i data-lucide="arrow-left"></i></a><div class="scores"><div><span>最高分</span><strong id="best">00000</strong></div><div><span>距离</span><strong id="score">00000</strong></div></div></div>
+  <div class="message" id="message"><h1 id="result">小恐龙</h1><p class="standalone-help">Space / ↑ 跳跃，↓ 下蹲。跳过仙人掌，躲开飞鸟。</p><button id="start" type="button">开始奔跑</button></div>
+  <div class="controls" aria-label="小恐龙控制"><button class="control" id="duck" type="button" aria-label="下蹲" title="下蹲"><i data-lucide="arrow-down-to-line"></i></button><button class="control" id="jump" type="button" aria-label="跳跃" title="跳跃"><i data-lucide="arrow-up"></i></button></div>
+  <p id="live" class="sr-only" role="status">等待开始</p>
+</body>
+</html>

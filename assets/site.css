@@ -1,0 +1,58 @@
+/* Shared across the portfolio, publications, arcade and archived blog. */
+:root{color-scheme:light;--ink:#171b19;--muted:#66706a;--line:#d7ddd8;--teal:#0d756d;--accent:#0d756d;--paper:#f7f8f5;--back:#f7f8f5;--night:#091011;--teal-light:#77d2c4;--header-height:68px;--page-width:1180px}
+html{scroll-padding-top:calc(var(--header-height) + 20px)}
+body{font-family:Inter,"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--paper)}
+#global-header,#global-header *{box-sizing:border-box}
+#global-header{position:fixed;inset:0 0 auto;z-index:1000;width:100%;max-width:none;height:var(--header-height);margin:0;padding:0;display:block;color:#fff;background:rgba(9,16,17,.97);border:0;border-bottom:1px solid #ffffff26;font:14px/1.4 Inter,system-ui,sans-serif;backdrop-filter:blur(12px)}
+#global-header .header-inner{width:min(calc(100% - 48px),1180px);height:100%;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:22px}
+#global-header a{border:0;text-decoration:none;line-height:1.4;letter-spacing:0}
+#global-header .brand{display:flex;align-items:center;gap:10px;min-width:0;margin:0;padding:0;background:none;color:#fff;font-weight:700;white-space:nowrap}
+#global-header .brand-mark{display:grid;place-items:center;width:34px;height:34px;margin:0;background:var(--teal-light);color:var(--night);border-radius:3px;font-size:12px;font-weight:700}
+#global-header .brand-name{display:inline;margin:0;color:#fff;font-size:14px;font-weight:650}
+#global-header .site-nav{display:flex;position:static;align-items:center;justify-content:center;gap:24px;margin:0 0 0 auto;padding:0;width:auto;max-height:none;overflow:visible;background:transparent;border:0;visibility:visible;opacity:1;transform:none}
+#global-header .site-nav a{position:relative;display:block;padding:24px 0;color:#c9d0cd;font-size:14px;font-weight:600;white-space:nowrap}
+#global-header .site-nav a::after{content:"";position:absolute;bottom:15px;left:0;right:0;height:2px;background:var(--teal-light);transform:scaleX(0)}
+#global-header .site-nav a:hover,#global-header .site-nav a[aria-current]{color:#fff}
+#global-header .site-nav a:hover::after,#global-header .site-nav a[aria-current]::after{transform:scaleX(1)}
+#global-header .header-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
+#global-header .header-cv,#global-header .language-switch{display:grid;place-items:center;width:auto;min-width:36px;height:36px;min-height:36px;padding:0 8px;margin:0;color:#fff;background:transparent;border:1px solid #ffffff42;border-radius:4px;font-size:13px;white-space:nowrap}
+#global-header .language-switch:hover,#global-header .header-cv:hover{background:#ffffff16}
+#global-header .menu-toggle{display:none;place-items:center;width:36px;height:36px;padding:0;border:1px solid #ffffff42;border-radius:4px;color:#fff;background:transparent;cursor:pointer;font:20px/1 system-ui}
+#global-header a:focus-visible,#global-header button:focus-visible{outline:2px solid var(--teal-light);outline-offset:4px}
+.skip-link{position:fixed;top:-100px;left:12px;z-index:1100;padding:10px 16px;background:var(--teal);color:white;transform:none}
+.skip-link:focus{top:8px}
+.shared-footer{display:flex;flex-wrap:wrap;align-items:start;justify-content:space-between;gap:24px;width:min(calc(100% - 48px),1180px);max-width:none;margin:0 auto;padding:36px 0;border-top:1px solid var(--line);font:14px/1.6 Inter,system-ui,sans-serif;color:var(--muted)}
+.shared-footer strong{color:var(--ink);font-size:16px}.shared-footer p{margin:6px 0 0}.shared-footer nav{display:flex;flex-wrap:wrap;gap:20px}.shared-footer a{color:var(--teal);text-decoration:none;border:0}.shared-footer small{flex-basis:100%}
+.publication-page main{padding-top:var(--header-height)}
+.arcade-page{background:var(--paper)}
+.standalone-game{height:100dvh;padding-top:var(--header-height);box-sizing:border-box}
+.standalone-game iframe{display:block;border:0;width:100%;height:100%}
+body:has(.standalone-game)>.shared-footer{display:none}
+.archive-entry{display:grid;grid-template-columns:110px 1fr;gap:20px;border-top:1px solid var(--line);padding:20px 0}
+.archive-entry time{color:var(--muted);font-size:14px}.archive-entry h2{font-size:20px;margin:0}.archive-entry a{text-decoration:none}
+.official-title{font-size:1rem;color:var(--muted)}.original-abstract{margin-top:16px}.original-abstract summary{cursor:pointer;color:var(--teal)}.original-abstract p{margin-top:12px}
+.legacy-page{padding-top:var(--header-height);background:var(--paper)}
+.legacy-page .main-inner{padding-top:36px;background:var(--paper)}
+.legacy-page .post-block{background:white;border:1px solid var(--line);border-radius:6px;padding:30px}
+.legacy-page .headband,.legacy-page .site-brand-container,.legacy-page .header>.site-nav{display:none}
+.legacy-page .header{padding:0}.legacy-page .post-body a{color:var(--teal)}
+.legacy-page .sidebar,.legacy-page .sidebar-toggle,.legacy-page .github-corner,.legacy-page .footer,.legacy-page .pace{display:none!important}
+.legacy-page{padding-left:0!important;padding-right:0!important}
+.legacy-page .main,.legacy-page .column{width:100%;margin:0;padding:0}
+.legacy-page .main-inner{width:calc(100% - 40px);max-width:960px;margin:0 auto}
+.legacy-page .main a:hover{color:var(--teal)}
+.legacy-page .archive-note{margin:20px auto;max-width:800px;color:var(--muted);font-size:14px;padding:0 20px}
+.legacy-page .post-block,.legacy-page .post-header,.legacy-page .post-body,.legacy-page .collection-header{opacity:1!important;transform:none!important}
+@media(max-width:1050px){
+ :root{--header-height:64px}
+ #global-header .header-inner{width:calc(100% - 32px);gap:12px}
+ #global-header .menu-toggle{display:grid}
+ #global-header .site-nav{position:absolute;top:var(--header-height);left:0;right:0;display:none;flex-direction:column;align-items:stretch;gap:0;margin:0;padding:8px 24px 18px;background:var(--night);border-bottom:1px solid #ffffff30;max-height:calc(100dvh - var(--header-height));overflow:auto}
+ #global-header .site-nav.is-open{display:flex}
+ #global-header .site-nav a{padding:13px 0;border-bottom:1px solid #ffffff18}
+ #global-header .site-nav a::after{display:none}
+ .shared-footer{width:calc(100% - 40px)}
+}
+@media(max-width:390px){#global-header .brand-name{display:none}#global-header .header-actions{gap:8px}}
+@media(max-width:600px){.archive-entry{grid-template-columns:1fr;gap:8px}}
+@media print{#global-header,.skip-link,.shared-footer{display:none}.publication-page main,.legacy-page{padding-top:0}}

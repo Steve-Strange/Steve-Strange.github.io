@@ -1,5 +1,6 @@
 (() => {
   'use strict';
+  const zh = document.documentElement.lang.startsWith('zh');
   const racing = document.body.dataset.game === 'racer';
   const { Engine, Bodies, Body, Composite, Events } = Matter;
   const W = 800, H = 600, floor = 450;
@@ -35,7 +36,7 @@
     Body.setVelocity(player, { x: 0, y: 0 });
     distance = elapsed = 0; timer = racing ? 650 : 900;
     state = 'playing'; message.hidden = true;
-    live.textContent = racing ? '比赛开始' : '开始奔跑';
+    live.textContent = zh ? (racing ? '比赛开始' : '开始奔跑') : (racing ? 'Race started' : 'Run started');
     window.arcadeTone(380);
   }
   function end() {
@@ -44,10 +45,10 @@
     best = Math.max(best, Math.floor(distance));
     window.arcadeStorage.set(bestKey, best);
     bestNode.textContent = String(best).padStart(5, '0');
-    document.getElementById('result').textContent = racing ? 'CRASH!' : 'GAME OVER';
-    document.getElementById('start').textContent = 'PLAY AGAIN';
+    document.getElementById('result').textContent = zh ? (racing ? '撞车了' : '游戏结束') : (racing ? 'CRASH!' : 'GAME OVER');
+    document.getElementById('start').textContent = zh ? '再来一局' : 'PLAY AGAIN';
     message.hidden = false;
-    live.textContent = `游戏结束，距离 ${Math.floor(distance)}`;
+    live.textContent = `${zh ? '游戏结束，距离' : 'Game over. Distance:'} ${Math.floor(distance)}`;
     window.arcadeTone(100, .16);
   }
   function setDuck(value) {

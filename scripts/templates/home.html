@@ -1,0 +1,356 @@
+<main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-media" aria-hidden="true"></div>
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="hero-inner page-width">
+        <div class="hero-copy">
+          <p class="eyebrow">ZITENG WANG · WANG ZITENG</p>
+          <h1 id="hero-title">王子腾 <span>Ziteng Wang</span></h1>
+          <p class="hero-role">北京航空航天大学计算机学院直博生</p>
+          <p class="hero-summary">研究人如何在虚拟与物理世界中更自然地感知、交互与行动。当前聚焦具身智能、VR/AR、人机交互，以及知识驱动的装配与拆卸规划。</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="mailto:wzt2694630726@gmail.com">
+              <i data-lucide="mail" aria-hidden="true"></i>
+              联系我
+            </a>
+            <a class="button button-ghost" href="/assets/ziteng-wang-cv.pdf" target="_blank" rel="noopener">
+              <i data-lucide="file-text" aria-hidden="true"></i>
+              查看公开简历
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-facts" aria-label="研究概览">
+          <div>
+            <strong>06</strong>
+            <span>已发表论文</span>
+          </div>
+          <div>
+            <strong>VR · HCI</strong>
+            <span>沉浸式交互</span>
+          </div>
+          <div>
+            <strong>Embodied AI</strong>
+            <span>当前研究主线</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="research section" id="research" aria-labelledby="research-title">
+      <div class="page-width">
+        <div class="section-intro reveal">
+          <p class="section-kicker">RESEARCH</p>
+          <h2 id="research-title">让交互方法连接感知、推理与行动。</h2>
+          <p>从 VR 输入与多物体操控出发，向具身数据、知识表示和可执行规划延伸。工作覆盖方法设计、系统实现、用户实验与物理验证。</p>
+        </div>
+
+        <div class="research-grid">
+          <article class="research-lane reveal">
+            <span class="lane-index">01</span>
+            <h3>具身智能与规划</h3>
+            <p>以装配知识图组织几何和语义证据，让 LLM 生成候选动作，再由物理仿真验证并反馈修正。</p>
+            <ul>
+              <li>Assembly Knowledge Graph</li>
+              <li>LLM-guided Planning</li>
+              <li>Physics Verification</li>
+            </ul>
+          </article>
+          <article class="research-lane reveal">
+            <span class="lane-index">02</span>
+            <h3>VR/AR 与人机交互</h3>
+            <p>研究触控、眼动和裸手输入，面向文本输入、多对象选择、空间布局及协作任务设计交互范式。</p>
+            <ul>
+              <li>Spatial Interaction</li>
+              <li>Eye &amp; Hand Input</li>
+              <li>User Study</li>
+            </ul>
+          </article>
+          <article class="research-lane reveal">
+            <span class="lane-index">03</span>
+            <h3>感知与工程系统</h3>
+            <p>实践多相机采集、手部三维感知、机器人 Retargeting、Android 端侧应用与 AI Agent 平台。</p>
+            <ul>
+              <li>3D Hand Perception</li>
+              <li>Robot Retargeting</li>
+              <li>Full-stack Prototyping</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="current-work section" aria-labelledby="current-title">
+      <div class="page-width current-layout">
+        <div class="current-heading reveal">
+          <p class="section-kicker section-kicker-light">CURRENT FOCUS</p>
+          <h2 id="current-title">知识驱动的拆卸规划</h2>
+        </div>
+        <div class="current-copy reveal">
+          <p class="current-lead">如何让语言模型给出的拆卸计划，不只“合理”，而且真实可执行？</p>
+          <p>当前研究从 CAD 装配体提取接触关系与几何属性，并补充部件功能和装配语义。规划器在结构化状态上提出序列，仿真器检查碰撞与阻塞，再把失败证据送回下一轮推理。</p>
+          <div class="method-flow" aria-label="研究流程">
+            <span>CAD Assembly</span>
+            <i data-lucide="arrow-right" aria-hidden="true"></i>
+            <span>Knowledge Graph</span>
+            <i data-lucide="arrow-right" aria-hidden="true"></i>
+            <span>LLM Planning</span>
+            <i data-lucide="arrow-right" aria-hidden="true"></i>
+            <span>Physics Check</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="publications section" id="publications" aria-labelledby="publications-title">
+      <div class="page-width">
+        <div class="section-heading reveal">
+          <div>
+            <p class="section-kicker">PUBLICATIONS</p>
+            <h2 id="publications-title">学术发表</h2>
+          </div>
+          <p>围绕沉浸式交互与多模态感知展开。以下列出 6 篇已发表论文，提供方法讲解、实验说明与引用信息。</p>
+        </div>
+
+        <div class="publication-list">
+          <article class="publication reveal">
+            <div class="publication-meta"><span>2026</span><strong>IEEE TVCG</strong></div>
+            <div class="publication-body">
+              <h3><a href="/publications/collaborative-disassembly/">Collaborative Disassembly for Multiple Users in Virtual Reality</a></h3>
+              <p>把可行拆卸顺序、并行任务和就近分工连接起来，让多人在 VR 中协同完成复杂装配体拆卸。</p>
+              <div class="text-links"><a href="/publications/collaborative-disassembly/">讲解与展示 →</a><a href="https://doi.org/10.1109/tvcg.2026.3732564">DOI</a><a href="/publications/collaborative-disassembly/cite.bib">BibTeX</a></div>
+            </div>
+          </article>
+
+          <article class="publication reveal">
+            <div class="publication-meta"><span>2026</span><strong>IJHCI</strong></div>
+            <div class="publication-body">
+              <h3><a href="/publications/dspt/">DSPT: Disassembly Sequence Planning Transformer for Interaction Guidance in VR</a></h3>
+              <p>用 Transformer 结合拆卸序列特征与零件历史，预测下一个拆卸目标，并把预测用于 VR 操作引导。</p>
+              <div class="text-links"><a href="/publications/dspt/">讲解与展示 →</a><a href="https://doi.org/10.1080/10447318.2025.2607559">DOI</a><a href="/publications/dspt/cite.bib">BibTeX</a></div>
+            </div>
+          </article>
+
+          <article class="publication reveal">
+            <div class="publication-meta"><span>2026</span><strong>IEEE TVCG</strong></div>
+            <div class="publication-body">
+              <h3><a href="/publications/moa/">MOA: Efficient Scene-Aware Multi-Object Arrangement in VR</a></h3>
+              <p>在大量物体互相遮挡的 VR 场景中，结合眼动、裸手和场景线索，先选中目标，再成组调整布局。</p>
+              <div class="text-links"><a href="/publications/moa/">讲解与展示 →</a><a href="https://doi.org/10.1109/tvcg.2025.3636062">DOI</a><a href="/publications/moa/cite.bib">BibTeX</a></div>
+            </div>
+          </article>
+
+          <article class="publication reveal">
+            <div class="publication-meta"><span>2026</span><strong>IJHCI</strong></div>
+            <div class="publication-body">
+              <h3><a href="/publications/align-box/">Align-Box: Enable Fast Bare-Hand Multi-Object Alignment in VR</a></h3>
+              <p>用物体包围盒与代理盒之间的映射，把多物体对齐转为直观的裸手操作，同时支持组内对齐和参照外部物体对齐。</p>
+              <div class="text-links"><a href="/publications/align-box/">讲解与展示 →</a><a href="https://doi.org/10.1080/10447318.2026.2621281">DOI</a><a href="/publications/align-box/cite.bib">BibTeX</a></div>
+            </div>
+          </article>
+
+          <article class="publication reveal">
+            <div class="publication-meta"><span>2025</span><strong>IEEE TVCG</strong></div>
+            <div class="publication-body">
+              <h3><a href="/publications/cybersickness-bcgr/">Multimodal Contrastive Learning for Cybersickness Recognition Using Brain Connectivity Graph Representation</a></h3>
+              <p>把 EEG、视频与运动数据表示为脑连接图，再用带连接约束的对比学习融合信息，识别 VR 晕动症。</p>
+              <div class="text-links"><a href="/publications/cybersickness-bcgr/">讲解与展示 →</a><a href="https://doi.org/10.1109/tvcg.2025.3616797">DOI</a><a href="/publications/cybersickness-bcgr/cite.bib">BibTeX</a></div>
+            </div>
+          </article>
+
+          <article class="publication reveal">
+            <div class="publication-meta"><span>2024</span><strong>IEEE VR</strong></div>
+            <div class="publication-body">
+              <h3><a href="/publications/fanpad/">FanPad: A Fan Layout Touchpad Keyboard for Text Entry in VR</a></h3>
+              <p>让 VR 手柄上的键盘顺着拇指运动：把 QWERTY 拆分到双手触控板，再把按键行弯成适合拇指的扇形。</p>
+              <div class="text-links"><a href="/publications/fanpad/">讲解与展示 →</a><a href="https://doi.org/10.1109/vr58804.2024.00045">DOI</a><a href="/publications/fanpad/cite.bib">BibTeX</a></div>
+            </div>
+          </article>
+        </div>
+        <p><a class="section-link" href="/publications/">全部论文与演示 →</a></p>
+      </div>
+    </section>
+
+    <section class="projects section" id="projects" aria-labelledby="projects-title">
+      <div class="page-width">
+        <div class="section-heading reveal">
+          <div>
+            <p class="section-kicker">SELECTED SYSTEMS</p>
+            <h2 id="projects-title">代表系统与演示</h2>
+          </div>
+          <a class="section-link" href="https://space.bilibili.com/517138510" target="_blank" rel="noopener noreferrer">
+            全部视频 <i data-lucide="arrow-up-right" aria-hidden="true"></i>
+          </a>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card reveal">
+            <a class="project-media" href="https://www.bilibili.com/video/BV1NKgUe8EH6" target="_blank" rel="noopener noreferrer" aria-label="观看 FanPad 演示">
+              <img src="/assets/media/fanpad.jpg" alt="FanPad VR 文本输入演示封面" width="1920" height="1080">
+              <span class="play-button" aria-hidden="true"><i data-lucide="play"></i></span>
+            </a>
+            <div class="project-body">
+              <p class="project-label">VR TEXT ENTRY · IEEE VR 2024</p>
+              <h3>FanPad</h3>
+              <p>面向 VR 手柄触控板的扇形键盘。以熟悉的 26 键布局和拇指运动范围平衡效率与舒适性。</p>
+              <div class="text-links">
+                <a href="https://github.com/Steve-Strange/FanPad-A-Fan-Layout-Touchpad-Keyboard-for-Text-Entry-in-VR" target="_blank" rel="noopener noreferrer">GitHub <i data-lucide="arrow-up-right" aria-hidden="true"></i></a>
+                <a href="https://doi.org/10.1109/VR58804.2024.00045" target="_blank" rel="noopener noreferrer">Paper <i data-lucide="arrow-up-right" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <a class="project-media" href="https://www.bilibili.com/video/BV1K8UqBMEWr" target="_blank" rel="noopener noreferrer" aria-label="观看 MOA 演示">
+              <img src="/assets/media/moa.jpg" alt="MOA 多对象布局 VR 场景" width="1635" height="919">
+              <span class="play-button" aria-hidden="true"><i data-lucide="play"></i></span>
+            </a>
+            <div class="project-body">
+              <p class="project-label">EYE + HAND INTERACTION · IEEE TVCG</p>
+              <h3>MOA</h3>
+              <p>场景感知的 VR 多对象布局方法。结合眼动和裸手输入，降低高遮挡条件下选择与整理对象的负担。</p>
+              <div class="text-links">
+                <a href="https://doi.org/10.1109/TVCG.2025.3636062" target="_blank" rel="noopener noreferrer">Paper <i data-lucide="arrow-up-right" aria-hidden="true"></i></a>
+                <a href="https://www.bilibili.com/video/BV1K8UqBMEWr" target="_blank" rel="noopener noreferrer">Demo <i data-lucide="play" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <a class="project-media" href="https://www.bilibili.com/video/BV17C4y1u7iX" target="_blank" rel="noopener noreferrer" aria-label="观看 Unity XRI VR 交互演示">
+              <img src="/assets/media/unity-xri.jpg" alt="Unity XRI VR 台球与交互演示场景" width="1440" height="1080">
+              <span class="play-button" aria-hidden="true"><i data-lucide="play"></i></span>
+            </a>
+            <div class="project-body">
+              <p class="project-label">UNITY · XRI · RAPID PROTOTYPING</p>
+              <h3>VR Interaction Playground</h3>
+              <p>基于 Unity XRI 的 VR 交互原型集合，覆盖移动、攀爬、射箭、台球与坐立状态切换。</p>
+              <div class="text-links">
+                <a href="https://github.com/Steve-Strange/Archery-and-Billiards-in-VR-using-Unity-XRI-2.5.2" target="_blank" rel="noopener noreferrer">GitHub <i data-lucide="arrow-up-right" aria-hidden="true"></i></a>
+                <a href="https://www.bilibili.com/video/BV17C4y1u7iX" target="_blank" rel="noopener noreferrer">Demo <i data-lucide="play" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <a class="project-media" href="https://www.bilibili.com/video/BV1SS421A7wQ" target="_blank" rel="noopener noreferrer" aria-label="观看 Android 运动助手演示">
+              <img src="/assets/media/android-sport.jpg" alt="Android 运动助手应用演示" width="1440" height="1080">
+              <span class="play-button" aria-hidden="true"><i data-lucide="play"></i></span>
+            </a>
+            <div class="project-body">
+              <p class="project-label">ANDROID · COMPUTER VISION</p>
+              <h3>运动助手 Android App</h3>
+              <p>面向运动场景的移动端原型，串联动作输入、视觉识别与即时结果展示。</p>
+              <div class="text-links">
+                <a href="https://www.bilibili.com/video/BV1SS421A7wQ" target="_blank" rel="noopener noreferrer">Demo <i data-lucide="play" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card project-card-wide reveal">
+            <a class="project-media" href="https://www.bilibili.com/video/BV1yj411W7ty" target="_blank" rel="noopener noreferrer" aria-label="观看 Pico 4 Pro 裸手识别测试">
+              <img src="/assets/media/pico-hand.jpg" alt="Pico 4 Pro 裸手交互识别测试场景" width="1080" height="810">
+              <span class="play-button" aria-hidden="true"><i data-lucide="play"></i></span>
+            </a>
+            <div class="project-body">
+              <p class="project-label">HAND TRACKING · DEVICE TEST</p>
+              <h3>Pico 4 Pro 裸手识别测试</h3>
+              <p>在真实操作场景中观察头显原生手部追踪的识别范围、遮挡表现与交互稳定性。</p>
+              <div class="text-links">
+                <a href="https://www.bilibili.com/video/BV1yj411W7ty" target="_blank" rel="noopener noreferrer">Demo <i data-lucide="play" aria-hidden="true"></i></a>
+                <a href="https://github.com/Steve-Strange/HandTracking-and-MovingObjects-with-mediapipe-in-unity" target="_blank" rel="noopener noreferrer">相关工程 <i data-lucide="arrow-up-right" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="open-source reveal" aria-labelledby="open-source-title">
+          <div class="open-source-heading">
+            <p class="section-kicker">OPEN SOURCE</p>
+            <h3 id="open-source-title">更多公开工程</h3>
+          </div>
+          <div class="repo-links">
+            <a href="/arcade/">
+              <span>Arcade Lab · 六款浏览器小游戏</span><i data-lucide="play" aria-hidden="true"></i>
+            </a>
+            <a href="https://github.com/Steve-Strange/HandTracking-and-MovingObjects-with-mediapipe-in-unity" target="_blank" rel="noopener noreferrer">
+              <span>Unity MediaPipe Hand Tracking</span><i data-lucide="arrow-up-right" aria-hidden="true"></i>
+            </a>
+            <a href="https://github.com/Steve-Strange/EngineAssemble-in-Unity-steamVR" target="_blank" rel="noopener noreferrer">
+              <span>Engine Assembly in SteamVR</span><i data-lucide="arrow-up-right" aria-hidden="true"></i>
+            </a>
+            <a href="https://github.com/Steve-Strange/Hand-interaction-with-leapmotion" target="_blank" rel="noopener noreferrer">
+              <span>Leap Motion Hand Interaction</span><i data-lucide="arrow-up-right" aria-hidden="true"></i>
+            </a>
+            <a href="https://github.com/Steve-Strange/data_review_project" target="_blank" rel="noopener noreferrer">
+              <span>Data Review Platform</span><i data-lucide="arrow-up-right" aria-hidden="true"></i>
+            </a>
+            <a href="https://github.com/Steve-Strange/claude-relay-service" target="_blank" rel="noopener noreferrer">
+              <span>Claude Relay Service</span><i data-lucide="arrow-up-right" aria-hidden="true"></i>
+            </a>
+            <a href="https://github.com/Steve-Strange" target="_blank" rel="noopener noreferrer">
+              <span>查看全部公开仓库</span><i data-lucide="github" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="experience section" id="experience" aria-labelledby="experience-title">
+      <div class="page-width experience-layout">
+        <div class="experience-heading reveal">
+          <p class="section-kicker">BACKGROUND</p>
+          <h2 id="experience-title">教育与实践</h2>
+          <p>研究之外，持续把方法落成可用系统。</p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <div class="timeline-date">2025.09 — 至今</div>
+            <div>
+              <p class="timeline-type">EDUCATION</p>
+              <h3>北京航空航天大学 · 计算机科学与技术</h3>
+              <p>计算机学院直博生，虚拟现实技术与系统全国重点实验室。研究具身智能、VR/AR 与人机交互。</p>
+            </div>
+          </article>
+          <article class="timeline-item reveal">
+            <div class="timeline-date">2021.09 — 2025.06</div>
+            <div>
+              <p class="timeline-type">EDUCATION</p>
+              <h3>北京航空航天大学 · 虚拟现实技术</h3>
+              <p>本科，GPA 3.78 / 4.00，北航优秀毕业生。</p>
+            </div>
+          </article>
+          <article class="timeline-item reveal">
+            <div class="timeline-date">2024 — 至今</div>
+            <div>
+              <p class="timeline-type">ENGINEERING</p>
+              <h3>AI 眼镜与具身数据平台</h3>
+              <p>参与 Android AI 眼镜、多传感器采集、数据质量门控、相机标定、手部感知与机器人 Retargeting 工程。</p>
+            </div>
+          </article>
+          <article class="timeline-item reveal">
+            <div class="timeline-date">2023 — 2025</div>
+            <div>
+              <p class="timeline-type">TEACHING</p>
+              <h3>课程助教</h3>
+              <p>数据结构课程助教；人工智能课程助教。</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="blog-band" aria-labelledby="blog-title">
+      <div class="page-width blog-band-inner reveal">
+        <div>
+          <p class="section-kicker section-kicker-light">ARCHIVE</p>
+          <h2 id="blog-title">旧博客仍在。</h2>
+          <p>41 篇课程笔记、实验记录与随笔继续保留原路径。</p>
+        </div>
+        <a class="button button-light" href="/archives/">
+          查看文章归档 <i data-lucide="arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </section>
+  </main>

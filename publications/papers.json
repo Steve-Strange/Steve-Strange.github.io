@@ -77,7 +77,9 @@
       "Dynamic Parallel Disassembly and Tasking",
       "DPDT"
     ],
-    "abstract": "Disassembly Sequence Planning (DSP) is critical in product lifecycle management but computationally demanding, with traditional and machine learning approaches facing challenges in scalability and lacking the real-time responsiveness required for interactive collaboration in virtual reality (VR). We present Dynamic Parallel Disassembly and Tasking (DPDT), a novel framework tailored for immersive collaboration. DPDT integrates a spatial-temporal feature-based heuristic to accelerate search prioritization and employs a dynamic reactivation strategy to resolve inter-part dependencies during parallel execution. Furthermore, a proximity-aware task assignment algorithm optimizes the translation of these plans into efficient multi-user instructions. We conduct extensive evaluations on a large-scale dataset against multiple baselines, showing that DPDT significantly outperforms state-of-the-art baselines. Specifically, for complex assemblies, our method achieves a computational speedup of up to 4.7 times while improving planning reliability by approximately 9.3 percentage points. These algorithmic gains translate directly into operational efficiency: a 24-participant user study in VR confirms that DPDT significantly reduces task completion time, physical-effort proxies, and NASA-TLX workload, validating its potential for effective collaborative maintenance training."
+    "abstract": "Disassembly Sequence Planning (DSP) is critical in product lifecycle management but computationally demanding, with traditional and machine learning approaches facing challenges in scalability and lacking the real-time responsiveness required for interactive collaboration in virtual reality (VR). We present Dynamic Parallel Disassembly and Tasking (DPDT), a novel framework tailored for immersive collaboration. DPDT integrates a spatial-temporal feature-based heuristic to accelerate search prioritization and employs a dynamic reactivation strategy to resolve inter-part dependencies during parallel execution. Furthermore, a proximity-aware task assignment algorithm optimizes the translation of these plans into efficient multi-user instructions. We conduct extensive evaluations on a large-scale dataset against multiple baselines, showing that DPDT significantly outperforms state-of-the-art baselines. Specifically, for complex assemblies, our method achieves a computational speedup of up to 4.7 times while improving planning reliability by approximately 9.3 percentage points. These algorithmic gains translate directly into operational efficiency: a 24-participant user study in VR confirms that DPDT significantly reduces task completion time, physical-effort proxies, and NASA-TLX workload, validating its potential for effective collaborative maintenance training.",
+    "cover": "cover.webp",
+    "cover_alt": "VR 装配体旁的三名彩色用户，各自获得不同的拆卸目标"
   },
   {
     "slug": "dspt",
@@ -118,19 +120,29 @@
     ],
     "results": [
       [
-        "序列预测",
-        "论文摘要报告序列准确率与逐步准确率优于所比较的先进方法",
-        "完整评测表尚未获得，不转述未经核实的百分比。"
+        "序列准确率",
+        "DSPT 60.29%；ASAP 50.49%",
+        "论文表 2，测试集差值为 9.80 个百分点。"
       ],
       [
-        "交互评测",
-        "摘要报告拆卸任务完成时间降低、可用性提高",
-        "需要结合全文中的任务、参与者与比较条件解释。"
+        "逐步准确率",
+        "DSPT 87.68%；ASAP 82.30%",
+        "论文表 2；不等于任意装配体的物理执行成功率。"
+      ],
+      [
+        "VR 用户研究",
+        "16 名参与者，无 VR 使用经验",
+        "用户在相同实验场景下比较 DSPT 与 ASAP 引导。"
+      ],
+      [
+        "拆卸完成时间",
+        "DSPT 1038.50 ± 55.67 s；ASAP 1246.46 ± 62.42 s",
+        "论文表 4：均值降低 16.68%，仅对应该研究任务。"
       ]
     ],
-    "limitations": "预测正确率与物理可执行性是不同问题。摘要不足以确定模型在任意装配体、工具约束或真实机器人上的表现。本页依据出版摘要讲解方法，详细样本规模、超参数和数值待全文补齐。",
+    "limitations": "论文主要在零件较少的物体上评测，复杂或不规则装配体的泛化仍需验证。可见性特征提取带来额外计算开销；该工作没有覆盖拆卸路径规划。因此，候选顺序预测不能替代轨迹可行性、工具约束和真实机器人执行验证。",
     "contribution": "Ziteng Wang 为出版作者列表中的第二作者。",
-    "evidence": "题名、作者、卷期页码来自 Crossref；完整摘要来自 OpenAlex 对该 DOI 的记录。",
+    "evidence": "题名、作者与卷期来自 Crossref；方法、图 1、表 2/4、16 人实验及限制均核对了本地出版 PDF 的可恢复正文页面。",
     "related": [
       "collaborative-disassembly"
     ],
@@ -140,7 +152,17 @@
       "VR guidance",
       "DSPT"
     ],
-    "abstract": "The application of virtual reality technology in complex equipment disassembly training is widely used, and planning the disassembly sequence and interactively guiding the disassembly is an issue that requires in-depth research. Traditional methods based on physical collision detection are very accurate, but the computational efficiency is too low to meet the requirement of interactivity. In recent years, deep learning-based disassembly sequence prediction methods have emerged, which are fast in reasoning but suffer from inaccurate prediction of parts to be disassembled. In this paper, we propose a novel Transformer-based network, the Disassembly Sequence Planning Transformer (DSPT), to optimize the disassembly sequence for guiding users to disassemble objects in VR environments. First, we define Disassembly Sequence Features and Part History Features, along with their construction methods. Then, we introduce the parts-to-be-disassembled probability predictor based on a temporal-spatial score and propose a new loss function leveraging the temporal-spatial score to enhance the predictor’s performance. Experimental results show that our method achieves higher sequence accuracy and stepwise accuracy, both outperforming the state-of-the-art method. The results of the user study demonstrate that our method significantly reduces the disassembly task completion time and improves the usability compared to comparison methods."
+    "abstract": "The application of virtual reality technology in complex equipment disassembly training is widely used, and planning the disassembly sequence and interactively guiding the disassembly is an issue that requires in-depth research. Traditional methods based on physical collision detection are very accurate, but the computational efficiency is too low to meet the requirement of interactivity. In recent years, deep learning-based disassembly sequence prediction methods have emerged, which are fast in reasoning but suffer from inaccurate prediction of parts to be disassembled. In this paper, we propose a novel Transformer-based network, the Disassembly Sequence Planning Transformer (DSPT), to optimize the disassembly sequence for guiding users to disassemble objects in VR environments. First, we define Disassembly Sequence Features and Part History Features, along with their construction methods. Then, we introduce the parts-to-be-disassembled probability predictor based on a temporal-spatial score and propose a new loss function leveraging the temporal-spatial score to enhance the predictor’s performance. Experimental results show that our method achieves higher sequence accuracy and stepwise accuracy, both outperforming the state-of-the-art method. The results of the user study demonstrate that our method significantly reduces the disassembly task completion time and improves the usability compared to comparison methods.",
+    "cover": "cover.webp",
+    "cover_alt": "DSPT 在 VR 中显示零件拆卸概率，并高亮下一步目标",
+    "figure": "overview.webp",
+    "figure_caption": "论文图 1：左侧为预测拆卸顺序，中间和右侧展示 VR 中的概率预测与目标高亮。",
+    "links": [
+      [
+        "YouTube 演示",
+        "https://www.youtube.com/watch?v=WFlZnzhBhlo"
+      ]
+    ]
   },
   {
     "slug": "moa",
@@ -217,7 +239,9 @@
       "Virtual reality",
       "MOA"
     ],
-    "abstract": "3D multi-object arrangement is a fundamental task in VR that relies on accurate and natural initial selection alongside rapid and convenient subsequent manipulation to ensure high efficiency. However, existing methods fail to support efficient multi-object arrangement in highly occluded scenes with densely packed candidate objects through controller-free natural interactions. In this article, we propose an efficient, scene-aware multi-object arrangement method (MOA) designed for fast, precise, and convenient object arrangement. First, MOA introduces an importance-driven multi-object initial selection algorithm that assigns higher spatiotemporally correlated object importance (IMP) to target objects, establishing a natural multi-object initial selection mode that enables quick and accurate selection of high-IMP objects. Subsequently, it presents an auxiliary-structure-guided multi-object manipulation algorithm that constructs an auxiliary manipulation structure to assist subsequent multi-object manipulation, alongside a multi-modal interaction mode that facilitates swift and natural manipulation. Compared to state-of-the-art controller-free and controller-based methods, MOA significantly improves task performance, reduces task load, and enhances convenience in complex multi-object arrangement scenes involving hundreds of highly occluded objects need to be arranged."
+    "abstract": "3D multi-object arrangement is a fundamental task in VR that relies on accurate and natural initial selection alongside rapid and convenient subsequent manipulation to ensure high efficiency. However, existing methods fail to support efficient multi-object arrangement in highly occluded scenes with densely packed candidate objects through controller-free natural interactions. In this article, we propose an efficient, scene-aware multi-object arrangement method (MOA) designed for fast, precise, and convenient object arrangement. First, MOA introduces an importance-driven multi-object initial selection algorithm that assigns higher spatiotemporally correlated object importance (IMP) to target objects, establishing a natural multi-object initial selection mode that enables quick and accurate selection of high-IMP objects. Subsequently, it presents an auxiliary-structure-guided multi-object manipulation algorithm that constructs an auxiliary manipulation structure to assist subsequent multi-object manipulation, alongside a multi-modal interaction mode that facilitates swift and natural manipulation. Compared to state-of-the-art controller-free and controller-based methods, MOA significantly improves task performance, reduces task load, and enhances convenience in complex multi-object arrangement scenes involving hundreds of highly occluded objects need to be arranged.",
+    "cover": "cover.webp",
+    "cover_alt": "MOA 场景中的成组物体操纵与用户裸手操作视角"
   },
   {
     "slug": "align-box",
@@ -296,7 +320,9 @@
       "Virtual reality",
       "Align-Box"
     ],
-    "abstract": "In virtual reality (VR) environments, aligning multiple objects can significantly enhance the efficiency of multi-object manipulation. This is especially true for tasks involving the layout of multiple objects in indoor spaces, where the objects often have geometric constraints. Multi-object alignment methods can enhance interaction efficiency for such applications, and immersive visualization effects can improve users’ perception of the scene, thereby optimizing layout design. In this paper, we propose an interactive multi-object alignment metaphor, the Align-Box. It consists of two hexahedral boxes, utilizing the mapping between the object enclosing box and the proxy box, along with a user-friendly and straightforward hand gesture system. This allows for efficient group-based and object-based multi-object alignment. We evaluated the method’s performance through an empirical user study, and the results indicate that Align-Box significantly improves multi-object alignment efficiency, usability, and task load."
+    "abstract": "In virtual reality (VR) environments, aligning multiple objects can significantly enhance the efficiency of multi-object manipulation. This is especially true for tasks involving the layout of multiple objects in indoor spaces, where the objects often have geometric constraints. Multi-object alignment methods can enhance interaction efficiency for such applications, and immersive visualization effects can improve users’ perception of the scene, thereby optimizing layout design. In this paper, we propose an interactive multi-object alignment metaphor, the Align-Box. It consists of two hexahedral boxes, utilizing the mapping between the object enclosing box and the proxy box, along with a user-friendly and straightforward hand gesture system. This allows for efficient group-based and object-based multi-object alignment. We evaluated the method’s performance through an empirical user study, and the results indicate that Align-Box significantly improves multi-object alignment efficiency, usability, and task load.",
+    "cover": "cover.webp",
+    "cover_alt": "Align-Box 的组内对齐与外部参照对齐操作"
   },
   {
     "slug": "cybersickness-bcgr",
@@ -374,7 +400,9 @@
       "Multimodal contrastive learning",
       "BCGR"
     ],
-    "abstract": "Cybersickness significantly impairs user comfort and immersion in virtual reality (VR). Effective identification of cybersickness leveraging physiological, visual, and motion data is a critical prerequisite for its mitigation. However, current methods primarily employ direct feature fusion across modalities, which often leads to limited accuracy due to inadequate modeling of inter-modal relationships. In this paper, we propose a multimodal contrastive learning method for cybersickness recognition. First, we introduce Brain Connectivity Graph Representation (BCGR), an innovative graph-based representation that captures cybersickness-related connectivity patterns across modalities. We further develop three BCGR instances: E-BCGR, constructed based on EEG signals; MV-BCGR, constructed based on video and motion data; and S-BCGR, obtained through our proposed standardized decomposition algorithm. Then, we propose a connectivity-constrained contrastive fusion module, which aligns E-BCGR and MV-BCGR into a shared latent space via graph contrastive learning while utilizing S-BCGR as a connectivity constraint to enhance representation quality. Moreover, we construct a multimodal cybersickness dataset comprising synchronized EEG, video, and motion data collected in VR environments to promote further research in this domain. Experimental results demonstrate that our method outperforms existing state-of-the-art methods across four critical evaluation metrics: accuracy, sensitivity, specificity, and the area under the curve. Source code: https://github.com/PEKEW/cybersickness-bcgr."
+    "abstract": "Cybersickness significantly impairs user comfort and immersion in virtual reality (VR). Effective identification of cybersickness leveraging physiological, visual, and motion data is a critical prerequisite for its mitigation. However, current methods primarily employ direct feature fusion across modalities, which often leads to limited accuracy due to inadequate modeling of inter-modal relationships. In this paper, we propose a multimodal contrastive learning method for cybersickness recognition. First, we introduce Brain Connectivity Graph Representation (BCGR), an innovative graph-based representation that captures cybersickness-related connectivity patterns across modalities. We further develop three BCGR instances: E-BCGR, constructed based on EEG signals; MV-BCGR, constructed based on video and motion data; and S-BCGR, obtained through our proposed standardized decomposition algorithm. Then, we propose a connectivity-constrained contrastive fusion module, which aligns E-BCGR and MV-BCGR into a shared latent space via graph contrastive learning while utilizing S-BCGR as a connectivity constraint to enhance representation quality. Moreover, we construct a multimodal cybersickness dataset comprising synchronized EEG, video, and motion data collected in VR environments to promote further research in this domain. Experimental results demonstrate that our method outperforms existing state-of-the-art methods across four critical evaluation metrics: accuracy, sensitivity, specificity, and the area under the curve. Source code: https://github.com/PEKEW/cybersickness-bcgr.",
+    "cover": "cover.webp",
+    "cover_alt": "参与者同时佩戴 EEG 脑电帽和 VR 头显进行数据采集"
   },
   {
     "slug": "fanpad",
@@ -457,6 +485,8 @@
       "Thumb ergonomics",
       "FanPad"
     ],
-    "abstract": "Text entry poses a significant challenge in the realm of virtual reality (VR). This paper introduces FanPad, a novel solution designed to facilitate dual-hand text input within head-mounted displays (HMDs). FanPad accomplishes this by ingeniously mapping and curving the 26 typing keys (T26) QWERTY keyboard onto the touchpads of both controllers. The curved key layout of FanPad is derived from the natural movement of the thumb when interacting with the touchpad, resembling an arc with a thumb-length fixed radius. To optimize the experience, we introduce a customization process for the FanPad curve to better cope with individual hand shapes and thumb movements. We also provide a version with more overlap area named FanPad-Ov for different users with different typing habits. Our first user study examined the effects of curving and different overlap areas by comparing four potential layouts. The results clearly favor the FanPad and FanPad-Ov layout compared to the nocurving version, SKPad(-Ov). Subsequently, the second user study was conducted to assess long-term performance and improvement on customized FanPads. Notably, novices achieved a typing speed of 19.73 words per minute (WPM), demonstrating a remarkable increase of 58.47% after a 60-phrase training in six days. The highest typing speed reached an impressive 24.19 WPM."
+    "abstract": "Text entry poses a significant challenge in the realm of virtual reality (VR). This paper introduces FanPad, a novel solution designed to facilitate dual-hand text input within head-mounted displays (HMDs). FanPad accomplishes this by ingeniously mapping and curving the 26 typing keys (T26) QWERTY keyboard onto the touchpads of both controllers. The curved key layout of FanPad is derived from the natural movement of the thumb when interacting with the touchpad, resembling an arc with a thumb-length fixed radius. To optimize the experience, we introduce a customization process for the FanPad curve to better cope with individual hand shapes and thumb movements. We also provide a version with more overlap area named FanPad-Ov for different users with different typing habits. Our first user study examined the effects of curving and different overlap areas by comparing four potential layouts. The results clearly favor the FanPad and FanPad-Ov layout compared to the nocurving version, SKPad(-Ov). Subsequently, the second user study was conducted to assess long-term performance and improvement on customized FanPads. Notably, novices achieved a typing speed of 19.73 words per minute (WPM), demonstrating a remarkable increase of 58.47% after a 60-phrase training in six days. The highest typing speed reached an impressive 24.19 WPM.",
+    "cover": "cover.webp",
+    "cover_alt": "双手控制器触控板与 VR 中的 FanPad 扇形键盘"
   }
 ]

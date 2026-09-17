@@ -1,0 +1,99 @@
+{
+  "collaborative-disassembly": {
+    "title_zh": "虚拟现实中的多用户协同拆卸",
+    "abstract_zh": "拆卸序列规划是产品生命周期管理中的关键环节，但计算开销较大。传统方法与机器学习方法都面临可扩展性挑战，也难以满足虚拟现实交互协作所需的实时响应。我们提出面向沉浸式协作的动态并行拆卸与任务分配框架（DPDT）。框架使用基于时空特征的启发式方法确定搜索优先级，并通过动态重新激活策略处理并行执行中的零件依赖关系。此外，考虑用户与目标距离的任务分配算法将规划结果转化为高效的多用户指令。我们在大规模数据集上与多种基线进行比较。结果表明，对于复杂装配体，DPDT 的计算速度最高提升至基线的 4.7 倍，规划可靠性提高约 9.3 个百分点。一项包含 24 名参与者的 VR 用户研究进一步表明，DPDT 显著降低了任务完成时间、体力负担代理指标和 NASA-TLX 任务负担，展现了其用于协同维修训练的潜力。",
+    "en": {
+      "role": "First author",
+      "question": "Adding users does not automatically make disassembly faster. Parts have dependencies, while people may wait for tasks, take detours, or compete for the same target. DPDT considers both which parts can be removed next and who should remove them.",
+      "steps": [["Rank candidate parts", "Spatiotemporal features, including geometric visibility, distance from the center, and previous attempts, prioritize promising candidates. Physical simulation still checks their feasibility."], ["Maintain parallel task sets", "Validate removal actions against the current assembly state. When a removal changes blocking relationships, dynamically reactivate previously infeasible candidates for the next planning round."], ["Assign tasks to nearby users", "Allocate validated candidates using the distance between users and targets, then show target and movement guidance in VR. Planning parallelism can exceed the number of active users to offer more assignment choices."]],
+      "results": [["Algorithm evaluation", "3,671 assemblies, including a reported subset of 382 complex assemblies", "Subject to the paper's geometry, simulation and time limits."], ["Planning time on the complex subset", "DPDT Pₙ=5: 8.66 s; serial ATA: 41.37 s", "About 4.7× for this comparison. ATA at Pₙ=5 takes 18.40 s; the 4.7× claim does not apply to every setting."], ["Success rate on the complex subset", "9.28 percentage points above ATA in the serial setting", "An absolute percentage-point difference, not relative growth."], ["VR user study", "24 participants; teams of 1, 2 or 3; four methods", "The revision reports improvements in task time, head movement and NASA-TLX. Some head-rotation comparisons are not significant after correction."]],
+      "limitations": "This simulation-validated framework targets VR training and primarily handles translational removal of rigid parts. It does not establish tool accessibility, screw removal, flexible-part handling or full 6-DOF operation in real maintenance. Movement measures are proxies for physical effort, and task time includes waiting during collaboration.",
+      "contribution": "Led the method, system implementation, comparison methods, user studies, demonstrations and paper writing.",
+      "figure_caption": "DPDT: candidate ranking, parallel disassembly planning and multi-user task assignment. Source: the method figure in the authors' revised manuscript.",
+      "video_caption": "Author-provided collaborative disassembly demonstration. Evaluation claims are supported by the paper.",
+      "evidence": "Publication metadata: IEEE's Crossref record. Methods and measurements: the authors' R2 clean revision, Sections 4–7; page-by-page equivalence to the publisher version has not been checked.",
+      "cover_alt": "Three color-coded users receive different removal targets around an assembly in VR"
+    }
+  },
+  "dspt": {
+    "title_zh": "DSPT：用于 VR 交互引导的拆卸序列规划 Transformer",
+    "abstract_zh": "虚拟现实已广泛用于复杂设备拆卸训练，而拆卸序列规划与交互式操作引导仍有待深入研究。基于物理碰撞检测的传统方法准确率高，但计算效率难以满足交互需求。近年来，基于深度学习的拆卸序列预测方法推理速度较快，却存在待拆零件预测不准确的问题。本文提出基于 Transformer 的拆卸序列规划网络 DSPT，用于优化拆卸序列并在 VR 环境中引导用户操作。首先，定义拆卸序列特征和零件历史特征及其构建方式。随后，提出基于时空评分的待拆零件概率预测器，并设计利用时空评分的新损失函数来提升预测性能。实验表明，该方法的序列准确率和逐步准确率均优于先进的比较方法。用户研究表明，该方法能显著缩短拆卸任务完成时间，并提高可用性。",
+    "en": {
+      "role": "Second author",
+      "question": "Physical search is often accurate but slow, while learned predictions may suggest invalid candidates. DSPT uses sequence context and part history to improve candidate prediction for interactive disassembly guidance.",
+      "steps": [["Represent the disassembly process", "Construct Disassembly Sequence Features and Part History Features so the model can use sequence context and previous part states."], ["Predict the next candidate", "A Transformer estimates the probability of each part being removed next. A temporal-spatial score and a corresponding loss improve the predictor."], ["Guide interaction in VR", "Turn candidate sequences into removal guidance. Evaluate sequence accuracy, stepwise accuracy and user task performance."]],
+      "results": [["Sequence accuracy", "DSPT: 60.29%; ASAP: 50.49%", "Table 2: a 9.80-percentage-point difference on the test set."], ["Stepwise accuracy", "DSPT: 87.68%; ASAP: 82.30%", "Table 2. This is not a physical execution success rate for arbitrary assemblies."], ["VR user study", "16 participants with no prior VR experience", "Participants compared DSPT and ASAP guidance in the study's common task setting."], ["Task completion time", "DSPT: 1038.50 ± 55.67 s; ASAP: 1246.46 ± 62.42 s", "Table 4: a 16.68% reduction in mean time for the studied tasks."]],
+      "limitations": "Evaluation mainly covers objects with relatively few parts. Generalization to complex or irregular assemblies needs further study. Visibility-feature extraction adds computational cost, and disassembly path planning is outside the scope. Sequence predictions do not replace trajectory, tool-constraint or robot-execution validation.",
+      "contribution": "Ziteng Wang is the second author in the published author list.",
+      "evidence": "Title, authors and issue metadata: Crossref. Methods, Figure 1, Tables 2 and 4, the 16-person study and limitations were checked against recoverable pages of the local publisher PDF.",
+      "cover_alt": "DSPT predicts part-removal probabilities and highlights the next target in VR",
+      "figure_caption": "Figure 1: the predicted removal sequence on the left, with VR probability estimates and target highlighting in the middle and right panels.",
+      "links": [["YouTube demo", "https://www.youtube.com/watch?v=WFlZnzhBhlo"]]
+    }
+  },
+  "moa": {
+    "title_zh": "MOA：高效的场景感知 VR 多物体布局方法",
+    "abstract_zh": "三维多物体布局是 VR 中的基础任务，其效率依赖准确自然的初始选择，以及快速便捷的后续操纵。然而，在候选物体密集且遮挡严重的场景中，现有方法难以通过无手柄自然交互高效完成多物体布局。本文提出场景感知的多物体布局方法 MOA，以实现快速、准确且便捷的物体整理。首先，MOA 提出重要性驱动的多物体初始选择算法，赋予目标物体更高的时空相关物体重要性（IMP），并建立自然的初始选择方式，使用户能够快速准确地选取高重要性物体。随后，提出辅助结构引导的多物体操纵算法，为后续操纵构建辅助结构，并结合多模态交互实现快速自然的操作。在包含数百个高遮挡物体的复杂布局场景中，相比先进的无手柄和有手柄方法，MOA 显著提升了任务表现，降低了任务负担，并提高了操作便利性。",
+    "en": {
+      "role": "Corresponding author (third in the author list)",
+      "question": "When arranging furniture or densely packed objects, selecting the right objects matters as much as moving them. Improving one grab alone does not address repeated selection, occlusion and group arrangement.",
+      "steps": [["Use scene context to estimate importance", "Spatiotemporally correlated object importance (IMP) separates targets from distractors and supports natural initial selection of multiple objects."], ["Build an auxiliary manipulation structure", "Give selected objects an actionable spatial reference, reducing the need to manipulate each object individually."], ["Combine input modalities", "Eye and bare-hand input connect initial selection and subsequent manipulation into a continuous arrangement workflow."]],
+      "results": [["Task setting", "Complex arrangement scenes with hundreds of highly occluded objects", "Focuses on arranging groups, rather than isolated single-object selection."], ["Comparisons", "Controller-free and controller-based methods", "The published abstract reports better task performance, lower workload and improved convenience. Quantitative tables are not available in the reviewed materials."]],
+      "limitations": "This explanation uses the published abstract and author-provided material. Performance depends on scene organization, tracking quality and task design. Without the complete final evaluation tables, it cannot support a fixed numerical efficiency claim.",
+      "contribution": "Worked on the method, design and implementation, comparison methods, user studies and demonstration system. The corresponding-author role follows the author's CV record.",
+      "figure_caption": "Initial multi-object selection in the authors' MOA demonstration, showing the first-person view and the user's input.",
+      "video_caption": "Author-provided MOA demonstration of multi-object selection and arrangement.",
+      "links": [["Bilibili demo", "https://www.bilibili.com/video/BV1K8UqBMEWr"]],
+      "evidence": "Issue metadata: IEEE TVCG 32(2), 2183–2199, 2026. Abstract: Semantic Scholar's record for this DOI; bibliographic details cross-checked with PubMed, PMID 41284398.",
+      "cover_alt": "Group manipulation in an MOA scene alongside the user's bare-hand input"
+    }
+  },
+  "align-box": {
+    "title_zh": "Align-Box：在 VR 中实现快速裸手多物体对齐",
+    "abstract_zh": "在虚拟现实环境中，对齐多个物体可以显著提升多物体操纵效率，尤其适用于室内空间布局等物体之间存在几何约束的任务。多物体对齐方法能够提高这类应用的交互效率，而沉浸式可视化有助于用户理解场景并优化布局设计。本文提出交互式多物体对齐隐喻 Align-Box。它由两个六面体盒组成，通过物体包围盒与代理盒之间的映射，以及易用、直观的手势系统，高效支持组内对齐和基于外部物体的对齐。用户研究表明，Align-Box 显著改善了多物体对齐效率、可用性和任务负担。",
+    "en": {
+      "role": "First student author (second in the author list)",
+      "question": "Aligning a row of objects is more than moving the whole group. Objects may need to align with one another or with an external reference such as a wall. Align-Box expresses both relationships through a shared proxy structure.",
+      "steps": [["Represent the object group with a box", "An enclosing hexahedral box turns a complex object set into edges, faces and spatial extents that are easier to manipulate."], ["Map input through a proxy box", "Users manipulate a second hexahedral box. The system maps that input to alignment relationships among the target objects."], ["Choose the alignment reference", "The same bare-hand interaction supports group-based alignment and object-based alignment, addressing internal relationships and alignment to external objects."]],
+      "results": [["Participants and device", "36 participants; Oculus Quest 2 hand tracking", "Section 4 of the authors' September 26, 2025 manuscript."], ["Group-based alignment (P1)", "12.94 s; AlignPin with ray selection: 28.42 s; WIM: 57.06 s", "Manuscript Table 3: reductions of 54.4% and 77.3%, respectively."], ["Object-based alignment (P2)", "67.78 s; WIM: 166.47 s", "Manuscript Table 4: a 59.3% reduction. AlignPin with ray selection did not support these tasks and was not compared here."], ["Workload and usability", "Improvements in several dimensions, but not every comparison is significant", "Physical and Temporal workload subscales did not differ significantly from AlignPin."]],
+      "limitations": "Targets and reference relationships must be clear, and results depend on hand-tracking quality and occlusion. Spatial alignment does not establish physical stability, collision avoidance or real assembly tolerances.",
+      "contribution": "Implemented the method and some comparison methods, conducted user studies, and contributed to paper writing.",
+      "figure_caption": "Method illustration from the authors' Align-Box manuscript. The enclosing box and proxy box map hand input to multi-object alignment.",
+      "evidence": "Publication metadata: Crossref. Methods, abstract and measurements: Section 4 and Tables 3–4 of the authors' September 26, 2025 manuscript. Published online February 6, 2026; numerical results have not been checked individually against the publisher full text.",
+      "cover_alt": "Align-Box interaction steps for group-based and object-based alignment"
+    }
+  },
+  "cybersickness-bcgr": {
+    "title_zh": "基于脑连接图表示的晕动症识别多模态对比学习",
+    "abstract_zh": "晕动症会显著降低用户在 VR 中的舒适度与沉浸感。利用生理、视觉和运动数据有效识别晕动症，是缓解其影响的重要前提。然而，现有方法主要直接融合各模态特征，对模态间关系的建模不足，限制了识别准确率。本文提出用于晕动症识别的多模态对比学习方法。首先，提出脑连接图表示（BCGR），以图结构刻画不同模态中与晕动症相关的连接模式，并构建三种实例：由 EEG 信号构建的 E-BCGR，由视频和运动数据构建的 MV-BCGR，以及通过标准化分解算法获得的 S-BCGR。随后，提出连接约束对比融合模块，通过图对比学习将 E-BCGR 和 MV-BCGR 对齐至共同潜在空间，并使用 S-BCGR 作为连接约束，提升表示质量。此外，我们构建了在 VR 环境中同步采集 EEG、视频和运动数据的多模态晕动症数据集。实验表明，该方法在准确率、敏感度、特异度和曲线下面积四项指标上均优于现有先进方法。源代码：https://github.com/PEKEW/cybersickness-bcgr。",
+    "en": {
+      "role": "Third author",
+      "question": "EEG, visual and motion data each contain clues about cybersickness. Concatenating their features may not capture relationships across modalities. This method first forms comparable connectivity graphs, then learns aligned representations.",
+      "steps": [["Synchronize three modalities", "Record EEG, first-person video and motion in VR, aligning samples from the same time interval."], ["Construct BCGR instances", "Build E-BCGR from EEG, obtain S-BCGR through standardized decomposition, and construct MV-BCGR from video and motion."], ["Fuse with connectivity constraints", "Connectivity-Constrained Contrastive Fusion (CCCF) aligns representations in a shared latent space. S-BCGR constrains connectivity to support cybersickness recognition."]],
+      "results": [["Accuracy", "84.17%", "The full three-modality model in the authors' manuscript."], ["Sensitivity / specificity", "85.09% / 84.18%", "Recognition of positive and negative samples, respectively."], ["AUC", "92.22%", "Under the paper's dataset and evaluation protocol."]],
+      "limitations": "The dataset labels the presence or absence of cybersickness, not symptom severity. Recognition performance in these experiments does not establish clinical diagnostic capability or equal performance across all users, devices and VR content.",
+      "contribution": "Helped build the VR cybersickness dataset with synchronized EEG, video and motion recordings.",
+      "figure_caption": "Figure 1: synchronized data collection, brain connectivity graph construction and connectivity-constrained contrastive fusion.",
+      "links": [["Code", "https://github.com/PEKEW/cybersickness-bcgr"]],
+      "evidence": "Bibliographic metadata: Crossref. Methods and metrics: Figure 1, Tables 1–3 and the conclusion of the local author manuscript.",
+      "cover_alt": "A participant wears an EEG cap and VR headset during synchronized data collection"
+    }
+  },
+  "fanpad": {
+    "title_zh": "FanPad：用于 VR 文本输入的扇形触控板键盘",
+    "abstract_zh": "文本输入是虚拟现实中的一项重要挑战。本文提出 FanPad，通过将包含 26 个字母键的 QWERTY 键盘映射并弯曲到两个控制器触控板上，实现头戴式显示设备中的双手文本输入。FanPad 的弯曲布局源于拇指在触控板上的自然运动，其轨迹近似以拇指长度为固定半径的圆弧。为适应不同手型和拇指运动，我们设计了曲线定制流程；同时提供左右手重叠区域更大的 FanPad-Ov，以适应不同输入习惯。第一项用户研究比较了四种候选布局，考察弯曲和重叠区域的作用。结果显示，FanPad 和 FanPad-Ov 优于不弯曲的 SKPad 及 SKPad-Ov。第二项研究评估了定制 FanPad 的持续使用表现与进步。经过六天、60 个短语的训练后，新手输入速度达到每分钟 19.73 个词，相比初始表现提高 58.47%；最高输入速度达到每分钟 24.19 个词。",
+    "en": {
+      "role": "Co-first author (second in the author list)",
+      "question": "Repeatedly raising a hand to point at a keyboard can be tiring in a headset. FanPad retains familiar QWERTY relationships while putting input on two controller touchpads, operated by the thumbs.",
+      "steps": [["Split QWERTY between two hands", "Map the 26 letters to left and right touchpads while retaining familiar relative key positions."], ["Curve rows along thumb movement", "Adapt key rows to the thumb's natural arc, then calibrate the layout to the user's hand shape and grip."], ["Choose overlap and enter text", "FanPad-Ov provides a larger overlap region to accommodate different typing habits. Touch and release selects letters; the trigger confirms a candidate word."]],
+      "results": [["Layout study", "FanPad / FanPad-Ov compared with uncurved SKPad / SKPad-Ov", "Separates the effects of curvature and the overlap region."], ["Learning study", "19.73 WPM after six days of training", "A reported 58.47% improvement over initial performance, not a universal comparison against other VR keyboards."], ["Highest typing speed", "24.19 WPM", "The highest observed value, not the participant mean."]],
+      "limitations": "Findings concern the paper's dual-touchpad hardware, layouts and short training period. Touchpad area, hand shape and practice affect performance; the results do not directly generalize to controllers without touchpads or long-term text editing.",
+      "contribution": "Co-first author, listed second. The published first page explicitly credits equal contribution to Ziteng Wang. Worked on method design and refinement, parts of the implementation and writing, user studies and the demonstration system.",
+      "figure_caption": "FanPad Figure 1: the fan-shaped keyboard, dual-hand input, and switching between case and symbols.",
+      "video_caption": "Author-provided FanPad demonstration of dual-touchpad input and keyboard interaction.",
+      "links": [["Code", "https://github.com/Steve-Strange/FanPad-A-Fan-Layout-Touchpad-Keyboard-for-Text-Entry-in-VR"], ["Bilibili demo", "https://www.bilibili.com/video/BV1NKgUe8EH6"]],
+      "evidence": "Author order, equal-contribution footnote, methods and measurements: the IEEE VR 2024 published paper, pages 222–232.",
+      "cover_alt": "Two controller touchpads and FanPad's curved keyboard inside VR"
+    }
+  }
+}

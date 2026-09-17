@@ -1,10 +1,10 @@
 const path = require('node:path');
-const { test, expect } = require('@playwright/test');
+const { test, expect } = require('playwright/test');
 const { PNG } = require('playwright-core/lib/utilsBundle');
 
 const base = process.env.ARCADE_URL || 'http://127.0.0.1:8765';
 const output = path.join(__dirname, '..', 'artifacts', 'visualizations');
-test.use({ launchOptions: { executablePath: '/snap/bin/chromium', args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] } });
+test.use({ launchOptions: { executablePath: '/usr/bin/google-chrome', args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] } });
 
 function pixelCount(buffer) {
   const { data } = PNG.sync.read(buffer);
@@ -46,7 +46,7 @@ for (const viewport of [{ width: 1440, height: 1000 }, { width: 1280, height: 72
 test('game switching, URL history, mode, pause, mute and restart', async ({ page }) => {
   await page.goto(`${base}/arcade/`);
   const frame = page.frameLocator('#game-frame');
-  await page.getByRole('button', { name: '本地双人', exact: true }).click();
+  await page.getByRole('button', { name: 'Local two-player', exact: true }).click();
   await expect(frame.locator('#game-shell')).toHaveAttribute('data-mode', 'pvp');
   await frame.locator('#overlay').click();
   await expect(frame.locator('#game-shell')).toHaveAttribute('data-state', 'playing');
@@ -68,7 +68,7 @@ test('game switching, URL history, mode, pause, mute and restart', async ({ page
   await page.locator('#restart-game').click();
   await expect(frame.locator('#game')).toHaveAttribute('data-state', 'playing');
   await page.goBack();
-  await expect(page.locator('#game-title')).toHaveText('反冲决斗');
+  await expect(page.locator('#game-title')).toHaveText('Recoil Duel');
 });
 
 test('Gomoku AI reply, occupied point, undo, win and restart', async ({ page }) => {
@@ -83,9 +83,9 @@ test('Gomoku AI reply, occupied point, undo, win and restart', async ({ page }) 
   await expect(frame.locator('#board')).toHaveAttribute('data-moves', '2');
   await frame.locator('#undo').click();
   await expect(frame.locator('#board')).toHaveAttribute('data-moves', '0');
-  await page.getByRole('button', { name: '本地双人', exact: true }).click();
+  await page.getByRole('button', { name: 'Local two-player', exact: true }).click();
   for (const index of [105, 0, 106, 1, 107, 2, 108, 3, 109]) await cells.nth(index).click();
-  await expect(frame.locator('#status')).toHaveText('黑方获胜');
+  await expect(frame.locator('#status')).toHaveText('Black wins');
   await cells.nth(110).evaluate(button => button.click());
   await expect(frame.locator('#board')).toHaveAttribute('data-moves', '9');
   await frame.locator('#undo').click();
@@ -101,7 +101,7 @@ test('Gomoku AI reply, occupied point, undo, win and restart', async ({ page }) 
 });
 
 test('Dino jumps, hits an obstacle, restarts and saves best', async ({ page }) => {
-  await page.goto(`${base}/arcade/dino/`);
+  await page.goto(`${base}/arcade/dino/play.html`);
   await page.locator('#start').click();
   await page.waitForTimeout(160);
   await page.keyboard.press('Space');
@@ -135,7 +135,7 @@ test('Dino has a short jump and clears consecutive tall cacti through maximum sp
     Math.random = () => random[index++ % random.length];
   });
   for (const fps of [30, 60, 120]) for (const lead of [.2, .3]) {
-    await page.goto(`${base}/arcade/dino/`);
+    await page.goto(`${base}/arcade/dino/play.html`);
     const result = await page.evaluate(({ fps, lead }) => {
       const dt = 1000 / fps;
       const canvas = document.getElementById('game');
@@ -189,7 +189,7 @@ test('Dino has a short jump and clears consecutive tall cacti through maximum sp
 
 test('Racer steering, brake, collision and restart', async ({ page }) => {
   await page.addInitScript(() => { Math.random = () => .5; });
-  await page.goto(`${base}/arcade/racer/`);
+  await page.goto(`${base}/arcade/racer/play.html`);
   await page.locator('#start').click();
   await page.keyboard.down('ArrowRight');
   await page.waitForTimeout(180);
@@ -235,7 +235,7 @@ test('blocked storage does not prevent games from running', async ({ page }) => 
   page.on('pageerror', error => errors.push(error.message));
   await page.addInitScript(() => { Object.defineProperty(window, 'localStorage', { get() { throw new DOMException('blocked', 'SecurityError'); } }); });
   for (const game of ['dino', 'racer', 'sky-hopper']) {
-    await page.goto(`${base}/arcade/${game}/`);
+    await page.goto(`${base}/arcade/${game}/play.html`);
     await page.locator('#start').click();
     await expect(page.locator('#game')).toHaveAttribute('data-state', 'playing');
   }
@@ -245,7 +245,7 @@ test('blocked storage does not prevent games from running', async ({ page }) => 
 test('mobile selection, touch controls and fullscreen', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(`${base}/arcade/`);
-  await page.getByRole('combobox', { name: '切换游戏' }).selectOption('racer');
+  await page.getByRole('combobox', { name: 'Switch game' }).selectOption('racer');
   const frame = page.frameLocator('#game-frame');
   await expect(page.locator('#game-title')).toHaveText('Pocket Racer');
   await frame.locator('#start').click();

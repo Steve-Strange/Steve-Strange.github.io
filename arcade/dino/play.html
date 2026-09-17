@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f6f2">
+  <title>Dino Run｜Arcade Lab</title>
+  <link rel="stylesheet" href="/assets/road-games.css">
+  <link rel="stylesheet" href="/assets/game-embed.css">
+  <script src="/assets/game-bridge.js"></script>
+  <script defer src="/lib/lucide/lucide.min.js"></script>
+  <script defer src="/lib/matter/matter.min.js"></script>
+  <script defer src="/assets/road-games.js"></script>
+<meta name="robots" content="noindex, follow"><link rel="canonical" href="https://steve-strange.github.io/arcade/dino/"></head>
+<body data-game="dino">
+  <canvas id="game" aria-label="A pixel dinosaur running past cacti and birds"></canvas>
+  <div class="topbar"><a class="back" href="/arcade/?game=dino" aria-label="Back to arcade" title="Back to arcade"><i data-lucide="arrow-left"></i></a><div class="scores"><div><span>HI</span><strong id="best">00000</strong></div><div><span>DISTANCE</span><strong id="score">00000</strong></div></div></div>
+  <div class="message" id="message"><h1 id="result">DINO RUN</h1><p class="standalone-help">Space / ↑ to jump, ↓ to duck. Clear the cacti and avoid birds.</p><button id="start" type="button">RUN</button></div>
+  <div class="controls" aria-label="Dinosaur controls"><button class="control" id="duck" type="button" aria-label="Duck" title="Duck"><i data-lucide="arrow-down-to-line"></i></button><button class="control" id="jump" type="button" aria-label="Jump" title="Jump"><i data-lucide="arrow-up"></i></button></div>
+  <p id="live" class="sr-only" role="status">Ready to start</p>
+</body>
+</html>

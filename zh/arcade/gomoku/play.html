@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#e8d4ad">
+  <title>五子棋｜游戏室</title>
+  <script src="/assets/game-bridge.js"></script>
+  <script defer src="/lib/lucide/lucide.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; background: #efe6d5; color: #343830; font: 14px/1.5 "Microsoft YaHei", sans-serif; }
+    .top { width: min(90vw, calc(100svh - 125px)); display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .top p { margin: 0; font-size: 12px; }
+    .top strong { display: block; font-size: 15px; }
+    .actions { display: flex; gap: 4px; }
+    .icon { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid #ada38e; border-radius: 3px; background: transparent; color: inherit; cursor: pointer; }
+    .icon:disabled { opacity: .3; cursor: default; }
+    svg { width: 17px; height: 17px; }
+    #board { position: relative; display: grid; grid-template-columns: repeat(15, 1fr); grid-template-rows: repeat(15, 1fr); width: min(90vw, calc(100svh - 125px)); aspect-ratio: 1; background: #dfc596; box-shadow: 0 3px 0 #b39365, 0 10px 28px #8c765e25; }
+    #board canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .point { position: relative; display: grid; place-items: center; min-width: 0; min-height: 0; border: 0; padding: 0; background: none; cursor: pointer; touch-action: manipulation; }
+    .point::after { content: ""; width: 80%; aspect-ratio: 1; border-radius: 50%; }
+    .point[data-stone="1"]::after { background: radial-gradient(circle at 35% 28%, #555853, #171b18 70%); box-shadow: 1px 2px 3px #0005; }
+    .point[data-stone="0"]::after { background: radial-gradient(circle at 35% 28%, #fff, #e5e6df 75%); box-shadow: 1px 2px 3px #0004; }
+    .point.last::before { content: ""; position: absolute; z-index: 1; width: 16%; aspect-ratio: 1; background: #c5533f; border-radius: 50%; }
+    .point:focus-visible { outline: 2px solid #ba4b36; outline-offset: -2px; }
+    .point:not([data-stone]):hover::after { background: #ffffff40; }
+    .standalone-mode { display: flex; gap: 10px; font-size: 12px; }
+    .standalone-help { margin: 0 12px; color: #776e5e; text-align: center; font-size: 11px; }
+    [hidden] { display: none !important; }
+    button:focus-visible, a:focus-visible { outline: 2px solid #ba4b36; }
+    @media (max-height: 360px) { body { gap: 6px; } .top, #board { width: min(90vw, calc(100svh - 65px)); } .top strong { font-size: 12px; } .top p { font-size: 10px; } .icon { height: 28px; width: 28px; } }
+  </style>
+  <link rel="stylesheet" href="/assets/game-embed.css">
+<meta name="robots" content="noindex, follow"><link rel="canonical" href="https://steve-strange.github.io/zh/arcade/gomoku/"></head>
+<body>
+  <div class="top"><div><strong id="status" role="status">黑方先行</strong><p id="move-count">第 1 手 · 黑方</p></div><div class="actions"><a class="icon back" href="/zh/arcade/?game=gomoku" aria-label="返回游戏室" title="返回游戏室"><i data-lucide="arrow-left"></i></a><button class="icon" id="undo" type="button" aria-label="悔棋" title="悔棋" disabled><i data-lucide="undo-2"></i></button><button class="icon" id="restart" type="button" aria-label="重新开始" title="重新开始"><i data-lucide="rotate-ccw"></i></button></div></div>
+  <div id="board" role="group" aria-label="十五路五子棋棋盘"><canvas aria-hidden="true"></canvas></div>
+  <div class="standalone-mode"><label><input type="radio" name="mode" value="ai" checked> 人机对战</label><label><input type="radio" name="mode" value="pvp"> 本地双人</label></div>
+  <p class="standalone-help">黑方先行，连成五子获胜。无禁手。方向键选点，Enter 落子，Z 悔棋。</p>
+  <script type="module">
+    import { GomokuSolution } from '/lib/gomoku/gomoku.mjs';
+    const board = document.getElementById('board');
+    const status = document.getElementById('status');
+    const undo = document.getElementById('undo');
+    const cells = [];
+    let solution;
+    let moves = [];
+    let mode = 'ai';
+    let busy = false;
+    let over = false;
+    let worker;
+    let generation = 0;
+    let cursor = 112;
+    let pendingMove;
+    const nextPlayer = () => moves.length % 2 ? 0 : 1;
+    function sync() {
+      cells.forEach((cell, index) => {
+        const move = moves.find(move => move.r * 15 + move.c === index);
+        if (move) cell.dataset.stone = String(move.p); else delete cell.dataset.stone;
+        cell.classList.toggle('last', move === moves.at(-1) && !!move);
+        cell.setAttribute('aria-label', `${Math.floor(index / 15) + 1} 行 ${index % 15 + 1} 列，${move ? (move.p ? '黑子' : '白子') : '空位'}`);
+        cell.setAttribute('aria-disabled', String(!!move || busy || over));
+        cell.tabIndex = index === cursor ? 0 : -1;
+      });
+      undo.disabled = !moves.length;
+      document.getElementById('move-count').textContent = `${over ? '共' : '第'} ${over ? moves.length : moves.length + 1} 手${over ? '' : nextPlayer() ? ' · 黑方' : ' · 白方'}`;
+      if (!over) status.textContent = busy ? '白方思考中…' : nextPlayer() ? '黑方落子' : '白方落子';
+      board.dataset.moves = String(moves.length);
+      document.body.dataset.state = over ? 'over' : busy ? 'thinking' : 'playing';
+      document.body.dataset.mode = mode;
+    }
+    function cancelSearch() { generation++; worker?.terminate(); worker = null; busy = false; pendingMove = null; }
+    function reset() {
+      cancelSearch();
+      solution = new GomokuSolution({ MAX_ROW: 15, MAX_COL: 15 });
+      solution.init([]);
+      moves = []; over = false; cursor = 112;
+      sync();
+    }
+    function put(r, c) {
+      if (!Number.isInteger(r) || !Number.isInteger(c) || r < 0 || r > 14 || c < 0 || c > 14 || over || moves.some(move => move.r === r && move.c === c)) return false;
+      const p = nextPlayer();
+      solution.forward(r, c, p);
+      moves.push({ r, c, p });
+      window.arcadeTone(p ? 240 : 320, .035);
+      over = solution.mover.isFinal();
+      if (over) status.textContent = moves.length === 225 ? '和棋' : p ? '黑方获胜' : '白方获胜';
+      sync();
+      return true;
+    }
+    function play(index) {
+      if (busy || window.arcadePaused || over || !put(Math.floor(index / 15), index % 15)) return;
+      if (mode !== 'ai' || over) return;
+      busy = true; sync();
+      worker = new Worker('/arcade/gomoku/worker.js', { type: 'module' });
+      const request = ++generation;
+      worker.onmessage = event => {
+        if (request !== generation) return;
+        worker.terminate(); worker = null;
+        pendingMove = event.data;
+        finishSearch();
+      };
+      worker.onerror = () => {
+        if (request !== generation) return;
+        cancelSearch();
+        const last = moves.pop(); solution.revert(last.r, last.c); sync();
+        status.textContent = '电脑未能落子，请再试一次';
+      };
+      worker.postMessage(moves);
+    }
+    function finishSearch() {
+      if (!pendingMove || window.arcadePaused) return;
+      const [r, c] = pendingMove;
+      pendingMove = null; busy = false;
+      if (!put(r, c)) { sync(); status.textContent = '电脑未能落子，请悔棋重试'; }
+    }
+    function takeBack() {
+      if (!moves.length || window.arcadePaused) return;
+      cancelSearch();
+      const count = mode === 'ai' && moves.at(-1).p === 0 ? 2 : 1;
+      for (let i = 0; i < count && moves.length; i++) { const last = moves.pop(); solution.revert(last.r, last.c); }
+      over = false; sync();
+    }
+    for (let i = 0; i < 225; i++) {
+      const cell = document.createElement('button');
+      cell.type = 'button'; cell.className = 'point';
+      cell.addEventListener('focus', () => { cells[cursor].tabIndex = -1; cursor = i; cell.tabIndex = 0; });
+      cell.addEventListener('click', () => { cursor = i; play(i); });
+      cell.addEventListener('keydown', event => {
+        const row = Math.floor(cursor / 15), col = cursor % 15;
+        const next = { ArrowLeft: row * 15 + Math.max(0, col - 1), ArrowRight: row * 15 + Math.min(14, col + 1), ArrowUp: Math.max(0, row - 1) * 15 + col, ArrowDown: Math.min(14, row + 1) * 15 + col }[event.code];
+        if (next === undefined) return;
+        event.preventDefault(); cursor = next; sync(); cells[cursor].focus();
+      });
+      cells.push(cell); board.append(cell);
+    }
+    const canvas = board.querySelector('canvas');
+    canvas.width = canvas.height = 900;
+    const ctx = canvas.getContext('2d');
+    ctx.strokeStyle = '#917a53'; ctx.lineWidth = 1.2;
+    for (let i = 0; i < 15; i++) { const x = 30 + i * 60; ctx.beginPath(); ctx.moveTo(30, x); ctx.lineTo(870, x); ctx.moveTo(x, 30); ctx.lineTo(x, 870); ctx.stroke(); }
+    ctx.fillStyle = '#68583d';
+    for (const [r, c] of [[3, 3], [3, 11], [7, 7], [11, 3], [11, 11]]) { ctx.beginPath(); ctx.arc(30 + c * 60, 30 + r * 60, 5, 0, Math.PI * 2); ctx.fill(); }
+    undo.addEventListener('click', takeBack);
+    document.getElementById('restart').addEventListener('click', reset);
+    function setMode(value) { mode = value; document.querySelector(`input[value="${value}"]`).checked = true; reset(); }
+    document.querySelectorAll('input[name="mode"]').forEach(input => input.addEventListener('change', () => setMode(input.value)));
+    addEventListener('arcade-mode', event => setMode(event.detail));
+    addEventListener('keydown', event => { if (event.code === 'KeyR') reset(); if (event.code === 'KeyZ') { event.preventDefault(); takeBack(); } });
+    addEventListener('message', event => { if (event.source === parent && event.origin === location.origin && event.data?.arcade && event.data.action === 'pause' && !event.data.value) finishSearch(); });
+    addEventListener('pagehide', cancelSearch);
+    reset();
+    document.body.dataset.ready = 'true';
+    addEventListener('load', () => window.lucide?.createIcons());
+    window.lucide?.createIcons();
+  </script>
+</body>
+</html>

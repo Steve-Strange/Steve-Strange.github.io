@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#171719">
+  <title>反冲决斗</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: #0c0c0e;
+      color: #f7f7f8;
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+    }
+
+    #game-shell {
+      position: relative;
+      width: min(100vw, 780px, calc(100svh * 4 / 3));
+      aspect-ratio: 4 / 3;
+      max-height: 100svh;
+      overflow: hidden;
+      background: #242427;
+      touch-action: none;
+      user-select: none;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    #overlay {
+      position: absolute;
+      top: 42%;
+      left: 50%;
+      translate: -50% -50%;
+      width: max-content;
+      max-width: 88%;
+      padding: 12px;
+      border: 0;
+      background: transparent;
+      color: #fff;
+      font: italic 900 32px / 1.1 Arial, sans-serif;
+      letter-spacing: 0;
+      text-align: center;
+      text-shadow: 0 3px 0 #7b8899, 0 6px 0 #34475e, 0 9px 18px #000a;
+      cursor: pointer;
+    }
+
+    #game-shell[data-state="won"] #overlay,
+    #game-shell[data-state="lost"] #overlay { top: 36%; }
+
+    #overlay:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+
+    #mode-select {
+      position: absolute;
+      left: 50%;
+      bottom: 14px;
+      z-index: 2;
+      display: flex;
+      translate: -50% 0;
+      overflow: hidden;
+      border: 1px solid #ffffff70;
+      border-radius: 4px;
+      background: #111114cc;
+    }
+
+    #mode-select button {
+      width: 70px;
+      height: 34px;
+      border: 0;
+      border-right: 1px solid #ffffff70;
+      background: transparent;
+      color: #fff;
+      font: 700 14px / 1 Arial, sans-serif;
+      letter-spacing: 0;
+      cursor: pointer;
+    }
+
+    #mode-select button:last-child { border-right: 0; }
+    #mode-select button[aria-pressed="true"] { background: #f7f7f8; color: #171719; }
+    #mode-select button:focus-visible { outline: 2px solid #28c4f5; outline-offset: -3px; }
+
+    #start-help {
+      position: absolute;
+      right: 12px;
+      bottom: 57px;
+      left: 12px;
+      color: #d8d8dc;
+      font-size: 12px;
+      line-height: 1.5;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    #start-help p { margin: 0; }
+    #mode-help { color: #fff; font-weight: 700; }
+
+    kbd {
+      display: inline-block;
+      min-width: 19px;
+      padding: 1px 4px;
+      border: 1px solid #ffffff80;
+      border-radius: 3px;
+      background: #111114b8;
+      color: #fff;
+      font: inherit;
+      line-height: 1.25;
+    }
+
+    #game-shell[data-state="playing"] #mode-select,
+    #game-shell[data-state="playing"] #start-help { display: none; }
+
+    [hidden] { display: none !important; }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (min-width: 700px) {
+      #game-shell { box-shadow: 0 0 42px #0008; }
+    }
+  </style>
+  <link rel="stylesheet" href="/assets/game-embed.css">
+  <script src="/assets/game-bridge.js"></script>
+<meta name="robots" content="noindex, follow"><link rel="canonical" href="https://steve-strange.github.io/zh/recoil-duel/"></head>
+<body>
+  <main id="game-shell" data-state="idle" data-mode="ai" aria-label="反冲决斗游戏">
+    <canvas id="arena" width="800" height="600" aria-label="蓝色手枪与红色手枪的零重力决斗场">
+      浏览器需要支持 Canvas 才能运行游戏。
+    </canvas>
+    <button id="overlay" type="button" aria-label="开始游戏">点击开始</button>
+    <div id="mode-select" role="group" aria-label="游戏模式">
+      <button type="button" data-mode="ai" aria-label="人机模式，快捷键 1" aria-pressed="true">单人对战</button>
+      <button type="button" data-mode="pvp" aria-label="双人模式，快捷键 2" aria-pressed="false">本地双人</button>
+    </div>
+    <div id="start-help">
+      <p>开火会推动枪身 · 子弹相撞抵消 · 命中三次获胜</p>
+      <p id="mode-help">蓝方：<kbd>F</kbd> / <kbd>Space</kbd> 开火 · 红方：AI</p>
+      <p><kbd>1</kbd>/<kbd>2</kbd> 切换模式 · <kbd>Space</kbd> 开始 · <kbd>R</kbd> 重开</p>
+    </div>
+    <p id="live" class="sr-only" aria-live="polite">等待开始</p>
+  </main>
+
+  <script>
+    (() => {
+      'use strict';
+
+      const W = 580;
+      const H = 435;
+      const PLAYER = '#28c4f5';
+      const ENEMY = '#ff244d';
+      const BG = '#242427';
+      const BULLET_SPEED = 520;
+      const BULLET_RADIUS = 3.2;
+      const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const shell = document.getElementById('game-shell');
+      const canvas = document.getElementById('arena');
+      const overlay = document.getElementById('overlay');
+      const modeButtons = [...document.querySelectorAll('#mode-select button')];
+      const modeHelp = document.getElementById('mode-help');
+      const live = document.getElementById('live');
+      const ctx = canvas.getContext('2d');
+
+      let state = 'idle';
+      let mode = 'ai';
+      let player;
+      let enemy;
+      let bullets = [];
+      let particles = [];
+      let pieces = [];
+      let lastTime = performance.now();
+      let resultDelay = 0;
+      let shake = 0;
+      let audioContext;
+
+      const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+      const angleDelta = (target, current) => Math.atan2(Math.sin(target - current), Math.cos(target - current));
+      const distanceSquared = (a, b) => (a.x - b.x) ** 2 + (a.y - b.y) ** 2;
+
+      function makeActor(side) {
+        const isPlayer = side === 'player';
+        return {
+          side,
+          color: isPlayer ? PLAYER : ENEMY,
+          x: isPlayer ? 160 : 420,
+          y: H / 2,
+          vx: 0,
+          vy: 0,
+          angle: isPlayer ? 0 : Math.PI,
+          spin: 0,
+          cooldown: 0,
+          flash: 0,
+          smoke: 0,
+          nextShot: isPlayer ? 0 : .75,
+          health: 3,
+          alive: true
+        };
+      }
+
+      function resetRound(nextState = 'idle') {
+        state = nextState;
+        player = makeActor('player');
+        enemy = makeActor('enemy');
+        bullets = [];
+        particles = [];
+        pieces = [];
+        shake = 0;
+        resultDelay = 0;
+        shell.dataset.state = state;
+      }
+
+      function beginRound() {
+        resetRound('playing');
+        overlay.hidden = true;
+        live.textContent = '决斗开始';
+        ensureAudio();
+      }
+
+      function setMode(nextMode) {
+        mode = nextMode;
+        shell.dataset.mode = mode;
+        modeButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.mode === mode)));
+        modeHelp.innerHTML = mode === 'ai'
+          ? '蓝方：<kbd>F</kbd> / <kbd>Space</kbd> 开火 · 红方：AI'
+          : '蓝方：<kbd>F</kbd> 开火 · 红方：<kbd>J</kbd> 开火';
+        resetRound();
+        overlay.hidden = false;
+        overlay.textContent = '点击开始';
+        overlay.setAttribute('aria-label', '开始游戏');
+        live.textContent = mode === 'ai' ? '人机模式' : '双人模式';
+        if (parent !== window) parent.postMessage({ arcade: true, action: 'mode-changed', value: mode }, location.origin);
+      }
+
+      function ensureAudio() {
+        if (!(window.AudioContext || window.webkitAudioContext)) return;
+        audioContext ||= new (window.AudioContext || window.webkitAudioContext)();
+        audioContext.resume();
+      }
+
+      function playShot(side) {
+        if (!audioContext || window.arcadeMuted) return;
+        const now = audioContext.currentTime;
+        const oscillator = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        oscillator.type = 'square';
+        oscillator.frequency.setValueAtTime(side === 'player' ? 150 : 120, now);
+        oscillator.frequency.exponentialRampToValueAtTime(45, now + .08);
+        gain.gain.setValueAtTime(.055, now);
+        gain.gain.exponentialRampToValueAtTime(.001, now + .09);
+        oscillator.connect(gain).connect(audioContext.destination);
+        oscillator.start(now);
+        oscillator.stop(now + .09);
+      }
+
+      function playImpact() {
+        if (!audioContext || window.arcadeMuted) return;
+        const length = Math.floor(audioContext.sampleRate * .22);
+        const buffer = audioContext.createBuffer(1, length, audioContext.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < length; i++) data[i] = (Math.random() * 2 - 1) * (1 - i / length);
+        const source = audioContext.createBufferSource();
+        const filter = audioContext.createBiquadFilter();
+        const gain = audioContext.createGain();
+        filter.type = 'lowpass';
+        filter.frequency.value = 900;
+        gain.gain.value = .12;
+        source.buffer = buffer;
+        source.connect(filter).connect(gain).connect(audioContext.destination);
+        source.start();
+      }
+
+      function addParticle(x, y, color, options = {}) {
+        if (reducedMotion && particles.length > 28) return;
+        const life = options.life ?? .45;
+        particles.push({
+          x,
+          y,
+          vx: options.vx ?? (Math.random() - .5) * 80,
+          vy: options.vy ?? (Math.random() - .5) * 80,
+          life,
+          maxLife: life,
+          size: options.size ?? 2.4,
+          color,
+          smoke: options.smoke ?? false
+        });
+      }
+
+      function burst(x, y, color, count = 20) {
+        for (let i = 0; i < count; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = 35 + Math.random() * 180;
+          addParticle(x, y, color, {
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            life: .35 + Math.random() * .55,
+            size: 1.5 + Math.random() * 3
+          });
+        }
+      }
+
+      function fire(actor) {
+        if (state !== 'playing' || !actor.alive || actor.cooldown > 0) return false;
+        const dx = Math.cos(actor.angle);
+        const dy = Math.sin(actor.angle);
+        const nx = -dy;
+        const ny = dx;
+        const muzzleX = actor.x + dx * 25 - nx * 3;
+        const muzzleY = actor.y + dy * 25 - ny * 3;
+
+        bullets.push({
+          owner: actor.side,
+          color: actor.color,
+          x: muzzleX,
+          y: muzzleY,
+          previousX: muzzleX - dx * 62,
+          previousY: muzzleY - dy * 62,
+          vx: actor.vx + dx * BULLET_SPEED,
+          vy: actor.vy + dy * BULLET_SPEED,
+          life: 1.2
+        });
+
+        actor.vx -= dx * 104;
+        actor.vy -= dy * 104;
+        actor.spin += 2.65;
+        actor.cooldown = .17;
+        actor.flash = .075;
+        actor.smoke = .48;
+        for (let i = 0; i < 8; i++) {
+          addParticle(muzzleX, muzzleY, i < 3 ? '#fff4b0' : actor.color, {
+            vx: dx * (20 + Math.random() * 90) + (Math.random() - .5) * 35,
+            vy: dy * (20 + Math.random() * 90) + (Math.random() - .5) * 35,
+            life: .09 + Math.random() * .12,
+            size: 1.5 + Math.random() * 2.5
+          });
+        }
+        playShot(actor.side);
+        if (actor.side === 'player' || mode === 'pvp') navigator.vibrate?.(8);
+        return true;
+      }
+
+      function shatter(actor) {
+        const shapes = [
+          { ox: 6, oy: -4, w: 34, h: 10 },
+          { ox: -5, oy: 10, w: 11, h: 20 },
+          { ox: -13, oy: -3, w: 12, h: 9 }
+        ];
+        for (const shape of shapes) {
+          const cos = Math.cos(actor.angle);
+          const sin = Math.sin(actor.angle);
+          pieces.push({
+            x: actor.x + shape.ox * cos - shape.oy * sin,
+            y: actor.y + shape.ox * sin + shape.oy * cos,
+            vx: actor.vx + (Math.random() - .5) * 170,
+            vy: actor.vy + (Math.random() - .5) * 170,
+            angle: actor.angle,
+            spin: actor.spin + (Math.random() - .5) * 8,
+            w: shape.w,
+            h: shape.h,
+            color: actor.color,
+            life: 2.2
+          });
+        }
+      }
+
+      function finishRound(loser) {
+        if (state !== 'playing') return;
+        loser.alive = false;
+        shatter(loser);
+        burst(loser.x, loser.y, loser.color, 44);
+        state = loser.side === 'enemy' ? 'won' : 'lost';
+        shell.dataset.state = state;
+        resultDelay = .72;
+        shake = reducedMotion ? 0 : 9;
+        playImpact();
+        navigator.vibrate?.([25, 25, 45]);
+        live.textContent = state === 'won' ? '胜利' : '失败';
+      }
+
+      function applyHit(bullet, target) {
+        target.health -= 1;
+        target.vx += bullet.vx * .13;
+        target.vy += bullet.vy * .13;
+        const offset = bullet.x - target.x + bullet.y - target.y;
+        target.spin += Math.sign(offset || 1) * 1.8;
+        burst(bullet.x, bullet.y, target.color, target.health ? 18 : 34);
+        shake = Math.max(shake, reducedMotion ? 0 : target.health ? 4 : 9);
+        navigator.vibrate?.(target.side === 'player' ? 18 : 10);
+        live.textContent = `${target.side === 'player' ? '蓝方' : '红方'}剩余 ${Math.max(0, target.health)} 点生命`;
+        if (target.health <= 0) finishRound(target);
+        else playImpact();
+      }
+
+      function hitsActor(bullet, actor) {
+        return actor.alive && bullet.owner !== actor.side && distanceSquared(bullet, actor) < (19 + BULLET_RADIUS) ** 2;
+      }
+
+      function updateActor(actor, dt) {
+        if (!actor.alive) return;
+        actor.cooldown = Math.max(0, actor.cooldown - dt);
+        actor.flash = Math.max(0, actor.flash - dt);
+        actor.smoke = Math.max(0, actor.smoke - dt);
+        const damping = Math.pow(.993, dt * 60);
+        actor.vx *= damping;
+        actor.vy *= damping;
+        actor.spin *= Math.pow(.996, dt * 60);
+        actor.x += actor.vx * dt;
+        actor.y += actor.vy * dt;
+        actor.angle += actor.spin * dt;
+
+        const radius = 18;
+        if (actor.x < radius || actor.x > W - radius) {
+          actor.x = clamp(actor.x, radius, W - radius);
+          actor.vx *= -.76;
+          actor.spin += actor.y < H / 2 ? .32 : -.32;
+        }
+        if (actor.y < radius || actor.y > H - radius) {
+          actor.y = clamp(actor.y, radius, H - radius);
+          actor.vy *= -.76;
+          actor.spin += actor.x < W / 2 ? -.32 : .32;
+        }
+
+        if (actor.smoke > 0 && Math.random() < dt * 25) {
+          addParticle(actor.x, actor.y, '#c8c8c5', {
+            vx: -actor.vx * .08 + (Math.random() - .5) * 12,
+            vy: -actor.vy * .08 + (Math.random() - .5) * 12,
+            life: .65 + Math.random() * .35,
+            size: 4 + Math.random() * 4,
+            smoke: true
+          });
+        }
+      }
+
+      function resolveActorCollision() {
+        if (!player.alive || !enemy.alive) return;
+        const dx = enemy.x - player.x;
+        const dy = enemy.y - player.y;
+        const distance = Math.hypot(dx, dy);
+        if (!distance || distance >= 32) return;
+        const nx = dx / distance;
+        const ny = dy / distance;
+        const overlap = 32 - distance;
+        player.x -= nx * overlap / 2;
+        player.y -= ny * overlap / 2;
+        enemy.x += nx * overlap / 2;
+        enemy.y += ny * overlap / 2;
+        const impulse = (enemy.vx - player.vx) * nx + (enemy.vy - player.vy) * ny;
+        if (impulse < 0) {
+          player.vx += nx * impulse * .7;
+          player.vy += ny * impulse * .7;
+          enemy.vx -= nx * impulse * .7;
+          enemy.vy -= ny * impulse * .7;
+          player.spin -= .45;
+          enemy.spin += .45;
+          burst((player.x + enemy.x) / 2, (player.y + enemy.y) / 2, '#ffd166', 7);
+        }
+      }
+
+      function updateBullets(dt) {
+        for (const bullet of bullets) {
+          bullet.previousX = bullet.x;
+          bullet.previousY = bullet.y;
+          bullet.x += bullet.vx * dt;
+          bullet.y += bullet.vy * dt;
+          bullet.life -= dt;
+        }
+
+        const cancelled = new Set();
+        for (let i = 0; i < bullets.length; i++) {
+          for (let j = i + 1; j < bullets.length; j++) {
+            const a = bullets[i];
+            const b = bullets[j];
+            if (a.owner === b.owner || cancelled.has(a) || cancelled.has(b) || !bulletsCollide(a, b)) continue;
+            cancelled.add(a);
+            cancelled.add(b);
+            burst((a.x + b.x) / 2, (a.y + b.y) / 2, '#fff4b0', 8);
+          }
+        }
+
+        const survivors = [];
+        for (const bullet of bullets) {
+          if (cancelled.has(bullet)) continue;
+
+          const target = bullet.owner === 'player' ? enemy : player;
+          if (hitsActor(bullet, target)) {
+            applyHit(bullet, target);
+            continue;
+          }
+
+          if (bullet.x < 0 || bullet.x > W || bullet.y < 0 || bullet.y > H) {
+            const x = clamp(bullet.x, 2, W - 2);
+            const y = clamp(bullet.y, 2, H - 2);
+            burst(x, y, bullet.color, 10);
+            shake = Math.max(shake, reducedMotion ? 0 : 2);
+            continue;
+          }
+          if (bullet.life > 0 && state === 'playing') survivors.push(bullet);
+        }
+        bullets = survivors;
+      }
+
+      function bulletsCollide(a, b) {
+        const dx = a.previousX - b.previousX;
+        const dy = a.previousY - b.previousY;
+        const vx = (a.x - a.previousX) - (b.x - b.previousX);
+        const vy = (a.y - a.previousY) - (b.y - b.previousY);
+        const speedSquared = vx * vx + vy * vy;
+        const t = speedSquared ? clamp(-(dx * vx + dy * vy) / speedSquared, 0, 1) : 0;
+        return (dx + vx * t) ** 2 + (dy + vy * t) ** 2 <= (BULLET_RADIUS * 2) ** 2;
+      }
+
+      function updateParticles(dt) {
+        particles = particles.filter(particle => {
+          particle.life -= dt;
+          if (particle.life <= 0) return false;
+          particle.x += particle.vx * dt;
+          particle.y += particle.vy * dt;
+          particle.vx *= Math.pow(particle.smoke ? .96 : .985, dt * 60);
+          particle.vy *= Math.pow(particle.smoke ? .96 : .985, dt * 60);
+          if (particle.smoke) particle.size += dt * 5;
+          return true;
+        });
+
+        pieces = pieces.filter(piece => {
+          piece.life -= dt;
+          piece.x += piece.vx * dt;
+          piece.y += piece.vy * dt;
+          piece.angle += piece.spin * dt;
+          piece.vx *= Math.pow(.992, dt * 60);
+          piece.vy *= Math.pow(.992, dt * 60);
+          return piece.life > 0;
+        });
+      }
+
+      function updateAI(dt) {
+        if (mode !== 'ai' || state !== 'playing' || !enemy.alive || !player.alive) return;
+        enemy.nextShot -= dt;
+        if (enemy.nextShot > 0) return;
+
+        const dx = player.x - enemy.x;
+        const dy = player.y - enemy.y;
+        const leadTime = Math.min(Math.hypot(dx, dy) / BULLET_SPEED, .65) * .7;
+        // ponytail: linear lead ignores wall bounces; simulate trajectories only if wall misses matter.
+        const targetAngle = Math.atan2(
+          dy + (player.vy - enemy.vy) * leadTime,
+          dx + (player.vx - enemy.vx) * leadTime
+        );
+        if (Math.abs(angleDelta(targetAngle, enemy.angle)) < .2 && fire(enemy)) {
+          enemy.nextShot = .58 + Math.random() * .34;
+        }
+      }
+
+      function showResult() {
+        overlay.hidden = false;
+        if (state === 'won') {
+          overlay.innerHTML = 'BLUE<br>WINS';
+          overlay.setAttribute('aria-label', '蓝方获胜，点击再来一局');
+        } else {
+          overlay.innerHTML = mode === 'ai' ? 'TRY<br>AGAIN' : 'RED<br>WINS';
+          overlay.setAttribute('aria-label', mode === 'ai' ? '失败，点击再来一局' : '红方获胜，点击再来一局');
+        }
+      }
+
+      function update(dt) {
+        if (state === 'playing') {
+          updateActor(player, dt);
+          updateActor(enemy, dt);
+          resolveActorCollision();
+          updateAI(dt);
+          updateBullets(dt);
+        } else if (state === 'won' || state === 'lost') {
+          updateActor(player, dt);
+          updateActor(enemy, dt);
+          resultDelay -= dt;
+          if (resultDelay <= 0 && overlay.hidden) showResult();
+        }
+        updateParticles(dt);
+        shake *= Math.pow(.08, dt);
+      }
+
+      function drawGun(actor) {
+        if (!actor.alive) return;
+        ctx.save();
+        ctx.translate(actor.x, actor.y);
+        ctx.rotate(actor.angle);
+        ctx.fillStyle = actor.color;
+        ctx.shadowColor = actor.color;
+        ctx.shadowBlur = 7;
+        ctx.beginPath();
+        ctx.moveTo(-18, -8);
+        ctx.lineTo(24, -8);
+        ctx.lineTo(24, 1);
+        ctx.lineTo(4, 1);
+        ctx.lineTo(3, 7);
+        ctx.lineTo(-2, 20);
+        ctx.lineTo(-12, 20);
+        ctx.lineTo(-8, 3);
+        ctx.lineTo(-18, 3);
+        ctx.closePath();
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = '#ffffff66';
+        ctx.fillRect(-14, -6, 27, 2);
+
+        if (actor.flash > 0) {
+          const alpha = actor.flash / .075;
+          ctx.globalAlpha = alpha;
+          ctx.fillStyle = '#fff8ce';
+          ctx.shadowColor = '#ffd35a';
+          ctx.shadowBlur = 22;
+          ctx.beginPath();
+          ctx.arc(29, -3, 5 + alpha * 6, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      function drawBullet(bullet) {
+        const speed = Math.hypot(bullet.vx, bullet.vy) || 1;
+        const tail = 56;
+        const tx = bullet.x - bullet.vx / speed * tail;
+        const ty = bullet.y - bullet.vy / speed * tail;
+        ctx.save();
+        ctx.strokeStyle = bullet.color;
+        ctx.globalAlpha = .8;
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(tx, ty);
+        ctx.lineTo(bullet.x, bullet.y);
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = '#fff';
+        ctx.shadowColor = bullet.color;
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.arc(bullet.x, bullet.y, BULLET_RADIUS, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function drawHealth(actor, rightAligned = false) {
+        const width = 22;
+        const gap = 5;
+        const startX = rightAligned ? W - 18 - width : 18;
+        ctx.save();
+        for (let i = 0; i < 3; i++) {
+          const x = startX + (rightAligned ? -i : i) * (width + gap);
+          ctx.fillStyle = i < actor.health ? actor.color : '#ffffff20';
+          ctx.fillRect(x, 16, width, 6);
+          ctx.strokeStyle = '#ffffff70';
+          ctx.lineWidth = 1;
+          ctx.strokeRect(x + .5, 16.5, width - 1, 5);
+        }
+        ctx.restore();
+      }
+
+      function drawParticle(particle) {
+        ctx.save();
+        ctx.globalAlpha = (particle.life / particle.maxLife) * (particle.smoke ? .22 : .9);
+        ctx.fillStyle = particle.color;
+        ctx.shadowColor = particle.smoke ? 'transparent' : particle.color;
+        ctx.shadowBlur = particle.smoke ? 0 : 6;
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function drawPiece(piece) {
+        ctx.save();
+        ctx.globalAlpha = clamp(piece.life, 0, 1);
+        ctx.translate(piece.x, piece.y);
+        ctx.rotate(piece.angle);
+        ctx.fillStyle = piece.color;
+        ctx.shadowColor = piece.color;
+        ctx.shadowBlur = 5;
+        ctx.fillRect(-piece.w / 2, -piece.h / 2, piece.w, piece.h);
+        ctx.restore();
+      }
+
+      function draw() {
+        ctx.setTransform(canvas.width / W, 0, 0, canvas.height / H, 0, 0);
+        ctx.fillStyle = BG;
+        ctx.fillRect(0, 0, W, H);
+        ctx.save();
+        if (shake > .15) ctx.translate((Math.random() - .5) * shake, (Math.random() - .5) * shake);
+        particles.filter(p => p.smoke).forEach(drawParticle);
+        bullets.forEach(drawBullet);
+        drawGun(player);
+        drawGun(enemy);
+        pieces.forEach(drawPiece);
+        particles.filter(p => !p.smoke).forEach(drawParticle);
+        ctx.restore();
+        drawHealth(player);
+        drawHealth(enemy, true);
+      }
+
+      function frame(now) {
+        const dt = Math.min((now - lastTime) / 1000, .033);
+        lastTime = now;
+        if (!window.arcadePaused) update(dt);
+        draw();
+        requestAnimationFrame(frame);
+      }
+
+      function resize() {
+        const rect = canvas.getBoundingClientRect();
+        const dpr = Math.min(devicePixelRatio || 1, 2);
+        canvas.width = Math.max(1, Math.round(rect.width * dpr));
+        canvas.height = Math.max(1, Math.round(rect.height * dpr));
+        draw();
+      }
+
+      overlay.addEventListener('click', beginRound);
+      modeButtons.forEach(button => button.addEventListener('click', () => setMode(button.dataset.mode)));
+      addEventListener('arcade-mode', event => setMode(event.detail));
+      canvas.addEventListener('pointerdown', event => {
+        event.preventDefault();
+        const rect = canvas.getBoundingClientRect();
+        fire(mode === 'ai' || event.clientX < rect.left + rect.width / 2 ? player : enemy);
+      });
+      addEventListener('keydown', event => {
+        if (event.repeat) return;
+        if (state !== 'playing' && ['Digit1', 'Numpad1', 'Digit2', 'Numpad2'].includes(event.code)) {
+          event.preventDefault();
+          setMode(event.code.endsWith('1') ? 'ai' : 'pvp');
+          return;
+        }
+        if (event.code === 'KeyR') {
+          event.preventDefault();
+          beginRound();
+          return;
+        }
+        if (!['KeyF', 'KeyJ', 'Space'].includes(event.code)) return;
+        const actor = event.code === 'KeyF' || (mode === 'ai' && event.code === 'Space')
+          ? player
+          : mode === 'pvp' && event.code === 'KeyJ' ? enemy : null;
+        event.preventDefault();
+        if (state !== 'playing') beginRound();
+        else if (actor) fire(actor);
+      });
+      addEventListener('resize', resize);
+      document.addEventListener('visibilitychange', () => { lastTime = performance.now(); });
+
+      function selfCheck() {
+        const testActor = makeActor('enemy');
+        console.assert(hitsActor({ owner: 'player', x: testActor.x, y: testActor.y }, testActor), 'hit detection');
+        console.assert(!hitsActor({ owner: 'enemy', x: testActor.x, y: testActor.y }, testActor), 'owner immunity');
+        console.assert(bulletsCollide(
+          { previousX: 0, previousY: 0, x: 10, y: 0 },
+          { previousX: 12, previousY: 0, x: 2, y: 0 }
+        ), 'swept bullet collision');
+        shell.dataset.selfCheck = 'ok';
+      }
+
+      resetRound();
+      selfCheck();
+      resize();
+      requestAnimationFrame(frame);
+    })();
+  </script>
+</body>
+</html>

@@ -1,5 +1,7 @@
 (() => {
   'use strict';
+  const lang = document.documentElement.lang.startsWith('zh') ? 'zh' : 'en';
+  const t = text => window.arcadeLabels[lang][text] || text;
   const games = {
     recoil: { name: '反冲决斗', path: '/recoil-duel/', type: '01 / PHYSICS DUEL', tagline: '每一枪，也是下一步。', description: '零重力场地，青红双枪。枪口不停自旋，用开火的后坐力调整位置，也等待下一次瞄准。', rules: '命中三次获胜。子弹相撞会抵消；枪体碰到边界会反弹。', controls: [['F / Space', '蓝方开火'], ['J', '双人模式红方开火'], ['点击 / 触屏', '单人全场，双人左右半场']], note: '单键决斗 · 1–2 人', modes: true },
     pinball: { name: '3D Pinball', path: '/arcade/pinball/', type: '02 / CLASSIC PINBALL', tagline: '熟悉的球台，再来一局。', description: '参考经典 Space Cadet：蓝色太空印刷台面，银色轨道，红白碰撞器和象牙色挡板。钢球沿发射槽入场，在机械部件间弹跳。', rules: '每局三球。碰撞器得 100 分；点亮三枚目标，累积最高 5 倍倍率。', controls: [['A / ←', '左挡板'], ['D / →', '右挡板'], ['Space', '发球'], ['触屏按钮', '挡板与发球']], note: '经典太空弹球 · 单人' },
@@ -9,6 +11,10 @@
     racer: { name: 'Pocket Racer', path: '/arcade/racer/', type: '06 / POCKET CIRCUIT', tagline: '沿着红白路肩，向前。', description: '掌机里的俯视公路，鲜红车身，绿色田野。穿过车流，在速度与空间之间留一点余地。', rules: '躲开车辆，按行驶距离计分。按住刹车降低速度；撞车后可立即重来。', controls: [['A / D · ← / →', '左右转向'], ['↓ / Space', '按住刹车'], ['触屏按钮', '转向 / 刹车']], note: '复古公路 · 单人' }
   };
   const $ = id => document.getElementById(id);
+  for (const game of Object.values(games)) {
+    for (const key of ['name', 'type', 'tagline', 'description', 'rules', 'note']) game[key] = t(game[key]);
+    game.controls = game.controls.map(pair => pair.map(t));
+  }
   const frame = $('game-frame');
   for (const [id, game] of Object.entries(games)) $('game-picker').add(new Option(game.name, id));
   let selected;
@@ -17,8 +23,10 @@
   let mode = 'ai';
   try { muted = localStorage.getItem('arcade-muted') === 'true'; } catch {}
   const send = (action, value) => frame.contentWindow?.postMessage({ arcade: true, action, value }, location.origin);
-  const navigate = path => frame.contentWindow.location.replace(`${path}?embed=1`);
+  const gamePath = path => lang === 'zh' ? `/zh${path}` : path;
+  const navigate = path => frame.contentWindow.location.replace(`${gamePath(path)}play.html?embed=1`);
   function icon(button, name, label, pressed) {
+    label = t(label);
     button.innerHTML = `<i data-lucide="${name}"></i>`;
     button.title = label;
     button.setAttribute('aria-label', label);
@@ -47,10 +55,10 @@
     setMode('ai');
     for (const key of ['type', 'tagline', 'description', 'rules', 'note']) $(`game-${key}`).textContent = game[key];
     $('game-title').textContent = $('stage-name').textContent = frame.title = game.name;
-    $('open-game').href = game.path;
+    $('open-game').href = gamePath(game.path);
     $('game-mode').hidden = !game.modes;
     $('game-controls').replaceChildren();
-    for (const [key, label] of [...game.controls, ['R', '重新开始']]) {
+    for (const [key, label] of [...game.controls, ['R', t('重新开始')]]) {
       const dt = document.createElement('dt');
       const kbd = document.createElement('kbd');
       kbd.textContent = key;
@@ -65,8 +73,8 @@
     });
     $('frame-error').hidden = true;
     navigate(game.path);
-    document.title = `${game.name} · Arcade Lab｜Ziteng Wang`;
-    $('arcade-live').textContent = `已选择${game.name}`;
+    document.title = `${game.name} · ${lang === 'zh' ? '游戏室' : 'Arcade Lab'} | Ziteng Wang`;
+    $('arcade-live').textContent = `${t('已选择')}${game.name}`;
     if (push) history.pushState(null, '', `?game=${id}`);
   }
   document.querySelectorAll('.game-card[data-game]').forEach(link => link.addEventListener('click', event => {
@@ -105,7 +113,7 @@
       if (document.fullscreenElement) await document.exitFullscreen();
       else await document.querySelector('.play-column').requestFullscreen();
       frame.contentWindow.focus();
-    } catch { $('arcade-live').textContent = '无法进入全屏，可独立打开游戏。'; }
+    } catch { $('arcade-live').textContent = t('无法进入全屏，可独立打开游戏。'); }
   });
   document.addEventListener('fullscreenchange', () => icon($('fullscreen-game'), document.fullscreenElement ? 'minimize' : 'maximize', document.fullscreenElement ? '退出全屏' : '全屏'));
   addEventListener('message', event => {

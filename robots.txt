@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /scripts/
+Disallow: /lib/
 
 Sitemap: https://steve-strange.github.io/sitemap.xml

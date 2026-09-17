@@ -1,6 +1,9 @@
 # Ziteng Wang / 王子腾
 
-> Beihang University researcher working on VR/HCI and disassembly planning.
+> PhD student at Beihang University working on embodied AI, VR/HCI and disassembly planning.
+
+- [English homepage](https://steve-strange.github.io/)
+- [中文主页](https://steve-strange.github.io/zh/)
 
 ## Publications
 
@@ -14,6 +17,5 @@
 ## Citation data
 
 - [BibTeX](https://steve-strange.github.io/publications/publications.bib)
-- [Structured catalog](https://steve-strange.github.io/publications/papers.json)
 
 Use publisher records for authoritative bibliographic updates. Explainers distinguish study evidence from limitations.

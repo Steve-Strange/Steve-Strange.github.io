@@ -1,282 +1,37 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#9bcbd8">
-  <meta name="description" content="单键控制的无尽飞行浏览器游戏。">
-  <title>Sky Hopper｜Arcade Lab</title>
-  <style>
-    * { box-sizing: border-box; }
-    html, body { width: 100%; height: 100%; }
-    body { margin: 0; overflow: hidden; background: #18333a; color: #fff; font-family: Arial, "Microsoft YaHei", sans-serif; }
-    canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
-    .back { position: fixed; top: max(14px, env(safe-area-inset-top)); left: 16px; z-index: 3; width: 42px; height: 42px; display: grid; place-items: center; color: #fff; background: #18333ad9; border: 1px solid #ffffff80; border-radius: 4px; text-decoration: none; font-size: 24px; }
-    .best { position: fixed; top: max(14px, env(safe-area-inset-top)); right: 16px; z-index: 3; color: #18333a; text-align: right; pointer-events: none; }
-    .best span { display: block; font-size: 10px; font-weight: 800; }
-    .best strong { display: block; font-size: 23px; line-height: 1.1; }
-    .message { position: fixed; top: 48%; left: 50%; z-index: 3; translate: -50% -50%; width: min(88vw, 390px); color: #18333a; text-align: center; }
-    .message h1 { margin: 0 0 8px; font-size: 34px; letter-spacing: 0; }
-    .message p { margin: 5px 0; font-size: 14px; line-height: 1.45; }
-    .message .rules { font-weight: 800; }
-    .message button { min-width: 144px; height: 44px; margin-top: 14px; border: 0; border-radius: 4px; color: #fff; background: #d94f50; font: 800 14px Arial, sans-serif; cursor: pointer; }
-    .message[hidden] { display: none; }
-    .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
-  </style>
-  <link rel="stylesheet" href="/assets/game-embed.css">
-  <script src="/assets/game-bridge.js"></script>
-</head>
-<body>
-  <canvas id="game" aria-label="黄色小鸟穿越空中障碍"></canvas>
-  <a class="back" href="/arcade/" aria-label="返回游戏库" title="返回游戏库">‹</a>
-  <div class="best"><span>BEST</span><strong id="best">0</strong></div>
-  <div class="message" id="message">
-    <h1>SKY HOPPER</h1>
-    <p class="rules" id="rules">穿过一组管道得 1 分 · 撞到管道或地面结束</p>
-    <p id="controls-copy"><b>Space</b>、点击或触屏起跳　<b>R</b> 重开</p>
-    <button type="button" id="start">START</button>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sky Hopper | Ziteng Wang · Beihang University</title>
+<meta name="description" content="Sky Hopper">
+<meta name="author" content="Ziteng Wang"><meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#091011">
+<link rel="canonical" href="https://steve-strange.github.io/arcade/sky-hopper/">
+<link rel="alternate" hreflang="en" href="https://steve-strange.github.io/arcade/sky-hopper/">
+<link rel="alternate" hreflang="zh-CN" href="https://steve-strange.github.io/zh/arcade/sky-hopper/">
+<link rel="alternate" hreflang="x-default" href="https://steve-strange.github.io/arcade/sky-hopper/">
+<link rel="icon" type="image/png" href="/images/a.png">
+<meta property="og:type" content="website"><meta property="og:title" content="Sky Hopper">
+<meta property="og:description" content="Sky Hopper"><meta property="og:url" content="https://steve-strange.github.io/arcade/sky-hopper/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://steve-strange.github.io/images/Head.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/assets/portfolio.css"><link rel="stylesheet" href="/assets/site.css">
+<script defer src="/lib/lucide/lucide.min.js"></script><script defer src="/assets/portfolio.js"></script>
+<script type="application/ld+json">{}</script>
+</head><body class=""><a class="skip-link" href="#main">Skip to content</a>
+<!-- shared-header:start -->
+<header id="global-header" class="site-header" data-header>
+  <div class="header-inner">
+    <a class="brand" href="/" aria-label="Home"><span class="brand-mark" aria-hidden="true">ZW</span><span class="brand-name">Ziteng Wang</span></a>
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation" data-nav><a href="/#research">Research</a><a href="/publications/">Publications</a><a href="/#projects">Systems</a><a href="/arcade/" aria-current="page">Arcade</a><a href="/#experience">Background</a><a href="/archives/">Blog</a></nav>
+    <div class="header-actions">
+      <a class="header-cv" href="/assets/ziteng-wang-cv.pdf" aria-label="CV (Chinese PDF)">CV</a>
+      <a class="language-switch" data-language-switch href="/zh/arcade/sky-hopper/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+      <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu" data-menu-toggle><span aria-hidden="true">☰</span></button>
+    </div>
   </div>
-  <p class="sr-only" id="live" aria-live="polite">等待开始</p>
-  <script src="/lib/matter/matter.min.js"></script>
-  <script>
-    (() => {
-      'use strict';
-      const { Engine, World, Bodies, Body, Events } = Matter;
-      let W = 420;
-      const H = 720;
-      const R = 18;
-      const canvas = document.getElementById('game');
-      const ctx = canvas.getContext('2d');
-      const message = document.getElementById('message');
-      const rules = document.getElementById('rules');
-      const controlsCopy = document.getElementById('controls-copy');
-      const live = document.getElementById('live');
-      const bestNode = document.getElementById('best');
-      const engine = Engine.create({ enableSleeping: false });
-      const bird = Bodies.circle(112, 340, R, { label: 'bird', restitution: 0, frictionAir: .015 });
-      const ceiling = Bodies.rectangle(W / 2, -24, W, 48, { label: 'edge', isStatic: true });
-      const ground = Bodies.rectangle(W / 2, H + 24, W, 48, { label: 'edge', isStatic: true });
-      const pipes = [];
-      let state = 'idle';
-      let score = 0;
-      let best = window.arcadeStorage.get('sky-hopper-best');
-      let spawnTimer = 0;
-      let lastTime = performance.now();
-      let viewScale = 1;
-      let viewX = 0;
-      let viewY = 0;
-
-      engine.gravity.y = 1.1;
-      Body.setStatic(bird, true);
-      World.add(engine.world, [bird, ceiling, ground]);
-      bestNode.textContent = String(best);
-
-      function addPipe() {
-        const gap = Math.max(152, 190 - score * 2);
-        const center = 190 + Math.random() * 320;
-        const width = 68;
-        const topHeight = center - gap / 2;
-        const bottomY = center + gap / 2;
-        const bottomHeight = H - bottomY;
-        const top = Bodies.rectangle(W + 60, topHeight / 2, width, topHeight, { isStatic: true, label: 'pipe' });
-        const bottom = Bodies.rectangle(W + 60, bottomY + bottomHeight / 2, width, bottomHeight, { isStatic: true, label: 'pipe' });
-        World.add(engine.world, [top, bottom]);
-        pipes.push({ top, bottom, width, scored: false });
-      }
-
-      function clearPipes() {
-        for (const pipe of pipes) World.remove(engine.world, [pipe.top, pipe.bottom]);
-        pipes.length = 0;
-      }
-
-      function reset(startPlaying = false) {
-        clearPipes();
-        Body.setStatic(bird, !startPlaying);
-        Body.setPosition(bird, { x: 112, y: 340 });
-        Body.setVelocity(bird, { x: 0, y: 0 });
-        Body.setAngle(bird, 0);
-        score = 0;
-        spawnTimer = 950;
-        state = startPlaying ? 'playing' : 'idle';
-        message.hidden = startPlaying;
-        if (startPlaying) flap();
-      }
-
-      function start() {
-        reset(true);
-        live.textContent = '开始飞行';
-      }
-
-      function flap() {
-        if (state === 'idle' || state === 'over') return start();
-        if (state !== 'playing') return;
-        Body.setVelocity(bird, { x: 0, y: -8.4 });
-        tone(520, .055);
-        navigator.vibrate?.(7);
-      }
-
-      function end() {
-        if (state !== 'playing') return;
-        state = 'over';
-        best = Math.max(best, score);
-        window.arcadeStorage.set('sky-hopper-best', best);
-        bestNode.textContent = String(best);
-        message.querySelector('h1').textContent = score ? `SCORE ${score}` : 'TRY AGAIN';
-        rules.textContent = `本局 ${score} 分 · 最高 ${best} 分`;
-        controlsCopy.textContent = 'Space、点击或触屏重新开始 · R 重开';
-        message.querySelector('button').textContent = 'PLAY AGAIN';
-        message.hidden = false;
-        live.textContent = `游戏结束，得分 ${score}`;
-        tone(95, .18);
-      }
-
-      function tone(frequency, duration) {
-        window.arcadeTone(frequency, duration);
-      }
-
-      Events.on(engine, 'collisionStart', event => {
-        if (event.pairs.some(pair => pair.bodyA === bird || pair.bodyB === bird)) end();
-      });
-
-      function resize() {
-        const dpr = Math.min(devicePixelRatio || 1, 2);
-        W = Math.max(420, H * innerWidth / innerHeight);
-        Body.setPosition(ceiling, { x: W / 2, y: -24 });
-        Body.setPosition(ground, { x: W / 2, y: H + 24 });
-        Body.setVertices(ceiling, [{ x: 0, y: -48 }, { x: W, y: -48 }, { x: W, y: 0 }, { x: 0, y: 0 }]);
-        Body.setVertices(ground, [{ x: 0, y: H }, { x: W, y: H }, { x: W, y: H + 48 }, { x: 0, y: H + 48 }]);
-        canvas.width = Math.round(innerWidth * dpr);
-        canvas.height = Math.round(innerHeight * dpr);
-        viewScale = Math.min(innerWidth / W, innerHeight / H);
-        viewX = (innerWidth - W * viewScale) / 2;
-        viewY = (innerHeight - H * viewScale) / 2;
-      }
-
-      function update(dt) {
-        if (state !== 'playing') return;
-        const speed = (2.7 + Math.min(score, 20) * .035) * dt / 16.667;
-        spawnTimer -= dt;
-        if (spawnTimer <= 0) {
-          addPipe();
-          spawnTimer = Math.max(1180, 1540 - score * 12);
-        }
-        for (let i = pipes.length - 1; i >= 0; i--) {
-          const pipe = pipes[i];
-          Body.setPosition(pipe.top, { x: pipe.top.position.x - speed, y: pipe.top.position.y });
-          Body.setPosition(pipe.bottom, { x: pipe.bottom.position.x - speed, y: pipe.bottom.position.y });
-          if (!pipe.scored && pipe.top.position.x + pipe.width / 2 < bird.position.x) {
-            pipe.scored = true;
-            score += 1;
-            live.textContent = `${score} 分`;
-            tone(760, .06);
-          }
-          if (pipe.top.position.x < -80) {
-            World.remove(engine.world, [pipe.top, pipe.bottom]);
-            pipes.splice(i, 1);
-          }
-        }
-        const steps = Math.max(1, Math.ceil(dt / 16.667));
-        for (let step = 0; step < steps; step++) Engine.update(engine, dt / steps);
-        Body.setAngle(bird, Math.max(-.45, Math.min(1.1, bird.velocity.y * .07)));
-        if (bird.position.y > H + R || bird.position.y < -R) end();
-      }
-
-      function cloud(x, y, size) {
-        ctx.fillStyle = '#ffffffc7';
-        ctx.beginPath();
-        ctx.arc(x, y, size * .55, 0, Math.PI * 2);
-        ctx.arc(x + size * .5, y - size * .18, size * .42, 0, Math.PI * 2);
-        ctx.arc(x + size, y, size * .5, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      function drawPipe(body, top) {
-        const bounds = body.bounds;
-        const x = bounds.min.x;
-        const y = bounds.min.y;
-        const width = bounds.max.x - bounds.min.x;
-        const height = bounds.max.y - bounds.min.y;
-        ctx.fillStyle = '#244f45';
-        ctx.fillRect(x, y, width, height);
-        ctx.fillStyle = '#16352f';
-        ctx.fillRect(x + 8, y, 11, height);
-        ctx.fillStyle = '#d94f50';
-        ctx.fillRect(x - 5, top ? y + height - 19 : y, width + 10, 19);
-        ctx.strokeStyle = '#18333a';
-        ctx.lineWidth = 3;
-        ctx.strokeRect(x, y, width, height);
-      }
-
-      function drawBird() {
-        ctx.save();
-        ctx.translate(bird.position.x, bird.position.y);
-        ctx.rotate(bird.angle);
-        ctx.fillStyle = '#ffd166';
-        ctx.beginPath(); ctx.arc(0, 0, R, 0, Math.PI * 2); ctx.fill();
-        ctx.fillStyle = '#f29d49';
-        ctx.beginPath(); ctx.ellipse(-8, 5, 11, 7, -.25, 0, Math.PI * 2); ctx.fill();
-        ctx.fillStyle = '#d94f50';
-        ctx.beginPath(); ctx.moveTo(14, -1); ctx.lineTo(28, 4); ctx.lineTo(14, 8); ctx.closePath(); ctx.fill();
-        ctx.fillStyle = '#fff';
-        ctx.beginPath(); ctx.arc(7, -7, 6, 0, Math.PI * 2); ctx.fill();
-        ctx.fillStyle = '#18333a';
-        ctx.beginPath(); ctx.arc(9, -7, 2.5, 0, Math.PI * 2); ctx.fill();
-        ctx.restore();
-      }
-
-      function draw() {
-        const dpr = Math.min(devicePixelRatio || 1, 2);
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        ctx.fillStyle = '#18333a';
-        ctx.fillRect(0, 0, innerWidth, innerHeight);
-        ctx.translate(viewX, viewY);
-        ctx.scale(viewScale, viewScale);
-        ctx.fillStyle = '#9bcbd8';
-        ctx.fillRect(0, 0, W, H);
-        for (let x = 42; x < W; x += 290) { cloud(x, 112, 34); cloud(x + 150, 185, 26); }
-        ctx.fillStyle = '#6e9da5';
-        for (let x = 0; x < W; x += 38) ctx.fillRect(x, 590 - (x % 76), 27, 130 + (x % 76));
-        ctx.fillStyle = '#4d7777';
-        ctx.fillRect(0, 665, W, 55);
-        ctx.fillStyle = '#ffd166';
-        for (let x = 13; x < W; x += 34) ctx.fillRect(x, 680, 8, 5);
-        for (const pipe of pipes) { drawPipe(pipe.top, true); drawPipe(pipe.bottom, false); }
-        drawBird();
-        ctx.fillStyle = '#18333a';
-        ctx.font = '900 42px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText(String(score), W / 2, 72);
-      }
-
-      function frame(now) {
-        const dt = Math.min(now - lastTime, 33.3);
-        lastTime = now;
-        if (!window.arcadePaused) update(dt);
-        document.body.dataset.state = state;
-        canvas.dataset.score = String(score);
-        canvas.dataset.state = state;
-        draw();
-        requestAnimationFrame(frame);
-      }
-
-      canvas.addEventListener('pointerdown', event => { event.preventDefault(); flap(); });
-      document.getElementById('start').addEventListener('click', start);
-      addEventListener('keydown', event => {
-        if (event.repeat) return;
-        if (event.code === 'Space') flap();
-        else if (event.code === 'KeyR') start();
-        else return;
-        event.preventDefault();
-      });
-      addEventListener('resize', resize);
-      document.addEventListener('visibilitychange', () => { lastTime = performance.now(); });
-      resize();
-      reset();
-      console.assert(Matter.Collision.collides(bird, Bodies.rectangle(112, 340, 20, 80, { isStatic: true })), 'bird collision');
-      requestAnimationFrame(frame);
-      document.body.dataset.selfCheck = 'ok';
-      document.body.dataset.ready = 'true';
-    })();
-  </script>
-</body>
-</html>
+</header>
+<!-- shared-header:end -->
+<main id="main" class="standalone-game"><iframe src="play.html" title="Sky Hopper" allow="autoplay; fullscreen"></iframe></main>
+<footer class="shared-footer"><div><strong>Ziteng Wang</strong><p>Beihang University · Embodied AI · VR · HCI</p></div><nav aria-label="Contact and profiles"><a href="mailto:wzt2694630726@gmail.com">Email</a><a href="https://scholar.google.com/citations?user=FDuEOccAAAAJ">Google Scholar</a><a href="https://github.com/Steve-Strange">GitHub</a></nav><small>© <span data-year>2026</span> Ziteng Wang</small></footer>
+</body></html>

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#5a8c65">
+  <title>Pocket Racer｜Arcade Lab</title>
+  <link rel="stylesheet" href="/assets/road-games.css">
+  <link rel="stylesheet" href="/assets/game-embed.css">
+  <script src="/assets/game-bridge.js"></script>
+  <script defer src="/lib/lucide/lucide.min.js"></script>
+  <script defer src="/lib/matter/matter.min.js"></script>
+  <script defer src="/assets/road-games.js"></script>
+<meta name="robots" content="noindex, follow"><link rel="canonical" href="https://steve-strange.github.io/arcade/racer/"></head>
+<body data-game="racer">
+  <canvas id="game" aria-label="A red car avoiding traffic on a highway through green fields"></canvas>
+  <div class="topbar"><a class="back" href="/arcade/?game=racer" aria-label="Back to arcade" title="Back to arcade"><i data-lucide="arrow-left"></i></a><div class="scores"><div><span>BEST</span><strong id="best">00000</strong></div><div><span>METERS</span><strong id="score">00000</strong></div></div></div>
+  <div class="message" id="message"><h1 id="result">POCKET RACER</h1><p class="standalone-help">← / → to steer, ↓ / Space to brake, R to restart. Avoid traffic.</p><button id="start" type="button">START ENGINE</button></div>
+  <div class="controls" aria-label="Racing controls"><button class="control" id="left" type="button" aria-label="Steer left" title="Steer left"><i data-lucide="arrow-left"></i></button><button class="control" id="brake" type="button" aria-label="Brake" title="Brake"><i data-lucide="octagon-pause"></i></button><button class="control" id="right" type="button" aria-label="Steer right" title="Steer right"><i data-lucide="arrow-right"></i></button></div>
+  <p id="live" class="sr-only" role="status">Ready to start</p>
+</body>
+</html>
