@@ -27,7 +27,7 @@ for lang in ['en', 'zh']:
     body = replace_phrases(body, mapping)
     # Internal navigation stays within the chosen language; assets and citations are shared.
     if lang == 'zh':
-        body = re.sub(r'href="(/(?:publications/[^".]*|arcade/|archives/))"', r'href="/zh\1"', body)
+        body = re.sub(r'href="(/(?:publications/[^".]*|arcade/[^".]*|investment/[^".]*|archives/))"', r'href="/zh\1"', body)
     body = body.replace('/assets/media/fanpad.jpg', '/publications/fanpad/cover.webp').replace('/assets/media/moa.jpg', '/publications/moa/cover.webp')
     title = '王子腾 | 北京航空航天大学 · 具身智能与人机交互' if lang == 'zh' else 'Ziteng Wang (王子腾) | Beihang University — Embodied AI, VR & HCI'
     description = '王子腾，北京航空航天大学计算机学院直博生。研究具身智能、虚拟现实、人机交互与拆卸规划。论文、系统演示与个人简历。' if lang == 'zh' else 'Ziteng Wang (王子腾), PhD student in Computer Science at Beihang University. Research in embodied AI, VR/AR, HCI and disassembly planning. Publications, demos and CV.'
@@ -91,6 +91,7 @@ arcade_translations = json.loads((ROOT / 'scripts/arcade-translations.json').rea
 (ROOT / 'assets/arcade-i18n.js').write_text('window.arcadeLabels = ' + json.dumps(arcade_translations, ensure_ascii=False) + ';\n')
 for lang in ['en', 'zh']:
     body = replace_phrases((ROOT / 'scripts/templates/arcade.html').read_text(), arcade_translations[lang])
+    body = body.replace('href="/#arcade"', f'href="{local("/#arcade", lang)}"')
     body = body.replace('src="/recoil-duel/?embed=1"', f'src="{local("/recoil-duel/", lang)}play.html?embed=1"')
     meta = '<link rel="stylesheet" href="/assets/arcade.css"><script defer src="/assets/arcade-i18n.js"></script><script defer src="/assets/arcade.js"></script>'
     title = '游戏室' if lang == 'zh' else 'Arcade Lab'
@@ -98,6 +99,30 @@ for lang in ['en', 'zh']:
     out = ROOT / local('/arcade/', lang).strip('/') / 'index.html'
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(shell(title, description, '/arcade/', body, lang, css='portfolio', active='arcade', metadata=meta, body_class='arcade-page'))
+
+# Investment notes keep their published Chinese text and sources within the shared shell.
+investment_content = (ROOT / 'scripts/templates/investment.html').read_text()
+for lang in ['en', 'zh']:
+    zh = lang == 'zh'
+    title = '投资资料与模拟方法' if zh else 'Investment notes'
+    description = '从公开原始资料出发，理解市场规则和信息时点；在相同资金流、费用与成交条件下比较策略。' if zh else 'Public sources, market rules and information timing. Compare strategies with the same cash flows, costs and execution conditions.'
+    topics = [('method', 'Research workflow', '研究方法'), ('channels', 'Public sources', '公开信息'),
+              ('simulation', 'Simulation templates', '模拟模板'), ('sources', 'Original readings', '原文阅读'),
+              ('tools', 'Engineering references', '工程参考')]
+    toc = ''.join(f'<a href="#{key}">{cn if zh else en}</a>' for key, en, cn in topics)
+    language_note = '' if zh else '<p class="content-language">The notes below are in Chinese; linked sources retain their original languages.</p>'
+    body = f'''<main id="main">
+<nav class="page-breadcrumb" aria-label="{'当前位置' if zh else 'Breadcrumb'}"><a href="{local('/#investment', lang)}">{'返回主页' if zh else 'Back to homepage'}</a><span aria-hidden="true">/</span><span>{'投资笔记' if zh else 'Investment'}</span></nav>
+<section class="page-intro" aria-labelledby="investment-title"><p class="section-kicker">{'投资笔记' if zh else 'INVESTMENT NOTES'}</p><h1 id="investment-title">{title}</h1><p class="page-description">{description}</p>{language_note}</section>
+<nav class="investment-toc" aria-label="{'页内导航' if zh else 'On this page'}">{toc}</nav>
+<div class="investment-content" lang="zh-CN">{investment_content}</div>
+</main>'''
+    out = ROOT / local('/investment/', lang).strip('/') / 'index.html'
+    out.parent.mkdir(parents=True, exist_ok=True)
+    policy = '<meta name="referrer" content="no-referrer"><meta http-equiv="Content-Security-Policy" content="default-src \'none\'; script-src \'self\'; style-src \'self\'; img-src \'self\'; base-uri \'none\'; form-action \'none\'">'
+    out.write_text(shell(title, description, '/investment/', body, lang, active='investment',
+                         metadata='<link rel="stylesheet" href="/assets/investment.css">', head_meta=policy,
+                         body_class='publication-page investment-page'))
 
 # Standalone games use a shell around the same game document used by the arcade.
 # This keeps the navigation out of canvas coordinates and preserves game behavior.
@@ -128,4 +153,4 @@ for path in sorted(ROOT.rglob('index.html')):
     url = ET.SubElement(urlset, 'url')
     ET.SubElement(url, 'loc').text = BASE + ('/' if relative.parent.as_posix() == '.' else '/' + relative.parent.as_posix() + '/')
 ET.ElementTree(urlset).write(ROOT / 'sitemap.xml', encoding='utf-8', xml_declaration=True)
-print(f'Built bilingual homepage, publications, arcade and archive; shared navigation on {len(legacy_paths)} legacy pages.')
+print(f'Built bilingual homepage, publications, arcade, investment and archive; shared navigation on {len(legacy_paths)} legacy pages.')

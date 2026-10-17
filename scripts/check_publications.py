@@ -17,11 +17,13 @@ class Page(HTMLParser):
         self.canonical = ''
         self.lang = ''
         self.navigation = []
+        self.ids = set()
         self.in_nav = False
         self.feed(text)
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        if attrs.get('id'): self.ids.add(attrs['id'])
         if tag == 'meta': self.meta.append(attrs)
         if tag == 'html': self.lang = attrs.get('lang')
         if tag == 'link' and attrs.get('rel') == 'alternate' and attrs.get('hreflang'):
@@ -39,10 +41,12 @@ class Page(HTMLParser):
 def check_links(page, path):
     for link in page.links:
         url = urlsplit(link)
-        if url.scheme or url.netloc or not url.path: continue
-        target = ROOT / unquote(url.path.lstrip('/')) if url.path.startswith('/') else path.parent / unquote(url.path)
+        if url.scheme or url.netloc: continue
+        target = (ROOT / unquote(url.path.lstrip('/')) if url.path.startswith('/') else path.parent / unquote(url.path)) if url.path else path
         if target.is_dir(): target /= 'index.html'
         assert target.is_file(), (str(path.relative_to(ROOT)), link)
+        if url.fragment and target.suffix == '.html':
+            assert unquote(url.fragment) in Page(target.read_text()).ids, (str(path.relative_to(ROOT)), link)
 
 assert len(papers) == len({p['doi'].lower() for p in papers}) == 6
 for p in papers:
@@ -71,7 +75,7 @@ assert '<strong>06</strong>' in (ROOT/'index.html').read_text()
 tree = ET.parse(ROOT / 'sitemap.xml')
 urls = {e.text for e in tree.iter() if e.tag.endswith('loc')}
 assert all(f'https://steve-strange.github.io/publications/{p["slug"]}/' in urls for p in papers)
-routes = ['', 'publications', 'arcade', 'archives', 'about', 'recoil-duel'] + ['arcade/' + s for s in ['gomoku','pinball','sky-hopper','dino','racer']] + ['publications/' + p['slug'] for p in papers]
+routes = ['', 'publications', 'arcade', 'investment', 'archives', 'about', 'recoil-duel'] + ['arcade/' + s for s in ['gomoku','pinball','sky-hopper','dino','racer']] + ['publications/' + p['slug'] for p in papers]
 for prefix, lang in [('', 'en'), ('zh/', 'zh-CN')]:
     for route in routes:
         path = ROOT / prefix / route / 'index.html'
@@ -80,6 +84,6 @@ for prefix, lang in [('', 'en'), ('zh/', 'zh-CN')]:
         assert page.lang == lang and page.canonical == url, path
         assert url in urls, path
         assert set(page.alternates) == {'en', 'zh-CN', 'x-default'}, path
-        assert page.navigation == [f'/{prefix}' + s for s in ['#research','publications/','#projects','arcade/','#experience','archives/']], path
+        assert page.navigation == [f'/{prefix}#' + s for s in ['research','publications','projects','experience','arcade','investment','blog']], path
         check_links(page, path)
 print('PASS: six papers, author order, metadata, citations, images, bilingual routes, shared navigation, local links and sitemap.')

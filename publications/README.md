@@ -7,9 +7,11 @@ python scripts/build_site.py
 python scripts/check_publications.py
 ```
 
-The build produces English pages at the root and Chinese pages under `/zh/`, including the homepage, six paper explainers, publication index, arcade, standalone game shells, archive landing page and about page. Every pair has a self-canonical URL and reciprocal `hreflang` links; English is the default. Content and language links work without JavaScript. The language switch preserves the current section and selected game when JavaScript is available.
+The build produces English pages at the root and Chinese pages under `/zh/`, including the homepage, six paper explainers, publication index, arcade, investment notes, standalone game shells, archive landing page and about page. Every pair has a self-canonical URL and reciprocal `hreflang` links; English is the default. Investment annotations retain their published Chinese text, with a language note on the English page. Content and language links work without JavaScript. The language switch preserves the current section and selected game when JavaScript is available.
 
 `scripts/site_common.py` owns the shared navigation, footer and metadata. `assets/site.css` applies the same navigation, typography and palette across current pages and archived blog pages. Homepage and game sources live in `scripts/templates/`; edit those sources rather than generated HTML. Games use the same generated `play.html` inside the arcade and standalone shells, keeping the shared navigation outside the canvas. Existing blog posts retain their original paths and original language; `?lang=zh` selects Chinese site navigation on those pages.
+
+The main menu follows the homepage sections: Research, Publications, Systems, Background, Arcade, Investment, Blog. Each item links to a homepage anchor; section cards and buttons open detail pages. Edit investment content in `scripts/templates/investment.html`, not the generated `investment/index.html` or `zh/investment/index.html`. The build preserves source links and generates the shared header, local contents navigation and language routes.
 
 BibTeX, Markdown, sitemap.xml, robots.txt and llms.txt are generated too. Browser checks use `scripts/site.e2e.spec.cjs` and `arcade/e2e.spec.cjs` with Playwright (`ARCADE_URL` sets the preview origin).
 

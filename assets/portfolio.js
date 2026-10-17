@@ -1,4 +1,5 @@
 (() => {
+  document.documentElement.classList.add('js');
   const zh = document.body.classList.contains('legacy-page')
     ? new URLSearchParams(location.search).get('lang') === 'zh'
     : document.documentElement.lang.startsWith('zh');
@@ -40,12 +41,35 @@
     });
   }
 
+  const sections = Array.from(nav?.querySelectorAll('a[data-section]') || [])
+    .filter(link => new URL(link.href).pathname === location.pathname)
+    .map(link => ({ link, section: document.getElementById(link.dataset.section) }))
+    .filter(item => item.section);
   const syncHeader = () => {
     header?.classList.toggle('is-scrolled', window.scrollY > 12);
+    if (!sections.length) return;
+    let current;
+    for (const item of sections) {
+      if (item.section.getBoundingClientRect().top <= header.offsetHeight + 32) current = item;
+    }
+    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
+      current = sections.at(-1);
+    }
+    for (const item of sections) {
+      if (item === current) item.link.setAttribute('aria-current', 'location');
+      else item.link.removeAttribute('aria-current');
+    }
   };
 
   syncHeader();
-  window.addEventListener('scroll', syncHeader, { passive: true });
+  let scrollPending = false;
+  window.addEventListener('scroll', () => {
+    if (scrollPending) return;
+    scrollPending = true;
+    requestAnimationFrame(() => { syncHeader(); scrollPending = false; });
+  }, { passive: true });
+  window.addEventListener('resize', syncHeader);
+  window.addEventListener('load', syncHeader);
 
   const year = document.querySelector('[data-year]');
   if (year) year.textContent = String(new Date().getFullYear());
@@ -76,9 +100,8 @@
   // Archived articles keep their original text; their site navigation is bilingual.
   if (document.body.classList.contains('legacy-page')) {
     const chineseUI = new URLSearchParams(location.search).get('lang') === 'zh';
-    const names = chineseUI ? ['研究', '论文', '系统', '游戏', '经历', '博客'] : ['Research', 'Publications', 'Systems', 'Arcade', 'Background', 'Blog'];
-    nav.querySelectorAll('a').forEach((a, index) => {
-      a.textContent = names[index];
+    nav.querySelectorAll('a').forEach(a => {
+      a.textContent = chineseUI ? a.dataset.labelZh : a.dataset.labelEn;
       if (chineseUI) a.setAttribute('href', '/zh' + a.getAttribute('href'));
     });
     header.querySelector('.brand').href = chineseUI ? '/zh/' : '/';

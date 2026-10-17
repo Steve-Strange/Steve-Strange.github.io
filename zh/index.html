@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="zh-CN"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>王子腾 | 北京航空航天大学 · 具身智能与人机交互</title>
 <meta name="description" content="王子腾，北京航空航天大学计算机学院直博生。研究具身智能、虚拟现实、人机交互与拆卸规划。论文、系统演示与个人简历。">
 <meta name="author" content="Ziteng Wang"><meta name="robots" content="index, follow, max-image-preview:large">
@@ -15,15 +16,15 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://steve-strange.github.io/images/Head.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="/assets/portfolio.css?v=20260917-bilingual"><link rel="stylesheet" href="/assets/site.css?v=20260917-bilingual">
-<script defer src="/lib/lucide/lucide.min.js"></script><script defer src="/assets/portfolio.js?v=20260917-bilingual"></script>
+<link rel="stylesheet" href="/assets/portfolio.css?v=20261017-navigation"><link rel="stylesheet" href="/assets/site.css?v=20261017-navigation">
+<script defer src="/lib/lucide/lucide.min.js"></script><script defer src="/assets/portfolio.js?v=20261017-navigation"></script>
 <link rel="preload" as="image" href="/images/Head.jpg"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Person", "@id": "https://steve-strange.github.io/#person", "name": "Ziteng Wang", "alternateName": ["王子腾", "Wang Ziteng"], "url": "https://steve-strange.github.io/", "image": "https://steve-strange.github.io/images/Head.jpg", "jobTitle": "PhD Student", "affiliation": {"@type": "CollegeOrUniversity", "name": "Beihang University"}, "knowsAbout": ["Embodied AI", "Virtual Reality", "Human–Computer Interaction", "Disassembly Sequence Planning"], "sameAs": ["https://scholar.google.com/citations?user=FDuEOccAAAAJ", "https://github.com/Steve-Strange"]}, {"@type": "ProfilePage", "@id": "https://steve-strange.github.io/zh/#profile", "url": "https://steve-strange.github.io/zh/", "mainEntity": {"@id": "https://steve-strange.github.io/#person"}, "inLanguage": "zh-CN"}]}</script>
 </head><body class=""><a class="skip-link" href="#main">跳到正文</a>
 <!-- shared-header:start -->
 <header id="global-header" class="site-header" data-header>
   <div class="header-inner">
     <a class="brand" href="/zh/" aria-label="个人主页"><span class="brand-mark" aria-hidden="true">ZW</span><span class="brand-name">王子腾</span></a>
-    <nav class="site-nav" id="site-nav" aria-label="主导航" data-nav><a href="/zh/#research">研究</a><a href="/zh/publications/">论文</a><a href="/zh/#projects">系统</a><a href="/zh/arcade/">游戏</a><a href="/investment/">投资资料</a><a href="/zh/#experience">经历</a><a href="/zh/archives/">博客</a></nav>
+    <nav class="site-nav" id="site-nav" aria-label="主导航" data-nav><a href="/zh/#research" data-section="research" data-label-en="Research" data-label-zh="研究">研究</a><a href="/zh/#publications" data-section="publications" data-label-en="Publications" data-label-zh="论文">论文</a><a href="/zh/#projects" data-section="projects" data-label-en="Systems" data-label-zh="系统">系统</a><a href="/zh/#experience" data-section="experience" data-label-en="Background" data-label-zh="经历">经历</a><a href="/zh/#arcade" data-section="arcade" data-label-en="Arcade" data-label-zh="游戏">游戏</a><a href="/zh/#investment" data-section="investment" data-label-en="Investment" data-label-zh="投资笔记">投资笔记</a><a href="/zh/#blog" data-section="blog" data-label-en="Blog" data-label-zh="博客">博客</a></nav>
     <div class="header-actions">
       <a class="header-cv" href="/assets/ziteng-wang-cv.pdf" aria-label="公开简历（中文 PDF）">简历</a>
       <a class="language-switch" data-language-switch href="/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
@@ -301,15 +302,9 @@
         <div class="open-source reveal" aria-labelledby="open-source-title">
           <div class="open-source-heading">
             <p class="section-kicker">开源工程</p>
-            <h3 id="open-source-title">更多公开工程与资料</h3>
+            <h3 id="open-source-title">更多公开工程</h3>
           </div>
           <div class="repo-links">
-            <a href="/zh/arcade/">
-              <span>Arcade Lab · 六款浏览器小游戏</span><i data-lucide="play" aria-hidden="true"></i>
-            </a>
-            <a href="/investment/">
-              <span>投资资料与模拟方法 · 公开来源、市场机制与策略模板</span><i data-lucide="book-open" aria-hidden="true"></i>
-            </a>
             <a href="https://github.com/Steve-Strange/HandTracking-and-MovingObjects-with-mediapipe-in-unity" target="_blank" rel="noopener noreferrer">
               <span>Unity MediaPipe 手部追踪</span><i data-lucide="arrow-up-right" aria-hidden="true"></i>
             </a>
@@ -378,11 +373,74 @@
       </div>
     </section>
 
-    <section class="blog-band" aria-labelledby="blog-title">
+    <section class="arcade-overview section" id="arcade" aria-labelledby="arcade-title">
+      <div class="page-width">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">游戏室</p>
+            <h2 id="arcade-title">浏览器游戏室</h2>
+          </div>
+          <p>研究之外的小实验：把物理、策略与操作手感做成六款浏览器小游戏。选一款，随时来一局。</p>
+        </div>
+        <div class="game-preview-grid">
+          <a class="game-preview" href="/zh/arcade/?game=recoil">
+            <img src="/assets/media/arcade-recoil.png" alt="青红双枪的反冲决斗" width="400" height="300" loading="lazy">
+            <div><h3>反冲决斗</h3><p>物理 · 单人或本地双人</p><i data-lucide="arrow-up-right" aria-hidden="true"></i></div>
+          </a>
+          <a class="game-preview" href="/zh/arcade/?game=gomoku">
+            <img src="/assets/media/arcade-gomoku.png" alt="木色棋盘上的五子棋" width="400" height="300" loading="lazy">
+            <div><h3>五子棋</h3><p>策略 · 人机或双人对弈</p><i data-lucide="arrow-up-right" aria-hidden="true"></i></div>
+          </a>
+          <a class="game-preview" href="/zh/arcade/?game=racer">
+            <img src="/assets/media/arcade-racer.png" alt="公路车流中的红色赛车" width="400" height="300" loading="lazy">
+            <div><h3>口袋赛车</h3><p>赛车 · 躲避车流与控制节奏</p><i data-lucide="arrow-up-right" aria-hidden="true"></i></div>
+          </a>
+        </div>
+        <div class="section-action">
+          <a class="button button-accent" href="/zh/arcade/">进入游戏室 <i data-lucide="arrow-right" aria-hidden="true"></i></a>
+          <span>还有三维弹球、晴空小鸟与小恐龙。</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="investment-overview section" id="investment" aria-labelledby="investment-title">
+      <div class="page-width">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">投资笔记</p>
+            <h2 id="investment-title">投资资料与模拟方法</h2>
+          </div>
+          <p>从公开原始资料出发，理解市场规则和信息时点，在一致条件下比较策略。记录来源、假设与验证方法。</p>
+        </div>
+        <div class="notes-preview-grid">
+          <a class="notes-preview" href="/zh/investment/#channels">
+            <span class="lane-index">01</span><h3>公开信息来源</h3>
+            <p>查阅政策、统计数据、交易所披露与行业新闻，回到信息最初发布的地方。</p>
+            <span class="preview-link">浏览资料目录 <i data-lucide="arrow-right" aria-hidden="true"></i></span>
+          </a>
+          <a class="notes-preview" href="/zh/investment/#method">
+            <span class="lane-index">02</span><h3>研究与验证</h3>
+            <p>区分事件、发布时间与后续修订，记录研究假设，检查模拟是否用了未来信息。</p>
+            <span class="preview-link">阅读研究流程 <i data-lucide="arrow-right" aria-hidden="true"></i></span>
+          </a>
+          <a class="notes-preview" href="/zh/investment/#simulation">
+            <span class="lane-index">03</span><h3>策略模拟模板</h3>
+            <p>在相同资金流、费用与成交约束下比较四类模板，让结果能够解释与复查。</p>
+            <span class="preview-link">查看模拟模板 <i data-lucide="arrow-right" aria-hidden="true"></i></span>
+          </a>
+        </div>
+        <div class="section-action">
+          <a class="button button-accent" href="/zh/investment/">阅读投资笔记 <i data-lucide="arrow-right" aria-hidden="true"></i></a>
+          <span>公开资料与方法笔记 · 中文正文</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="blog-band" id="blog" aria-labelledby="blog-title">
       <div class="page-width blog-band-inner reveal">
         <div>
           <p class="section-kicker section-kicker-light">博客归档</p>
-          <h2 id="blog-title">旧博客仍在。</h2>
+          <h2 id="blog-title">博客与笔记</h2>
           <p>课程笔记、实验记录与随笔，以原文语言保留。</p>
         </div>
         <a class="button button-light" href="/zh/archives/">

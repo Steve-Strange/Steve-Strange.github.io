@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Ziteng Wang (王子腾) | Beihang University — Embodied AI, VR &amp; HCI</title>
 <meta name="description" content="Ziteng Wang (王子腾), PhD student in Computer Science at Beihang University. Research in embodied AI, VR/AR, HCI and disassembly planning. Publications, demos and CV.">
 <meta name="author" content="Ziteng Wang"><meta name="robots" content="index, follow, max-image-preview:large">
@@ -15,15 +16,15 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://steve-strange.github.io/images/Head.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="/assets/portfolio.css?v=20260917-bilingual"><link rel="stylesheet" href="/assets/site.css?v=20260917-bilingual">
-<script defer src="/lib/lucide/lucide.min.js"></script><script defer src="/assets/portfolio.js?v=20260917-bilingual"></script>
+<link rel="stylesheet" href="/assets/portfolio.css?v=20261017-navigation"><link rel="stylesheet" href="/assets/site.css?v=20261017-navigation">
+<script defer src="/lib/lucide/lucide.min.js"></script><script defer src="/assets/portfolio.js?v=20261017-navigation"></script>
 <link rel="preload" as="image" href="/images/Head.jpg"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Person", "@id": "https://steve-strange.github.io/#person", "name": "Ziteng Wang", "alternateName": ["王子腾", "Wang Ziteng"], "url": "https://steve-strange.github.io/", "image": "https://steve-strange.github.io/images/Head.jpg", "jobTitle": "PhD Student", "affiliation": {"@type": "CollegeOrUniversity", "name": "Beihang University"}, "knowsAbout": ["Embodied AI", "Virtual Reality", "Human–Computer Interaction", "Disassembly Sequence Planning"], "sameAs": ["https://scholar.google.com/citations?user=FDuEOccAAAAJ", "https://github.com/Steve-Strange"]}, {"@type": "ProfilePage", "@id": "https://steve-strange.github.io/#profile", "url": "https://steve-strange.github.io/", "mainEntity": {"@id": "https://steve-strange.github.io/#person"}, "inLanguage": "en"}]}</script>
 </head><body class=""><a class="skip-link" href="#main">Skip to content</a>
 <!-- shared-header:start -->
 <header id="global-header" class="site-header" data-header>
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Home"><span class="brand-mark" aria-hidden="true">ZW</span><span class="brand-name">Ziteng Wang</span></a>
-    <nav class="site-nav" id="site-nav" aria-label="Main navigation" data-nav><a href="/#research">Research</a><a href="/publications/">Publications</a><a href="/#projects">Systems</a><a href="/arcade/">Arcade</a><a href="/investment/">Investment Notes</a><a href="/#experience">Background</a><a href="/archives/">Blog</a></nav>
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation" data-nav><a href="/#research" data-section="research" data-label-en="Research" data-label-zh="研究">Research</a><a href="/#publications" data-section="publications" data-label-en="Publications" data-label-zh="论文">Publications</a><a href="/#projects" data-section="projects" data-label-en="Systems" data-label-zh="系统">Systems</a><a href="/#experience" data-section="experience" data-label-en="Background" data-label-zh="经历">Background</a><a href="/#arcade" data-section="arcade" data-label-en="Arcade" data-label-zh="游戏">Arcade</a><a href="/#investment" data-section="investment" data-label-en="Investment" data-label-zh="投资笔记">Investment</a><a href="/#blog" data-section="blog" data-label-en="Blog" data-label-zh="博客">Blog</a></nav>
     <div class="header-actions">
       <a class="header-cv" href="/assets/ziteng-wang-cv.pdf" aria-label="CV (Chinese PDF)">CV</a>
       <a class="language-switch" data-language-switch href="/zh/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
@@ -301,15 +302,9 @@
         <div class="open-source reveal" aria-labelledby="open-source-title">
           <div class="open-source-heading">
             <p class="section-kicker">OPEN SOURCE</p>
-            <h3 id="open-source-title">More projects and public notes</h3>
+            <h3 id="open-source-title">More open-source projects</h3>
           </div>
           <div class="repo-links">
-            <a href="/arcade/">
-              <span>Arcade Lab · Six browser games</span><i data-lucide="play" aria-hidden="true"></i>
-            </a>
-            <a href="/investment/">
-              <span>Investment Research Notes · Public sources and simulation methods (中文)</span><i data-lucide="book-open" aria-hidden="true"></i>
-            </a>
             <a href="https://github.com/Steve-Strange/HandTracking-and-MovingObjects-with-mediapipe-in-unity" target="_blank" rel="noopener noreferrer">
               <span>Unity MediaPipe Hand Tracking</span><i data-lucide="arrow-up-right" aria-hidden="true"></i>
             </a>
@@ -378,11 +373,74 @@
       </div>
     </section>
 
-    <section class="blog-band" aria-labelledby="blog-title">
+    <section class="arcade-overview section" id="arcade" aria-labelledby="arcade-title">
+      <div class="page-width">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">ARCADE</p>
+            <h2 id="arcade-title">Browser games</h2>
+          </div>
+          <p>Small experiments beyond research: six browser games exploring physics, strategy and controls. Pick one and play.</p>
+        </div>
+        <div class="game-preview-grid">
+          <a class="game-preview" href="/arcade/?game=recoil">
+            <img src="/assets/media/arcade-recoil.png" alt="Blue and red guns in Recoil Duel" width="400" height="300" loading="lazy">
+            <div><h3>Recoil Duel</h3><p>Physics · Solo or local multiplayer</p><i data-lucide="arrow-up-right" aria-hidden="true"></i></div>
+          </a>
+          <a class="game-preview" href="/arcade/?game=gomoku">
+            <img src="/assets/media/arcade-gomoku.png" alt="Gomoku on a wooden board" width="400" height="300" loading="lazy">
+            <div><h3>Gomoku</h3><p>Strategy · AI or two players</p><i data-lucide="arrow-up-right" aria-hidden="true"></i></div>
+          </a>
+          <a class="game-preview" href="/arcade/?game=racer">
+            <img src="/assets/media/arcade-racer.png" alt="A red racer weaving through traffic" width="400" height="300" loading="lazy">
+            <div><h3>Pocket Racer</h3><p>Racing · Traffic and timing</p><i data-lucide="arrow-up-right" aria-hidden="true"></i></div>
+          </a>
+        </div>
+        <div class="section-action">
+          <a class="button button-accent" href="/arcade/">Explore the arcade <i data-lucide="arrow-right" aria-hidden="true"></i></a>
+          <span>Also featuring 3D Pinball, Sky Hopper and Dino Run.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="investment-overview section" id="investment" aria-labelledby="investment-title">
+      <div class="page-width">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">INVESTMENT NOTES</p>
+            <h2 id="investment-title">Investment notes</h2>
+          </div>
+          <p>Start with public sources, understand market rules and information timing, and compare strategies under consistent conditions. Document sources, assumptions and validation methods.</p>
+        </div>
+        <div class="notes-preview-grid">
+          <a class="notes-preview" href="/investment/#channels">
+            <span class="lane-index">01</span><h3>Public sources</h3>
+            <p>Read policy releases, statistics, exchange disclosures and industry news at their original sources.</p>
+            <span class="preview-link">Browse the sources <i data-lucide="arrow-right" aria-hidden="true"></i></span>
+          </a>
+          <a class="notes-preview" href="/investment/#method">
+            <span class="lane-index">02</span><h3>Research and validation</h3>
+            <p>Separate events, release dates and later revisions. Record assumptions and check for future information leaking into a simulation.</p>
+            <span class="preview-link">Read the workflow <i data-lucide="arrow-right" aria-hidden="true"></i></span>
+          </a>
+          <a class="notes-preview" href="/investment/#simulation">
+            <span class="lane-index">03</span><h3>Simulation templates</h3>
+            <p>Compare four templates with the same cash flows, costs and execution constraints so results can be explained and checked.</p>
+            <span class="preview-link">View the templates <i data-lucide="arrow-right" aria-hidden="true"></i></span>
+          </a>
+        </div>
+        <div class="section-action">
+          <a class="button button-accent" href="/investment/">Read the notes <i data-lucide="arrow-right" aria-hidden="true"></i></a>
+          <span>Public sources and methods · Notes in Chinese</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="blog-band" id="blog" aria-labelledby="blog-title">
       <div class="page-width blog-band-inner reveal">
         <div>
           <p class="section-kicker section-kicker-light">ARCHIVE</p>
-          <h2 id="blog-title">Notes and experiments</h2>
+          <h2 id="blog-title">Blog and notes</h2>
           <p>Course notes, experiment logs and essays, preserved in their original languages.</p>
         </div>
         <a class="button button-light" href="/archives/">

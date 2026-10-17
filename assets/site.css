@@ -1,6 +1,7 @@
 /* Shared across the portfolio, publications, arcade and archived blog. */
 :root{color-scheme:light;--ink:#171b19;--muted:#66706a;--line:#d7ddd8;--teal:#0d756d;--accent:#0d756d;--paper:#f7f8f5;--back:#f7f8f5;--night:#091011;--teal-light:#77d2c4;--header-height:68px;--page-width:1180px}
-html{scroll-padding-top:calc(var(--header-height) + 20px)}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-height) + 20px)}
+html:not(.js){scroll-behavior:auto}
 body{font-family:Inter,"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--paper)}
 #global-header,#global-header *{box-sizing:border-box}
 #global-header{position:fixed;inset:0 0 auto;z-index:1000;width:100%;max-width:none;height:var(--header-height);margin:0;padding:0;display:block;color:#fff;background:rgba(9,16,17,.97);border:0;border-bottom:1px solid #ffffff26;font:14px/1.4 Inter,system-ui,sans-serif;backdrop-filter:blur(12px)}
@@ -31,6 +32,12 @@ body:has(.standalone-game)>.shared-footer{display:none}
 .archive-entry{display:grid;grid-template-columns:110px 1fr;gap:20px;border-top:1px solid var(--line);padding:20px 0}
 .archive-entry time{color:var(--muted);font-size:14px}.archive-entry h2{font-size:20px;margin:0}.archive-entry a{text-decoration:none}
 .official-title{font-size:1rem;color:var(--muted)}.original-abstract{margin-top:16px}.original-abstract summary{cursor:pointer;color:var(--teal)}.original-abstract p{margin-top:12px}
+.page-breadcrumb{display:flex;align-items:center;gap:12px;margin:28px 0 0;color:var(--muted);font-size:14px}
+.page-breadcrumb a{color:var(--teal);text-decoration:none}.page-breadcrumb a:hover{text-decoration:underline}
+.page-intro{padding:28px 0 36px}.page-intro h1{margin:0 0 16px;font-size:clamp(32px,4vw,48px);line-height:1.2;letter-spacing:0}
+.page-intro .section-kicker{margin:0 0 12px;color:var(--teal);font-size:12px;font-weight:750;line-height:1.4}
+.page-intro .page-description{max-width:760px;margin:0;color:var(--muted);font-size:18px;line-height:1.75}
+.page-intro .content-language{margin:16px 0 0;color:var(--muted);font-size:14px}
 .legacy-page{padding-top:var(--header-height);background:var(--paper)}
 .legacy-page .main-inner{padding-top:36px;background:var(--paper)}
 .legacy-page .post-block{background:white;border:1px solid var(--line);border-radius:6px;padding:30px}
@@ -55,4 +62,12 @@ body:has(.standalone-game)>.shared-footer{display:none}
 }
 @media(max-width:390px){#global-header .brand-name{display:none}#global-header .header-actions{gap:8px}}
 @media(max-width:600px){.archive-entry{grid-template-columns:1fr;gap:8px}}
+@media(max-width:1050px){
+ html:not(.js) #global-header{position:static;height:auto}
+ html:not(.js) #global-header .header-inner{flex-wrap:wrap;padding-top:12px}
+ html:not(.js) #global-header .site-nav{position:static;display:flex;flex-direction:row;flex-wrap:wrap;order:3;width:100%;gap:0 20px;padding:0 0 12px;border:0;max-height:none}
+ html:not(.js) #global-header .menu-toggle{display:none}
+ html:not(.js) .publication-page main,html:not(.js) .arcade-main,html:not(.js) .legacy-page{padding-top:0}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 @media print{#global-header,.skip-link,.shared-footer{display:none}.publication-page main,.legacy-page{padding-top:0}}

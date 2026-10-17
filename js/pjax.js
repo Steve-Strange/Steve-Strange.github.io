@@ -1,6 +1,8 @@
 /* global NexT, CONFIG, Pjax */
 
 const pjax = new Pjax({
+  // The shared site header and language switch require a full page navigation.
+  elements: '.main-inner a[href], .main-inner form[action]',
   selectors: [
     'head title',
     'script[type="application/json"]',

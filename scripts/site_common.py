@@ -10,9 +10,9 @@ ESC = html.escape
 
 
 def version_assets(text):
-    # Invalidate cached scripts together with the new bilingual HTML and game routes.
-    return re.sub(r'((?:src|href)="/assets/[^"?]+\.(?:css|js))(?:\?[^"\s]*)?"',
-                  r'\1?v=20260917-bilingual"', text)
+    # Invalidate cached styles and navigation together with the generated pages.
+    return re.sub(r'((?:src|href)="/(?:assets/[^"?]+\.(?:css|js)|js/pjax\.js))(?:\?[^"\s]*)?"',
+                  r'\1?v=20261017-navigation"', text)
 
 
 def local(path, lang):
@@ -27,13 +27,16 @@ def language_meta(path, lang):
 
 def header(path, lang='en', active=''):
     zh = lang == 'zh'
-    links = [('/#research', 'Research', '研究', 'research'),
-             ('/publications/', 'Publications', '论文', 'publications'),
-             ('/#projects', 'Systems', '系统', 'projects'),
-             ('/arcade/', 'Arcade', '游戏', 'arcade'),
-             ('/#experience', 'Background', '经历', 'experience'),
-             ('/archives/', 'Blog', '博客', 'blog')]
-    nav = ''.join(f'<a href="{local(url, lang)}"' + (' aria-current="page"' if key == active else '') + f'>{cn if zh else en}</a>' for url, en, cn, key in links)
+    links = [('research', 'Research', '研究'),
+             ('publications', 'Publications', '论文'),
+             ('projects', 'Systems', '系统'),
+             ('experience', 'Background', '经历'),
+             ('arcade', 'Arcade', '游戏'),
+             ('investment', 'Investment', '投资笔记'),
+             ('blog', 'Blog', '博客')]
+    nav = ''.join(f'<a href="{local("/#" + key, lang)}" data-section="{key}" data-label-en="{en}" data-label-zh="{cn}"'
+                  + (' aria-current="location"' if key == active else '') + f'>{cn if zh else en}</a>'
+                  for key, en, cn in links)
     return f'''<!-- shared-header:start -->
 <header id="global-header" class="site-header" data-header>
   <div class="header-inner">
@@ -54,12 +57,13 @@ def footer(lang='en'):
     return f'''<footer class="shared-footer"><div><strong>{'王子腾' if zh else 'Ziteng Wang'}</strong><p>{'北京航空航天大学 · 具身智能 · 虚拟现实 · 人机交互' if zh else 'Beihang University · Embodied AI · VR · HCI'}</p></div><nav aria-label="{'联系与学术主页' if zh else 'Contact and profiles'}"><a href="mailto:wzt2694630726@gmail.com">{'邮箱' if zh else 'Email'}</a><a href="https://scholar.google.com/citations?user=FDuEOccAAAAJ">Google Scholar</a><a href="https://github.com/Steve-Strange">GitHub</a></nav><small>© <span data-year>2026</span> Ziteng Wang</small></footer>'''
 
 
-def shell(title, description, path, body, lang='en', *, css='publications', active='', metadata='', structured=None, image='', body_class=''):
+def shell(title, description, path, body, lang='en', *, css='publications', active='', metadata='', head_meta='', structured=None, image='', body_class=''):
     zh = lang == 'zh'
     data = json.dumps(structured or {}, ensure_ascii=False).replace('<', '\\u003c')
     return version_assets(f'''<!doctype html>
 <html lang="{'zh-CN' if zh else 'en'}"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+{head_meta}
 <title>{ESC(title) if path == '/' else ESC(title) + (' | 王子腾 · 北航' if zh else ' | Ziteng Wang · Beihang University')}</title>
 <meta name="description" content="{ESC(description, quote=True)}">
 <meta name="author" content="Ziteng Wang"><meta name="robots" content="index, follow, max-image-preview:large">

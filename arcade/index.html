@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Arcade Lab | Ziteng Wang · Beihang University</title>
 <meta name="description" content="Six browser games: Recoil Duel, 3D Pinball, Sky Hopper, Gomoku, Dino Run and Pocket Racer.">
 <meta name="author" content="Ziteng Wang"><meta name="robots" content="index, follow, max-image-preview:large">
@@ -15,15 +16,15 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://steve-strange.github.io/images/Head.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="/assets/portfolio.css?v=20260917-bilingual"><link rel="stylesheet" href="/assets/site.css?v=20260917-bilingual">
-<script defer src="/lib/lucide/lucide.min.js"></script><script defer src="/assets/portfolio.js?v=20260917-bilingual"></script>
-<link rel="stylesheet" href="/assets/arcade.css?v=20260917-bilingual"><script defer src="/assets/arcade-i18n.js?v=20260917-bilingual"></script><script defer src="/assets/arcade.js?v=20260917-bilingual"></script><script type="application/ld+json">{}</script>
+<link rel="stylesheet" href="/assets/portfolio.css?v=20261017-navigation"><link rel="stylesheet" href="/assets/site.css?v=20261017-navigation">
+<script defer src="/lib/lucide/lucide.min.js"></script><script defer src="/assets/portfolio.js?v=20261017-navigation"></script>
+<link rel="stylesheet" href="/assets/arcade.css?v=20261017-navigation"><script defer src="/assets/arcade-i18n.js?v=20261017-navigation"></script><script defer src="/assets/arcade.js?v=20261017-navigation"></script><script type="application/ld+json">{}</script>
 </head><body class="arcade-page"><a class="skip-link" href="#main">Skip to content</a>
 <!-- shared-header:start -->
 <header id="global-header" class="site-header" data-header>
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Home"><span class="brand-mark" aria-hidden="true">ZW</span><span class="brand-name">Ziteng Wang</span></a>
-    <nav class="site-nav" id="site-nav" aria-label="Main navigation" data-nav><a href="/#research">Research</a><a href="/publications/">Publications</a><a href="/#projects">Systems</a><a href="/arcade/" aria-current="page">Arcade</a><a href="/#experience">Background</a><a href="/archives/">Blog</a></nav>
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation" data-nav><a href="/#research" data-section="research" data-label-en="Research" data-label-zh="研究">Research</a><a href="/#publications" data-section="publications" data-label-en="Publications" data-label-zh="论文">Publications</a><a href="/#projects" data-section="projects" data-label-en="Systems" data-label-zh="系统">Systems</a><a href="/#experience" data-section="experience" data-label-en="Background" data-label-zh="经历">Background</a><a href="/#arcade" data-section="arcade" data-label-en="Arcade" data-label-zh="游戏" aria-current="location">Arcade</a><a href="/#investment" data-section="investment" data-label-en="Investment" data-label-zh="投资笔记">Investment</a><a href="/#blog" data-section="blog" data-label-en="Blog" data-label-zh="博客">Blog</a></nav>
     <div class="header-actions">
       <a class="header-cv" href="/assets/ziteng-wang-cv.pdf" aria-label="CV (Chinese PDF)">CV</a>
       <a class="language-switch" data-language-switch href="/zh/arcade/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
@@ -33,9 +34,14 @@
 </header>
 <!-- shared-header:end -->
 <main id="main" class="arcade-main page-width">
-    <section class="arcade-intro" aria-labelledby="arcade-title">
-      <h1 id="arcade-title">Arcade Lab<span>Browser games</span></h1>
-      <p class="arcade-count"><span class="status-dot"></span>6 games <span class="count-divider">/</span> Ready when you are</p>
+    <nav class="page-breadcrumb" aria-label="Breadcrumb"><a href="/#arcade">Back to homepage</a><span aria-hidden="true">/</span><span>Browser games</span></nav>
+    <section class="arcade-intro page-intro" aria-labelledby="arcade-title">
+      <div>
+        <p class="section-kicker">ARCADE</p>
+        <h1 id="arcade-title">Browser games</h1>
+        <p class="page-description">Six small games exploring physics, strategy and controls. Choose a game to see its rules and controls below.</p>
+      </div>
+      <a class="arcade-count" href="#shelf-title">Browse all 6 games <i data-lucide="arrow-down" aria-hidden="true"></i></a>
     </section>
     <section class="play-layout" id="games" aria-label="Play area">
       <div class="play-column">

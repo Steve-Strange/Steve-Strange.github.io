@@ -904,6 +904,159 @@ h3 {
   color: var(--muted);
 }
 
+.arcade-overview {
+  background: var(--white);
+}
+
+.investment-overview {
+  border-top: 1px solid var(--line);
+}
+
+.game-preview-grid,
+.notes-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.game-preview,
+.notes-preview {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--white);
+  transition: border-color 150ms;
+}
+
+.game-preview:hover,
+.notes-preview:hover {
+  border-color: var(--teal);
+}
+
+.game-preview:focus-visible,
+.notes-preview:focus-visible,
+.button-accent:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 4px;
+}
+
+.game-preview img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+}
+
+.game-preview > div {
+  position: relative;
+  padding: 22px 46px 22px 24px;
+  border-top: 1px solid var(--line);
+}
+
+.game-preview h3,
+.notes-preview h3 {
+  margin: 0 0 8px;
+  font-size: 23px;
+}
+
+.game-preview p,
+.notes-preview p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.game-preview svg {
+  position: absolute;
+  right: 22px;
+  top: 27px;
+  color: var(--teal);
+}
+
+.notes-preview {
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
+}
+
+.notes-preview .lane-index {
+  margin-bottom: 20px;
+}
+
+.notes-preview p {
+  margin-bottom: 24px;
+}
+
+.preview-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  color: var(--teal);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.section-action {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+  margin-top: 32px;
+}
+
+.section-action > span {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.button-accent {
+  color: var(--white);
+  background: var(--teal);
+  border-color: var(--teal);
+}
+
+.button-accent:hover {
+  background: var(--forest);
+  border-color: var(--forest);
+}
+
+@media (max-width: 760px) {
+  .game-preview-grid,
+  .notes-preview-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .game-preview {
+    display: grid;
+    grid-template-columns: minmax(100px, 35%) minmax(0, 1fr);
+    align-items: center;
+  }
+
+  .game-preview > div {
+    padding: 16px;
+    border-top: 0;
+  }
+
+  .game-preview h3 {
+    font-size: 19px;
+  }
+
+  .game-preview p {
+    font-size: 13px;
+  }
+
+  .game-preview svg {
+    display: none;
+  }
+
+  .notes-preview {
+    padding: 24px;
+  }
+}
+
 .blog-band {
   padding: 76px 0;
   color: var(--white);

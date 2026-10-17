@@ -1,26 +1,249 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="referrer" content="no-referrer"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
-<title>投资资料与模拟方法</title><meta name="description" content="从公开原始资料出发，理解信息时点、交易机制、策略模板与可重复模拟。">
-<style>
-:root{color-scheme:light;--ink:#15283b;--muted:#536477;--line:#d6e0e5;--paper:#f6f8f6;--accent:#14685a}
-*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.8 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
-a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:.22em}a:hover{color:#0b443a}a:focus-visible{outline:3px solid #ebad48;outline-offset:4px}
-.wrap{max-width:1140px;margin:auto;padding:0 28px}header{background:#fff;border-bottom:1px solid var(--line)}.topbar{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-top:21px;padding-bottom:21px}.brand{font-weight:750;letter-spacing:.03em}.topbar a{text-decoration:none}
-nav{display:flex;gap:22px;flex-wrap:wrap;font-size:14px}.hero{padding:76px 0 65px;max-width:850px}.eyebrow,.step{color:var(--accent);font-size:12px;font-weight:750;letter-spacing:.14em}.hero h1{font-size:clamp(34px,5vw,58px);line-height:1.2;letter-spacing:-.04em;margin:15px 0 24px}.hero p{font-size:19px;color:var(--muted);max-width:760px}.hero .note{font-size:14px;border-left:3px solid #8ab8a9;padding-left:16px;margin-top:28px}
-section{padding:42px 0;border-top:1px solid var(--line);scroll-margin-top:20px}h2{font-size:27px;line-height:1.4;margin:0 0 12px}h3{font-size:18px;margin:11px 0 8px}p{margin:7px 0 18px}.lead{max-width:900px;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:24px}.grid article{padding:24px;background:#fff;border:1px solid var(--line);border-radius:14px}.grid article p{margin-bottom:0;color:var(--muted)}.channels{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.channels article{padding:18px}.channels h3{font-size:16px}.channels p{font-size:13px}
-.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:#fff;margin:22px 0}table{border-collapse:collapse;width:100%;min-width:720px;text-align:left}th,td{padding:16px;vertical-align:top;border-bottom:1px solid var(--line);font-size:14px}th{font-size:13px;background:#edf3ef}td:first-child{font-weight:650;min-width:130px}tr:last-child td{border-bottom:0}.sources{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:24px}.source-group ul{list-style:none;padding:0;margin:0}.source-group li{border-bottom:1px solid var(--line);padding:14px 0}.source-group li span,.source-group li small{display:block}.source-group small{color:var(--muted);font-size:12px;margin-top:5px}details{margin-top:24px}summary{cursor:pointer;font-weight:650;color:var(--accent)}.fine{font-size:14px;color:var(--muted)}footer{margin-top:30px;padding:30px 0 40px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
-@media(max-width:760px){.wrap{padding:0 20px}.topbar{align-items:flex-start;flex-direction:column}.hero{padding:48px 0 42px}.hero p{font-size:17px}.grid,.sources{grid-template-columns:1fr}.channels{grid-template-columns:1fr 1fr}section{padding:34px 0}nav{gap:16px}}
-</style></head><body><header><div class="wrap topbar"><a class="brand" href="/">RESEARCH NOTES</a>
-<nav aria-label="页内导航"><a href="#method">研究方法</a><a href="#channels">公开信息</a><a href="#simulation">模拟模板</a><a href="#sources">原文阅读</a></nav></div></header>
-<main class="wrap"><div class="hero"><span class="eyebrow">EVIDENCE · METHODS · SIMULATION</span><h1>投资资料与模拟方法</h1>
-<p>从公开原始资料出发，理解市场规则和信息时点；在相同资金流、费用与成交条件下比较策略。</p>
-<p class="note">这里展示公开资料、通用方法与策略模板。页面未发布实际投资收益或完成前向验证的结论。</p></div>
-<section id="method"><h2>让模拟结果能够解释与复查</h2><p class="lead">一次回测表现好，可能来自有效方法，也可能来自未来信息、遗漏成本或反复筛选。先把这些差异控制住，再讨论收益。</p><div class="grid"><article><span class="step">01</span><h3>先确定信息何时可见</h3><p>事件发生、正式发布、首次观察和后续修订分别记录。今天下载的旧文件，不能据此证明当年已经可用。</p></article><article><span class="step">02</span><h3>把观点与执行分开</h3><p>研究提出条件和信号；同一套确定性规则负责资金流、费用、可卖份额、交收与模拟成交。</p></article><article><span class="step">03</span><h3>在相同条件下比较</h3><p>基线与候选共享资金流、数据版本、交易日历和费用。决策过期后不得回到旧价格成交。</p></article><article><span class="step">04</span><h3>用新发生的数据检验</h3><p>滚动研究与保留测试区间分开。历史模型分析可能已知未来结果，最终证据需要真实前向观察。</p></article></div></section>
-<section id="channels"><h2>公开信息与新闻来源</h2><p class="lead">政策和交易规则回到发布方，市场新闻用于发现线索。公告日期、数据所属期与下载日期分别保留，更新以原站为准。</p><div class="grid channels"><article><h3><a href="https://www.pbc.gov.cn/" rel="noopener noreferrer">中国人民银行</a></h3><p>货币政策与统计发布</p></article><article><h3><a href="https://www.csrc.gov.cn/" rel="noopener noreferrer">中国证监会</a></h3><p>监管规则与公告</p></article><article><h3><a href="https://www.stats.gov.cn/" rel="noopener noreferrer">国家统计局</a></h3><p>宏观数据与发布日程</p></article><article><h3><a href="https://www.sse.com.cn/" rel="noopener noreferrer">上交所</a></h3><p>交易规则与发行人披露</p></article><article><h3><a href="https://www.szse.cn/" rel="noopener noreferrer">深交所</a></h3><p>交易规则与发行人披露</p></article><article><h3><a href="https://www.cninfo.com.cn/" rel="noopener noreferrer">巨潮资讯</a></h3><p>公司与基金公开披露</p></article><article><h3><a href="https://www.federalreserve.gov/newsevents.htm" rel="noopener noreferrer">美联储</a></h3><p>政策声明与公开新闻</p></article><article><h3><a href="https://fred.stlouisfed.org/" rel="noopener noreferrer">FRED / ALFRED</a></h3><p>经济数据及历史版本</p></article><article><h3><a href="https://apps.bea.gov/rss/rss.xml" rel="noopener noreferrer">美国经济分析局 · RSS</a></h3><p>经济数据与修订发布</p></article><article><h3><a href="https://www.bankofengland.co.uk/rss/news" rel="noopener noreferrer">英格兰银行 · RSS</a></h3><p>货币政策与金融稳定</p></article><article><h3><a href="https://www.gov.uk/government/organisations/hm-treasury.atom" rel="noopener noreferrer">英国财政部 · Atom</a></h3><p>财政、税收与贸易政策</p></article><article><h3><a href="https://www.boj.or.jp/en/rss/whatsnew.xml" rel="noopener noreferrer">日本央行 · RSS</a></h3><p>日本货币政策与经济数据</p></article><article><h3><a href="https://www.bok.or.kr/eng/bbs/E0000634/news.rss?menuNo=400069" rel="noopener noreferrer">韩国央行 · RSS</a></h3><p>韩国货币政策、宏观与贸易</p></article><article><h3><a href="https://ec.europa.eu/eurostat/en/search?p_p_id=estatsearchportlet_WAR_estatsearchportlet&amp;p_p_lifecycle=2&amp;p_p_state=maximized&amp;p_p_mode=view&amp;p_p_resource_id=atom&amp;_estatsearchportlet_WAR_estatsearchportlet_collection=CAT_PREREL" rel="noopener noreferrer">Eurostat · Atom</a></h3><p>欧盟统计与经济发布</p></article><article><h3><a href="https://www.eia.gov/rss/todayinenergy.xml" rel="noopener noreferrer">EIA · RSS</a></h3><p>石油、天然气及能源资讯</p></article><article><h3><a href="https://www.rba.gov.au/rss/rss-cb-media-releases.xml" rel="noopener noreferrer">澳大利亚央行 · RSS</a></h3><p>澳大利亚政策与经济发布</p></article><article><h3><a href="https://www.cftc.gov/RSS/RSSGP/rssgp.xml" rel="noopener noreferrer">CFTC · RSS</a></h3><p>商品、衍生品与监管公告</p></article><article><h3><a href="https://nvidianews.nvidia.com/releases.xml" rel="noopener noreferrer">NVIDIA · RSS</a></h3><p>公司公开发布；属于公司自述</p></article><article><h3><a href="https://news.samsung.com/global/feed" rel="noopener noreferrer">Samsung · RSS</a></h3><p>公司与半导体资讯；属于公司自述</p></article><article><h3><a href="https://news.un.org/feed/subscribe/en/news/all/rss.xml" rel="noopener noreferrer">联合国新闻 · RSS</a></h3><p>国际事务、全球经济与人道新闻</p></article><article><h3><a href="https://www.jpx.co.jp/english/rss/markets_news.xml" rel="noopener noreferrer">日本交易所 · RSS</a></h3><p>日本市场制度、上市与交易所公告</p></article><article><h3><a href="https://news.panasonic.com/global/rss/press/index.xml" rel="noopener noreferrer">Panasonic · RSS</a></h3><p>日本公司与产业资讯；属于公司自述</p></article><article><h3><a href="https://worldsteel.org/feed/" rel="noopener noreferrer">世界钢铁协会 · RSS</a></h3><p>钢铁行业与协会动态</p></article><article><h3><a href="https://www.fao.org/feeds/fao-newsroom-rss" rel="noopener noreferrer">FAO · RSS</a></h3><p>农业、粮食安全与供需背景</p></article><article><h3><a href="https://globalnews.ca/world/feed/" rel="noopener noreferrer">Global News 世界 · RSS</a></h3><p>世界新闻；转载需核对原始发布者</p></article><article><h3><a href="https://globalnews.ca/economy/feed/" rel="noopener noreferrer">Global News 经济 · RSS</a></h3><p>经济与贸易；与世界频道同属 Corus</p></article><article><h3><a href="https://www150.statcan.gc.ca/n1/rss/dai-quo/0-eng.atom" rel="noopener noreferrer">加拿大统计局 · Atom</a></h3><p>加拿大官方经济、贸易与能源统计更新</p></article></div></section>
-<section id="simulation"><h2>四类模拟模板</h2><p class="lead">下面比较研究问题与适用条件，不给出个人配置参数。所有模板使用同一事件账本处理资金与成交。</p><div class="table-wrap"><table><thead><tr><th>模板</th><th>研究什么</th><th>比较条件</th><th>主要失效情景</th></tr></thead><tbody><tr><td>持有与定期投入</td><td>固定既定投入与现金流，作为共同基线。</td><td>需要完整资金流和产品确认规则。</td><td>市场方向、投入节奏与费用都会影响结果。</td></tr><tr><td>中期趋势与风险调整</td><td>利用决策时点之前的价格信息调整暴露。</td><td>信号生成后按后续可成交价格执行。</td><td>震荡市场可能反复触发交易，延迟会改变成交。</td></tr><tr><td>定期再平衡</td><td>按预先设定的周期恢复组合结构，并检验集中度。</td><td>各策略采用相同资金流、费用与可交易范围。</td><td>偏离持续扩大时，调仓成本和回撤可能上升。</td></tr><tr><td>有限战术交易</td><td>在相同底仓上增加战术交易，与不交易的底仓直接比较。</td><td>遵守可卖库存、产品交收和响应延迟。</td><td>价差收益可能被双边费用、滑点和未成交抵消。</td></tr></tbody></table></div>
-<p class="fine">评价同时报告扣费收益、资金流调整后的表现、回撤、换手、成交率与提醒负担。合成测试用于检查程序；历史回放与前向模拟分别记录。尚未积累的前向交易日不能由加速回放补足。</p></section>
-<section id="sources"><h2>回到原文</h2><p class="lead">交易所规则与监管文件说明约束，数据文档解释版本，股东信和备忘录提供可追溯观点。投资者观点不等于已验证规律，成功案例与失败情景需要一起阅读。</p><div class="sources"><div class="source-group"><h3>政策原文</h3><ul><li><span><a href="https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm" rel="noopener noreferrer">2026 年 9 月 FOMC 声明</a></span><small>美联储 · 2026-09-16</small></li><li><span><a href="https://www.pbc.gov.cn/zhengcehuobisi/125207/125227/125957/2026nhbzczxbg/2026081218435062865/2026081218435024793.pdf" rel="noopener noreferrer">2026 年第二季度货币政策执行报告</a></span><small>中国人民银行 · 2026-08-12</small></li></ul></div><div class="source-group"><h3>规则与机制</h3><ul><li><span><a href="https://www.sse.com.cn/lawandrules/sselawsrules2025/trade/universal/c/10816492/files/58bd5ce4dfc94b57a5391f60eb2719ab.docx" rel="noopener noreferrer">上交所交易规则（2026 年修订）</a></span><small>上海证券交易所 · 2026-04-24</small></li><li><span><a href="https://www.finra.org/investors/investing/investment-products/stocks/order-types" rel="noopener noreferrer">市价单与限价单</a></span><small>FINRA · 常设页面；未核唯一发布日期</small></li><li><span><a href="https://www.finra.org/investors/insights/stop-orders-factors-consider-during-volatile-markets" rel="noopener noreferrer">波动市场中的止损订单</a></span><small>FINRA · 2025-03-26</small></li><li><span><a href="https://www.finra.org/investors/investing/investment-products/exchange-traded-funds-and-products" rel="noopener noreferrer">ETF 与其他交易所产品</a></span><small>FINRA · 常设页面；未核唯一发布日期</small></li><li><span><a href="https://www.finra.org/investors/insights/understanding-settlement-cycles" rel="noopener noreferrer">交易与结算周期</a></span><small>FINRA · 2026-05-07</small></li><li><span><a href="https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf" rel="noopener noreferrer">深交所交易规则（2026 年修订）</a></span><small>深圳证券交易所 · 2026-04-24</small></li><li><span><a href="https://www.csrc.gov.cn/csrc/c101954/c7606091/7606091/files/附件1：公开募集证券投资基金销售费用管理规定.pdf" rel="noopener noreferrer">公募基金销售费用管理规定</a></span><small>中国证监会 · 2025-12-31</small></li><li><span><a href="https://www.csrc.gov.cn/csrc/c101954/c7619929/7619929/files/附件1：公开募集证券投资基金信息披露内容与格式准则第2号—定期报告的内容与格式.pdf" rel="noopener noreferrer">公募基金定期报告内容与格式</a></span><small>中国证监会 · 2026-03-13</small></li></ul></div><div class="source-group"><h3>数据与验证</h3><ul><li><span><a href="https://fred.stlouisfed.org/docs/api/fred/realtime_period.html" rel="noopener noreferrer">FRED 数据的实时版本区间</a></span><small>圣路易斯联储 · 常设页面；未核唯一发布日期</small></li><li><span><a href="https://alfred.stlouisfed.org/help" rel="noopener noreferrer">ALFRED 历史数据版本</a></span><small>圣路易斯联储 · 常设页面；未核唯一发布日期</small></li><li><span><a href="https://www.davidhbailey.com/dhbpapers/backtest-prob.pdf" rel="noopener noreferrer">回测过拟合的概率</a></span><small>Bailey、Borwein、López de Prado、Zhu · 2015-02-27</small></li></ul></div><div class="source-group"><h3>原始观点与案例</h3><ul><li><span><a href="https://www.berkshirehathaway.com/letters/2008ltr.pdf" rel="noopener noreferrer">伯克希尔 2008 年股东信</a></span><small>Berkshire Hathaway · 2009-02-27</small></li><li><span><a href="https://www.berkshirehathaway.com/letters/2013ltr.pdf" rel="noopener noreferrer">伯克希尔 2013 年股东信</a></span><small>Berkshire Hathaway · 2014-02-28</small></li><li><span><a href="https://www.berkshirehathaway.com/letters/2022ltr.pdf" rel="noopener noreferrer">伯克希尔 2022 年股东信</a></span><small>Berkshire Hathaway · 2023-02-25</small></li><li><span><a href="https://www.oaktreecapital.com/docs/oaktreecaplibraries/memos/the-folly-of-certainty.pdf?sfvrsn=b4be5566_2" rel="noopener noreferrer">The Folly of Certainty</a></span><small>Oaktree Capital · 2024-07-17</small></li><li><span><a href="https://www.oaktreecapital.com/docs/default-source/memos/illusion-of-knowledge.pdf?sfvrsn=86034e66_5" rel="noopener noreferrer">The Illusion of Knowledge</a></span><small>Oaktree Capital · 2022-09-08</small></li><li><span><a href="https://www.oaktreecapital.com/docs/default-source/memos/sea-change.pdf?sfvrsn=a69a4066_10" rel="noopener noreferrer">Sea Change</a></span><small>Oaktree Capital · 2022-12-13</small></li></ul></div></div></section>
-<section id="tools"><h2>可复用的工程参考</h2><p class="lead">这些项目为数据适配、事件回放、组合基线和分析分工提供参考。参考方法、复制代码与使用数据是不同事项，许可按固定版本分别核对。</p><details><summary>查看工程候选与许可原文</summary><div class="table-wrap"><table><thead><tr><th>项目</th><th>许可摘要</th><th>原文</th></tr></thead><tbody><tr><td><a href="https://github.com/TauricResearch/TradingAgents" rel="noopener noreferrer">TradingAgents</a></td><td>Apache-2.0</td><td><a href="https://github.com/TauricResearch/TradingAgents/blob/1394a3f72aa4393e1a98f51b382434c4b4c2d972/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr><tr><td><a href="https://github.com/hsliuping/TradingAgents-CN" rel="noopener noreferrer">TradingAgents-CN</a></td><td>混合许可；专有部分存在使用与分发限制</td><td><a href="https://github.com/hsliuping/TradingAgents-CN/blob/51060a7682cf51810b4bc3a704829438d18cd8dc/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr><tr><td><a href="https://github.com/microsoft/qlib" rel="noopener noreferrer">Qlib</a></td><td>MIT</td><td><a href="https://github.com/microsoft/qlib/blob/54355232463878d2eebb91fe0ee5fa7fa1f5976c/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr><tr><td><a href="https://github.com/AI4Finance-Foundation/FinRL" rel="noopener noreferrer">FinRL</a></td><td>MIT</td><td><a href="https://github.com/AI4Finance-Foundation/FinRL/blob/8511e7c15fbe1fbe5eb25e9f89932ac1ecd546a0/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr><tr><td><a href="https://github.com/AI4Finance-Foundation/FinGPT" rel="noopener noreferrer">FinGPT</a></td><td>MIT 代码；模型与数据另核</td><td><a href="https://github.com/AI4Finance-Foundation/FinGPT/blob/fdb04c9a273d1ccc3764b09b8e3ed1e708e57566/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr><tr><td><a href="https://github.com/virattt/ai-hedge-fund" rel="noopener noreferrer">AI Hedge Fund</a></td><td>MIT</td><td><a href="https://github.com/virattt/ai-hedge-fund/blob/78b779c1389e2d1452dc29606d2c4126d859b964/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr><tr><td><a href="https://github.com/pmorissette/bt" rel="noopener noreferrer">bt</a></td><td>MIT</td><td><a href="https://github.com/pmorissette/bt/blob/efe04cd643d58a1d237ec80cac2a1820f7269266/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr><tr><td><a href="https://github.com/ricequant/rqalpha" rel="noopener noreferrer">RQAlpha</a></td><td>非商业使用许可；商业使用另需授权</td><td><a href="https://github.com/ricequant/rqalpha/blob/284b78a1975bd2d6c4bee8fde35586e6846bfd96/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr><tr><td><a href="https://github.com/vnpy/vnpy" rel="noopener noreferrer">vn.py / VeighNa</a></td><td>MIT</td><td><a href="https://github.com/vnpy/vnpy/blob/c6e231caf32b7fc97e6459817fff66458cf7e7c4/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr><tr><td><a href="https://github.com/mementum/backtrader" rel="noopener noreferrer">Backtrader</a></td><td>GPL-3.0 许可证文本</td><td><a href="https://github.com/mementum/backtrader/blob/b853d7c90b6721476eb5a5ea3135224e33db1f14/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr><tr><td><a href="https://github.com/polakowo/vectorbt" rel="noopener noreferrer">vectorbt</a></td><td>Apache-2.0 附 Commons Clause</td><td><a href="https://github.com/polakowo/vectorbt/blob/8bf3aff77e3d9cba0be0b00988d3a4831692e142/LICENSE.md" rel="noopener noreferrer">固定版本许可原文</a></td></tr><tr><td><a href="https://github.com/akfamily/akshare" rel="noopener noreferrer">AKShare</a></td><td>MIT 代码；数据权益另核</td><td><a href="https://github.com/akfamily/akshare/blob/fe10d1decb705e5f43cc8ca3339ca39e580fb8f4/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr><tr><td><a href="https://github.com/waditu/tushare" rel="noopener noreferrer">Tushare</a></td><td>BSD-3-Clause 代码；服务授权另核</td><td><a href="https://github.com/waditu/tushare/blob/093856995af0811d3ebbe8c179b8febf4ae706f0/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr><tr><td><a href="https://github.com/OpenBB-finance/OpenBB" rel="noopener noreferrer">OpenBB ODP</a></td><td>所核固定版本为 Apache-2.0</td><td><a href="https://github.com/OpenBB-finance/OpenBB/blob/7c9d4221bdf66965e3f6c7f4dc6ee848073e5ae2/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr><tr><td><a href="https://github.com/QuantConnect/Lean" rel="noopener noreferrer">LEAN</a></td><td>Apache-2.0</td><td><a href="https://github.com/QuantConnect/Lean/blob/a54e9cc6cee9030e865d4f401c03c0e2373ba199/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr><tr><td><a href="https://github.com/UFund-Me/Qbot" rel="noopener noreferrer">Qbot</a></td><td>根许可 MIT；附带与付费内容另核</td><td><a href="https://github.com/UFund-Me/Qbot/blob/f0425ae4ae8bd02b79656b8f7039f4cd6874095e/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr></tbody></table></div></details>
-<p class="fine">项目列表不表示这些框架全部已接入，也不将上游展示的回测收益作为本站实证。数据、模型及付费服务的授权需单独核验。</p></section>
-</main><footer><div class="wrap">公开方法笔记 · 持续保留原始出处、适用条件与反例。</div></footer></body></html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
+<title>Investment notes | Ziteng Wang · Beihang University</title>
+<meta name="description" content="Public sources, market rules and information timing. Compare strategies with the same cash flows, costs and execution conditions.">
+<meta name="author" content="Ziteng Wang"><meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#091011">
+<link rel="canonical" href="https://steve-strange.github.io/investment/">
+<link rel="alternate" hreflang="en" href="https://steve-strange.github.io/investment/">
+<link rel="alternate" hreflang="zh-CN" href="https://steve-strange.github.io/zh/investment/">
+<link rel="alternate" hreflang="x-default" href="https://steve-strange.github.io/investment/">
+<link rel="icon" type="image/png" href="/images/a.png">
+<meta property="og:type" content="website"><meta property="og:title" content="Investment notes">
+<meta property="og:description" content="Public sources, market rules and information timing. Compare strategies with the same cash flows, costs and execution conditions."><meta property="og:url" content="https://steve-strange.github.io/investment/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://steve-strange.github.io/images/Head.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/assets/publications.css?v=20261017-navigation"><link rel="stylesheet" href="/assets/site.css?v=20261017-navigation">
+<script defer src="/lib/lucide/lucide.min.js"></script><script defer src="/assets/portfolio.js?v=20261017-navigation"></script>
+<link rel="stylesheet" href="/assets/investment.css?v=20261017-navigation"><script type="application/ld+json">{}</script>
+</head><body class="publication-page investment-page"><a class="skip-link" href="#main">Skip to content</a>
+<!-- shared-header:start -->
+<header id="global-header" class="site-header" data-header>
+  <div class="header-inner">
+    <a class="brand" href="/" aria-label="Home"><span class="brand-mark" aria-hidden="true">ZW</span><span class="brand-name">Ziteng Wang</span></a>
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation" data-nav><a href="/#research" data-section="research" data-label-en="Research" data-label-zh="研究">Research</a><a href="/#publications" data-section="publications" data-label-en="Publications" data-label-zh="论文">Publications</a><a href="/#projects" data-section="projects" data-label-en="Systems" data-label-zh="系统">Systems</a><a href="/#experience" data-section="experience" data-label-en="Background" data-label-zh="经历">Background</a><a href="/#arcade" data-section="arcade" data-label-en="Arcade" data-label-zh="游戏">Arcade</a><a href="/#investment" data-section="investment" data-label-en="Investment" data-label-zh="投资笔记" aria-current="location">Investment</a><a href="/#blog" data-section="blog" data-label-en="Blog" data-label-zh="博客">Blog</a></nav>
+    <div class="header-actions">
+      <a class="header-cv" href="/assets/ziteng-wang-cv.pdf" aria-label="CV (Chinese PDF)">CV</a>
+      <a class="language-switch" data-language-switch href="/zh/investment/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+      <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu" data-menu-toggle><span aria-hidden="true">☰</span></button>
+    </div>
+  </div>
+</header>
+<!-- shared-header:end -->
+<main id="main">
+<nav class="page-breadcrumb" aria-label="Breadcrumb"><a href="/#investment">Back to homepage</a><span aria-hidden="true">/</span><span>Investment</span></nav>
+<section class="page-intro" aria-labelledby="investment-title"><p class="section-kicker">INVESTMENT NOTES</p><h1 id="investment-title">Investment notes</h1><p class="page-description">Public sources, market rules and information timing. Compare strategies with the same cash flows, costs and execution conditions.</p><p class="content-language">The notes below are in Chinese; linked sources retain their original languages.</p></section>
+<nav class="investment-toc" aria-label="On this page"><a href="#method">Research workflow</a><a href="#channels">Public sources</a><a href="#simulation">Simulation templates</a><a href="#sources">Original readings</a><a href="#tools">Engineering references</a></nav>
+<div class="investment-content" lang="zh-CN"><p class="investment-note">这里展示公开资料、通用方法与策略模板。页面未发布实际投资收益或完成前向验证的结论。</p>
+<section id="method">
+<h2>让模拟结果能够解释与复查</h2>
+<p class="lead">一次回测表现好，可能来自有效方法，也可能来自未来信息、遗漏成本或反复筛选。先把这些差异控制住，再讨论收益。</p>
+<div class="grid">
+<article><span class="step">01</span>
+<h3>先确定信息何时可见</h3>
+<p>事件发生、正式发布、首次观察和后续修订分别记录。今天下载的旧文件，不能据此证明当年已经可用。</p>
+</article>
+<article><span class="step">02</span>
+<h3>把观点与执行分开</h3>
+<p>研究提出条件和信号；同一套确定性规则负责资金流、费用、可卖份额、交收与模拟成交。</p>
+</article>
+<article><span class="step">03</span>
+<h3>在相同条件下比较</h3>
+<p>基线与候选共享资金流、数据版本、交易日历和费用。决策过期后不得回到旧价格成交。</p>
+</article>
+<article><span class="step">04</span>
+<h3>用新发生的数据检验</h3>
+<p>滚动研究与保留测试区间分开。历史模型分析可能已知未来结果，最终证据需要真实前向观察。</p>
+</article>
+</div>
+</section>
+<section id="channels">
+<h2>公开信息与新闻来源</h2>
+<p class="lead">政策和交易规则回到发布方，市场新闻用于发现线索。公告日期、数据所属期与下载日期分别保留，更新以原站为准。</p>
+<div class="grid channels">
+<article>
+<h3><a href="https://www.pbc.gov.cn/" rel="noopener noreferrer">中国人民银行</a></h3>
+<p>货币政策与统计发布</p>
+</article>
+<article>
+<h3><a href="https://www.csrc.gov.cn/" rel="noopener noreferrer">中国证监会</a></h3>
+<p>监管规则与公告</p>
+</article>
+<article>
+<h3><a href="https://www.stats.gov.cn/" rel="noopener noreferrer">国家统计局</a></h3>
+<p>宏观数据与发布日程</p>
+</article>
+<article>
+<h3><a href="https://www.sse.com.cn/" rel="noopener noreferrer">上交所</a></h3>
+<p>交易规则与发行人披露</p>
+</article>
+<article>
+<h3><a href="https://www.szse.cn/" rel="noopener noreferrer">深交所</a></h3>
+<p>交易规则与发行人披露</p>
+</article>
+<article>
+<h3><a href="https://www.cninfo.com.cn/" rel="noopener noreferrer">巨潮资讯</a></h3>
+<p>公司与基金公开披露</p>
+</article>
+<article>
+<h3><a href="https://www.federalreserve.gov/newsevents.htm" rel="noopener noreferrer">美联储</a></h3>
+<p>政策声明与公开新闻</p>
+</article>
+<article>
+<h3><a href="https://fred.stlouisfed.org/" rel="noopener noreferrer">FRED / ALFRED</a></h3>
+<p>经济数据及历史版本</p>
+</article>
+<article>
+<h3><a href="https://apps.bea.gov/rss/rss.xml" rel="noopener noreferrer">美国经济分析局 · RSS</a></h3>
+<p>经济数据与修订发布</p>
+</article>
+<article>
+<h3><a href="https://www.bankofengland.co.uk/rss/news" rel="noopener noreferrer">英格兰银行 · RSS</a></h3>
+<p>货币政策与金融稳定</p>
+</article>
+<article>
+<h3><a href="https://www.gov.uk/government/organisations/hm-treasury.atom" rel="noopener noreferrer">英国财政部 · Atom</a></h3>
+<p>财政、税收与贸易政策</p>
+</article>
+<article>
+<h3><a href="https://www.boj.or.jp/en/rss/whatsnew.xml" rel="noopener noreferrer">日本央行 · RSS</a></h3>
+<p>日本货币政策与经济数据</p>
+</article>
+<article>
+<h3><a href="https://www.bok.or.kr/eng/bbs/E0000634/news.rss?menuNo=400069" rel="noopener noreferrer">韩国央行 · RSS</a></h3>
+<p>韩国货币政策、宏观与贸易</p>
+</article>
+<article>
+<h3><a href="https://ec.europa.eu/eurostat/en/search?p_p_id=estatsearchportlet_WAR_estatsearchportlet&amp;p_p_lifecycle=2&amp;p_p_state=maximized&amp;p_p_mode=view&amp;p_p_resource_id=atom&amp;_estatsearchportlet_WAR_estatsearchportlet_collection=CAT_PREREL" rel="noopener noreferrer">Eurostat · Atom</a></h3>
+<p>欧盟统计与经济发布</p>
+</article>
+<article>
+<h3><a href="https://www.eia.gov/rss/todayinenergy.xml" rel="noopener noreferrer">EIA · RSS</a></h3>
+<p>石油、天然气及能源资讯</p>
+</article>
+<article>
+<h3><a href="https://www.rba.gov.au/rss/rss-cb-media-releases.xml" rel="noopener noreferrer">澳大利亚央行 · RSS</a></h3>
+<p>澳大利亚政策与经济发布</p>
+</article>
+<article>
+<h3><a href="https://www.cftc.gov/RSS/RSSGP/rssgp.xml" rel="noopener noreferrer">CFTC · RSS</a></h3>
+<p>商品、衍生品与监管公告</p>
+</article>
+<article>
+<h3><a href="https://nvidianews.nvidia.com/releases.xml" rel="noopener noreferrer">NVIDIA · RSS</a></h3>
+<p>公司公开发布；属于公司自述</p>
+</article>
+<article>
+<h3><a href="https://news.samsung.com/global/feed" rel="noopener noreferrer">Samsung · RSS</a></h3>
+<p>公司与半导体资讯；属于公司自述</p>
+</article>
+<article>
+<h3><a href="https://news.un.org/feed/subscribe/en/news/all/rss.xml" rel="noopener noreferrer">联合国新闻 · RSS</a></h3>
+<p>国际事务、全球经济与人道新闻</p>
+</article>
+<article>
+<h3><a href="https://www.jpx.co.jp/english/rss/markets_news.xml" rel="noopener noreferrer">日本交易所 · RSS</a></h3>
+<p>日本市场制度、上市与交易所公告</p>
+</article>
+<article>
+<h3><a href="https://news.panasonic.com/global/rss/press/index.xml" rel="noopener noreferrer">Panasonic · RSS</a></h3>
+<p>日本公司与产业资讯；属于公司自述</p>
+</article>
+<article>
+<h3><a href="https://worldsteel.org/feed/" rel="noopener noreferrer">世界钢铁协会 · RSS</a></h3>
+<p>钢铁行业与协会动态</p>
+</article>
+<article>
+<h3><a href="https://www.fao.org/feeds/fao-newsroom-rss" rel="noopener noreferrer">FAO · RSS</a></h3>
+<p>农业、粮食安全与供需背景</p>
+</article>
+<article>
+<h3><a href="https://globalnews.ca/world/feed/" rel="noopener noreferrer">Global News 世界 · RSS</a></h3>
+<p>世界新闻；转载需核对原始发布者</p>
+</article>
+<article>
+<h3><a href="https://globalnews.ca/economy/feed/" rel="noopener noreferrer">Global News 经济 · RSS</a></h3>
+<p>经济与贸易；与世界频道同属 Corus</p>
+</article>
+<article>
+<h3><a href="https://www150.statcan.gc.ca/n1/rss/dai-quo/0-eng.atom" rel="noopener noreferrer">加拿大统计局 · Atom</a></h3>
+<p>加拿大官方经济、贸易与能源统计更新</p>
+</article>
+</div>
+</section>
+<section id="simulation">
+<h2>四类模拟模板</h2>
+<p class="lead">下面比较研究问题与适用条件，不给出个人配置参数。所有模板使用同一事件账本处理资金与成交。</p>
+<div class="table-wrap" role="region" tabindex="0" aria-label="可横向滚动的数据表">
+<table>
+<thead>
+<tr><th>模板</th><th>研究什么</th><th>比较条件</th><th>主要失效情景</th></tr>
+</thead>
+<tbody>
+<tr><td>持有与定期投入</td><td>固定既定投入与现金流，作为共同基线。</td><td>需要完整资金流和产品确认规则。</td><td>市场方向、投入节奏与费用都会影响结果。</td></tr>
+<tr><td>中期趋势与风险调整</td><td>利用决策时点之前的价格信息调整暴露。</td><td>信号生成后按后续可成交价格执行。</td><td>震荡市场可能反复触发交易，延迟会改变成交。</td></tr>
+<tr><td>定期再平衡</td><td>按预先设定的周期恢复组合结构，并检验集中度。</td><td>各策略采用相同资金流、费用与可交易范围。</td><td>偏离持续扩大时，调仓成本和回撤可能上升。</td></tr>
+<tr><td>有限战术交易</td><td>在相同底仓上增加战术交易，与不交易的底仓直接比较。</td><td>遵守可卖库存、产品交收和响应延迟。</td><td>价差收益可能被双边费用、滑点和未成交抵消。</td></tr>
+</tbody>
+</table>
+</div>
+<p class="fine">评价同时报告扣费收益、资金流调整后的表现、回撤、换手、成交率与提醒负担。合成测试用于检查程序；历史回放与前向模拟分别记录。尚未积累的前向交易日不能由加速回放补足。</p>
+</section>
+<section id="sources">
+<h2>回到原文</h2>
+<p class="lead">交易所规则与监管文件说明约束，数据文档解释版本，股东信和备忘录提供可追溯观点。投资者观点不等于已验证规律，成功案例与失败情景需要一起阅读。</p>
+<div class="sources">
+<div class="source-group">
+<h3>政策原文</h3><ul><li><span><a href="https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm" rel="noopener noreferrer">2026 年 9 月 FOMC 声明</a></span><small>美联储 · 2026-09-16</small></li><li><span><a href="https://www.pbc.gov.cn/zhengcehuobisi/125207/125227/125957/2026nhbzczxbg/2026081218435062865/2026081218435024793.pdf" rel="noopener noreferrer">2026 年第二季度货币政策执行报告</a></span><small>中国人民银行 · 2026-08-12</small></li></ul>
+</div>
+<div class="source-group">
+<h3>规则与机制</h3><ul><li><span><a href="https://www.sse.com.cn/lawandrules/sselawsrules2025/trade/universal/c/10816492/files/58bd5ce4dfc94b57a5391f60eb2719ab.docx" rel="noopener noreferrer">上交所交易规则（2026 年修订）</a></span><small>上海证券交易所 · 2026-04-24</small></li><li><span><a href="https://www.finra.org/investors/investing/investment-products/stocks/order-types" rel="noopener noreferrer">市价单与限价单</a></span><small>FINRA · 常设页面；未核唯一发布日期</small></li><li><span><a href="https://www.finra.org/investors/insights/stop-orders-factors-consider-during-volatile-markets" rel="noopener noreferrer">波动市场中的止损订单</a></span><small>FINRA · 2025-03-26</small></li><li><span><a href="https://www.finra.org/investors/investing/investment-products/exchange-traded-funds-and-products" rel="noopener noreferrer">ETF 与其他交易所产品</a></span><small>FINRA · 常设页面；未核唯一发布日期</small></li><li><span><a href="https://www.finra.org/investors/insights/understanding-settlement-cycles" rel="noopener noreferrer">交易与结算周期</a></span><small>FINRA · 2026-05-07</small></li><li><span><a href="https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf" rel="noopener noreferrer">深交所交易规则（2026 年修订）</a></span><small>深圳证券交易所 · 2026-04-24</small></li><li><span><a href="https://www.csrc.gov.cn/csrc/c101954/c7606091/7606091/files/附件1：公开募集证券投资基金销售费用管理规定.pdf" rel="noopener noreferrer">公募基金销售费用管理规定</a></span><small>中国证监会 · 2025-12-31</small></li><li><span><a href="https://www.csrc.gov.cn/csrc/c101954/c7619929/7619929/files/附件1：公开募集证券投资基金信息披露内容与格式准则第2号—定期报告的内容与格式.pdf" rel="noopener noreferrer">公募基金定期报告内容与格式</a></span><small>中国证监会 · 2026-03-13</small></li></ul>
+</div>
+<div class="source-group">
+<h3>数据与验证</h3><ul><li><span><a href="https://fred.stlouisfed.org/docs/api/fred/realtime_period.html" rel="noopener noreferrer">FRED 数据的实时版本区间</a></span><small>圣路易斯联储 · 常设页面；未核唯一发布日期</small></li><li><span><a href="https://alfred.stlouisfed.org/help" rel="noopener noreferrer">ALFRED 历史数据版本</a></span><small>圣路易斯联储 · 常设页面；未核唯一发布日期</small></li><li><span><a href="https://www.davidhbailey.com/dhbpapers/backtest-prob.pdf" rel="noopener noreferrer">回测过拟合的概率</a></span><small>Bailey、Borwein、López de Prado、Zhu · 2015-02-27</small></li></ul>
+</div>
+<div class="source-group">
+<h3>原始观点与案例</h3><ul><li><span><a href="https://www.berkshirehathaway.com/letters/2008ltr.pdf" rel="noopener noreferrer">伯克希尔 2008 年股东信</a></span><small>Berkshire Hathaway · 2009-02-27</small></li><li><span><a href="https://www.berkshirehathaway.com/letters/2013ltr.pdf" rel="noopener noreferrer">伯克希尔 2013 年股东信</a></span><small>Berkshire Hathaway · 2014-02-28</small></li><li><span><a href="https://www.berkshirehathaway.com/letters/2022ltr.pdf" rel="noopener noreferrer">伯克希尔 2022 年股东信</a></span><small>Berkshire Hathaway · 2023-02-25</small></li><li><span><a href="https://www.oaktreecapital.com/docs/oaktreecaplibraries/memos/the-folly-of-certainty.pdf?sfvrsn=b4be5566_2" rel="noopener noreferrer">The Folly of Certainty</a></span><small>Oaktree Capital · 2024-07-17</small></li><li><span><a href="https://www.oaktreecapital.com/docs/default-source/memos/illusion-of-knowledge.pdf?sfvrsn=86034e66_5" rel="noopener noreferrer">The Illusion of Knowledge</a></span><small>Oaktree Capital · 2022-09-08</small></li><li><span><a href="https://www.oaktreecapital.com/docs/default-source/memos/sea-change.pdf?sfvrsn=a69a4066_10" rel="noopener noreferrer">Sea Change</a></span><small>Oaktree Capital · 2022-12-13</small></li></ul>
+</div>
+</div>
+</section>
+<section id="tools">
+<h2>可复用的工程参考</h2>
+<p class="lead">这些项目为数据适配、事件回放、组合基线和分析分工提供参考。参考方法、复制代码与使用数据是不同事项，许可按固定版本分别核对。</p>
+<details>
+<summary>查看工程候选与许可原文</summary>
+<div class="table-wrap" role="region" tabindex="0" aria-label="可横向滚动的数据表">
+<table>
+<thead>
+<tr><th>项目</th><th>许可摘要</th><th>原文</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="https://github.com/TauricResearch/TradingAgents" rel="noopener noreferrer">TradingAgents</a></td><td>Apache-2.0</td><td><a href="https://github.com/TauricResearch/TradingAgents/blob/1394a3f72aa4393e1a98f51b382434c4b4c2d972/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr>
+<tr><td><a href="https://github.com/hsliuping/TradingAgents-CN" rel="noopener noreferrer">TradingAgents-CN</a></td><td>混合许可；专有部分存在使用与分发限制</td><td><a href="https://github.com/hsliuping/TradingAgents-CN/blob/51060a7682cf51810b4bc3a704829438d18cd8dc/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr>
+<tr><td><a href="https://github.com/microsoft/qlib" rel="noopener noreferrer">Qlib</a></td><td>MIT</td><td><a href="https://github.com/microsoft/qlib/blob/54355232463878d2eebb91fe0ee5fa7fa1f5976c/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr>
+<tr><td><a href="https://github.com/AI4Finance-Foundation/FinRL" rel="noopener noreferrer">FinRL</a></td><td>MIT</td><td><a href="https://github.com/AI4Finance-Foundation/FinRL/blob/8511e7c15fbe1fbe5eb25e9f89932ac1ecd546a0/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr>
+<tr><td><a href="https://github.com/AI4Finance-Foundation/FinGPT" rel="noopener noreferrer">FinGPT</a></td><td>MIT 代码；模型与数据另核</td><td><a href="https://github.com/AI4Finance-Foundation/FinGPT/blob/fdb04c9a273d1ccc3764b09b8e3ed1e708e57566/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr>
+<tr><td><a href="https://github.com/virattt/ai-hedge-fund" rel="noopener noreferrer">AI Hedge Fund</a></td><td>MIT</td><td><a href="https://github.com/virattt/ai-hedge-fund/blob/78b779c1389e2d1452dc29606d2c4126d859b964/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr>
+<tr><td><a href="https://github.com/pmorissette/bt" rel="noopener noreferrer">bt</a></td><td>MIT</td><td><a href="https://github.com/pmorissette/bt/blob/efe04cd643d58a1d237ec80cac2a1820f7269266/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr>
+<tr><td><a href="https://github.com/ricequant/rqalpha" rel="noopener noreferrer">RQAlpha</a></td><td>非商业使用许可；商业使用另需授权</td><td><a href="https://github.com/ricequant/rqalpha/blob/284b78a1975bd2d6c4bee8fde35586e6846bfd96/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr>
+<tr><td><a href="https://github.com/vnpy/vnpy" rel="noopener noreferrer">vn.py / VeighNa</a></td><td>MIT</td><td><a href="https://github.com/vnpy/vnpy/blob/c6e231caf32b7fc97e6459817fff66458cf7e7c4/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr>
+<tr><td><a href="https://github.com/mementum/backtrader" rel="noopener noreferrer">Backtrader</a></td><td>GPL-3.0 许可证文本</td><td><a href="https://github.com/mementum/backtrader/blob/b853d7c90b6721476eb5a5ea3135224e33db1f14/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr>
+<tr><td><a href="https://github.com/polakowo/vectorbt" rel="noopener noreferrer">vectorbt</a></td><td>Apache-2.0 附 Commons Clause</td><td><a href="https://github.com/polakowo/vectorbt/blob/8bf3aff77e3d9cba0be0b00988d3a4831692e142/LICENSE.md" rel="noopener noreferrer">固定版本许可原文</a></td></tr>
+<tr><td><a href="https://github.com/akfamily/akshare" rel="noopener noreferrer">AKShare</a></td><td>MIT 代码；数据权益另核</td><td><a href="https://github.com/akfamily/akshare/blob/fe10d1decb705e5f43cc8ca3339ca39e580fb8f4/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr>
+<tr><td><a href="https://github.com/waditu/tushare" rel="noopener noreferrer">Tushare</a></td><td>BSD-3-Clause 代码；服务授权另核</td><td><a href="https://github.com/waditu/tushare/blob/093856995af0811d3ebbe8c179b8febf4ae706f0/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr>
+<tr><td><a href="https://github.com/OpenBB-finance/OpenBB" rel="noopener noreferrer">OpenBB ODP</a></td><td>所核固定版本为 Apache-2.0</td><td><a href="https://github.com/OpenBB-finance/OpenBB/blob/7c9d4221bdf66965e3f6c7f4dc6ee848073e5ae2/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr>
+<tr><td><a href="https://github.com/QuantConnect/Lean" rel="noopener noreferrer">LEAN</a></td><td>Apache-2.0</td><td><a href="https://github.com/QuantConnect/Lean/blob/a54e9cc6cee9030e865d4f401c03c0e2373ba199/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr>
+<tr><td><a href="https://github.com/UFund-Me/Qbot" rel="noopener noreferrer">Qbot</a></td><td>根许可 MIT；附带与付费内容另核</td><td><a href="https://github.com/UFund-Me/Qbot/blob/f0425ae4ae8bd02b79656b8f7039f4cd6874095e/LICENSE" rel="noopener noreferrer">固定版本许可原文</a></td></tr>
+</tbody>
+</table>
+</div>
+</details>
+<p class="fine">项目列表不表示这些框架全部已接入，也不将上游展示的回测收益作为本站实证。数据、模型及付费服务的授权需单独核验。</p>
+</section>
+</div>
+</main>
+<footer class="shared-footer"><div><strong>Ziteng Wang</strong><p>Beihang University · Embodied AI · VR · HCI</p></div><nav aria-label="Contact and profiles"><a href="mailto:wzt2694630726@gmail.com">Email</a><a href="https://scholar.google.com/citations?user=FDuEOccAAAAJ">Google Scholar</a><a href="https://github.com/Steve-Strange">GitHub</a></nav><small>© <span data-year>2026</span> Ziteng Wang</small></footer>
+</body></html>

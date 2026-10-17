@@ -1,9 +1,7 @@
 .arcade-page { min-height: 100vh; background: var(--paper); }
 .arcade-main { padding-top: var(--header-height); }
-.arcade-intro { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 30px 24px; }
-.arcade-intro h1 { margin: 0; font-size: 34px; line-height: 1.2; }
-.arcade-intro h1 span { margin-left: 16px; font-size: 15px; color: var(--muted); font-weight: 500; white-space: nowrap; }
-.arcade-count { display: flex; align-items: center; gap: 9px; margin: 0; color: var(--muted); font-size: 12px; white-space: nowrap; }
+.arcade-intro { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+.arcade-count { display: flex; align-items: center; gap: 9px; margin: 0; color: var(--teal); font-size: 14px; font-weight: 650; white-space: nowrap; }
 .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
 .count-divider { margin-inline: 6px; color: #b8c0bd; }
 .play-layout { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 34px; align-items: start; }
@@ -18,7 +16,7 @@
 .tool svg { width: 16px; height: 16px; }
 .tool:hover, .tool[aria-pressed="true"] { background: #ffffff19; color: #fff; }
 button:focus-visible, a:focus-visible, iframe:focus-visible { outline: 3px solid #d4543f; outline-offset: 3px; }
-.game-stage { position: relative; width: 100%; aspect-ratio: 4 / 3; max-height: max(350px, calc(100svh - 270px)); background: #242427; }
+.game-stage { position: relative; width: 100%; aspect-ratio: 4 / 3; max-height: max(320px, calc(100svh - 430px)); background: #242427; }
 .game-stage iframe { width: 100%; height: 100%; border: 0; display: block; }
 .play-column:fullscreen { border-radius: 0; display: flex; flex-direction: column; }
 .play-column:fullscreen .game-stage { flex: 1; aspect-ratio: auto; min-height: 0; }
@@ -64,10 +62,7 @@ kbd { display: inline-block; min-width: 23px; border: 1px solid #d1d6d3; border-
 @media (max-width: 1000px) { .play-layout { grid-template-columns: minmax(0, 1fr) 240px; gap: 24px; } .game-info h2 { font-size: 25px; } .game-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 760px) {
   .arcade-main, .arcade-footer { width: calc(100% - 32px); }
-  .arcade-intro { padding-block: 24px 20px; }
-  .arcade-intro h1 { font-size: 27px; }
-  .arcade-intro h1 span { margin-left: 10px; font-size: 12px; }
-  .arcade-count { display: none; }
+  .arcade-intro { flex-direction: column; align-items: flex-start; gap: 18px; }
   .play-layout { grid-template-columns: minmax(0, 1fr); gap: 22px; }
   .game-stage { max-height: none; }
   .game-stage[data-game="pinball"], .game-stage[data-game="sky-hopper"] { aspect-ratio: 3 / 4; }

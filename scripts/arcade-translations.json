@@ -1,5 +1,10 @@
 {
   "en": {
+    "当前位置": "Breadcrumb",
+    "返回主页": "Back to homepage",
+    "浏览器游戏室": "Browser games",
+    "六款小游戏，探索物理、策略与操作手感。选择游戏后，下方会显示玩法与操作说明。": "Six small games exploring physics, strategy and controls. Choose a game to see its rules and controls below.",
+    "查看全部 6 款游戏": "Browse all 6 games",
     "游戏室": "Browser games", "6 款游戏": "6 games", "随时来一局": "Ready when you are", "游戏区": "Play area", "切换游戏": "Switch game", "反冲决斗": "Recoil Duel", "五子棋": "Gomoku", "独立打开游戏": "Open game in a new tab", "独立打开": "Open game", "继续游戏": "Resume", "游戏未能载入。": "The game could not load. ", "重新载入": "Reload", "对战模式": "Game mode", "人机对战": "Play against AI", "本地双人": "Local two-player", "玩法": "Rules", "操作": "Controls", "换个游戏": "Choose a game", "选择游戏": "Choose a game", "青红双枪决斗": "Blue and red guns in a recoil duel", "蓝色台面与红白碰撞器的经典三维弹球台": "Classic pinball with a blue playfield and red-and-white bumpers", "晴空小鸟与管道": "A bird flying between pipes", "木色棋盘上的黑白棋子": "Black and white stones on a wooden board", "像素小恐龙跳过仙人掌": "A pixel dinosaur jumping over cacti", "红色赛车穿过公路车流": "A red car weaving through traffic", "物理 · 双人": "Physics · Two players", "经典 · 弹球": "Classic · Pinball", "轻快 · 飞行": "Flying · One button", "棋盘 · 策略": "Board · Strategy", "像素 · 跑酷": "Pixel · Runner", "复古 · 赛车": "Retro · Racing",
     "每一枪，也是下一步。": "Every shot is your next move.",
     "零重力场地，青红双枪。枪口不停自旋，用开火的后坐力调整位置，也等待下一次瞄准。": "Two spinning guns meet in zero gravity. Use recoil to move, then wait for the next clear shot.",
@@ -29,6 +34,7 @@
     "重新开始": "Restart", "暂停": "Pause", "静音": "Mute", "开启声音": "Unmute", "退出全屏": "Exit fullscreen", "全屏": "Fullscreen", "无法进入全屏，可独立打开游戏。": "Fullscreen is unavailable. Open the game in a new tab.", "已选择": "Selected: "
   },
   "zh": {
+    "ARCADE": "游戏室",
     "Arcade Lab<span>游戏室</span>": "游戏室<span>随时来一局</span>", "THE COLLECTION / 06": "游戏合集 / 06", "3D Pinball": "三维弹球", "Sky Hopper": "晴空小鸟", "Dino Run": "小恐龙", "Pocket Racer": "口袋赛车", "01 / PHYSICS DUEL": "01 / 物理决斗", "02 / CLASSIC PINBALL": "02 / 经典弹球", "03 / ONE BUTTON": "03 / 单键飞行", "04 / FIVE IN A ROW": "04 / 五子连珠", "05 / PIXEL RUNNER": "05 / 像素跑酷", "06 / POCKET CIRCUIT": "06 / 口袋赛道"
   }
 }
